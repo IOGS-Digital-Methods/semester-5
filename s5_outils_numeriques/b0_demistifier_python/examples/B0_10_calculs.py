@@ -22,12 +22,12 @@ print(f' k = {k}')
 m = 0.3 - 0.2 - 0.1
 print(f' m = {m} \n')
 
-
+#%%
 ''' Format d'affichage '''
 
 print(format(0.1, '.20f')+'\n')
 
-
+#%%
 ''' Nombres complexes '''
 
 c = (1j)**2
