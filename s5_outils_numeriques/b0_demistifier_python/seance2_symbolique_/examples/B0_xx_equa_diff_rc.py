@@ -3,8 +3,8 @@
 """
 Module Outils Numériques / Semestre 5 / Institut d'Optique
 
-Differential Equation Resolution
-- RC circuit
+Differential Equation Resolution - Euler Methods
+- RC circuit - Discharge of C in R with initial voltage
 
 Created on 15/Apr/2023
 
@@ -149,5 +149,18 @@ solu = integrate.solve_ivp(c_disc1, [t0, tf], [c_disc1.u0], vectorized=True)
 plt.figure()
 plt.plot(t, u, label='Explicit Euler Method')
 plt.plot(solu.t, solu.y.flat, "+", label='ivp solver from Scipy')
+plt.legend()
+plt.show()
+
+#%% Numerical method / ivp from scipy
+
+t0 = 0
+tf = 0.5
+t = np.linspace(t0, tf, 1001)
+solu = integrate.solve_ivp(c_disc1, [t0, tf], [c_disc1.u0], vectorized=True, t_eval=t, method='RK45')
+# with a specific method and time vector
+
+plt.figure()
+plt.plot(solu.t, solu.y.flat, label='ivp solver from Scipy')
 plt.legend()
 plt.show()
