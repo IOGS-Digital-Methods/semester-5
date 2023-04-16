@@ -41,7 +41,6 @@ class second_order_low_pass:
         return (u[1], (self.G0 - u[0])*self.w0**2 - 2*self.m*self.w0*u[1])
 
 
-
 #%% Numerical method / ivp from scipy
 from scipy import integrate
 
