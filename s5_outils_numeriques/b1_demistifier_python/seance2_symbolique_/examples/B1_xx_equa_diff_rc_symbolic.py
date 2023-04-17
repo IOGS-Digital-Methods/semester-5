@@ -32,10 +32,10 @@ print(f'vs_t = {vs_t}')
 
 # Evaluation of the result in different points
 t_vect = np.linspace(0,1,1001)
-vs_t_final = np.zeros(len(t_vect))
 
-for k in range(len(t_vect)):
-    vs_t_final[k] = vs_t.evalf(subs={t:t_vect[k], R:1e5, C:1e-6})
+from sympy.utilities.lambdify import lambdify
+func = lambdify([t, R, C], vs_t)
+
 
 plt.figure()
-plt.plot(t_vect, vs_t_final)
+plt.plot(t_vect, func(t_vect, 1e5, 1e-6))
