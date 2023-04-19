@@ -119,11 +119,13 @@ class C_discharge:
     def __call__(self, t, u): # f(t,u)
         return -u/(self.R*self.C)
 
-
+    
 c_disc1 = C_discharge(1e5, 1e-6, 5)
 c_disc2 = C_discharge(1e5, 1e-6, 1)
 c_disc3 = C_discharge(1e5, 1e-7, 5)
 c_disc = [c_disc1, c_disc2, c_disc3]
+
+
 
 plt.figure()
 for k in range(len(c_disc)):
@@ -163,4 +165,45 @@ solu = integrate.solve_ivp(c_disc1, [t0, tf], [c_disc1.u0], vectorized=True, t_e
 plt.figure()
 plt.plot(solu.t, solu.y.flat, label='ivp solver from Scipy')
 plt.legend()
+plt.show()
+
+
+
+#%% Test avec Ve(t)
+
+class C_charge:
+    def __init__(self, R, C, u0, Ve):
+        self.C = C
+        self.R = R
+        self.u0 = u0
+        self.Ve = Ve                                                                         
+    def __call__(self, t, u): # f(t,u)
+        return (self.Ve(t)-u)/(self.R*self.C)
+
+class signal_sinus:
+    def __init__(self, f, A):
+        self.A = A
+        self.f = f
+    def __call__(self, t):
+        return self.A * np.sin(2*np.pi*self.f*t)
+    
+class signal_constant:
+    def __init__(self, A):
+        self.A = A
+    def __call__(self, t):
+        return self.A
+    
+    
+c_charge = C_charge(1e5, 1e-6, 0, signal_sinus(1, 5))
+t, u = explicit_euler(c_charge, c_charge.u0, 10, 10000)
+plt.figure()
+plt.plot(t,u)
+plt.title('Régime forcé - Sinus 1 Hz 5V')
+plt.show()
+
+c_charge = C_charge(1e5, 1e-6, 0, signal_constant(1))
+t, u = explicit_euler(c_charge, c_charge.u0, 1, 1000)
+plt.figure()
+plt.plot(t,u)
+plt.title('Réponse indicielle')
 plt.show()
