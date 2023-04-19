@@ -146,7 +146,10 @@ from scipy import integrate
 t0 = 0
 tf = 2
 t, u = explicit_euler(c_disc1, c_disc1.u0, 2, 200)
+
 solu = integrate.solve_ivp(c_disc1, [t0, tf], [c_disc1.u0], vectorized=True)
+
+
 
 plt.figure()
 plt.plot(t, u, label='Explicit Euler Method')
@@ -158,15 +161,16 @@ plt.show()
 
 t0 = 0
 tf = 0.5
-t = np.linspace(t0, tf, 1001)
-solu = integrate.solve_ivp(c_disc1, [t0, tf], [c_disc1.u0], vectorized=True, t_eval=t, method='RK45')
+tivp = np.linspace(t0, tf, 1001)
+solu = integrate.solve_ivp(c_disc1, [t0, tf], [c_disc1.u0], vectorized=True, t_eval=tivp, method='RK45')
 # with a specific method and time vector
 
+print(solu.t.shape)
+
 plt.figure()
-plt.plot(solu.t, solu.y.flat, label='ivp solver from Scipy')
+plt.plot(solu.t, solu.y.T, label='ivp solver from Scipy')
 plt.legend()
 plt.show()
-
 
 
 #%% Test avec Ve(t)
