@@ -18,6 +18,7 @@ NEXT Solving Differential Equation
 
 import sympy as sp
 from sympy import *
+from IPython.display import *
 
 #%% Definition of symbols
 x, y, t = sp.symbols('x y t')

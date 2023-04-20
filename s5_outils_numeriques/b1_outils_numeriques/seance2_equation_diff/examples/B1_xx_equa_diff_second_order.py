@@ -15,6 +15,57 @@ Created on 15/Apr/2023
 import numpy as np
 from matplotlib import pyplot as plt
 
+from scipy import integrate
+
+
+class RLC_forced:
+    def __init__(self, R, L, C, Ve):
+        self.R = R
+        self.L = L
+        self.C = C
+        self.Ve = Ve
+    def __call__(self, t, y):
+        Vs = y[0]
+        u = y[1]
+        return [u, -self.R/self.L*u - (Vs - self.Ve(t)) / (self.L*self.C)]
+
+class sinus_sig:
+    def __init__(self, f, A=1):
+        self.f = f
+        self.A = A
+    def __call__(self, t):
+        return self.A * np.sin(2*np.pi*self.f*t)
+
+class step_sig:
+    def __init__(self, A=1):
+        self.A = A
+    def __call__(self, t):
+        return self.A
+
+# Sine
+sinus = sinus_sig(20)
+# Equations
+rlc_forced = RLC_forced(1e2, 1e-3, 1e-4, sinus)
+rlc_step = RLC_forced(1e2, 1e-3, 1e-4, step_sig())
+
+t0 = 0
+tf = 0.1
+t = np.linspace(t0, tf, 101)
+
+solu_forced = integrate.solve_ivp(rlc_forced, [t[0], t[-1]], y0=[0,0], t_eval=t)
+solu_step = integrate.solve_ivp(rlc_step, [t[0], t[-1]], y0=[0,0], t_eval=t)
+
+
+# Display
+plt.figure()
+plt.plot(solu_forced.t, solu_forced.y[0].T, label='Sine Response')
+plt.plot(t, sinus(t), label='Sine input')
+plt.plot(solu_step.t, solu_step.y[0].T, label='Step Response')
+plt.legend()
+plt.show()
+
+
+
 
 #%% Integrate parameters in f function
 
