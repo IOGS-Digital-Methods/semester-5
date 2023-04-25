@@ -43,3 +43,22 @@ print(f'my_array_2 = {my_array_2}')
 print(type(my_array_2))
 
 print(f'\tlength of my_array_2 = {len(my_array_2)}\n')
+
+#%% Matrices 2D
+mb = np.array( [[1,2,3] , [4,5,6]] )
+mc = np.array( [[1,2,3] , [4,5,6]] )
+mm = mb + mc
+md = 2 * mb
+print(f'mm = {mm}')
+print(f'md = {md}')
+
+#%% Vecteur partiel
+vect = np.arange(100)
+print(vect)
+vect_p = vect[10:30]
+print(vect_p)
+vect_s = vect[50:]
+print(vect_s)
+
+c = vect[(vect > 2) & (vect < 11)]
+print(c)
