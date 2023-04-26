@@ -29,4 +29,4 @@ display(tf_sys)
 
 omega = np.logspace(-2, 2, 101)
 
-ct.bode_plot( sys , omega=w)
+ct.bode_plot( tf_sys , omega=omega)
