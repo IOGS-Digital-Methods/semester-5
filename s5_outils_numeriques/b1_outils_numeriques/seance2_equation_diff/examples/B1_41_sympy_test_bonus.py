@@ -4,64 +4,24 @@
 Module Outils Numériques / Semestre 5 / Institut d'Optique
 
 Calcul symbolique SymPy
-- better vizualization in Jupyter Notebook
 
 Created on 15/Apr/2023
 
 @author: LEnsE / IOGS / Palaiseau
 @author: Julien Villemejane
-@see : https://www.youtube.com/watch?v=-SdIZHPuW9o
-
-NEXT Solving Differential Equation
-@see : https://www.youtube.com/watch?v=MM3cBamj1Ms
 """
 
 import sympy as sp
 from sympy import *
 from IPython.display import *
 
-#%% Definition of symbols
+#%% Definition des symboles
 x, y, t = sp.symbols('x y t')
-# x and y consider as variables
+# x, y et t sont des variables
 print(x**2)
 
 f,g,h,m = sp.symbols('f g h m', cls=sp.Function) 
-# f, g, h and m consider as functions
-f=f(x)
-
-
-#%% Rational number
-print(sp.Rational(3,2))  # 3/2
-
-#%% Function of x and y
-f = x**2 + y
-
-print(f.subs(x, 4))
-
-
-
-#%% Solve limits of an expression
-# First function
-g = sp.sin(x/2 + sp.sin(x))
-print(g)
-lg = sp.limit(g, x, sp.pi)
-print(lg)
-
-# Second function with limit in 0+
-h = 2*sp.exp(1/x)/(sp.exp(1/x)+1)
-print(h)
-lhplus = sp.limit(h, x, 0, dir='+')
-print(lhplus)
-# Second function with limit in 0-
-lhmoins = sp.limit(h, x, 0, dir='-')
-print(lhmoins)
-
-# Third function with limit in +infinite
-m = (sp.cos(x)-1)/x
-print(f'Value in x=1 = {m.subs(x, 1)}')
-lm = sp.limit(m, x, sp.oo)
-print(f'Limit in +inf = {lm}')
-
+# f, g, h, m sont des fonctions
 
 #%% Derivatives
 print('\nDerivatives !!')
