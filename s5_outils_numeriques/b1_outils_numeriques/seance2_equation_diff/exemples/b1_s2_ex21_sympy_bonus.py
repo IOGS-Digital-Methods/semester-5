@@ -3,7 +3,7 @@
 """
 Module Outils Numériques / Semestre 5 / Institut d'Optique
 
-Calcul symbolique SymPy
+Calcul symbolique SymPy / Séries et Vecteurs
 
 Created on 15/Apr/2023
 
@@ -15,19 +15,7 @@ import sympy as sp
 from sympy import *
 from IPython.display import *
 
-#%% Definition des symboles
-x, y, t = sp.symbols('x y t')
-# x, y et t sont des variables
-print(x**2)
-
-f,g,h,m = sp.symbols('f g h m', cls=sp.Function) 
-# f, g, h, m sont des fonctions
-
 #%% Derivatives
-print('\nDerivatives !!')
-dfx = sp.diff(f, x)
-print(dfx)
-
 # Derivative with abstract expression
 k, l = sp.symbols('k l', cls=sp.Function)
 k = k(x)
@@ -36,10 +24,6 @@ dfkl = sp.diff(l, x)
 print(dfkl)
 
 #%% Integral
-print('\nIntegral !!')
-inte_f = sp.integrate(f, x)
-print(inte_f)
-
 # with definite value
 f = sp.exp(x)/(sp.sqrt(sp.exp(2*x)+9))
 inte_f = sp.integrate(f, (x, 0, sp.log(4)))
