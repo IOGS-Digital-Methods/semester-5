@@ -22,6 +22,7 @@ Le dépôt regroupe les ressources suivantes :
   - ***b3_traitement_2D*** : troisième bloc d'apprentissage autour des images 2D et traitements basiques (coupe, FFT, régression)
     - découverte par le projet : images provenant d'un faisceau LASER gaussien à analyser
     - *en cours de développement*
+- **systeme_photodection** : *à venir...*
 
 Les exemples fournis dans ce dépôt se basent sur une version supérieure à 3.7 de **Python**.
 
