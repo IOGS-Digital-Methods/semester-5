@@ -14,11 +14,17 @@ Created on 25/Apr/2023
 import numpy as np
 from matplotlib import pyplot as plt
 
+#%%
+theta1 = np.linspace(0, 2*np.pi, 14)
+y1 = np.sin(theta1)
+theta2 = np.linspace(0, 2*np.pi, 101)
+y2 = np.sin(theta2)
+
+
 plt.figure()
-eta = np.arange(10)
-tau = np.exp(eta)
-plt.plot(eta,tau,'bx-')
-plt.xlabel(r'$\tau(\eta)$')
-plt.ylabel(r'$\eta$')
-plt.title(r'$\tau (\eta) = e^{\eta}$')
+plt.plot(theta1, y1, '*', label='14 points')
+plt.plot(theta2, y2, label='101 points')
+plt.xlabel(r'$\theta$  (rd)')
+plt.ylabel(r'fonction $\sin(\theta)$')
+plt.legend()
 plt.show()
