@@ -89,7 +89,7 @@ vect_s = vect[ 50 : ]
 
 #%%
 mb = np.array( [[1,2,3] , [4,5,6]] )
-mc = md[ : , 1:3 ]
+mc = mb[ : , 1:3 ]
 
 # A quoi sert la dernière instruction ?
 
