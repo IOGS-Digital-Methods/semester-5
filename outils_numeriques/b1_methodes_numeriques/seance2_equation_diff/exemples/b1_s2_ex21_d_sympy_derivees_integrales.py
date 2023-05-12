@@ -15,6 +15,10 @@ import math
 import sympy
 from IPython.display import *
 
+
+x, y = sympy.symbols('x y')
+f = sympy.Function('f')
+
 #%% Derivees
 
 # Exemple 1
