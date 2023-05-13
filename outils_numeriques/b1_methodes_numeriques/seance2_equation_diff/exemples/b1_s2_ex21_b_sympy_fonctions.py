@@ -60,4 +60,29 @@ print(yres.shape)
 # Affichez la fonction g(x) en fonction de xlin
 
 
+#%% Expression avec des dérivées
+# Déclaration des symboles et des fonctions
+t, tau = sympy.symbols('t tau')
+vs = sympy.Function('V_s')(t)
 
+# On souhaite par la suite étudiée l'expression suivante : 𝑉𝑠(𝑡)+𝜏⋅𝑑𝑉𝑠(𝑡)𝑑𝑡=0
+dvs = sympy.Derivative(vs, t)
+exp = vs + tau * dvs
+display(exp)
+
+# Que donne l'affichage précédent ?
+
+
+#%% Résolution d'une équation différentielle
+result = sympy.dsolve(exp, vs)
+vs_t = result.rhs
+print(f'vs_t = {vs_t}')
+
+# L'expression donnée est-elle juste ?
+
+init_conds = {vs.subs(t,0): 5}
+result = sympy.dsolve(exp, vs, ics=init_conds)
+vs_t = result.rhs
+print(f'vs_t = {vs_t}')
+
+# Que devient l'expression dans ce nouveau cas ?
