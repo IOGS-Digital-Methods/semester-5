@@ -11,52 +11,51 @@ Created on 16/Apr/2023
 
 @author: LEnsE / IOGS / Palaiseau
 @author: Julien Villemejane
-@see : ode_book.pdf - part 5
+@see : https://scipython.com/book/chapter-8-scipy/additional-examples/the-sir-epidemic-model/
 """
-
-from ODESolver import RungeKutta4
 import numpy as np
+from scipy.integrate import odeint
 import matplotlib.pyplot as plt
 
-class SEIR:
-    def __init__(self, beta, mu, nu, gamma):
-        self.beta = beta
-        self.mu = mu
-        self.nu = nu
-        self.gamma = gamma
-        
-    def __call__(self, t, u):
-        S, E, I, R = u
-        N = S+I+R+E
-        dS = -self.beta*S*I/N + self.gamma*R
-        dE = self.beta*S*I/N - self.mu*E
-        dI = self.mu*E - self.nu*I
-        dR = self.nu*I - self.gamma*R
-        return [dS,dE,dI,dR]
-
-
-
-S0 = 7e7
-E0 = 0
-I0 = 1
-R0 = 0
-model = SEIR(beta=1.0, mu=1.0/10,nu=1.0/7,gamma=1.0/50)
-
-solver= RungeKutta4(model)
-solver.set_initial_condition([S0,E0,I0,R0])
-
-TF = 500
+# Total population, N.
 N = 1000
+# Initial number of infected and recovered individuals, I0 and R0.
+I0, R0 = 0.01, 0
+# Everyone else, S0, is susceptible to infection initially.
+S0 = N - I0 - R0
+# Contact rate, beta, and mean recovery rate, gamma, (in 1/days).
+beta, gamma = 0.4, 0.8/10 
+# A grid of time points (in days)
+t = np.linspace(0, 160, 160)
 
-time_points = np.linspace(0, TF, N)
+# The SIR model differential equations.
+def deriv(y, t, N, beta, gamma):
+    S, I, R = y
+    dSdt = -beta * S * I / N
+    dIdt = beta * S * I / N - gamma * I
+    dRdt = gamma * I
+    return dSdt, dIdt, dRdt
 
-t, u = solver.solve((0,TF),N)
+# Initial conditions vector
+y0 = S0, I0, R0
+# Integrate the SIR equations over the time grid, t.
+ret = odeint(deriv, y0, t, args=(N, beta, gamma))
+S, I, R = ret.T
 
-S = u[:,0]; E = u[:,1]; I = u[:,2]; R = u[:,3]
-plt.plot(t,S, label='Susceptible')
-plt.plot(t,E, label='Exposed')
-plt.plot(t,I, label='Infected')
-plt.plot(t,R, label='Recovered')
-plt.legend()
+# Plot the data on three separate curves for S(t), I(t) and R(t)
+fig = plt.figure(facecolor='w')
+ax = fig.add_subplot(111, facecolor='#dddddd', axisbelow=True)
+ax.plot(t, S/1000, 'b', alpha=0.5, lw=2, label='Susceptible')
+ax.plot(t, I/1000, 'r', alpha=0.5, lw=2, label='Infected')
+ax.plot(t, R/1000, 'g', alpha=0.5, lw=2, label='Recovered with immunity')
+ax.set_xlabel('Time /days')
+ax.set_ylabel('Number (1000s)')
+ax.set_ylim(0,1.2)
+ax.yaxis.set_tick_params(length=0)
+ax.xaxis.set_tick_params(length=0)
+ax.grid(b=True, which='major', c='w', lw=2, ls='-')
+legend = ax.legend()
+legend.get_frame().set_alpha(0.5)
+for spine in ('top', 'right', 'bottom', 'left'):
+    ax.spines[spine].set_visible(False)
 plt.show()
-
