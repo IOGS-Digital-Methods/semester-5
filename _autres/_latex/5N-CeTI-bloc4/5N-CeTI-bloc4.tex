@@ -47,7 +47,7 @@ avec $H_0 = 5$ et $\omega_0 = 500\operatorname{rd/s}$.
 A l'aide du tutoriel \textbf{Matlab} / \textsc{Systèmes et asservissement / Approche graphique / SimuLink}, vous devriez aboutir à un schéma de ce type,  :
 
 \begin{center}
-	\includegraphics[width=10cm]{images/simulink_sys_1.png}
+	\includegraphics[width=8cm]{images/simulink_sys_1.png}
 \end{center}
  
 }
@@ -60,10 +60,22 @@ On prendra un ALI dont les paramètres sont les suivants : $A_0 = 10^5$ et $GBP 
  
 }
 
-\encadreTDExo{3 - Modéliser et simuler un système asservi du second ordre}{
+\encadreTDExo{3 - Asservir un système et instabilité}{
+De manière graphique, à l'aide de \textbf{Simulink}, on souhaite simuler la \textbf{réponse à un échelon} puis la \textbf{réponse en fréquence} du système donné par la fonction de transfert suivante : 
+
+$$H(j\omega) = \frac{H_0}{H_0 + (1 + \frac{j \cdot \omega}{\omega_0})^3}$$
+
+pour $\omega_0 = 1000\operatorname{rd/s}$ et $H_0 = 1$, puis $H_0 = 10$ et $H_0 = 50$.
+
+Vous pouvez vous inspirer du tutoriel \textbf{Matlab} / \textsc{Systèmes et réponse en fréquence / Approche graphique / SimuLink}.
+}
+
+\encadreTDExo{4 - Modéliser et simuler un système asservi du second ordre}{
 De manière graphique, à l'aide de \textbf{Simulink}, on souhaite simuler la \textbf{réponse à un échelon} puis la \textbf{réponse en fréquence} du modèle d'un montage transimpédance.
 
-SCHEMA TRANSIMPEDANCE ?
+\begin{center}
+	\includegraphics[width=15cm]{images/transimpedance_modele.png}
+\end{center}
 
 On prendra un ALI dont les paramètres sont les suivants : $A_0 = 10^5$ et $GBP = 3~\operatorname{MHz}$.
 
@@ -71,19 +83,13 @@ On prendra une photodiode dont la capacité vaut $C_0 = 50\operatorname{pF}$ et 
  
 }
 
-\encadreTDExo{4 - Asservir un système et instabilité}{
-De manière graphique, à l'aide de \textbf{Simulink}, on souhaite simuler la \textbf{réponse à un échelon} puis la \textbf{réponse en fréquence} du système donné par la fonction de transfert suivante : 
 
-$$H(j\omega) = $$
-
- 
-}
-
-
-\encadreTDExo{5 - Simuler un système asservi - Approche non graphique}{
+\encadreTDExo{5 - Simuler un système - Approche non graphique}{
 A l'aide de \textbf{Matlab}, on souhaite simuler la \textbf{réponse à un échelon} puis la \textbf{réponse en fréquence} du système donné par la fonction de transfert suivante : 
 
-$$H(j\omega) = $$
+$$H(j\omega) = \frac{1}{1 + 2 \cdot m \cdot \frac{j \cdot \omega}{\omega_0} + (\frac{j \cdot \omega}{\omega_0})^2}$$
+
+avec $m = 0.3$ et $\omega_0 = 800\operatorname{rd/s}$
 
 On souhaite également montrer l'impact du choix du facteur $m$ (facteur d'amortissement) sur la réponse impulsionnelle du système.
 
@@ -92,11 +98,16 @@ On souhaite également montrer l'impact du choix du facteur $m$ (facteur d'amort
 Vous pouvez vous inspirer du tutoriel \textbf{Matlab} / \textsc{Systèmes et asservissement / Approche Système}.
 }
 
+\encadreTDExo{6 - Asservir un système - Approche non graphique}{
+A l'aide de \textbf{Matlab}, on souhaite simuler la \textbf{réponse à un échelon} puis la \textbf{réponse en fréquence} du système précédent rebouclé à l'aide d'un gain de facteur $K = \frac{1}{20}$.
+}
 
-\encadreTDExo{6 - Définir les marges de sécurité d'un système}{
+\encadreTDExo{7 - Définir les marges de sécurité d'un système}{
 A l'aide de \textbf{Matlab}, on souhaite identifier les marges de sécurité en terme de phase et de gain du système suivant :
 
-$$H(j\omega) = $$
+$$H(j\omega) = \frac{H_0}{H_0 + (1 + \frac{j \cdot \omega}{\omega_0})^3}$$
+
+pour $\omega_0 = 1000\operatorname{rd/s}$ et $H_0 = 1$, puis $H_0 = 10$ et $H_0 = 50$.
 
 On souhaite également corriger ce système avec un correcteur proportionnel et vérifier la limite de stabilité.
 
