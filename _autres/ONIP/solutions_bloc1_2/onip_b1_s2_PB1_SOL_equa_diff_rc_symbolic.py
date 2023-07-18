@@ -42,6 +42,7 @@ func = lambdify([t, R, C], vs_t)
 
 plt.figure()
 plt.plot(t_vect, func(t_vect, 1e5, 1e-6))
+plt.show()
 
 
 #%% Differential equation - Forced Regime / Sinus
@@ -67,3 +68,4 @@ func = lambdify([t, R, C], vs_t)
 # Display
 plt.figure()
 plt.plot(t_vect, func(t_vect, 1e5, 1e-6))
+plt.show()

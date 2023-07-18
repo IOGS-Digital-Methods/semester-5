@@ -47,7 +47,7 @@ init_conds = {vs.subs(t,0): 5}
 
 result = sp.dsolve(equation, vs, ics=init_conds)
 vs_t = result.rhs
-display(f'vs_t = {vs_t}')
+display(vs_t)
 
 t_lin = np.linspace(0, 0.01, 101)
 func_vs = lambdify([t], vs_t)
