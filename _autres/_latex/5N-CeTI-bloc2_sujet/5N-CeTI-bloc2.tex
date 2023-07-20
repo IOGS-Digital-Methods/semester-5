@@ -23,13 +23,13 @@
 %------------------------------------------
 
 %%%%%%%%%%%%%%%%%%%
-\encadreTDExo{1 - Filtrer une composante fréquentielle}{
+\encadreTDExo{1 - Filtrer des composantes fréquentielles - Ordre 1 Passif}{
 Proposer une structure de filtre du premier ordre qui laisse passer des signaux au dessus d'une fréquence $f_c$. Donner les principales caractéristiques et limitations d'un tel filtre.
 }
 
 
 %%%%%%%%%%%%%%%%%%%
-\encadreTDExo{2 - Filtrer une composante fréquentielle}{
+\encadreTDExo{2 - Filtrer des composantes fréquentielles - Ordre 2}{
 On se propose d'étudier la structure suivante :
 
 \begin{center}
@@ -39,18 +39,35 @@ On se propose d'étudier la structure suivante :
 Pour cela, on se propose d'étudier les deux circuits suivants :
 
 \begin{center}
-Intégrateur
-
-	\includegraphics[width=8cm]{images/universel_integrateur.png}
-
-Additionneur
-
-	\includegraphics[width=8cm]{images/universel_sommateur.png}
+	\includegraphics[width=7cm]{images/universel_integrateur.png}
+	\quad
+	\includegraphics[width=7cm]{images/universel_sommateur.png}
 \end{center}
 }
 
+\encadreTDExo{4 - Réaliser un filtre à partir d'un gabarit}{
+On s'intéresse ici aux filtres de \textbf{Butterworth} (voir annexe).
+
+On souhaite réaliser un filtre dont le gabarit est le suivant :
+
+\begin{itemize}
+	\item gain supérieur à $-1\operatorname{dB}$ jusqu'à $10\operatorname{kHz}$
+	\item gain inférieur à $-60\operatorname{dB}$ à partir de $40\operatorname{kHz}$
+\end{itemize}
+
+\bigskip
+
+\begin{enumerate}
+	\item Tracer le gabarit du filtre.
+	\item Déterminer l'ordre du filtre minimal.
+	\item Déterminer la pulsation de coupure du filtre.
+	\item Déterminer la fonction de transfert du filtre	
+\end{enumerate}
+
+}
+
 %%%%%%%%%%%%%%%%%%%
-\encadreTDExo{3 - Filtrer une composante fréquentielle autrement}{
+\encadreTDExo{3 - Filtrer des composantes fréquentielles autrement}{
 
 \subsection*{Capacité commutée}
 
@@ -98,7 +115,110 @@ On s'intéresse au composant MAX296 dont une partie de la documentation techniqu
 
 }
 
+%%%%%%%%%%%%%%%%%%%
 
 \includepdf[pages=-]{doc/MAX296.pdf}
+
+\newpage
+\section*{Annexe : Filtres actif de \textbf{Butterworth} et de \textbf{Chebychev}}
+
+\textit{Document basé sur le cours de Sylvie Lebrun, Filtrage analogique, 2015.}
+
+\subsection*{Gabarit d'un filtre}
+
+Le gabarit d'un filtre correspond aux \textbf{contraintes fréquentielles et en gain} que doit satisfaire le système à développer.
+
+\begin{center}
+	\includegraphics[width=10cm]{images/gabarit_filtre.png}
+\end{center}
+
+On souhaite souvent réaliser un système de filtrage qui possède les caractéristiques suivantes :
+\begin{itemize}
+	\item transmission de fréquence inférieure à $f_0$
+	\item valeur minimale $a$ de gain dans la bande de fréquence à transmettre
+	\item valeur maximale $b$ de gain dans la bande de fréquence à éliminer (à partir d'une fréquence $f_1$)
+\end{itemize}
+
+Le gabarit est caractérisé par 2 points $(f_0, a)$ et $(f_1, b)$.
+
+\medskip
+
+A partir de ce gabarit, plusieurs types de filtres peuvent être utilisés : Butterworth, Chebychev, Bessel, Cauer
+
+\bigskip
+
+Pour la suite, on posera : $X = \frac{\omega}{\omega_c}$ où $\omega_c$ est la fréquence de coupure du système, définie à $-3\operatorname{dB}$ par rapport au gain dans la bande passante.
+
+
+\begin{center}
+	\includegraphics[width=8cm]{images/gabarit_butter.png}
+\end{center}
+
+\newpage
+\subsection*{Filtre de Butterworth}
+
+Ce type de filtre est utilisé pour sa \textbf{réponse extrêmement plate dans la bande-passante}.
+
+
+La réponse en fréquence d'un tel filtre est tel que son module vaut :
+
+$$ T(X) = \frac{1}{\sqrt{1 + X^{2\cdot n}}}$$
+
+où $n$ est l'ordre du filtre.
+
+\subsubsection*{Détermination de $n$}
+En s'intéressant aux conditions aux limites :
+
+
+$
+\left\{
+    \begin{array}{ll}
+        20 \cdot \log_{10} T(x_0) > a \\
+        20 \cdot \log_{10} T(x_1) < b \\
+    \end{array}    
+\right. 
+$
+$\Leftrightarrow$
+$
+\left\{
+    \begin{array}{ll}
+        x_0^{2\cdot n} < 10^{-a/10} - 1 & (1)\\
+        x_1^{2\cdot n} > 10^{-b/10} - 1 & (2)\\
+    \end{array}    
+\right. 
+$
+
+\medskip
+
+En divisant (2) par (1) on obtient alors la valeur minimale de $n$. On choisira $n$ la plus petite valeur entière qui satisfasse :
+
+$$ n \ge \frac{1}{2} \cdot \frac{\log_{10} \frac{10^{-a/10} - 1}{10^{-b/10} - 1}}{\log_{10} \frac{f_0}{f_1}}$$
+
+
+\subsubsection*{Détermination de $f_c$}
+
+On calcule alors avec (1) et (2) les fréquences de coupure limites :
+
+$$f_{c,0} = \frac{f_0}{(10^{-a/10} - 1)^{1/(2\cdot n)}} \qquad f_{c,1} = \frac{f_1}{(10^{-b/10} - 1)^{1/(2\cdot n)}}$$
+
+On choisit ensuite la fréquence de coupure comme étant la moyenne géométrique des deux fréquences précédentes :
+
+$$f_c = \sqrt{f_{c,0} \cdot f_{c,1}} $$
+
+
+\subsubsection*{Fonction de transfert}
+
+Il faut trouver une fraction rationnelle complexe $T(p)$ (avec $p=j\cdot x$) qui admette T(x) comme module. On factorise alors le polynôme : $B_n(x) = 1 + x^{2\cdot n}$. 
+
+On trouve alors que $B_n(p)$ peut s'écrire sous la forme des polynômes obtenus par Butterworth :
+
+\begin{center}
+	\includegraphics[width=12cm]{images/polynomes_butter.png}
+\end{center}
+
+
+La fonction de transfert normalisée s'écrit alors ($n$ impair et $n$ pair) :
+
+$$ T(p) = \frac{1}{(1 + p) \cdot (a^2 + b^2 + 2\cdot b p + p^2) \cdot (...} \qquad  T(p) = \frac{1}{(a^2 + b^2 + 2\cdot b p + p^2) \cdot (...} $$
 
 \end {document}
