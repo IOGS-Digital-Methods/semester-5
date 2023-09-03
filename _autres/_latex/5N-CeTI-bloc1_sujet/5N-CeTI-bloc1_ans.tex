@@ -80,7 +80,7 @@ Si on suppose maintenant que le circuit précédent est chargé par une résista
 	\draw (1,0) to [short, *-] (3,0)
 		to[R=$R_{2}$, -*, i<_=$I_2$] (3,2)
 		to[R=$R_{1}$, -] (3,4)
-		to [short, -*, i<_=$I$] (0,4);
+		to [short, -o, i<_=$I$] (0,4);
 	\draw (3,0) to[short, -o] (4,0);
 	\draw[dashed] (4,0) to[short, -] (5.5,0) 
 		to[R=$R_L$, -] (5.5,2)
@@ -91,7 +91,7 @@ Si on suppose maintenant que le circuit précédent est chargé par une résista
 	\draw (0,0.5) edge[->] (0,3.5);
 	\node (Ein) at (-1,2.25){$V_E$};
 
-	\draw (0,0) to [short, *-] (1,0)
+	\draw (0,0) to [short, o-] (1,0)
 		node[ground](GND){};
 	% fleche
 	\draw (3.5,0.3) edge[->, green!40!black] (3.5,1.7); \node[text=green!40!black] (US) at (4,1){$V_S$};

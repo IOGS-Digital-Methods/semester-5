@@ -1,0 +1,4937 @@
+\documentclass[10pt]{article} 
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fourier}
+
+%\usepackage{fullpage}
+
+\usepackage{tabularx}
+
+
+
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[svgnames]{xcolor}
+\usepackage{geometry}
+\geometry{verbose,tmargin=1.5cm,bmargin=2cm,lmargin=3cm,rmargin=2.5cm}
+
+\usepackage{enumitem}
+
+\usepackage{ccaption} %permet d'afficher le titre d'une figure sans "figure n°"
+
+
+\usepackage{grafcet}  %pour faire des grafcet
+
+\usepackage{karnaughmap}  %pour dessiner des tableaux de Karnaugh
+
+\usepackage{karnaugh-map}  %pour dessiner des tableaux de Karnaugh
+
+\usepackage[french]{varioref}
+
+\usepackage{esvect}  %pour avoir de beaux vecteurs avec \vv
+\usepackage{steinmetz}
+
+\usepackage{schemabloc} %pour les schémas blocs en automatique
+
+\usepackage[european, straightvoltages, oldvoltagedirection, siunitx, cuteinductors]{circuitikz}  %pour avoir des fleches de tension droites et dans le bon sens
+
+
+\usepackage{siunitx}
+\sisetup{decimalsymbol=comma}  %remplace le point décimal par une virgule
+
+%Séparation partie entière décimale par une virgule et séparation des unités par un point
+
+\sisetup{  output-decimal-marker={,},    inter-unit-product=\ensuremath{{} \cdot {}}}
+
+\sisetup{output-decimal-marker={,}}
+   
+
+
+
+%\usepackage[european, cuteinductors]{circuitikz}
+\usetikzlibrary{positioning}
+%\usetikzlibrary{calc}  %pour l'emploi des coordonnées relatives, le calcul de celles-ci
+
+\usetikzlibrary{decorations.markings,arrows}  %utilisation d'accolades dans Tikz
+
+\usepackage{multicol}
+\usepackage{lscape}
+
+\usetikzlibrary{decorations.pathreplacing} 
+
+
+
+\usepackage{hyperref}
+\hypersetup{
+hyperindex=true, %ajoute des liens dans les index.
+colorlinks=true, %colorise les liens
+breaklinks=true, %permet le retour à la ligne dans les liens trop longs
+urlcolor= blue, %couleur des hyperliens
+linkcolor= blue, %couleur des liens internes
+bookmarks=true, %créé des signets pour Acrobat
+bookmarksopen=true, %si les signets Acrobat sont créés,  les afficher complètement.
+pdftitle={}, %informations apparaissant dans
+pdfauthor={Claude CHEVASSU}, %dans les informations du document sous Acrobat.
+pdfsubject={},
+pdfkeywords={},
+pdfcreator  = {PDFLaTeX},%
+pdfproducer = {PDFLaTeX}
+}
+
+
+
+\usepackage[frenchb]{babel}
+
+
+
+
+
+
+\begin{document}
+
+
+
+\begin{titlepage}
+
+  \begin{sffamily}
+  \begin{center}
+
+    % Title
+  
+    { \huge \bfseries  Bien débuter avec CircuiTikZ \\
+   \vspace{1cm}
+    recueil de schémas }
+    
+    \vspace{4cm}
+
+    \includegraphics[scale=1.1]{ctanlion2.jpg}
+  
+    \vfill
+
+   \end{center}
+  
+  
+      \begin{flushright} \large Claude Chevassu\\
+      \today
+      \end{flushright}
+  \end{sffamily}
+  
+\end{titlepage}
+
+
+
+\tableofcontents
+
+
+\newpage
+
+
+
+\section{Introduction}
+
+Le présent recueil regroupe des schémas d'électronique et d'électricité réalisés avec Circuitikz et TikZ. Ce recueil comporte également quelques exemples de schémas blocs réalisés avec le package \og schemabloc \fg{} et aussi quelques grafcet réalisés avec le package \og grafcet \fg{}, packages conçus par Robert Papanicola. Deux exemples de \og ladder \fg sont présentés à la fin.
+
+
+Le but de ce présent recueil est de mettre à disposition de tout un chacun, en plus de ce document au format pdf, le fichier source \LaTeX{} afin de permettre de \og copier coller \fg{} les différents schémas. Cela permet de ne pas tout réinventer, de ne pas tout refaire et de gagner un temps précieux. Je ne prétends pas avoir \og codé \fg{} mes schémas de manière la plus optimale et la plus astucieuse possible, vous trouverez sûrement de nombreuses améliorations à y apporter. Néanmoins, cette collection peut constituer un aperçu de ce qu'il est possible d'obtenir pour un débutant et de permettre, par \og copier coller \fg, de se familiariser et encore une fois de gagner du temps. Je n'ai malheureusement pas commenté mes schémas autant que j'aurai dû le faire dans un but pédagogique, vous voudrez bien m'en excuser.
+
+\vspace{0.5cm}
+
+L'utilisation de Circuitikz, comme celle de \LaTeX, n'est pas très intuitive et demande un apprentissage long et laborieux. Dès lors, pourquoi utiliser Tikz et plus spécifiquement Circuitikz pour réaliser vos schémas d'électricité ou d'électronique ? Avec Circuitikz, votre figure sera codée est vous obtiendrez toujours le même résultat en tapant la même ligne de code. Il s'agit de dessin vectoriel, donc pas d'effets disgracieux si vous grossissez l'échelle. Circuitikz permet d'obtenir un aspect uniformisé de votre texte et de vos schémas~; c'est intéressant, la police utilisée sera la même partout, dans le texte de votre document \LaTeX comme dans les schémas. Le document apparaîtra plus homogène. On peut sans problème changer l'échelle du schéma pour mieux l'inclure dans une page. On peut également inclure de belles formules mathématiques dans les schémas, chose difficilement possible avec d'autres solutions.
+
+Et puis surtout, à part ce remarquable outil, qu'utiliser pour réaliser des schémas à peu près aux normes~? Les logiciels de dessins dans ce domaine ne sont pas légion. Utiliser des logiciels de simulation et \og copier coller \fg{} le schéma obtenu n'est pas très satisfaisant. Néanmoins, voici une adresse ou trouver des alternatives à Circuitikz \url{https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Electronics/Programs}
+
+\vspace{0.5cm}
+
+Massimo Redaelli, l'auteur de CircuiTikz ainsi que 	Stefan Erhardt, Romano Giannetti et Stefan Lindner qui maintiennent le package ont accompli un gros effort de pédagogie  \href{https://www.google.fr/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwibk-CEyITtAhVFyxoKHbMFDBMQFjAAegQIBhAC&url=http%3A%2F%2Ftexdoc.net%2Ftexmf-dist%2Fdoc%2Flatex%2Fcircuitikz%2Fcircuitikzmanual.pdf&usg=AOvVaw3wW8oOXJGx8ByXEr6LWQqV}{dans la dernière documentation publiée en 2019}. Cette dernière est en anglais, hélas, mais ce n'est pas de l'anglais littéraire et des outils de traduction en ligne vous sortirons d'affaire en cas de difficulté de compréhension. Je pense qu'il faut lire et relire leur documentation, comme disent les anglo-saxon quand une question triviale est posée~: \og RTFM \fg, read the fucking manual, lis le putain de manuel\dots
+
+\vspace{1cm}
+
+Dans les dernières versions de TikZ de fréquents problèmes de compilation surgissent à cause de conflits entre le package babel français et les codes internes de \TeX{}  \og  ; : ! ?\fg. Une solution consiste à ne plus considérer le caractère \og : \fg{} comme un caractère spécial dans les passages où il doit être interprété par TikZ, en utilisant la commande fournie par babel français~: \begin{verbatim}\shorthandoff{;:!?} et \shorthandon{;:!?} \end{verbatim} 
+
+
+On encapsulera donc les figures à l'aide des instructions suivantes~:
+
+\begin{verbatim}
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\begin{center}
+\begin{circuitikz}[european,scale=0.9, every node/.style={scale=0.9}]
+
+\draw
+
+;
+
+\end{circuitikz}
+\legend{Circuit de l'exercice \ref{transistor1}}
+\label{fig:transistor1}
+\end{center}
+\legend{}  %ou plutôt caption si l'on souhaite numéroter les figures
+%\label{}  %insére une étiquette à laquelle on peut renvoyer
+\end{figure}
+\shorthandon{;:!?}
+
+\end{verbatim}
+
+\newpage
+
+
+Il existe des sites où on peut trouver des exemples tout fait de dessins~:
+
+\url{http://www.physagreg.fr/schemas-figures-physique-svg-tikz.php}
+
+
+\url{http://www.texample.net/tikz/examples/tag/circuitikz/}
+
+Le site~: \url{https://tex.stackexchange.com/} permet de poser des questions et d'examiner la réponse aux très nombreuses questions posées à propos de Circuitikz ou autre. Si vous mettez le mot clé \og  circuitikz \fg dans la fenêtre tout en haut, c'est une véritable mine pleine de réponses et d'exemples à méditer !
+
+
+
+Bien sûr il faut lire et relire la documentation de circuitikz~! Le présent recueil présente la manière de bien débuter avec Circuitikz en utilisant tout de suite le positionnement relatif par rapport aux points d'ancrage des composants.
+
+Avant toute chose, il serait bon d'être à l'aise avec les commandes de bases de TikZ sur lequel est basé Circuitikz. Pour ce faire, on pourra lire l'excellent \og TikZ pour l'impatient \fg{} de Gérard Tisseau et Jacques Duma, il suffit de taper ce titre dans un moteur de recherche pour dénicher le pdf. Mais l'expérience montre que lorsqu'on utilise Circuitikz, on ne possède pas suffisamment l'expérience de Tikz, le chapitre suivant sur l'emploi des coordonnées relatives a pour but de palier à ce défaut de connaissance de Tikz en fournissant les connaissances indispensables.
+
+\`A part dans le premier chapitre, je n'ai pas fait figurer le code des schémas dans ce pdf, l'expérience m'a montré que les \og copier coller \fg{} ne s'effectuent pas forcément très bien. Je vous invite donc à récupérer le fichier source au format .tex et à utiliser la fonction recherche le cas échéant pour localiser le code du dessin qui vous intéresserait.
+
+
+\newpage
+
+\section{Du bon usage de Circuitikz}
+
+\subsection{Flèches de tension droites}
+
+Dans le circuit suivant~:
+
+\begin{figure}[h]
+\centering
+\shorthandoff{:!}
+\begin{circuitikz}
+\draw
+(0,0)to[R,v=$U_1$](2,0)
+;
+\end{circuitikz}
+\shorthandon{:!}
+\end{figure}
+
+obtenu avec le code ci-dessous~:
+
+\begin{verbatim}
+\begin{figure}[h]
+\centering
+\shorthandoff{:!}
+\begin{circuitikz}
+\draw
+(0,0)to[R,v=$U_1$](2,0)
+;
+\end{circuitikz}
+\shorthandon{:!}
+\end{figure}
+\end{verbatim}
+
+la flèche de tension aux bornes de la résistance est courbe. Pour obtenir les flèches droites habituelles, il suffit d'ajouter l'option \og straightvoltages \fg{} au package circuitikz dans le préambule, comme ceci~:
+
+\begin{verbatim}
+\usepackage[european, straightvoltages]{circuitikz}
+\end{verbatim}
+
+
+
+\subsection{Coordonnées relatives}
+
+La \og bonne \fg{} manière d'utiliser Circuitikz consiste à travailler le plus possible en coordonnées relative par rapport aux points d'ancrage des composants, les \og ancres \fg. Cela est surtout utile dès que l'on utilises des tripôles, comme les transistors, des quadripôles, comme le transformateur. Si l'on souhaite dessiner un transistor bipolaire NPN par exemple, on indiquera où sera placé le centre du composant, mais on ne connaîtra pas les coordonnées exactes de la base, du collecteur et de l'émetteur. Par contre on pourra utiliser ces points et y faire arriver ou en faire partir des connexions \og en relatif \fg. L'exemple du transformateur et de l'amplificateur opérationnel donnés dans la suite permettront de clarifier cela.
+
+\vspace{0.5cm}
+
+
+TikZ permet de définir les coordonnées des points à relier de manière relative. Ainsi, on peut mettre deux + devant une coordonnée comme dans ++(1cm,0pt), ce qui signifie \og un centimètre à droite du dernier point utilisé \fg. Prenons par exemple les coordonnées~: (1,0) ++(1,0)++(0,1); cela indique les trois coordonnées (1,0), puis (2,0) et enfin (2,1); à partir du point de départ (1,0), déplacement de +1 sur Ox, puis +1 sur Oy.
+
+Au lieu de deux signes +, on peut n'en mettre qu'un. Cela spécifie les coordonnées d'un point de manière relative, mais ne \og change \fg{} pas le point courant utilisé dans les commandes relatives qui viennent ensuite et qui se réfèrent toutes à ce même point. Par exemple~: (1,0) +(1,0) +(0,1) indique les trois coordonnées (1,0), puis (2,0), et (1,1); les deux coordonnées +(1,0) puis +(0,1) se référent au même point de départ (1,0).
+
+Le schéma ci-dessous illustre les effets d'un seul + et de deux+~:
+
+\begin{verbatim}
+\begin{tikzpicture}
+\draw[step=1cm,color=green,thin](-0.2cm,-0.2cm)grid (2.2cm,2.2cm); %dessin de la grille en vert
+
+\draw [color=blue, thin] (0,0)--+(1,0)--+(1,1); %déplacement relatif par rapport à l'origine (0,0)  
+
+\draw [color=red, dashed, thick](0,1)--++(1,0)--++(1,1); %déplacement de point en point
+
+\end{tikzpicture}
+\end{verbatim}
+
+
+
+
+\begin{center}
+\begin{tikzpicture}
+\draw[step=1cm,color=green,thin](-0.2cm,-0.2cm)grid (2.2cm,2.2cm); %dessin de la grille en vert
+
+\draw [color=blue, thin] (0,0)--+(1,0)--+(1,1); %déplacement relatif par rapport à l'origine (0,0)  
+
+\draw [color=red, dashed, thick](0,1)--++(1,0)--++(1,1); %déplacement de point en point
+
+\end{tikzpicture}
+\end{center}
+
+
+Voici par exemple 4 résistances placées à partir de l'origine (0,0) en coordonnées relative~; on part de l'origine, on se déplace de 2 vers la gauche en plaçant une résistance, puis de 2 vers le bas en plaçant une résistance, puis de 2 vers la gauche en plaçant une résistance, puis on revient au point origine en plaçant une dernière résistance. Le point origine est marqué par un gros point noir~:
+
+\begin{verbatim}
+\begin{circuitikz}
+%%dessin d'un point noir pour marquer le point origine
+\draw (0,0)node[circ]{};
+%%placement des résistances
+\draw (0,0)to[R]++(2,0)to[R]++(0,-2)to[R]++(-2,0)to[R](0,0);
+\end{circuitikz}
+\end{verbatim}
+
+
+
+\shorthandoff{:!}
+\begin{figure}[!hbtp]
+\begin{center}
+\begin{circuitikz}
+%%dessin d'un point noir pour marquer le point origine
+\draw (0,0)node[circ]{};
+%%placement des résistances
+\draw (0,0)to[R]++(2,0)to[R]++(0,-2)to[R]++(-2,0)to[R](0,0);
+\end{circuitikz}
+\end{center}
+\legend{Placement de 4 résistances à l'aide de coordonnées relatives}
+%\label{}
+\end{figure}
+\shorthandon{:!}
+
+
+\newpage
+
+Voici la mise en application à partir du symbole du transformateur, symbole placé avec \og node \fg{} et qui possède 4 points d'ancrage, des \og ancres \fg, A1 et A2 pour le primaire et B1, B2 pour le secondaire (voir la documentation de Circuitikz le paragraphe intitulé \og Doubles bipoles \fg).
+
+
+\begin{verbatim}
+\begin{circuitikz}
+            \draw (0,0)node[transformer core, yscale=1.25] (T) {}; %placement du transformateur
+            \draw (T.A2) --++(-1,0) to [sV] ($(T.A1)+(-1,0)$) -- (T.A1); %connexion partant de l'ancre A2 vers la gauche de 1 unité, placement de la source de tension sinusoµïdale entre ce point et un point situé à gauche d'une unité de l'ancre A1 et connexion entre ce point et l'ancre A1
+            \draw (T.A2) node[below]{T.A2}; %placement du nom de l'ancre A2 : T.A2
+            \draw (T.A1) node[above]{T.A1}; %placement du nom de l'ancre A1 : T.A1
+\end{circuitikz}
+\end{verbatim}
+
+
+
+\vspace{1cm}
+
+
+\shorthandoff{:!}
+\begin{figure}[!hbtp]
+\begin{center}
+\begin{circuitikz}
+            \draw (0,0)node[transformer core, yscale=1.25] (T) {};
+            \draw (T.A2) --++(-1,0) to [sV] ($(T.A1)+(-1,0)$) -- (T.A1);
+            \draw (T.A2) node[below]{T.A2};
+            \draw (T.A1) node[above]{T.A1};
+\end{circuitikz}
+\end{center}
+\legend{Coordonnées relatives, transformateur}
+%\label{}
+\end{figure}
+\shorthandon{:!}
+
+On dessine un transformateur nommé T au point (0,0) avec les instructions~:
+node[transformer core, yscale=1.25] (T) {}
+
+
+Le transformateur est un quadripôle qui possède 4 \og ancres \fg. On part de l'ancre T.A2, on déplace le crayon d'une unité vers la gauche (T.A2) -- ++(-1,0), ensuite on dessine la source de tension alternative jusqu'au point 
+\verb? ($(T.A1)+(-1,0)$)? et on dessine ensuite la connexion jusqu'à T.A1
+
+
+Voici un schéma à peine différent où on travaille encore en coordonnées relatives, mais avec l'instruction \verb? \coordinate?.
+
+\verb? \coordinate (A) at (x,y);? est la forme abrégé de la commande qui permet de nommer et de placer un nœud de dimension nulle~:
+
+
+\begin{verbatim}
+\path (x,y) coordinate (A);
+ou
+\draw (x,y) node[coordinate] (A){};
+ou
+\node (A) at (x,y) node[shape=coordinate]{};
+\end{verbatim}
+
+
+
+
+Voici un schéma dans lequel on utilise cette instruction \verb? \coordinate?~:
+
+
+\begin{verbatim}
+\begin{circuitikz}[scale=2]
+
+%%placement du transformateur au point (0,0)
+
+\draw (0,0) node[transformer core] (T) {};
+
+%%source de tension sinusoïdale, interrupteur et lampe
+\coordinate[left=2cm] (a) at (T.A1);
+
+\draw (a) to [closing switch, mirror, invert] (T.A1)  
+      (a) to [vsourcesin]    (a |- T.A2)
+          to [lamp] (T.A2);
+          
+%mirror et invert permettent d'obtenir un interrupteur correctement placé
+% selon la typographie de l'appareillage électrique
+
+%voltmètre
+\draw (T.B1) to[voltmeter,l=$U$,*-] ++ (1,0) coordinate (b)
+             to (b |- T.B2) %trace une ligne verticale jusqu'à l'horizontale passant par T.B2
+             to [short,-*] (T.B2); %trace la ligne de l'extrèmité de la ligne précédente à T.B2
+             
+\end{circuitikz}
+\end{verbatim}
+
+
+
+\vspace{1cm}
+
+
+\shorthandoff{:!}
+\begin{figure}[!hbtp]
+\begin{center}
+\begin{circuitikz}[cute inductor,scale=2]
+
+%%placement du transformateur
+
+\draw (0,0) node[transformer core] (T) {};
+
+%%source de tension sinusoïdale, interrupteur et lampe
+\coordinate[left=2cm] (a) at (T.A1);
+
+\draw (a) to [closing switch, mirror, invert] (T.A1)
+      (a) to [vsourcesin]    (a |- T.A2)
+          to [lamp] (T.A2);
+%mirror et invert permettent d'obtenir un interrupteur correctement placé
+% selon la typographie de l'appareillage électrique
+          
+          
+
+%voltmètre
+\draw (T.B1) to[voltmeter,l=$U$,*-] ++ (1,0) coordinate (b)
+             to (b |- T.B2) %trace une ligne verticale jusqu'à l'horizontale passant par T.B2
+             to [short,-*] (T.B2); %trace la ligne de l'extrèmité de la ligne précédente à T.B2
+             
+\end{circuitikz}
+\end{center}
+\legend{Transformateur en coordonnées relatives}
+%\label{}
+\end{figure}
+\shorthandon{:!}
+
+
+\newpage
+
+
+\shorthandoff{:!}
+\begin{figure}[!hbtp]
+\begin{center}
+\begin{circuitikz}
+\draw
+ (0,0)to[sI] (0,4)
+     to[R,l=$\SI{1}{\kilo\ohm}$,-*] (3,4) -- ++(1,0)
+     to[R,l=$\SI{2}{\kilo\ohm}$] ++(2,0) -- ++(0,-4) to[R,l=$\SI{2}{\kilo\ohm}$] ++(-2,0) -| (3,4)
+     (0,0)to[short,-*](3,0)
+;
+\end{circuitikz}
+\end{center}
+\legend{encore des coordonnées relatives}
+%\label{}
+\end{figure}
+\shorthandon{:!}
+
+\vspace{2cm}
+
+Démonstration de la fonction \og coordinate \fg{} et placement d'un composant par rapport à un point défini comme intersection entre l'horizontal qui passe par un point et la verticale qui passe par un autre point~:
+
+
+\begin{verbatim}
+\begin{circuitikz}
+\draw (0,-2)node[circ]{};
+\draw (0,-2)coordinate(a){};
+\draw(8,1) node(d){}
+
+ (a |- d)to[cute inductor](d); % (a|- d) = point d'intersection de la verticale passant par
+ a et de l'horizontale passant par d
+ 
+\end{circuitikz}
+\end{verbatim}
+
+
+
+
+\shorthandoff{:!}
+\begin{figure}[!hbtp]
+\begin{center}
+\begin{circuitikz}
+\draw (0,-2)node[circ]{};
+\draw (0,-2)coordinate(a){};
+\draw(8,1) node(d){}
+
+ (a |- d)to[cute inductor](d); 
+ 
+\end{circuitikz}
+\end{center}
+\legend{placement d'une inductance en coordonnées relatives par rapport à un point défini, |-}
+%\label{}
+\end{figure}
+\shorthandon{:!}
+
+\newpage
+
+
+\begin{verbatim}
+\begin{circuitikz}
+\draw (0,-2)node[circ]{};
+\draw (0,-2)coordinate(a){};
+\draw(8,1) node(d){}
+
+ (a -| d)to[cute inductor](d); % (a-| d) = point d'intersection de l'horizontale passant par a
+ et de la verticale passant par d
+ 
+\end{circuitikz}
+\end{verbatim}
+
+
+\shorthandoff{:!}
+\begin{figure}[!hbtp]
+\begin{center}
+\begin{circuitikz}
+\draw (0,-2)node[circ]{};
+\draw (0,-2)coordinate(a){};
+\draw(8,1) node(d){}
+
+ (a -| d)to[cute inductor](d); 
+ 
+\end{circuitikz}
+\end{center}
+\legend{placement d'une inductance en coordonnées relatives par rapport à un point défini, -|}
+%\label{}
+\end{figure}
+\shorthandon{:!}
+
+
+Si vous n'êtes pas encore convaincu de la nécessité de travailler en coordonnées relative, examinez le schéma ci-après où le défaut de positionnement des masses par rapport les unes aux autres à été exagéré.
+
+\shorthandoff{:!}
+\begin{figure}[!hbtp]
+\begin{center}
+\begin{circuitikz}
+  \draw
+  (0,0)
+  node[npn](Q1){}
+  (Q1.C)
+  to[short]
+  ++(1,0)
+  to[V=${\SI{10}{\volt}}$]
+  ++(0,-2)
+  node[cground]{}
+
+  (Q1.E)
+  to[short]
+  (0,-1.8)
+  node[cground]{}
+
+  (Q1.B)
+  to[short]
+  ++(-1, 0)
+  to[V=${\SI{0.6}{\volt}}$]
+  ++(0, -2)
+  node[cground]{}
+  ;
+\end{circuitikz}
+\end{center}
+\legend{défauts de placement en coordonnées absolues}
+%\label{}
+\end{figure}
+\shorthandon{:!}
+
+\newpage
+
+
+Et maintenant, voici la solution~: la masse au bout de la source de tension de \SI{10}{\volt} a été baptisée \og gnd \fg{} et la base comme l'émetteur sont connectés vers le bas en coordonnées relatives par rapport à \og gnd \fg.
+
+
+\shorthandoff{:!}
+\begin{figure}[!hbtp]
+\begin{center}
+\begin{circuitikz}
+  \draw
+  (0,0)  node[npn](Q1){}
+  (Q1.C) to[short] ++(1,0) to[V=${\SI{10}{\volt}}$] ++(0,-2.75)
+  node[cground](gnd){}
+  (Q1.E) to[short]  (Q1.E|- gnd)  node[cground]{}
+  (Q1.B) to[short] ++(-1, 0) coordinate(top) to[V=${\SI{0.6}{\volt}}$] (top|- gnd) 
+  node[cground]{}
+  ;
+\end{circuitikz}
+\end{center}
+\legend{correction de défauts de placement en coordonnées absolues}
+%\label{}
+\end{figure}
+\shorthandon{:!}
+
+Les flèches de tension ne sont pas dans le bon sens. Pour les retourner il faut inverser les coordonnées des points entre lesquels sont placés les sources de tension, mais cela n'est pas possible en travaillant seulement en coordonnées relatives. une astuce consiste à ne tracer qu'un segment invisible to[open], à définir des points grâce à \og coordinate \fg{}, puis à utiliser ces points~:
+
+
+\shorthandoff{:!}
+\begin{figure}[!hbtp]
+\begin{center}
+\begin{circuitikz}
+  \draw
+  (0,0)  node[npn](Q1){}
+  
+  (Q1.C) to[short] ++(1,0)coordinate(c) to[open] ++(0,-2.75) node[cground](gnd){}
+  (gnd)to[V_=${\SI{10}{\volt}}$](c)
+  
+  (Q1.E) to[short]  (Q1.E|-gnd)  node[cground]{}
+  
+  
+  
+  (Q1.B) to[short] ++(-1, 0) coordinate(top) to[open] (top|-gnd) 
+  node[cground](b){}
+  
+  
+  (b)to[V=${\SI{0.6}{\volt}}$](top)
+  
+  ;
+\end{circuitikz}
+\end{center}
+\legend{correction du sens des flèches en coordonnées absolues}
+%\label{}
+\end{figure}
+\shorthandon{:!}
+
+
+
+
+
+
+\newpage
+
+
+
+
+Dans une expression de coordonnées, on peut utiliser des calculs~: \verb?({sqrt(3)/2},1/2)? désigne le point de coordonnées $\left( \frac{\sqrt{3}}{2}, \frac{1}{2} \right)$, comme on le voit, si le calcul utilise des parenthèses, il faut l'encadrer par des accolades. 
+
+Il est donc possible de faire des calculs portant directement sur les couples de coordonnées, par exemple faire la somme de deux couples, faire le produit d’un nombre par un couple. Mais cela introduit une syntaxe spéciale~: les calculs de ce type doivent être écrits entre les symboles \verb?($ et $)?, comme \verb?($ (1,2) + (3,4) $)?.
+
+Ce type d'instruction va permettre de travailler en relatif en créant des points par rapport aux points d'ancrage des composants. Ainsi~: \verb?($(opamp.+)-(2,0)$)? est un point créé est à deux unités sur la droite de l'entrée + de l'ampli-op, bien évidemment il aura fallu déclarer et placer cet ampli-op auparavant.
+
+\begin{verbatim}
+\begin{circuitikz}[scale=1]
+ \draw
+ 
+ %placement de l'aop
+(5,.5) node [en amp] (opamp) {}
+
+%branchement des résistances sur l'entrée + en position relative par rapport à celle-ci
+(opamp.+)to [R, l=$R_d$, *-*] ($(opamp.+)-(2,0)$)to [R, l=$R_d$, *-o]($(opamp.+)-(4,0)$)
+node [left] {$U_{we}$}
+
+%branchement du condensateur entre l'entrée + et la masse
+(opamp.+) to [C, l_=$C_{d2}$, *-] ($(opamp.+)+(0,-3)$) node [cground] {}
+
+%branche entre l'entrée - et la verticale arrivant à 2.5 au-dessus de l'entrée -
+(opamp.-) to [short,-*]($(opamp.-)+(0,2.5)$)
+
+%branche entre la sortie de l'aop et un point situé par rapport à l'entrée -, plus haute
+de 2.5 et à droite de l'entrée - de 2
+(opamp.out) |- ($(opamp.-)+(2,2.5)$)
+
+%placement du condensateur Cd1 entre un point placé relativement par rapport à l'entrée - et relativement par rapport à la sortie
+($(opamp.-)+(2,2.5)$)to [C, l_=$C_{d1}$] ($(opamp.-)+(0,2.5)$)
+
+%branche entre le point à gauche du condensateur en coordonnées relatives par rapport à
+l'entrée - et un point en coordonnées relative par rapport à l'entrée +
+($(opamp.-)+(0,2.5)$)-|($(opamp.+)-(2,0)$)
+ 
+%branche de sortie de l'aop
+(opamp.out) to [short, *-o] ($(opamp.out)+(1,0)$)node [right] {$U_{wy}$}
+;
+ \end{circuitikz}
+\end{verbatim}
+
+
+\shorthandoff{:!}
+ \begin{figure}[!hbtp]
+\centering
+ \begin{circuitikz}[scale=1]
+ 
+ \draw
+ 
+ %placement de l'aop
+(5,.5) node [en amp] (opamp) {}
+
+%branchement des résistances sur l'entrée + en position relative par rapport à celle-ci
+(opamp.+)to [R, l=$R_d$, *-*] ($(opamp.+)-(2,0)$)to [R, l=$R_d$, *-o]($(opamp.+)-(4,0)$)node [left] {$U_{we}$}
+
+%branchement du condensateur entre l'entrée + et la masse
+(opamp.+) to [C, l_=$C_{d2}$, *-] ($(opamp.+)+(0,-3)$) node [cground] {}
+
+%branche entre l'entrée - et la verticale arrivant à 2.5 au-dessus de l'entrée -
+(opamp.-) to [short,-*]($(opamp.-)+(0,2.5)$)
+
+%branche entre la sortie de l'aop et un point situé par rapport à l'entrée -, plus haute de 2.5 et à droite de l'entrée - de 2
+(opamp.out) |- ($(opamp.-)+(2,2.5)$)
+
+%placement du condensateur Cd1 entre un point placé relativement par rapport à l'entrée - et relativement par rapport à la sortie
+($(opamp.-)+(2,2.5)$)to [C, l_=$C_{d1}$] ($(opamp.-)+(0,2.5)$)
+
+%branche entre le point à gauche du condensateur en coordonnées relatives par rapport à l'entrée - et un point en coordonnées relative par rapport à l'entrée +
+($(opamp.-)+(0,2.5)$)-|($(opamp.+)-(2,0)$)
+ 
+%branche de sortie de l'aop
+(opamp.out) to [short, *-o] ($(opamp.out)+(1,0)$)node [right] {$U_{wy}$}
+ 
+ ;
+ \end{circuitikz}
+ \legend{Circuit réalisé en coordonnées relatives par rapport aux entrées et à la sortie de l'ampli-op}
+%\label{}
+\end{figure}
+\shorthandon{:!}
+ 
+ 
+ \newpage
+ 
+ \subsection{Modification de la taille d'un composant}
+ 
+ La modification de la taille d'un composant, en ne modifiant pas les autres, peut s'effectuer par deux méthodes.
+ 
+Par exemple, pour modifier une diode, insérer~:
+ 
+ \begin{verbatim}
+ \ctikzset{bipoles/diode/height=0.4, bipoles/diode/width=0.4,}
+ \ctikzset{tripoles/npn/height=2.0, tripoles/npn/width=1.4,}
+ \end{verbatim}
+ 
+ \begin{verbatim}
+ \begin{circuitikz}[
+    ]
+    \draw (0,0) to[diode] (0,3);
+    \begin{scope}
+        \ctikzset{bipoles/diode/height=1.4, bipoles/diode/width=1.4,}
+        \ctikzset{tripoles/npn/height=2.0, tripoles/npn/width=1.4,}
+        \draw (2,0) to[diode] (2,3); 
+        \draw (5,2) node[npn](q1){};
+    \end{scope}
+    \draw (7,2) node[npn](q2){}; 
+\end{circuitikz}
+ \end{verbatim}
+ 
+ 
+           
+                        
+                        
+\shorthandoff{:!}                        
+\begin{circuitikz}[
+    ]
+    \draw (0,0) to[diode] (0,3);
+     \draw (7,2) node[npn](q1){};
+   
+        \ctikzset{bipoles/diode/height=1.4, bipoles/diode/width=1.4,}
+        \ctikzset{tripoles/npn/height=3.0, tripoles/npn/width=2.4,}
+        \draw (3,0) to[diode] (3,3); 
+       
+    
+    \draw (13,2) node[npn](q2){}; 
+\end{circuitikz}
+ \shorthandon{:!}
+ 
+ 
+ 
+ 
+ \newpage
+ 
+ 
+ 
+ Autre méthode, toujours pour une diode~: \verb?to [/tikz/circuitikz/bipoles/length=2.5cm,diode$]?             
+ 
+ \begin{verbatim}
+ \begin{circuitikz}
+    \draw (0,0) to[diode] (0,3);
+    
+    \draw (3,0)to [/tikz/circuitikz/bipoles/length=3.5cm,diode](3,3)  ;
+     
+\end{circuitikz}
+ \end{verbatim}
+ 
+ \vspace{2cm}
+
+
+\shorthandoff{:!}                        
+\begin{circuitikz}
+    \draw (0,0) to[diode] (0,3);
+    
+    \draw (3,0)to [/tikz/circuitikz/bipoles/length=3.5cm,diode](3,3)  ;
+     
+\end{circuitikz}
+ \shorthandon{:!} 
+ 
+ 
+ 
+ 
+ \newpage
+ 
+ \subsection{rotation d'un composant}
+ 
+ 
+ On peut, bien entendu, faire tourner les composants d'un certain nombre de degré. Cela dérive du fait que Tikz est la mère de CircuiTikz . L'option \og rotate= \fg{} attend pour paramètre l'angle de la rotation en degrés. Le schéma de la figure \vref{permutateur} correspondant au code ci-dessous permet de voir un permutateur placé en position verticale grâce à une rotation de $+ \SI{90}{\degree}$. À noter que la position de la lamelle mobile du permutateur peut être positionnée dans la position miieu (point $B$ de la figure \vref{permutateur}) ou dans l'autre position (point $C$ de la figure \vref{permutateur}), voir \href{https://www.google.fr/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwibk-CEyITtAhVFyxoKHbMFDBMQFjAAegQIBhAC&url=http%3A%2F%2Ftexdoc.net%2Ftexmf-dist%2Fdoc%2Flatex%2Fcircuitikz%2Fcircuitikzmanual.pdf&usg=AOvVaw3wW8oOXJGx8ByXEr6LWQqV}{la documentation de Circuititz} pour cela.
+ 
+ \begin{verbatim}
+\begin{circuitikz}
+\draw
+(3,3) node[cute spdt up arrow, rotate = 90] (Sw){}
+(3,0)to[C=\SI{4}{\micro\farad}, v>=$v_1(t)$,*-](Sw.in)
+(0,0)to[V=\SI{100}{\volt}](0,3)
+(0,3)|-(Sw.out 1)
+(Sw.out 2)-|(6,3)
+(0,0)--(6,0)
+(6,3)to[C, l_=\SI{1}{\micro\farad}, v^<=$v_2(t)$](6,0)
+; 
+\draw (3,4)node{B};
+\draw (3,3.6)node[ocirc]{};
+\draw (2.4,3.6)node{A};
+\draw (3.5,3.6)node{C};
+\end{circuitikz}   
+\end{verbatim}
+ 
+  
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering 
+\begin{circuitikz}
+\draw
+(3,3) node[cute spdt up arrow, rotate = 90] (Sw){}
+(3,0)to[C=\SI{4}{\micro\farad}, v>=$v_1(t)$,*-](Sw.in)
+(0,0)to[V=\SI{100}{\volt}](0,3)
+(0,3)|-(Sw.out 1)
+(Sw.out 2)-|(6,3)
+(0,0)--(6,0)
+(6,3)to[C, l_=\SI{1}{\micro\farad}, v^<=$v_2(t)$](6,0)
+; 
+\draw (3,4)node{B};
+\draw (3,3.6)node[ocirc]{};
+\draw (2.4,3.6)node{A};
+\draw (3.5,3.6)node{C};
+\end{circuitikz}
+\caption{permutateur \label{permutateur}}
+\end{figure}
+\shorthandon{;:!?}
+ 
+
+ 
+ 
+ 
+ \newpage
+
+
+\subsection{Un peu de programmation}
+
+Le schéma ci-dessous illustre la puissance de l'utilisation d'un \og rien \fg{} de programmation pour simplifier les schémas et permettre une modification des plus simple. Il suffit de remplacer la valeur de R à un seul endroit !
+
+
+\shorthandoff{:!}
+\begin{figure}[!hbtp]
+\begin{center}
+\begin{circuitikz}
+  \newcommand\R{3} % rayon de l'hexagone
+  
+  %% les 6 résistances intérieures qui vont du centre aux extrêmités de l'hexagone
+  
+  \foreach \a in {0,60,...,300}
+     \draw (0,0) to[R,*-*] (\a:\R);
+     
+ %% les 6 résistances extérieures sur l'hexagone    
+     
+  %\foreach \a in {0,60,120,180,240,300,360}
+     %\draw (\a:\R) to[R] (\a+60:\R);
+     
+ %% les 4 résistances extérieures sur l'hexagone sauf celles horizontales remplacées par un voltmètre et un ampèremètre
+ 
+ \foreach \a in {0,120,180,300}
+     \draw (\a:\R) to[R] (\a+60:\R);
+ 
+     
+%% les voltmètres
+  \draw (120:\R) to[voltmeter] (60:\R);
+  \draw (240:\R) to[ammeter] (300:\R);
+  
+  
+  %%noeuds A et B
+  %\draw (0:\R) node[right] {B};
+  %\draw (180:\R) node[left] {A};
+\end{circuitikz}
+\end{center}
+\legend{placement d'une inductance en coordonnées relatives par rapport à un point défini, -|}
+%\label{}
+\end{figure}
+\shorthandon{:!}
+
+
+
+\newpage
+
+
+
+
+
+
+\subsection{Placement des valeurs des composants}
+
+Voici comment placer une information au-dessus ou en-dessous d'un composant~: 
+
+
+\shorthandoff{:!}
+\begin{figure}[!hbtp]
+\begin{center}
+\begin{circuitikz}
+ 
+ \draw (0,2) to[R,label=\mbox{$R_1=\SI{2}{\ohm}$}] (2,2);
+ 
+ \draw(0,0) to[R,l_=$R_g{=}\SI{10}{\ohm}$] ++(2,0);
+ 
+\end{circuitikz}
+\end{center}
+\legend{placement d'une information au-dessus d'un composant ou en-dessous}
+%\label{}
+\end{figure}
+\shorthandon{:!}
+
+
+
+\newpage
+
+
+\subsection{Création d'un nouveau composant}
+
+
+Voici la manière dont on peut créer un composant qui manquerait à Circuitikz, ci-dessous un haut-parleur~:
+
+
+
+\shorthandoff{:!}
+\begin{figure}[!hbtp]
+\begin{center}
+\begin{circuitikz}[cute inductor]
+ 
+\newcommand{\speaker}[2] % #1 = name from to[generic,n=#1], #2 = rotation angle
+{\draw[thick,rotate=#2] (#1) +(.2,.25) -- +(.7,.75) -- +(.7,-.75) -- +(.2,-.25);}
+
+\draw (0,2) to[C, l_=$C$, o-*] (2,2) to[short, -*] (3.5,2) to[short] (5,2);
+\draw (0,0) to[short, o-*] (2,0) to[short, -*] (3.5,0) to[short] (5,0);
+\draw (2,2) to[L=$L$] (2,0);
+\draw (3.5,2) to[R=$R$] (3.5,0);
+\draw (5,2) to[generic, n=S1](5,0);
+\speaker{S1}{0}
+\end{circuitikz}
+\end{center}
+\legend{Création d'un composant}
+%\label{}
+\end{figure}
+\shorthandon{:!}
+
+
+
+
+
+
+
+
+\newpage
+
+\section{\'Electronique}
+
+
+\subsection{Diodes}
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=1.3, every node/.style={scale=1.3}]
+\draw
+%source tension alternative
+(0,1) to[sV=$V$](0,3)
+(0,1)to[short,-*](2,1)
+(0,3)to[short,-*](4,3)
+
+%pont de diodes
+(2,-1)to[Do](2,1)
+(2,3)to[Do](2,5)
+(4,-1)to[Do](4,1)
+(4,3)to[Do](4,5)
+
+%liaisons pont diodes source tension
+(2,1)--(2,3)
+(4,1)--(4,3)
+
+%liaisons hautes pont diodes
+(2,5)--(4,5)to[short,*-](6,5)
+(2,-1)to[short,-*](4,-1)to[short,-](6,-1)
+
+
+%résistance f.c.é.m.
+(6,5)to[R=$R$](6,2)
+(6,-1)to[V=$E$](6,2)
+
+(6.2,5.2) node{A}
+(6.2,-1.2)node{B}
+(6.8,-2)to[open,v=$V_{\text{AB}}$](6.8,6)
+;
+\end{circuitikz}
+\legend{pont redresseur double alternances}
+\label{fig:question3}
+\end{figure}
+\shorthandon{;:!?}
+
+\newpage
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=1.3, every node/.style={scale=1.3}]
+\draw
+(0,0) to[V=$U_1$](0,4)
+(0,4)to[short,i>^=$I$](1.5,4)
+(1.5,4)to[R=$R_p$](3,4)
+(4,4)to[short](3,4)
+(4,0)to[zDo, i<^=$I_z$](4,4)
+(3.2,2)node{$D_z$}
+(4,4)to[short](6,4)
+(4,4)node[circ]{}
+(6,0)to[tgeneric=$R_c$, i<^=$I_c$](6,4)
+
+(0,0)to[short](6,0)
+(4,0)node[circ]{}
+(7,2)node{$U_c$};
+\draw[>=latex,->] (6.7,1)--(6.7,3);
+
+\end{circuitikz}
+\legend{diode Zener}
+\label{fig:question1}
+\end{figure}
+\shorthandon{;:!?}
+
+\newpage
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=1, every node/.style={scale=1}]
+\draw
+(0,0) to[V=\SI{8}{\volt}](0,10)
+(0,10)to[short,i>^=$I$](1.5,10)
+(1.5,10)to[R=$R_p$](3,10)
+(4,10)to[short](3,10)
+(4,2)to[Do](4,0)
+(4,4)to[Do](4,2)
+(4,6)to[Do](4,4)
+(4,8)to[Do](4,6)
+(4,10)to[Do](4,8)
+
+(6,0)to[R=$R_c$, i<^=$I_c$](6,10)
+
+(0,0)to[short,-*](4,0)
+(4,0)to[short](6,0)
+(4,10)to[short,*-](6,10)
+
+(7,5)node{$U_c$};
+\draw[>=latex,->] (6.7,4)--(6.7,6);
+
+\end{circuitikz}
+\legend{5 diodes en série}
+\label{fig:question1}
+\end{figure}
+\shorthandon{;:!?}
+
+
+
+\newpage
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=0.8, every node/.style={scale=0.8}]
+\draw
+(0,0) to[V=$V$, v=\SI{12}{\volt}](0,3)
+(3,3)to[Do](0,3)
+(0,0)to[short](3,0)
+%lampe
+(3,3)to[lamp](3,0)
+(3.8,1.5)node{$L$}
+(1.5,3.7)node{$D$}
+;
+\end{circuitikz}
+\legend{circuit \no 1}
+\label{fig:circuit1}
+\end{figure}
+
+
+
+
+
+
+
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=0.8, every node/.style={scale=0.8}]
+\draw
+(0,0) to[V=$V$, v=\SI{12}{\volt}](0,3)
+(0,3)to[Do](3,3)
+(0,0)to[short](3,0)
+(3,0)to[Do,*-*](3,3)
+(3,3)--(5,3)
+(3,0)--(5,0)
+(5,0)to[lamp](5,3)
+(3.8,1.5)node{$D_2$}
+(1.5,3.7)node{$D_1$}
+(5.8,1.5)node{$L$}
+;
+\end{circuitikz}
+\legend{circuit \no 2}
+\label{fig:question3}
+\end{figure}
+
+
+
+
+
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=0.8, every node/.style={scale=0.8}]
+\draw
+(0,0) to[V=$V$, v=\SI{24}{\volt}](0,5)--(4,5)
+(2,0) to[V=$V$, v=\SI{18}{\volt},*-](2,3)--(4,3)
+(4,3)to[Do,-*](6,3)
+(4,5)to[Do](6,5)
+(6,3)to[short](6,5)
+(0,0)--(6,0)
+
+(6,3)to[lamp, v=$V_L$](6,0)
+(6.7,1.5)node{$L$}
+(5,2.3)node{$D_2$}
+(5,5.7)node{$D_1$}
+
+;
+\end{circuitikz}
+\legend{circuit \no 3}
+\label{fig:question3}
+\end{figure}
+
+
+
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=0.8, every node/.style={scale=0.8}]
+\draw
+(0,0) to[V=$V$, v=\SI{24}{\volt}](0,5)--(4,5)
+(2,0) to[V=$V$, v=\SI{18}{\volt},*-](2,3)--(4,3)
+(4,3)to[Do,-*](6,3)
+(4,5)to[Do](6,5)
+(6,3)to[short](6,5)
+(0,0)--(10,0)
+
+(10,0) to[V=$V$, v=\SI{21}{\volt}](10,4)
+(10,4)to[Do,-*](6,4)
+
+(6,3)to[lamp, v=$V_L$,-*](6,0)
+(6.7,1.5)node{$L$}
+(5,2.3)node{$D_2$}
+(5,5.7)node{$D_1$}
+
+;
+\end{circuitikz}
+\legend{circuit \no 4}
+%\label{fig:question4}
+\end{figure}
+\shorthandon{;:!?}
+
+
+\newpage
+
+
+
+\shorthandoff{;:!?}
+\begin{figure}[!!hbtp]
+\centering
+\begin{circuitikz}[scale=1, every node/.style={scale=1}]
+    \draw
+    % Diodes leg 2
+    (2,0)
+        to[Do,*-] ++(0,1.5)
+        -- ++(0,1)
+        to[Do,-*] ++(0,1.5) coordinate (leg2)
+    % Diodes leg 1
+    (0,0)
+        to[Do] ++(0,1.5)
+        -- ++(0,1)
+        to[Do] ++(0,1.5) coordinate (leg1)
+    % Connections and load R
+        -- ++(2,0)
+        to[short, i=$i_o$, current/distance=0.5] ++(2,0)
+                  
+        -- ++(0,-1.4)
+        to[R] ++(0,-1.2)
+       
+    % Back to (0,0)
+        |- (0,0)
+                
+    % AC source
+    (-2,1.5) coordinate (Vnn)
+        to[sV] ++(0,1) coordinate (Vpp)
+        -- (leg1 |- Vpp) node [circ] {}
+    (Vnn)
+        -- (leg2 |- Vnn) node [circ] {}
+        
+    % v_o(t)
+    (4.5,-1)to[open, v=$v_o(t)$](4.5,4.5)
+    ;
+\end{circuitikz}
+\legend{Circuit \no 1}
+%\label{fig:circuit1}
+\end{figure}
+\shorthandon{;:!?}
+
+\vspace{2cm}
+
+\begin{tabular}{cc}
+
+\begin{circuitikz}[scale=0.4, every node/.style={scale=0.4}]
+        %axes
+ \draw[->,>=stealth] (0,0) -- (16.3,0) node[below right] {$t (ms)$};
+%stealth définit un style de flèche, "furtif"
+\draw[->,>=stealth] (0,-0.1) -- (0,1.5);
+%échelle abscisse
+%\draw (1,0.1) -- (1,-0.1) node [below right] {{\scriptsize $0.2$}}; 
+%échelle ordonnée
+\draw (0.1,1) -- (-0.1,1) node [left] {{\scriptsize $12V$}}; 
+    
+    
+    %\draw (0,0) -- (16.3,0);
+   % \draw (0.2,1)node[left,font=\tiny] {$y=1$} -- (11.8,1);
+   % \draw (0.2,-1)node[left,font=\tiny] {$y=-1$} -- (11.8,-1); 
+   %\foreach \x in {0,0.4,...,16}{
+    %\draw (\x,-0.1)  node [below,font=\tiny,] {\x} -- (\x,0.1) ;
+   %\draw (\x,-0.1) -- (\x,0.1) ;
+  % }
+    \draw (0.3,0.6) sin (1,1);    
+    \draw (1,1) sin (4.3,0.6);
+    
+    
+    \draw (4.3,0.6) sin (5,1);   
+    \draw (5,1) sin (8.3,0.6);
+   
+    
+    \draw (8.3,0.6) sin (9,1);   
+    \draw (9,1) sin (12.3,0.6);
+    
+    
+    \draw (12.3,0.6) sin (13,1);   
+    \draw (13,1) sin (16.3,0.6);
+     
+\end{circuitikz}
+
+
+ &
+
+\begin{circuitikz}[scale=0.4, every node/.style={scale=0.4}]
+        \draw[->,>=stealth] (-0.5,0) -- (14,0) node[below right] {$t (ms)$};
+        \draw[->,>=stealth] (0,-1.5) -- (0,1.5);
+        \draw (0.1,1) -- (-0.1,1)node [left] {{\scriptsize $12V$}}; %axes
+        
+        \draw plot[domain=0:14,samples=150] (\x,{abs(sin(\x r))});
+\end{circuitikz}
+
+ \\
+ \begin{circuitikz}[scale=0.4, every node/.style={scale=0.4}]
+    \draw[->,>=stealth] (0,0) -- (16,0) node[below right] {$t (ms)$};
+    \draw[->,>=stealth] (0,-0.3) -- (0,1.5);
+     \draw (0.1,1) -- (-0.1,1)node [left] {{\scriptsize $12V$}};
+   % \draw (0.2,1)node[left,font=\tiny] {$y=1$} -- (11.8,1);
+   % \draw (0.2,-1)node[left,font=\tiny] {$y=-1$} -- (11.8,-1); 
+  % \foreach \x in {0,1,...,16}{
+    %\draw (\x,-0.1)node [below,font=\tiny,] {\x} -- (\x,0.1) ;
+  % }
+    \draw[ultra thick] (0,0) sin (1,1);    %% the real business in this line
+    \draw[ultra thick] (1,1) cos (2,0);
+     \draw[ultra thick](2,0)--(4,0);
+    
+    \draw[ultra thick] (4,0) sin (5,1);   
+    \draw[ultra thick] (5,1) cos (6,0);
+    \draw[ultra thick](6,0)--(8,0);
+    
+    \draw[ultra thick] (8,0) sin (9,1);   
+    \draw[ultra thick] (9,1) cos (10,0);
+     \draw[ultra thick](10,0)--(12,0);
+    
+    \draw[ultra thick] (12,0) sin (13,1);   
+    \draw[ultra thick] (13,1) cos (14,0);
+     \draw[ultra thick](14,0)--(16,0);
+\end{circuitikz}
+&
+
+\begin{circuitikz}[scale=0.4, every node/.style={scale=0.4}]
+        \draw[->,>=stealth] (-0.5,0) -- (14,0) node[below right] {$t (ms)$};
+        \draw[->,>=stealth] (0,-1.5) -- (0,1.5);
+        \draw (0.1,1) -- (-0.1,1)node [left] {{\scriptsize $12V$}}; %axes
+        
+        \draw plot[domain=0:14,smooth] (\x,{sin(\x r)});
+\end{circuitikz}
+
+ 
+\end{tabular}
+
+\vspace{3cm}
+
+
+\begin{figure}[!h]
+\centering
+\begin{circuitikz}[scale=0.8, every node/.style={scale=0.8}]
+    \draw[->,>=stealth] (0,0) -- (16,0) node[below right] {$t (ms)$};
+    \draw[->,>=stealth] (0,-0.3) -- (0,1.5);
+     \draw (0.1,1) -- (-0.1,1)node [left] {{\scriptsize $12V$}};
+   % \draw (0.2,1)node[left,font=\tiny] {$y=1$} -- (11.8,1);
+   % \draw (0.2,-1)node[left,font=\tiny] {$y=-1$} -- (11.8,-1); 
+  % \foreach \x in {0,1,...,16}{
+    %\draw (\x,-0.1)node [below,font=\tiny,] {\x} -- (\x,0.1) ;
+  % }
+    \draw[ultra thick] (0,0) sin (1,1);    %% the real business in this line
+    \draw[ultra thick] (1,1) cos (2,0);
+     \draw[ultra thick](2,0)--(4,0);
+    
+    \draw[ultra thick] (4,0) sin (5,1);   
+    \draw[ultra thick] (5,1) cos (6,0);
+    \draw[ultra thick](6,0)--(8,0);
+    
+    \draw[ultra thick] (8,0) sin (9,1);   
+    \draw[ultra thick] (9,1) cos (10,0);
+     \draw[ultra thick](10,0)--(12,0);
+    
+    \draw[ultra thick] (12,0) sin (13,1);   
+    \draw[ultra thick] (13,1) cos (14,0);
+     \draw[ultra thick](14,0)--(16,0);
+\end{circuitikz}
+\legend{Courbe \no 3}
+\label{fig:courbe3}
+\end{figure}
+
+
+\begin{figure}[!h]
+\centering
+\begin{circuitikz}[scale=0.8, every node/.style={scale=0.8}]
+        \draw[->,>=stealth] (-0.5,0) -- (14,0) node[below right] {$t (ms)$};
+        \draw[->,>=stealth] (0,-1.5) -- (0,1.5);
+        \draw (0.1,1) -- (-0.1,1)node [left] {{\scriptsize $12V$}}; %axes
+        
+        \draw plot[domain=0:14,samples=150] (\x,{abs(sin(\x r))});
+\end{circuitikz}
+\legend{Courbe \no 4}
+\label{fig:courbe4}
+\end{figure}
+
+
+\newpage
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=1, every node/.style={scale=1}]
+\draw
+(0,0) to[V=$V$, v=\SI{12}{\volt}](0,3)
+(0,3)to[Do](3,3)
+(0,0)to[short](3,0)
+(3,0)to[R,*-*](3,3)
+(3,3)--(5,3)
+(3,0)--(5,0)
+(5,0)to[Do](5,3)
+(3.8,1.5)node{$D_2$}
+(1.5,3.7)node{$D_1$}
+(5.8,1.5)node{$R$}
+;
+\end{circuitikz}
+\legend{circuit \no 2}
+\label{fig:question2}
+\end{figure}
+\shorthandon{;:!?}
+
+\vspace{2cm}
+
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=1, every node/.style={scale=1}]
+\draw
+(6,0) to[V=$V$, v=\SI{24}{\volt}](6,5)--(2,5)
+(4,0) to[V=$V$, v=\SI{18}{\volt},*-](4,3)--(2,3)
+(2,3)to[Do,-*](0,3)
+(2,5)to[Do](0,5)
+(0,3)to[short](0,5)
+(0,0)--(6,0)
+
+(0,0)to[lamp, v=$V_L$](0,3)
+(0.7,1.5)node{$L$}
+(1,2.3)node{$D_2$}
+(1,5.7)node{$D_1$}
+
+;
+\end{circuitikz}
+\legend{circuit \no 3}
+\label{fig:question3}
+\end{figure}
+\shorthandon{;:!?}
+
+\vspace{2cm}
+
+
+
+\shorthandoff{;:!?}
+\begin{figure}[h!]
+  \begin{center}
+		\begin{circuitikz}[scale=1]
+			\draw
+			(0,3)to[sqV,l_=$u$](0,0)
+			(0,3)to[C,l=$C_1$](3,3)
+			(3,3)to[Do,*-*](3,0)
+			(6,3)to[Do](3,3)
+			(6,3)to[C,l=$C_2$,-*](6,0)
+			(0,0)--(6,0)
+			(6,3)to[short,*-o](7,3)
+			(7,3)node[above]{sortie}
+			%masse
+            (6,0)node[cground]{}
+	        (6,0)node[circ]{}			
+			;
+		\end{circuitikz}
+		\legend{Pompe de charge}
+  \end{center}
+\end{figure}
+\shorthandon{;:!?}
+
+\newpage
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[european resistors]
+\draw
+(3,3) node[npn](npn){}
+(npn.base)to[R,-*,l=\SI{33}{\kilo\ohm}](0,3)
+(npn.emitter)to[short](3,2)node[cground]{}(3,0)
+(3,7.5)to[R,l=\SI{680}{\ohm}](3,5.5)
+(3,5.5)to[pD](3,3.5)
+
+(5,3.5)to[pD,mirror](5,5.5)
+(5,5.5)to[R,l_=\SI{300}{\kilo\ohm}](5,7.5)
+(5,3.5)to[short](5,2)node[cground]{}(5,0)
+(3,7.5)to[short,-*](6,7.5)node[anchor=west]{\SI{20}{\volt}}
+(5,5.5)to[short,*-*](6,5.5)node[anchor=west]{$V_0$}
+(0,3)node[anchor=east]{$V_1$}
+;\end{circuitikz}
+\legend{Photodiode.}
+\label{fig:photodiode}
+\end{figure}
+\shorthandon{;:!?}
+
+\newpage
+
+
+\shorthandoff{;:!?}
+\begin{figure}[h!]
+  \begin{center}
+\begin{circuitikz}
+	\draw
+	(0,6)to[sV,l_=$V$](0,2)
+	(0,6)to[C,l=$C_1$](2.5,6)
+	(0,2)--(1,2)to[C,l=$C_2$](4,2)
+	(1,2)to[Do,*-*](2.5,6)
+	(2.5,6)to[Do,*-](4,2)
+	%(1,1.5)node{$A$}
+	%(4,1.5)node{$B$}
+	;
+\end{circuitikz}
+\legend{multiplieur de tension 1}
+  \end{center}
+\end{figure}
+\shorthandon{;:!?}
+
+
+
+
+
+
+
+\shorthandoff{;:!?}
+\begin{figure}[h!]
+  \begin{center}
+\begin{circuitikz}
+	\draw
+	(0,6)to[sV,l_=$V$](0,2)
+	(0,6)to[C,l=$C_1$](2.5,6)
+	(0,2)--(1,2)to[C,l=$C_2$](4,2)
+	(1,2)to[Do,*-*](2.5,6)
+	(2.5,6)to[Do,*-*](4,2)
+	(4,2)to[Do,*-*](5.5,6)
+	(5.5,6)to[Do,*-*](7,2)
+	(2.5,6)to[C,l=$C_3$](5.5,6)
+	(4,2)to[C,l=$C_4$](7,2)
+	
+	(7,2)to[Do,*-*](8.5,6)
+	(8.5,6)to[Do,*-*](10,2)
+	(5.5,6)to[C,l=$C_5$](8.5,6)
+	(7,2)to[C,l=$C_6$](10,2)
+	(10,2)to[C,l=$C_{\text{charge}}$](10,0)
+	(10,0)--(0,0)to[short,-*](0,2)
+	;
+\end{circuitikz}
+\legend{multiplieur de tension 2}
+  \end{center}
+\end{figure}
+\shorthandon{;:!?}
+
+
+\shorthandoff{;:!?}
+\begin{figure}[h!]
+  \begin{center}
+\begin{circuitikz}[scale=1]
+	\draw
+	(0,6)to[sV,l_=$V$](0,2)
+	(0,6)to[C,l=$C_1$](2.5,6)
+	(0,2)--(1,2)to[C,l=$C_2$](4,2)
+	(1,2)to[Do,*-*](2.5,6)
+	(2.5,6)to[Do,*-*](4,2)
+	(4,2)to[Do,*-*](5.5,6)
+	(5.5,6)to[Do,*-*](7,2)
+	(2.5,6)to[C,l=$C_3$](5.5,6)
+	(4,2)to[C,l=$C_4$](7,2)
+	
+	(7,2)to[Do,*-*](8.5,6)
+	(8.5,6)to[Do,*-*](10,2)
+	(5.5,6)to[C,l=$C_5$](8.5,6)
+	(7,2)to[C,l=$C_6$](10,2)
+	
+    (10,2)to[Do,*-*](11.5,6)
+	(11.5,6)to[Do,*-*](13,2)
+	(8.5,6)to[C,l=$C_7$](11.5,6)
+	(10,2)to[C,l=$C_8$](13,2)	
+	
+	(13,2)to[C,l=$C_{\text{charge}}$](13,0)
+	(13,0)--(0,0)to[short,-*](0,2)
+	;
+\end{circuitikz}
+\legend{montage 2}
+  \end{center}
+\end{figure}
+\shorthandon{;:!?}
+
+\newpage
+
+
+
+
+\subsection{Transistors bipolaires}
+
+
+\subsubsection{Transistor NPN}
+
+
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz} \draw
+(-1,0)to[V=$E$](-1,6)
+(-1,6)--(5,6)
+
+(2,2.5) to [R, l=$R_{\text{B}}$, -*] (2,6)
+(5,2.5) node[npn](npn){}
+
+(2,2.5)to[short,i=$I_{\text{B}}$](4.2,2.5)
+
+(npn.collector)to[open,v^=$V_{\text{CE}_0}$](npn.emitter)
+(npn.collector)to [R,l_=$R_{\text{C}}$,i<=$I_{\text{C}}$](5,6)
+(npn.emitter)--(5,0)
+
+(-1,0)--(5,0)to[short,*-o](6.5,0)
+
+(5,3.5)to[short,*-o](6.5,3.5)
+
+(2,0)node[circ]{} %soudure sur la masse
+;
+\draw[->,>=latex](6.5,0.3)--(6.5,3.2);%flèche de tension U=10V
+\draw (6.9,1.8)node{$U$};
+
+%le symbole de la masse aux normes européennes
+\begin{scope}[xshift=2cm, scale=0.4]
+\draw (0,0) -- (0,-1);
+\draw (-0.75,-1) -- (0.75,-1);
+\foreach \x in {-0.75,-0.5, ...,0.75}
+{
+\draw (\x,-1)--++(-0.5,-0.5);
+}
+\end{scope}
+
+\end{circuitikz}
+\legend{transistor bipolaire avec masse \og compliquée \fg}
+%\label{fig:transistor1}
+\end{figure}
+\shorthandon{;:!?}
+
+
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz} \draw
+(-1,0)to[V=$E$](-1,6)
+(-1,6)--(5,6)
+
+(2,2.5) to [R, l=$R_{\text{B}}$, -*] (2,6)
+(5,2.5) node[npn](npn){}
+
+(2,2.5)to[short,i=$I_{\text{B}}$](4.2,2.5)
+
+(npn.collector)to[open,v^=$V_{\text{CE}_0}$](npn.emitter)
+(npn.collector)to [R,l_=$R_{\text{C}}$,i<=$I_{\text{C}}$](5,6)
+(npn.emitter)--(5,0)
+
+(-1,0)--(5,0)to[short,*-o](6.5,0)
+
+(5,3.5)to[short,*-o](6.5,3.5)
+
+(2,0)node[circ]{} %soudure sur la masse
+(2,0)node[cground]{}
+;
+\draw[->,>=latex](6.5,0.3)--(6.5,3.2);%flèche de tension U=10V
+\draw (6.9,1.8)node{$U$};
+
+
+\end{circuitikz}
+\legend{transistor bipolaire avec masse cground }
+%\label{fig:transistor1}
+\end{figure}
+\shorthandon{;:!?}
+
+
+
+\newpage
+
+
+
+\subsubsection{Transistor PNP}
+
+
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz} \draw
+(-1,0)to[V=$E$](-1,6)
+(-1,6)--(5,6)
+
+(2,3.5) to [R, l=$R_{\text{B}}$, -*] (2,0)
+
+(5,3.5) node[pnp](pnp){}
+
+(pnp.base)to[short,i=$I_{\text{B}}$](2,3.5)
+
+%(npn.collector)to[open,v^=$V_{\text{CE}_0}$](npn.emitter)
+
+(5,0)to [R,l_=$R_{\text{C}}$,i<=$I_{\text{C}}$](pnp.collector)
+(pnp.emitter)--(5,6)
+
+(-1,0)--(5,0)to[short,*-*](6.5,0)
+
+(5,2.7)to[short,*-*](6.5,2.7)
+
+(2,0)node[circ]{} %soudure sur la masse
+;
+\draw[->,>=latex](6.5,0.3)--(6.5,2.5);%flèche de tension U
+\draw (6.9,1.3)node{$U$};
+
+\draw[->,>=latex](5.5,3)--(5.5,4.2);%flèche de tension VCE
+\draw (5.9,3.5)node{$V_{\text{CE}}$};
+
+
+%le symbole de la masse aux normes européennes
+\begin{scope}[xshift=2cm, scale=0.4]
+\draw (0,0) -- (0,-1);
+\draw (-0.75,-1) -- (0.75,-1);
+\foreach \x in {-0.75,-0.5, ...,0.75}
+{
+\draw (\x,-1)--++(-0.5,-0.5);
+}
+\end{scope}
+
+\end{circuitikz}
+\legend{Transistor PNP}
+%\label{Transistor PNP}
+\end{figure}
+\shorthandon{;:!?}
+
+
+
+\newpage
+
+
+
+
+\subsubsection{Transistor avec une alimentation à point milieu}
+
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz} \draw
+(0,0)to[V=$E_2$](0,3)
+(0,3)to[V=$E_1$](0,6)
+
+(5,3) node[npn](npn){}
+
+(0,6)--(5,6)
+
+(0,0)--(5,0)
+
+(npn.collector)to [R, l=$R_{\text{C}}$,i<=$I_{\text{C}}$](5,6)
+
+(5,0)to [R,l_=$R_{\text{E}}$,i<=$I_{\text{E}}$](npn.emitter)
+
+(5,3.7)to[short,*-*](6.5,3.7)
+
+(0,3)to[short,*-](1,3)
+
+(3.5,3)to[short](npn.base)
+(3.5,3)to[short,i=$I_{\text{B}}$](npn.base)
+;
+
+\draw[->,>=latex](6.5,3)--(6.5,3.5);%flèche de tension VCE
+\draw (7,3.2)node{$U$};
+
+
+%le symbole de la masse aux normes européennes
+\begin{scope}[xshift=1cm, yshift=3cm, scale=0.4]
+\draw (0,0) -- (0,-1);
+\draw (-0.75,-1) -- (0.75,-1);
+\foreach \x in {-0.75,-0.5, ...,0.75}
+{
+\draw (\x,-1)--++(-0.5,-0.5);
+}
+\end{scope}
+
+\begin{scope}[xshift=3.5cm, yshift=3cm, scale=0.4]
+\draw (0,0) -- (0,-1);
+\draw (-0.75,-1) -- (0.75,-1);
+\foreach \x in {-0.75,-0.5, ...,0.75}
+{
+\draw (\x,-1)--++(-0.5,-0.5);
+}
+\end{scope}
+
+\begin{scope}[xshift=6.5cm, yshift=3cm, scale=0.4]
+\draw (0,0) -- (0,-1);
+\draw (-0.75,-1) -- (0.75,-1);
+\foreach \x in {-0.75,-0.5, ...,0.75}
+{
+\draw (\x,-1)--++(-0.5,-0.5);
+}
+\end{scope}
+
+\end{circuitikz}
+\legend{Transistor avec une alimentation à point milieu}
+%\label{fig:transistor3}
+\end{figure}
+\shorthandon{;:!?}
+
+
+
+\newpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsubsection{Transistor avec diode Zener} 
+
+
+
+
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz} \draw
+%((7,7)node[anchor=south]{$V_{\text{CC}}=\SI{10}{\volt}$}
+(0,-1)to[V, l=$E$](0,7)
+(0,7)--(5,7)
+(2,-1) to [zDo, l=$D_{\text{Z}}$,i<=$I_{\text{Z}}$, *-*]
+(2,3.5) to [R, l=$R_{\text{Z}}$, *-*] (2,7)
+(5,3.5) node[npn](npn){T}
+
+(2,3.5)to[short,i=$I_{\text{B}}$](4.2,3.5)
+%(5,-1)node[ground]{}
+(6,-1)to[open,v>=$V_{\text{S}}$](6,3)
+%(4.6,2.5)to[open,v^>=$U_{\text{BE}_0}$](4,3)
+(npn.collector) to[short]  (5,7)
+(5,-1)to [R, l_=$R_{\text{E}}$,i<=$I_{\text{E}}$] (npn.emitter)
+(0,-1)--(5,-1);
+
+%le symbole de la masse aux normes européennes
+\begin{scope}[xshift=2cm, yshift=-1cm,scale=0.4]
+\draw (0,0) -- (0,-1);
+\draw (-0.75,-1) -- (0.75,-1);
+\foreach \x in {-0.75,-0.5, ...,0.75}
+{
+\draw (\x,-1)--++(-0.5,-0.5);
+}
+\end{scope}
+\end{circuitikz}
+\legend{transistor bipolaire et diode Zener }
+%\label{fig:zener1}
+\end{figure}
+\shorthandon{;:!?}
+
+
+
+
+\newpage
+
+
+
+\subsubsection{Générateur de courant}
+
+
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz} \draw
+
+(0,-1)to[V, l=$E$](0,7)
+(0,7)--(5,7)
+(2,-1) to [zDo, l=$D_{\text{Z}}$,i<=$I_{\text{Z}}$, *-*]
+(2,3.5) to [R, l=$R_{\text{B}}$, *-*] (2,7)
+(5,3.5) node[npn](npn){T}
+
+(2,3.5)to[short,i=$I_{\text{B}}$](4.2,3.5)
+
+(6,-1)to[open,v>=$V_{\text{s}}$](6,3)
+
+(npn.collector) to[pR, n=POT]  (5,7)
+(5,-1)to [R, l_=$R_{\text{E}}$,i<=$I_{\text{E}}$] (npn.emitter)
+(0,-1)--(5,-1);
+\draw(POT.wiper)-|(4,7);
+\draw(4,7)[circ]node{};
+\draw(6.3,5.7)node{$R_{\text{C}}=\SI{3,3}{\kilo\ohm}$};
+
+%le symbole de la masse aux normes européennes
+\begin{scope}[xshift=2cm, yshift=-1cm,scale=0.4]
+\draw (0,0) -- (0,-1);
+\draw (-0.75,-1) -- (0.75,-1);
+\foreach \x in {-0.75,-0.5, ...,0.75}
+{
+\draw (\x,-1)--++(-0.5,-0.5);
+}
+\end{scope}
+\end{circuitikz}
+\legend{générateur de courant}
+%\label{fig:zener2}
+\end{figure}
+\shorthandon{;:!?}
+
+
+
+
+
+\newpage
+
+\subsubsection{Bascules à transistors bipolaires}
+
+\shorthandoff{;:!?}
+\begin{figure}[h!]
+  \begin{center}
+\begin{tikzpicture}[scale=1] 
+  \draw
+	
+	%Vcc
+	(0,10)--(10,10)
+	(5,10)to[short,-o](5,11)
+	(5,10)node[circ]{}
+	(5,11)node[right]{$Vcc$}
+	
+	%Les deux Rc
+	(0,10)--(0,8)
+	(10,10)--(10,8)
+	(0,8)to[R=$Rc1$](0,6)
+	(10,8)to[R=$Rc2$](10,6)
+	
+	%Lien entre Rc et T
+	(0,6)--(0,4)
+	(10,6)--(10,4)
+	
+	%Ground
+	(0,1)--(10,1)
+	%(5,0)--(5,-1)
+	(5,1)node[cground]{}
+	(5,1)node[circ]{}
+	%(5,0.5)node[right=5mm]{$Gnd$}
+		
+	%Les deux Transistors
+	%T1
+	(0,3) node[npn,xscale=-1](npn){}
+	(npn.B)node[left=7mm] {$T1$}
+	(npn.B)--(1,3)to(3,3)
+	(npn.C)--(0,4)
+	(npn.E)to(0,1)
+	%On indique la base de T1 :
+	(3,2.5)node{$B1$}
+	%T2
+	(10,3) node[npn,xscale=1](npn){}
+	(npn.B)node[right=7mm] {$T2$}
+	(npn.B)--(9,3)to(7,3)
+	(npn.C)--(10,4)
+	(npn.E)to(10,1)
+	%On indique la base de T2 :
+	(7,2.5)node{$B2$}
+	
+	%Les deux Condensteurs
+	(0,5)to[C,l=$C1$](2.5,5)
+	(7.5,5)to[C,l=$C2$](10,5)
+	(2.5,5)to(7,3)
+	(7.5,5)to(3,3)
+	
+	%Les deux Rb
+	(3,7.5)to[R=$Rb1$](3,6)
+	(7,7.5)to[R=$Rb2$](7,6)
+	(3,10)to(3,7.5)
+	(3,6)to[short,-*](3,3)
+	(7,10)to(7,7.5)
+	(7,6)to[short,-*](7,3)
+	
+	%Contact entre fils
+	(0,6)to[short,-*](0,5)
+	(10,6)to[short,-*](10,5)
+	(3,10)to[short,-*](3,10)
+	(7,10)to[short,-*](7,10)	
+	;
+\end{tikzpicture}
+\legend{Bascules à transistors bipolaires}
+\end{center}
+\end{figure}
+\shorthandon{;:!?}
+
+\vspace{2cm}
+
+\shorthandoff{;:!?}
+\begin{figure}[h!]
+  \begin{center}
+\begin{tikzpicture}[scale=1] 
+  \draw
+	
+	%Vcc
+	(0,10)--(10,10)
+	(5,10)to[short,-o](5,11)
+	(5,10)node[circ]{}
+	(5,11)node[right]{$Vcc$}
+	
+	%Les deux LEDs
+	(0,10)to[leDo](0,8)
+	(0,9)node[left=5mm]{$D1$}
+	(10,10)to[leDo](10,8)
+	(10,9)node[left=5mm]{$D2$}
+	
+	%Les deux Rc
+	(0,8)to[R=$Rc1$](0,6)
+	(10,8)to[R=$Rc2$](10,6)
+	
+	%Lien entre Rc et T
+	(0,6)--(0,4)
+	(10,6)--(10,4)
+	
+	%Ground
+	(0,1)--(10,1)
+	%(5,0)--(5,-1)
+	%(5,1)node[ground]{}
+	%(5,0.5)node[right=5mm]{$Gnd$}
+        (5,1)node[cground]{}
+	    (5,1)node[circ]{}	
+	
+	
+	%Les deux Transistors
+	(0,3) node[npn,xscale=-1](npn){}
+	(npn.B)node[left=7mm] {$T1$}
+	(npn.B)--(1,3)to(3,3)
+	(npn.C)--(0,4)
+	(npn.E)to(0,1)
+	(10,3) node[npn,xscale=1](npn){}
+	(npn.B)node[right=7mm] {$T2$}
+	(npn.B)--(9,3)to(7,3)
+	(npn.C)--(10,4)
+	(npn.E)to(10,1)
+	%On indique la base de T1 :
+	(3,2.5)node{$B1$}
+	%On indique la base de T2 :
+	(7,2.5)node{$B2$}
+	
+	%Les deux Condensteurs
+	(0,5)to[C,l=$C1$](2.5,5)
+	(7.5,5)to[C,l=$C2$](10,5)
+	(2.5,5)to(7,3)
+	(7.5,5)to(3,3)
+	
+	%Les deux Rb
+	(3,7.5)to[R=$Rb1$](3,6)
+	(7,7.5)to[R=$Rb2$](7,6)
+	(3,10)to(3,7.5)
+	(3,6)to[short,-*](3,3)
+	(7,10)to(7,7.5)
+	(7,6)to[short,-*](7,3)
+	
+	%Contact entre fils
+	(0,6)to[short,-*](0,5)
+	(10,6)to[short,-*](10,5)
+	(3,10)to[short,-*](3,10)
+	(7,10)to[short,-*](7,10)
+	
+	%On indique le collecteur de T2 par le point M (et non C pour ne pas confondre avec le condensateur C):
+	(10,5)node[right=1mm]{$M$}
+	;
+\end{tikzpicture}
+\legend{Bascules à transistors bipolaires avec DEL}
+\end{center}
+\end{figure}
+\shorthandon{;:!?}
+
+\newpage
+
+\shorthandoff{;:!?}
+\begin{figure}[h!]
+  \begin{center}
+\begin{circuitikz}[scale=1, every node/.style={scale=1}]
+	\draw
+	(0,2) node[npn,xscale=-1](npn1){}
+	(npn1.E) node[left=7mm, above=5mm]{T1} % Labelling the transistor
+	(10,2) node[npn](npn2){}
+	(npn2.E) node[right=7mm, above=5mm]{T2} % Labelling the transistor
+	(npn1.C) to[short](0,3)to [R,l_=$R_{C1}$,*-] (0,6)
+	(npn2.C) to[short](10,3)to  [R,l_=$R_{C2}$,*-] (10,6)
+	
+	%(3,3)to [R,l_=\SI{10}{\kilo\ohm},*-*] (3,6)
+	%(7,3)to [R,l_=\SI{10}{\kilo\ohm},*-*] (7,6)
+	(0,6)--(10,6)
+	(5,6)to[short,*-o] (5,7) node[right]{$V_{\text{CC}}$} % Power supply
+	(3,3)to [R,l_=$R_{B2}$](0,3)
+	(7,3)to [R,l_=$R_{B1}$,-*](10,3)
+	(npn1.B)to[short](3,2)--(7,3)
+	(npn2.B)to[short](7,2)--(3,3)
+	(npn1.E)--(0,0)
+	(npn2.E)--(10,0)
+	(0,0)to[short,-*](5,0)--(10,0)
+	(5,0) node[cground]{}
+	
+	(3,0)to[cspst,*-*](3,3)
+	(7,0)to[cspst,*-*](7,3)
+	;
+\end{circuitikz}
+\legend{bistable}
+  \end{center}
+\end{figure}
+\shorthandon{;:!?}
+
+
+
+\newpage
+
+
+
+
+\shorthandoff{;:!?}
+\begin{figure}[h!]
+  \begin{center}
+\begin{circuitikz}[scale=1, every node/.style={scale=1}]
+	\draw
+	(0,2) node[npn,xscale=-1](npn1){}
+	(npn1.E) node[left=7mm, above=5mm]{T1} % Labelling the transistor
+	(10,2) node[npn](npn2){}
+	(npn2.E) node[right=7mm, above=5mm]{T2} % Labelling the transistor
+	(npn1.C) to[short](0,3)to [R,l_=$R_{C1}$,*-] (0,6)
+	(npn2.C) to[short](10,3)to  [R,l_=$R_{C2}$,*-] (10,6)
+	
+	(3,3)to [R,l_=$R_{B2}$,*-*] (3,6)
+	%(7,3)to [R,l_=\SI{10}{\kilo\ohm},*-*] (7,6)
+	(0,6)--(10,6)
+	(5,6)to[short,*-o] (5,7) node[right]{$V_{\text{CC}}=\SI{9}{\volt}$} % Power supply
+	(3,3)to[C,l_=$C$](0,3)
+	(7,3)to [R,l_=$R_{B1}$,-*](10,3)
+	(npn1.B)to[short](3,2)--(7,3)
+	(npn2.B)to[short](7,2)--(3,3)
+	(npn1.E)--(0,0)
+	(npn2.E)--(10,0)
+	(0,0)to[short,-*](5,0)--(10,0)
+	(5,0) node[cground]{}
+	
+	(3,0)to[cspst,*-*](3,3)
+	%(7,0)to[cspst,*-*](7,3)
+	;
+\end{circuitikz}
+\legend{monostable}
+  \end{center}
+\end{figure}
+\shorthandon{;:!?}
+
+
+
+
+\shorthandoff{;:!?}
+\begin{figure}[h!]
+  \begin{center}
+\begin{circuitikz}
+	\draw
+	(0,2) node[npn,xscale=-1](npn1){}
+	(npn1.E) node[left=5mm, above=5mm]{$T_1$} % Labelling the transistor
+	(8,2) node[npn](npn2){}
+	(npn2.E) node[right=5mm, above=5mm]{$T_2$} % Labelling the transistor
+	(npn1.C) to[short](0,3)to [R,l_=$R_{\text{C}}$,*-] (0,6)
+	(npn2.C) to[short](8,3)to  [R,l_=$R_{\text{C}}$,*-] (8,6)
+	
+	(3,3)to [R,l_=$R_{\text{B1}}$,*-*] (3,6)
+
+	(3,4)to[short,-*](3,3)
+	
+	(0,6)--(10,6)
+	
+	(3,3)to[C,l_=$C_1$](0,3)
+	(6,3)to[R,l_=$R_{\text{B2}}$,-*](8,3)
+	(npn1.B)to[short](3,2)--(6,3)
+	(npn2.B)to[short](6,2)--(3,3)
+	(npn1.E)--(0,1)
+	(npn2.E)--(8,1)
+	(0,1)to[short,-*](5,1)--(8,1)
+	(5,1) node[cground]{}
+		
+	(8,6)to[short,*-o] (13,6) node[right]{$V_{\text{CC}}$} % Power supply
+	(-1.5,0)to[push button, l=K](-1.5,6)
+	(-1.5,6)to[short,-*](0,6)
+	(-1.5,0)to[R](2,0)to[short,-*](2,2)
+	
+	(12,3) node[npn](npn3){}
+	(12,6)to[lamp, l=$L$](npn3.C)
+	(12,6)node[circ]{}
+	(npn3.E) node[right=5mm, above=5mm]{$T_3$} % Labelling the transistor
+		(8,3)to[R,l=$R_{\text{B3}}$](npn3.B)
+	(npn3.E)--(12,1)
+	(12,1)to[short,-*](8,1)
+	;
+\end{circuitikz}
+\legend{monostable 2}
+  \end{center}
+\end{figure}
+\shorthandon{;:!?}
+
+\newpage
+
+
+\shorthandoff{;:!?}
+\begin{figure}[h!]
+  \begin{center}
+\begin{circuitikz}
+	\draw
+	(0,2) node[npn,xscale=-1](npn1){}
+	(npn1.E) node[left=7mm, above=5mm]{$T_1$} % Labelling the transistor
+	(10,2) node[npn](npn2){}
+	(npn2.E) node[right=7mm, above=5mm]{$T_2$} % Labelling the transistor
+	(npn1.C) to[short](0,3)to [R,l_=$R_{\text{C}}$,*-] (0,6)
+	(npn2.C) to[short](10,3)to  [R,l_=$R_{\text{C}}$,*-] (10,6)
+	
+	(3,4)to[pR,l_=R,n=POT](7,4)
+	(POT.wiper)to[short,-*](5,6) %potentiomètre
+	(3,4)to[short,-*](3,3)
+	(7,4)to[short,-*](7,3)
+	(0,6)--(10,6)
+	
+	(3,3)to[C,l_=$C_1$](0,3)
+	(7,3)to[C,l^=$C_2$](10,3)
+	(npn1.B)to[short](3,2)--(7,3)
+	(npn2.B)to[short](7,2)--(3,3)
+	(npn1.E)--(0,1)
+	(npn2.E)--(10,1)
+	(0,1)to[short,-*](5,1)--(10,1)
+	(5,1) node[cground]{}
+		
+	
+	(5.5,4.5) node[]{$r$}
+	(4.4,4.5) node[]{$R-r$}
+	
+(10,6)to[short,*-o] (14,6) node[right]{$V_{\text{CC}}$} % Power supply
+		
+	(13,3) node[npn](npn3){}
+	(13,6)to[lamp, l=$L$](npn3.C)
+	(13,6)node[circ]{}
+	(npn3.E) node[right=5mm, above=5mm]{$T_3$} % Labelling the transistor
+		(10,3)to[R,l=$R_{\text{B3}}$](npn3.B)
+	(npn3.E)--(13,1)
+	(13,1)to[short,-*](10,1)
+		
+	;
+\end{circuitikz}
+\legend{astable commandant un hacheur}
+  \end{center}
+\end{figure}
+\shorthandon{;:!?}
+
+
+\newpage
+
+\subsubsection{Porte logique} 
+
+
+
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}
+\draw
+(5,3)node[npn](npn1){$T_1$} %transistor du bas
+
+(5,5)node[npn](npn2){$T_2$} %transistor du haut
+
+(9,2.75)node[npn](npn3){$T_3$} %transistor du bout à droite
+
+(0.5,3)to[R, l=$R_3$,o-](3,3)--(npn1.base)
+
+(-0.5,5)to[R, l=$R_1$,o-](3,5)--(npn2.base)
+
+(3,5)to[short,*-](3,3)to[R, l_=$R_2$](3,0)
+
+(4,3)to[R, l=$R_4$,*-*](4,0)
+
+(npn2.emitter)--(npn1.collector)
+
+(npn2.collector)to[R, l=$R_5$,-*](5,8)
+
+(7,5.5)to[R,l=$R_6$](7,2.75)to[R,l=$R_7$,-*](7,0)
+
+(npn2.collector)-|(7,5.5)
+
+
+(npn1.emitter)to[short,-*](5,0)
+
+(npn3.collector)to[R, l=$R_8$](9,8)
+
+(npn3.base)to[short,-*](7,2.75)
+
+(9,8)to[short,-o](4,8)
+(3.5,8)node{$E$}
+
+(npn3.collector)to[short,*-o](10,3.52)
+(10.4,3.52)node{$S$}
+
+(3,0)-|(npn3.emitter)
+
+(npn2.collector)[circ]node{}
+;
+\begin{scope}[xshift=5cm,scale=0.4]
+\draw (0,0) -- (0,-1);
+\draw (-0.75,-1) -- (0.75,-1);
+\foreach \x in {-0.75,-0.5, ...,0.75} %masse
+{
+\draw (\x,-1)--++(-0.5,-0.5);
+}
+\end{scope}
+
+\begin{scope}[xshift=0.5cm,yshift=2cm,scale=0.4]
+\draw (0,0) -- (0,-1);
+\draw (-0.75,-1) -- (0.75,-1);
+\foreach \x in {-0.75,-0.5, ...,0.75} %masse
+{
+\draw (\x,-1)--++(-0.5,-0.5);
+}
+\end{scope}
+
+
+\begin{scope}[xshift=-0.5cm,yshift=4cm,scale=0.4]
+\draw (0,0) -- (0,-1);
+\draw (-0.75,-1) -- (0.75,-1);
+\foreach \x in {-0.75,-0.5, ...,0.75} %masse
+{
+\draw (\x,-1)--++(-0.5,-0.5);
+}
+\end{scope}
+
+\draw[->,>=latex](-0.5,4)--(-0.5,4.8);%flèche de tension U=10V
+\draw (-0.8,4.2)node{$e_1$};
+
+\draw[->,>=latex](0.5,2)--(0.5,2.8);%flèche de tension U=10V
+\draw (0.2,2.2)node{$e_2$};
+
+\end{circuitikz}
+\legend{porte logique}
+%\label{fig:logique1}
+\end{figure}
+\shorthandon{;:!?}
+
+
+\newpage
+
+
+\subsubsection{Hacheur survolteur}
+
+
+
+\shorthandoff{;:!?}
+\begin{figure}[h!]
+  \begin{center}
+\begin{circuitikz}
+	\draw
+	(0,0)to[V=$E$](0,3)
+	(0,3)to[R=$R$](0,6)
+	(0,6)--(4,6)
+	(4,6)to[cute inductor,l=$L$](4,4)
+	(4,2) node[npn](npn){$T$}
+	(npn.B)--(2,2)to[sqV,l_=$u$,-*](2,0)
+	(npn.C)--(4,4)
+	(npn.E)to[short,-*](4,0)
+	(4,3.5)to[Do,l=$D$,*-](7,3.5)
+	(7,3.5)to[C,l=$C$](7,0)
+	(7,0)--(0,0)
+	(2,0)node[cground]{}
+	
+	;
+\end{circuitikz}
+\legend{Hacheur survolteur}
+\end{center}
+\end{figure}
+\shorthandon{;:!?}
+
+
+\newpage
+
+\subsubsection{Amplificateur}
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[european resistors]
+\draw
+(5,4) node[pnp](pnp){$T_1$}
+(2,0)to[R,l=\SI{100}{\kilo\ohm}](2,4)
+(pnp.base) to[short, -*](2,4)
+(pnp.collector)to[R,-*,l_=\SI{560}{\ohm}](5,0)
+(pnp.emitter)to[short](5,6)
+(0,4)to[C,*-,l=](2,4)
+(5,6)--(10,6)
+(2,0)--(10,0)
+(5,3)to[C,*-*,l=](7.5,3)
+(7.5,0)node[cground]{}
+(7.5,6)to[short,*-*](7.5,6.5)node[anchor=south]{\SI{20}{\volt}}
+(10,3) node[pnp](pnp){$T_2$}
+(7.5,0)to[R,*-,l=\SI{8}{\kilo\ohm}](7.5,3.5)
+(7.5,3.5)to[R,-*,l=\SI{2}{\kilo\ohm}](7.5,6)
+(pnp.collector)to[R,l_=\SI{3}{\kilo\ohm}](10,0)
+(pnp.emitter)to[R,l=\SI{3}{\kilo\ohm}](10,6)
+(7.5,3)to[short,l=](9.4,3)
+(10,2)to[C,*-*,l=](12,2)
+;\end{circuitikz}
+\legend{Amplificateur à deux étages.}
+\label{fig:ampli-2-etages}
+\end{figure}
+\shorthandon{;:!?}
+
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[european resistors]
+\draw
+(5,3) node[npn](npn){}
+(npn.collector)node[anchor=east]{$\beta=50$}
+(3,3)to[R,l=\SI{1}{\mega\ohm}](3,6)
+(npn.base) to[short,-*](3,3)
+(npn.collector)to[R,-*,l=\SI{10}{\kilo\ohm}](5,6)
+(1,3)to[C,*-,l=](3,3)
+(3,6)--(14,6)
+(5,2.2)to[short,-*](10,2.2)--(14,2.2)
+(5,3.9)to[C,*-*,l=](7,3.9)
+(8.4,2.2)node[cground]{}
+(8.4,2.2)node[circ]{}
+(8.4,6)to[short,*-*](8.4,6.5)node[anchor=south]{$V_{CC}$}
+(10,3) node[npn](npn){}
+(npn.collector)node[anchor=east]{$\beta=400$}
+(7,3)--(7,3.8)to[R,-*,l=\SI{2}{\mega\ohm}](7,6)
+(npn.collector)to[R,-*,l=\SI{2.5}{\kilo\ohm}](10,6)
+(7,3)to[short](9.4,3)
+(10,3.9)to[C,*-*,l=](12,3.9)
+(14,3) node[npn](npn){}
+(npn.collector)node[anchor=east]{$\beta=1000$}
+(12,3)--(12,3.5)to[R,-*,l_=\SI{1}{\mega\ohm}](12,6)
+(npn.collector)to[R,l_=\SI{500}{\ohm}](14,6)
+(12,3)to[short](13.4,3)
+(14,3.9)to[C,*-*,l=](16,3.9)
+;\end{circuitikz}
+\legend{Polarisation d'un amplificateur à trois étages.}
+\label{fig:ampli-trois-etages1}
+\end{figure}
+\shorthandon{;:!?}
+
+\newpage
+
+
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[european resistors]
+\draw
+(5,3) node[npn](npn){$T_1$}
+(3,0)to[R,l=\SI{5}{\kilo\ohm}](3,3)
+(3,3)to[R,l=\SI{30}{\kilo\ohm}](3,6)
+(npn.base) to[short, -*](3,3)
+(npn.collector)to[R,-*,l=\SI{1}{\kilo\ohm}](5,6)
+(npn.emitter)to[R,-*,l_=\SI{2}{\kilo\ohm}](5,0)
+(1,3)to[C,*-,l=](3,3)
+(3,6)--(14,6)
+(3,0)--(14,0)
+(5,3.9)to[C,*-*,l=](7,3.9)
+(8.4,0)node[cground]{}
+(8.4,0)node[circ]{}
+(8.4,6)to[short,*-*](8.4,6.5)node[anchor=south]{$V_{CC}$}
+(10,3) node[npn](npn){$T_2$}
+(7,0)to[R,*-,l=\SI{1}{\kilo\ohm}](7,3.5)
+(7,3.5)to[R,-*,l=\SI{3}{\kilo\ohm}](7,6)
+(npn.collector)to[R,l=\SI{500}{\ohm}](10,6)
+(npn.emitter)to[R,-*,l_=\SI{1}{\kilo\ohm}](10,0)
+(7,3)to[short,*-,l=](9.4,3)
+(10,3.9)to[C,*-*,l=](12,3.9)
+(14,3) node[npn](npn){$T_3$}
+(12,0)to[R,*-,l_=\SI{100}{\ohm}](12,3.5)
+(12,3.5)to[R,-*,l_=\SI{200}{\ohm}](12,6)
+(npn.collector)to[R,l_=\SI{50}{\ohm}](14,6)
+(npn.emitter)to[R,l^=\SI{75}{\ohm}](14,0)
+(12,3)to[short,*-,l=](13.4,3)
+(14,3.9)to[C,*-*,l=](16,3.9)
+;\end{circuitikz}
+\legend{Amplificateur à trois étages.}
+\label{fig:ampli-trois-etages2}
+\end{figure}
+\shorthandon{;:!?}
+
+
+
+
+\newpage
+
+\subsection{Bascules réalisées avec des inverseurs logiques}
+
+
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}
+\draw
+
+%positionnement des inverseurs
+(1,4)node[european not port](not1){}
+(5,4)node[european not port](not2){}
+
+%jonction des deux inverseurs
+(not1.out)--(not2.in)
+
+%placement de la résistance
+($(not1.out)+(1,0)$)to[R,*-*]($(not1.out)+(1,-4)$)
+
+%placement du condensateur
+
+(not2.out)--($(not2.out)+(0.5,0)$)
+to[C]($(not2.out)+(0.5,-4)$)
+
+%fil du bas et entrée de l'inverseur de gauche
+(not1.in)|-($(not1.out)+(1,-4)$)--($(not2.out)+(0.5,-4)$)
+
+;
+\end{circuitikz}
+\legend{Bascule à inverseur logique symétrique}
+%\label{}
+\end{figure}
+\shorthandon{;:!?}
+
+
+\vspace{2cm}
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=1, every node/.style={scale=0.8}]
+\draw
+
+%positionnement des inverseurs
+(1,4)node[european not port](not1){}
+(5,4)node[european not port](not2){}
+
+%jonction des deux inverseurs
+(not1.out)--(not2.in)
+
+%placement du condensateur
+(not2.out)--($(not2.out)+(0.5,0)$)
+to[C]($(not2.out)+(0.5,-4)$)coordinate(c){}
+
+%placement du potentiomètre
+($(not1.out)+(0.1,-1.5)$)to[european potentiometer,n=pot]($(not2.in)+(0,-1.5)$)
+($(not1.out)!0.40!(not2.in)$)|-(pot.wiper)
+($(not1.out)!0.40!(not2.in)$)node[circ]{}
+($(not1.out)+(0.1,-1.5)$)coordinate(a){}
+($(not2.in)+(0,-1.5)$)coordinate(b){}
+($(not1.out)+(0.5,-1.2)$)node{$R - r$}
+($(not2.in)+(-0.6,-1.2)$)node{$r$}
+;
+
+%placement des diodes
+
+%réglage de la taille des diodes
+\ctikzset{bipoles/diode/height=0.5, bipoles/diode/width=0.5}
+
+\draw
+(a |- c)to[diode,*-]($(not1.out)+(0.1,-1.5)$)
+($(not2.in)+(0,-1.5)$)to[diode,-*](b |- c)
+
+
+%fil du bas et entrée de l'inverseur de gauche
+(not1.in)|-($(not1.out)+(1,-4)$)--($(not2.out)+(0.5,-4)$)
+
+;
+\end{circuitikz}
+\legend{Bascule à inverseur logique asymétrique pour la commande d'un hacheur}
+%\label{}
+\end{figure}
+\shorthandon{;:!?}
+
+
+\newpage
+
+
+
+\subsection{Transistors à effet de champ à grille isolée}
+
+
+\shorthandoff{;:!?}
+
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=0.9, every node/.style={scale=0.9}]
+
+
+ \draw
+
+(3,0)node[nfet](nfet1){}
+(nfet1.B)-|(3.5,-1)
+(nfet1.S)--(3,-1)
+(3.5,-1)node[circ]{}
+(2,0)to[short,-*](2,8)
+
+
+(5,0)node[nfet](nfet2){}
+(nfet2.B)-|(5.5,-1)
+(nfet2.S)to[short,-*](5,-1)
+(5.5,-1)node[circ]{}
+(4,0)to[short,-*](4,6)
+
+
+(7,0)node[nfet](nfet3){}
+(nfet3.B)-|(7.5,-1)
+(nfet3.S)to[short,-*](7,-1)
+(7.5,-1)node[circ]{}
+(6,0)to[short,-*](6,4)
+
+
+(9,0)node[nfet](nfet4){}
+(nfet4.B)--++(0.5,0)|-(9,-1)
+(nfet4.S)to[short,-*](9,-1)
+(8,0)to[short,-*](8,2)
+
+(3,-1)--(9,-1)
+
+(nfet1.D)to[short,-*](nfet2.D)to[short,-*](nfet3.D)to[short,-*](nfet4.D)to[short,-o](10.5,0.77)
+
+(10.8,0.77)node{$S$} %sortie
+
+
+(9,2)node[pfet](pfet1){}
+(pfet1.B)--(9.5,2)
+
+(9,4)node[pfet](pfet2){}
+(pfet2.B)to[short,-*](9.5,4)
+
+(9,6)node[pfet](pfet3){}
+(pfet3.B)to[short,-*](9.5,6)
+
+(9,8)node[pfet](pfet4){}
+(pfet4.B)to[short,-*](9.5,8)|-(9,8.6)
+
+
+(pfet4.D)to[short,-o](9,9.5)
+(9.6,9.6)node{$+V_{\text{DD}}$}
+
+
+(pfet4.S)--(pfet3.D)
+(pfet3.S)--(pfet2.D)
+(pfet2.S)--(pfet1.D)
+(pfet1.S)--(nfet4.D)
+
+(9.5,8)--(9.5,2) %liaison substrats des pfet
+
+(1,2)to[short,o-](8,2)
+(0.5,2)node{$e_4$}
+(1,4)to[short,o-](8,4)
+(0.5,4)node{$e_3$}
+(1,6)to[short,o-](8,6)
+(0.5,6)node{$e_2$}
+(1,8)to[short,o-](8,8)
+(0.5,8)node{$e_1$}
+
+
+(9,8.6)[circ]node{}
+;
+
+%le symbole de la masse aux normes européennes
+\begin{scope}[xshift=9cm, yshift=-1cm, scale=0.4]
+\draw (0,0) -- (0,-1);
+\draw (-0.75,-1) -- (0.75,-1);
+\foreach \x in {-0.75,-0.5, ...,0.75}
+{
+\draw (\x,-1)--++(-0.5,-0.5);
+}
+\end{scope}
+
+\end{circuitikz}
+\legend{NOR}
+%\label{fig:MOS1}
+\end{figure}
+ \shorthandon{;:!?}
+ 
+ 
+ \newpage
+ 
+ 
+ \shorthandoff{;:!?}
+
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=0.9, every node/.style={scale=0.9}]
+
+
+ \draw
+
+(3,0)node[nfet](nfet1){}
+(nfet1.B)-|(3.5,-1)
+(nfet1.S)--(3,-1)
+(3.5,-1)node[circ]{}
+(2,0)to[short,-*](2,8)
+
+
+(5,0)node[nfet](nfet2){}
+(nfet2.B)-|(5.5,-1)
+(nfet2.S)to[short,-*](5,-1)
+(5.5,-1)node[circ]{}
+(4,0)to[short,-*](4,6)
+
+
+(7,0)node[nfet](nfet3){}
+(nfet3.B)-|(7.5,-1)
+(nfet3.S)to[short,-*](7,-1)
+(7.5,-1)node[circ]{}
+(6,0)to[short,-*](6,4)
+
+
+(9,0)node[nfet](nfet4){}
+(nfet4.B)--++(0.5,0)|-(9,-1)
+(nfet4.S)to[short,-*](9,-1)
+(8,0)to[short,-*](8,2)
+
+(3,-1)--(9,-1)
+
+(nfet1.D)to[short,-*](nfet2.D)to[short,-*](nfet3.D)to[short,-*](nfet4.D)to[short,-o](10.5,0.77)
+
+(10.8,0.77)node{$S$} %sortie
+
+
+(9,2)node[pfet](pfet1){}
+(pfet1.B)--(9.5,2)
+
+(9,4)node[pfet](pfet2){}
+(pfet2.B)to[short,-*](9.5,4)
+
+(9,6)node[pfet](pfet3){}
+(pfet3.B)to[short,-*](9.5,6)
+
+(9,8)node[pfet](pfet4){}
+(pfet4.B)to[short,-*](9.5,8)|-(9,8.6)
+
+
+(pfet4.D)to[short,-o](9,9.5)
+(9.6,9.6)node{$+V_{\text{DD}}$}
+
+
+(pfet4.S)--(pfet3.D)
+(pfet3.S)--(pfet2.D)
+(pfet2.S)--(pfet1.D)
+(pfet1.S)--(nfet4.D)
+
+(9.5,8)--(9.5,2) %liaison substrats des pfet
+
+(1,2)to[short,o-](8,2)
+(0.5,2)node{$e_4$}
+(1,4)to[short,o-](8,4)
+(0.5,4)node{$e_3$}
+(1,6)to[short,o-](8,6)
+(0.5,6)node{$e_2$}
+(1,8)to[short,o-](8,8)
+(0.5,8)node{$e_1$}
+
+
+(9,8.6)[circ]node{}
+%masse avec node[cground]
+(9,-1)[cground]node{}
+;
+
+
+
+\end{circuitikz}
+\legend{NOR}
+%\label{fig:MOS1}
+\end{figure}
+ \shorthandon{;:!?}
+ 
+ 
+ \newpage
+ 
+ 
+ 
+ 
+
+ 
+\shorthandoff{;:!?}
+ \begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}
+
+ \draw
+
+(8,0)node[pfet](pfet1){}
+(pfet1.B)-|(8.5,1)
+(pfet1.D)to[short,-*](8,1)
+(7.02,0)-|(7.02,-8)
+
+(6,0)node[pfet](pfet2){}
+(pfet2.B)-|(6.5,1)
+(pfet2.D)to[short,-*](6,1)
+(5.02,0)-|(5.02,-6)
+
+
+(4,0)node[pfet](pfet3){}
+(pfet3.B)-|(4.5,1)
+(pfet3.D)to[short,-*](4,1)
+(3.02,0)-|(3.02,-4)
+
+
+(2,0)node[pfet](pfet4){}
+(pfet4.B)-|(2.5,1)
+(pfet4.D)to[short](2,1)
+(1.02,0)-|(1.02,-2)
+
+(2,1)--(8.5,1)to[short,-o](8.5,2)
+(8.5,2.4)node{$+ V_{\text{DD}}$}
+
+
+
+(8,-2)node[nfet](nfet1){}
+(nfet1.B)to[short](8.5,-2)
+
+
+(8,-4)node[nfet](nfet2){}
+(nfet2.B)to[short,-*](8.5,-4)
+
+
+(8,-6)node[nfet](nfet3){}
+(nfet3.B)to[short,-*](8.5,-6)
+
+
+(8,-8)node[nfet](nfet4){}
+(nfet4.B)to[short,-*](8.5,-8)
+(nfet4.S)--++(0.5,0)
+
+
+(7.2,-8)to[short,-o](0,-8)
+(7.2,-6)to[short,-o](0,-6)
+(7.2,-4)to[short,-o](0,-4)
+(7.2,-2)to[short,-o](0,-2)
+
+(-0.5,-8)node{$e_4$}
+(-0.5,-6)node{$e_3$}
+(-0.5,-4)node{$e_2$}
+(-0.5,-2)node{$e_1$}
+
+(pfet1.S)--(nfet1.D)
+(nfet1.S)--(nfet2.D)
+(nfet2.S)--(nfet3.D)
+(nfet3.S)--(nfet4.D)
+
+(pfet4.D)to[short,-*](pfet3.D)to[short,-*](pfet2.D)to[short,-*](pfet1.D)to[short,-o](9,-0.77)
+(9.3,-0.77)node{$S$}
+
+(8.5,-9)--(8.5,-2)
+
+
+(2.5,1)[circ]node{}
+(6.5,1)[circ]node{}
+(4.5,1)[circ]node{}
+(4,1)[circ]node{}
+(6,1)[circ]node{}
+(8,1)[circ]node{}
+(8.5,1)[circ]node{}
+(7.02,-8)[circ]node{}
+(5.02,-6)[circ]node{}
+(3.02,-4)[circ]node{}
+(1.02,-2)[circ]node{}
+(8.5,-8.77)[circ]node{}
+(8.5,-8.77)[cground]node{}
+;
+
+
+
+\end{circuitikz}
+\legend{NAND }
+%\label{fig:MOS2}
+\end{figure}
+
+\shorthandon{;:!?}
+
+\newpage
+
+ \shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=0.9]
+
+
+
+%transistors horizontaux
+
+\foreach \x in {1, ...,6}
+{
+\draw (\x*2,0) node[nfet] (nmos\x) {}
+    (nmos\x.B)-|(\x*2+0.5,-1)
+    (nmos\x.S)-|(\x*2,-1)
+    (nmos\x.D)-|(\x*2,1)
+    (nmos\x.G)|-(\x*2-1.22,\x*2+2)
+    (\x*2,-1)node[circ]{}
+    (\x*2+0.5,-1)node[circ]{}
+    (\x*2,1)node[circ]{}
+    (\x*2-1.11,\x*2+2)node[circ]{}
+    ;
+}
+
+\draw (0,0) node[nfet] (nmos7) {$T_1$}
+    (nmos7.B)-|(0.5,-1)
+    (nmos7.S)-|(0,-1)
+    (nmos7.D)-|(0,1)
+    (nmos7.G)|-(-1.2,2)
+    (0.5,-1)node[circ]{}
+      (-1.10,2)node[circ]{}
+   
+    
+    (14,0) node[nfet] (nmos8) {}
+    (nmos8.B)-|(14.5,-1)
+    (nmos8.S)-|(14,-1)
+    (nmos8.D)-|(14,1.5)
+     (nmos8.G)|-(14-1.2,16)
+    (14,-1)node[circ]{}
+    (14,1)node[circ]{}
+    (14-1.11,16)node[circ]{}
+    
+    (0,-1)--(14.5,-1)
+    (14,-1)node[cground]{}
+    
+    (0,1)--(16,1)
+    (16,1)node[ocirc]{}
+    (16,1)node[below]{sortie}
+    ;
+    
+%transistors verticaux
+\foreach \y in {1, ...,8}
+{
+\draw (14,\y*2) node[pfet] (pmos\y) {}
+    (pmos\y.B)-|(14.5,\y*2)
+   (pmos\y.D)-|(14,1.5+\y*2)
+    (pmos\y.G)--(-2,\y*2)
+        (-2,\y*2)node[ocirc]{}
+    (-2.5,\y*2)node{$e_{\y}$}
+   
+    ;
+}
+
+\foreach \z in {2, ...,8}
+ \draw
+ (14.5,\z*2)node[circ]{}
+ ;
+       
+\draw
+ (14.5,2)--(14.5,17)--(14,17)
+   (14,17)node[circ]{}
+   (14,17.5)node[ocirc]{}
+  (14,17.5)node[above]{$V_{\text{DD}}$}
+    ;
+
+\end{circuitikz}
+\legend{NON OU à 8 entrées}
+%\label{}
+\end{figure}
+\shorthandon{;:!?}
+ 
+\newpage
+
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=0.9]
+
+%% nommage des entrées e
+\foreach \x in {8, ...,1}
+{\draw
+(-2.5,-\x*2)node{$e_{\x}$}
+;}
+
+
+%%soudures des substrats des transistors verticaux
+\foreach \z in {2, ...,8}
+ \draw
+ (14.5,-\z*2)node[circ]{}
+ ;
+
+%transistors pmos horizontaux
+\foreach \x in {1, ...,6}
+{
+\draw (\x*2,0) node[pfet] (pmos\x) {}
+    (pmos\x.B)-|(\x*2+0.5,1)
+    (pmos\x.S)-|(\x*2,1)
+    (pmos\x.D)-|(\x*2,-1)
+    (pmos\x.G)|-(\x*2-1.22,-\x*2-2)
+    (\x*2,-1)node[circ]{}
+    (\x*2+0.5,1)node[circ]{}
+    (\x*2,1)node[circ]{}
+    (\x*2-1.11,-\x*2-2)node[circ]{}
+    ;
+}
+
+
+\draw (0,0) node[pfet] (pmos7) {$T_1$}
+    (pmos7.B)-|(0.5,1)coordinate(S)
+    (pmos7.S)-|(0,1)
+    (pmos7.D)-|(0,-1)
+    (pmos7.G)|-(-1.2,-2)
+    (S)node[circ]{}
+    (-1.10,-2)node[circ]{}
+   
+    
+    (14,0) node[pfet] (pmos8) {}
+    (pmos8.B)-|(14.5,1)node[circ]{}
+    (pmos8.B)-|(14.5,2)coordinate(V)
+    (pmos8.S)-|(14,1)coordinate(D)
+    (pmos8.D)-|(14,-1.5)
+    (pmos8.G)|-(14-1.2,-16)
+    (D)node[circ]{}
+    (14,-1)node[circ]{}
+    (14-1.11,-16)node[circ]{}
+    ($(V)+(0.5,0.2)$)node{$V_{\text{DD}}$}
+    (V)node[ocirc]{}
+  
+       
+    (0,1)--(14.5,1)
+       
+    (0,-1)--(16,-1)
+    (16,-1)node[ocirc]{}
+    (16,-1)node[below]{sortie}
+    ;
+    
+%transistors nmos verticaux
+\foreach \y in {-1, ...,-8}
+%\foreach \x in {8, ...,1}
+{
+\draw (14,\y*2) node[nfet] (nmos\y) {}
+    (nmos\y.B)-|(14.5,\y*2)
+   (nmos\y.D)-|(14,1.5+\y*2)
+    (nmos\y.G)--(-2,\y*2)
+        (-2,\y*2)node[ocirc]{}
+;
+}
+
+\draw
+ %(14.5,-2)--(14.5,-17)--(14,-17)
+ ($(nmos-8.B)+(0.5,0)$)--($(nmos-1.B)+(0.5,0)$)
+   ($(nmos-8.B)+(0.5,0)$)|-(nmos-8.S)
+   (nmos-8.S)node[circ]{}
+   (nmos-8.S)node[cground]{}
+;
+
+\end{circuitikz}
+\legend{NON ET à 8 entrées}
+%\label{}
+\end{figure}
+\shorthandon{;:!?}
+
+\newpage
+
+Pour le symbole de la masse, on pourra employer \og node[cground]\{\} \fg{} ou bien la figure ci-dessous, plus belle mais moins simple d'utilisation.
+ 
+ 
+ 
+ \shorthandoff{;:!?}
+ \begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}
+ 
+ %le symbole de la masse aux normes européennes
+\begin{scope}[xshift=8.5cm, yshift=-9cm, scale=0.4]
+\draw (0,0) -- (0,-1);
+\draw (-0.75,-1) -- (0.75,-1);
+\foreach \x in {-0.75,-0.5, ...,0.75}
+{
+\draw (\x,-1)--++(-0.5,-0.5);
+}
+\end{scope}
+ 
+ 
+ \end{circuitikz}
+\legend{masse }
+%\label{fig:MOS2}
+\end{figure}
+
+\shorthandon{;:!?}
+ 
+
+
+
+
+\newpage
+
+\section{Amplificateur opérationnel}
+
+\subsection{Symbol européen de l'ampli-op}
+
+Le premier mai 2017, j'ai contacté l'équipe qui assure le maintien de circuitikz, Stefan Lindner et Stefan Erhardt, afin de leur demander d'élaborer un symbole aux normes européennes de l'amplificateur opérationnel et moins de 24 heures après, j'avais la réponse et le symbole était fait. Quelle réactivité ! Merci à eux.
+
+
+
+\shorthandoff{:!}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=1, every node/.style={scale=1}]
+\draw
+(0,2) node[en amp]{}
+;
+\end{circuitikz}
+\legend{ampli op}
+%\label{inverseur}
+\end{figure}
+\shorthandon{:!}
+
+\vspace{1cm}
+
+\shorthandoff{:!}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=1, every node/.style={scale=1}]
+\draw
+(0,2) node[yscale=-1, en amp]{}
+;
+\end{circuitikz}
+\legend{ampli op}
+%\label{inverseur}
+\end{figure}
+\shorthandon{:!}
+\vspace{1cm}
+
+\shorthandoff{:!}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=1, every node/.style={scale=1}]
+\draw
+(0,2) node[xscale=-1, en amp]{}
+;
+\end{circuitikz}
+\legend{ampli op}
+%\label{inverseur}
+\end{figure}
+\shorthandon{:!}
+
+\shorthandoff{:!}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz} 
+\draw (0,0) node[en amp] (opamp) {}
+ (opamp.+) node[ left ] {$v_+$}
+ (opamp.-) node[left] {$v_-$}
+ (opamp.out) node[right] {$v_o$}
+ (opamp.down) node[cground] {}
+ (opamp.up) ++ (0,.5) node[above] {\SI{12}{\volt}}
+ -- (opamp.up)
+;
+\end{circuitikz}
+\legend{ampli op avec ses alimentations}
+%\label{inverseur}
+\end{figure}
+\shorthandon{:!}
+
+
+
+\newpage
+
+\shorthandoff{:!}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}
+    \draw
+    (0, 0) node[op amp,yscale=-1] (opamp) {}
+    (opamp.-) 
+            to ++(-.8,0) -| 
+    (-2,-0.5)   to [R,*-,l_=\SI{364.1}{\ohm}](-2,-2.5)           node[cground]{}
+    (-2,-0.5)   to [R,l=\SI{988}{\ohm}](-2,1.5) -| (-4,1.5) 
+                to [battery, l_=\SI{15}{\volt}](-4,-2.5)         node[cground]{}
+    (opamp.-) to[R,*-,l=\SI{9.87}{\kilo\ohm}]++(0,-2)            node[cground]{}  
+    (opamp.+) to ++(0,1) coordinate (leftR)
+    -- (leftR -| opamp.out)
+    to[short,-*] (opamp.out)
+    (opamp.out)  to[/tikz/circuitikz/bipoles/length=1.cm,R,l=\SI{10}{\ohm}](3,0)             node[anchor=west]  {$V_{out}$}
+    ;
+\end{circuitikz}
+\legend{ampli op 1}
+%\label{inverseur}
+\end{figure}
+\shorthandon{:!}
+
+\vspace{2cm}
+
+
+\shorthandoff{:!}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}
+    \draw
+    (0, 0) node[op amp] (opamp) {}
+    (opamp.-) 
+            to ++(-.8,0)  
+    (-2,0.5)    to [R,*-,l_=\SI{364.1}{\ohm}](-2,-1)             node[cground]{}
+    (-2,0.5)    to [R,l=\SI{988}{\ohm}](-2,2) -- (-4,2)
+                to [battery, l_=\SI{15}{\volt}](-4,-.5)          node[cground]{}
+    (opamp.-) to[R,*-,l_=\SI{9.87}{\kilo\ohm}]++(0,2)            node[cground,yscale=-1]{}  
+    (opamp.+) to ++(0,-1) coordinate (leftR)
+    -- (leftR -| opamp.out)
+    to[short,-*] (opamp.out)
+    \pgfextra{\ctikzset{bipoles/resistor/width=.4,
+                        bipoles/resistor/height=.15}}
+    (opamp.out)  to[R,l=\SI{10}{\ohm}](5,0)          node[anchor=west]  {$V_{out}$};
+\end{circuitikz}
+\legend{ampli op 2}
+%\label{inverseur}
+\end{figure}
+\shorthandon{:!}
+
+
+
+\newpage
+
+
+Circuit réalisé avec des déplacements relatifs par rapport aux entrées et à la sortie de l'ampli-op, je pense qu'il vaut mieux travailler ainsi pour tous les composants qui ne sont pas de simples dipôles. 
+
+
+\shorthandoff{:!}
+ \begin{figure}[!hbtp]
+\centering
+ \begin{circuitikz}[scale=1]\draw
+ 
+ %placement de l'aop
+(5,.5) node [en amp] (opamp) {}
+
+%branchement des résistances sur l'entrée + en position relative par rapport à celle-ci
+(opamp.+)to [R, l=$R_d$, *-*] ($(opamp.+)-(2,0)$)to [R, l=$R_d$, *-o]($(opamp.+)-(4,0)$)node [left] {$U_{we}$}
+
+%branchement du condensateur entre l'entrée + et la masse
+(opamp.+) to [C, l_=$C_{d2}$, *-] ($(opamp.+)+(0,-3)$) node [cground] {}
+
+%branche entre l'entrée - et la verticale arrivant à 2.5 au-dessus de l'entrée -
+(opamp.-) to [short,-*]($(opamp.-)+(0,2.5)$)
+
+%branche entre la sortie de l'aop et un point situé par rapport à l'entrée -, plus haute de 2.5 et à droite de l'entrée - de 2
+(opamp.out) |- ($(opamp.-)+(2,2.5)$)
+
+%placement du condensateur Cd1 entre un point placé relativement par rapport à l'entrée - et relativement par rapport à la sortie
+($(opamp.-)+(2,2.5)$)to [C, l_=$C_{d1}$] ($(opamp.-)+(0,2.5)$)
+
+%branche entre le point à gauche du condensateur en coordonnées relatives par rapport à l'entrée - et un point en coordonnées relative par rapport à l'entrée +
+($(opamp.-)+(0,2.5)$)-|($(opamp.+)-(2,0)$)
+ 
+%branche de sortie de l'aop
+(opamp.out) to [short, *-o] ($(opamp.out)+(1,0)$)node [right] {$U_{wy}$}
+ 
+ ;\end{circuitikz}
+ \legend{circuit réalisé à l'aide d'un symbole normalisé de l'aop}
+%\label{}
+\end{figure}
+ \shorthandon{:!}
+
+\newpage
+
+
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\begin{center}
+\begin{circuitikz}
+\draw
+(1,-1.5)to[zDo,l=$D_z$,,*-](1,2.5)to[R, l=$R_1$,*-*](1,5)
+(4,2) node[op amp,yscale=-1](opamp){}
+(3.9,5)node[circ]{}
+(opamp.down)to[short,-*](3.9,5)
+(opamp.up)to[short,-*](3.9,-1.5)
+(opamp.+)--(1,2.5)
+(6,5.3)node{$T_1$}
+(7,5)to[Tnpn,n=n1](5,5)
+(-0.5,5)to[short](n1.C)
+(opamp.out)-|(n1.B)
+(n1.E)to[short](8,5)to[R,l=$R_2$](11,5)
+(12,5)node[circ]{}
+(9,2)to[Tnpn,n=n2,mirror](7,2)
+(8,1.7)node{$T_2$}
+(8,5)node[circ]{}
+(n2.B)--(8,5)
+(n2.C)to[short,-*]($(n2.C)+(-1.23,0)$)
+(n2.E)-|(11,5)
+(12,5)to[R,l=$R$,*-](12,2.5)to[short](12,0.5)to[R,l=$R_3$,*-*](12,-1.5)
+(opamp.-)|-(12,0.5)
+(-0.5,-1.5)to[short](14,-1.5)
+(3.9,-1.5)node[cground]{}
+(11,5)to[short](14,5)
+(14,5)to[R,l=$R_{\text{charge}}$](14,-1.5)
+(-0.5,-1.5)to[V=$E$](-0.5,5)
+(13.3,-1)-- node[currarrow, sloped, pos=1]{}(13.3,4.5)
+(13.3,2.25)node[left]{U}
+;
+\end{circuitikz}
+\end{center}
+\legend{Alimentation stabilisée}
+\label{fig:alim-stab}
+\end{figure}
+ \shorthandon{:!}
+ 
+ \newpage
+ 
+ Schéma bloc~:
+ 
+ \`A utiliser avec le package  \og schemabloc \fg{} de Robert Papanicola.
+ 
+ 
+  
+ \shorthandoff{;:!?}
+ \begin{figure}[!hbtp]
+\centering
+\begin{tikzpicture}
+\sbEntree{E}
+\sbComp{comp}{E}
+\sbRelier[$\underline{E}$]{E}{comp}
+\sbBloc{reg}{$\underline{A}$}{comp}
+\sbRelier[$\underline{\epsilon}$]{comp}{reg}
+\sbSortie{S}{reg}
+\sbRelier[$\underline{S}$]{reg}{S}
+\sbDecaleNoeudy[4]{S}{U}
+\sbBlocr{cap}{$\underline{B}$}{U}
+\sbRelieryx{reg-S}{cap}
+\sbRelierxy[$\underline{R}$]{cap}{comp}
+\end{tikzpicture}
+\legend{Schéma bloc d'un oscillateur quasi sinusoïdal, rebouclage soustractif.}
+\label{fig:systeme-boucle1}
+\end{figure}
+ \shorthandon{:!}
+
+\vspace{2cm}
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{tikzpicture}
+\sbEntree{E}
+\sbSumb{comp}{E}
+\sbRelier[$\underline{E}$]{E}{comp}
+\sbBloc{reg}{$\underline{A}$}{comp}
+\sbRelier[$\underline{\epsilon}$]{comp}{reg}
+\sbSortie{S}{reg}
+\sbRelier[$\underline{S}$]{reg}{S}
+\sbDecaleNoeudy[4]{S}{U}
+\sbBlocr{cap}{$\underline{B}$}{U}
+\sbRelieryx{reg-S}{cap}
+\sbRelierxy[$\underline{R}$]{cap}{comp}
+\end{tikzpicture}
+\legend{Schéma bloc d'un oscillateur quasi sinusoïdal, rebouclage additif.}
+\label{fig:systeme-boucle2}
+\end{figure}
+ \shorthandon{:!}
+ 
+ 
+ \newpage
+ 
+ Oscillateur à pont de Wien~:
+ 
+ 
+ 
+ 
+ \shorthandoff{;:!?}
+ \begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}
+\draw (-0.8,-2.8)[dashed]rectangle(3,4.2);
+\draw (3.2,-2.8)[dashed]rectangle(10.2,4.2);
+\draw
+(1,2)node[op amp](opamp){}
+(opamp.out)--(3,2)
+(3,2)to[R=$R$](5,2)
+(4.7,2)to[C=$C$](7,2)
+(7,2)to[R=$R$,*-](7,-2)
+(7,-2)node[cground]{}
+(9,2)to[C=$C$,*-](9,-2)
+(9,-2)node[cground]{}
+(6,2)--(10,2)
+(opamp.-)--(-0.2,4)
+(-0.2,4)--(10,4)--(10,2)
+(2.7,2)to[short,*-](2.7,0)
+(2.7,0)to[R=$R_2$,-*](-0.2,0)
+(-0.2,0)to[R=$R_1$](-0.2,-2)
+(-0.2,0)--(opamp.+)
+(-0.2,-2)node[cground]{}
+(1.15,-2.8)node[anchor=north]{chaîne directe}
+(1.15,-3.1)node[anchor=north]{amplificateur}
+(6.7,-2.8)node[anchor=north]{chaîne de retour}
+(6.7,-3.1)node[anchor=north]{filtre à pont de Wien}
+;\end{circuitikz}
+\legend{Oscillateur à pont de Wien.}
+\label{fig:pont-wien1}
+\end{figure}
+\shorthandon{:!}
+
+
+\newpage
+
+
+
+
+Multivibrateur astable à rapport cyclique variable~:
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\begin{center}
+\begin{circuitikz}
+\draw
+(0,-4)to[C,l=$C$](0,3)--(0,5)--(2,5)to[R, l=$R$](5.5,5)
+
+(4,2) node[op amp](opamp){}
+(opamp.down)--++(0,-1)node[below]{$- V_{\text{alim}}$}
+(opamp.up)--++(0,1)node[above]{$+ V_{\text{alim}}$}
+
+
+(opamp.-)--(0,2.5)node[circ]{}
+(opamp.+)-|(1.5,-1)
+(1.5,-4)to[R,l=$R_1$,*-](1.5,-1)
+(1.5,-0.75)node[circ]{}
+(1.5,-0.75)to[R,l_=$R_2$](5.5,-0.75)
+(5.5,-0.75)--(5.5,5)
+(opamp.out)--(5.5,2)node[circ]{}
+(5.5,2)--(6.5,2)
+(0,-4)--(6.5,-4)
+(3.25,-4)node[cground]{}
+(3.25,-4)node[circ]{}
+(6.5,3)to[open,v^=$v_s$](6.5,-5)
+;
+\end{circuitikz}
+\end{center}
+\legend{Multivibrateur astable.}
+\label{fig:astable}
+\end{figure}
+\shorthandon{:!}
+
+
+
+\newpage
+
+Régulation tout ou rien~:
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\begin{center}
+\begin{circuitikz}
+\draw
+(1,-1.5)to[zDo,l=$D_z$,,*-](1,2.5)to[R, l=$R_z$,*-*](1,6)
+(5,2) node[op amp,yscale=-1](opamp){}
+(opamp.down)--++(0,.5)node[above]{\SI{24}{\volt}}
+(opamp.up)--++(0,-0.5)node[cground]{}
+(opamp.+)to[R,l=$R_1$](1,2.5)
+(opamp.+)node[circ]{}
+(opamp.+)--(3.8,4.5)
+(3.8,4.5)to[R,l=$R_2$](6.5,4.5)--(6.5,2)
+(6.5,2)node[circ]{}
+(9,2)node[npn](npn){}
+(opamp.out)--(6.5,2)
+(npn.collector)to[cute inductor,l_=$\text{relais}$](9,6)
+(8,3)to[empty diode,l=$D$,-*](8,6)
+(8,3)--(9,3)
+(9,3)node[circ]{}
+(9,6)--(1,6)
+(-1,4)to[pR,l_=$\text{capteur}$,n=POT,-*](-1,-1.5)
+(-1,4)to[short,-*](-1,6)
+(opamp.-)-|(POT.wiper)
+(-3,-1.5)to[V=$\SI{24}{\volt}$](-3,6)
+(-3,6)--(1,6)
+(-3,-1.5)--(1,-1.5)
+(1,-1.5)-|(npn.emitter)
+(6.5,2)to[R,l=$R$](8.5,2)
+(8.5,2)--(npn.base)
+(2.5,-1.5)node[cground]{}
+(2.5,-1.5)node[circ]{}
+;
+\end{circuitikz}
+\end{center}
+\legend{Régulation de niveau tout ou rien.}
+\label{fig:regulation-niveau-tor}
+\end{figure}
+\shorthandon{:!}
+
+
+\newpage
+
+\subsection{Autres schémas}
+
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\begin{center}
+\begin{circuitikz}[american]
+
+\draw (0,0) node [scale=1.5,transformer core] (T){}
+      (T.A1) node[above] {A1}
+      (T.A2) node[below] {A2}
+      (T.B1) node[above left] {B1} node[circ]{}
+      (T.B2) node[below left] {B2} node[circ]{}
+      (T.base) node{};
+\path (T.B1) -| ++ (2,1) coordinate (tb1){};% define a coordinate at top right relative to B1
+\draw (T.B1) -- ++ (0,1) to[D*,-*]  (tb1);      
+\draw (T.B2) to[D*] ++(2,0)coordinate(tba){} -| (tba |- tb1);
+\path (T.B2) |- ++(3,-1) coordinate(tb2){}; % define a coordinate at bottom right relative to B2
+\draw (tb2) to[D*,*-] ++(-3,0) -- (T.B2);
+\draw (tb2) --(tb2 |- T.B1) to[D*] (T.B1);
+
+% placement des valeurs de tension 
+\draw(T.A1) to[open,v<={$\SI{240}{\volt}_{rms}$,o-o}](T.A2);
+\draw($(T.B1)!0.3!(T.B2)$) node[]{$\SI{12}{\volt}_{\text{rms,AC}}$}(T.B1);
+\draw ($(T.B1)!0.8!(T.B2)$)node[]{$\SI{12}{\volt}_{\text{rms,AC}}$}(T.B2);
+
+%point milieu du transfo nommé c au secondaire et liaison vers la masse à droite
+\draw[thick] ($(T.B1)!0.50!(T.B2)-(1cm,0)$)coordinate[](c){};
+
+
+%ligne du point milieu du transfo vers la droite et vers la masse
+\draw (c) -- ++ (12.44,0) -| ++ (1,-1) node[cground]{};                          
+
+% placement des condensateurs et des résistance (branches supérieure)
+\draw(6,1) node[](d1){} to [C,l_=$C_1$, *-*] (c -| d1);
+\draw(10,1)node[](d2){} to [C,l_=$C_3$, *-*] (c -| d2);
+\draw(13,1)node[](d3){} to [R, european,l=$R_L$]       (c -| d3);
+
+% placement des rectangles correspondant aux régulateurs de tension
+\draw (7.5,0.5)  rectangle (8.5,1.5) node[below left= 0.25cm and 0.1cm]{780s}; 
+\draw (7.5,-3.6) rectangle (8.5,-4.6)node[above left=0.25cm and 0.1cm]{790s};
+
+% placement des condensateurs et des résistance (branche du bas)
+\draw(6,-4.15) node[](d4){} to [C,l_=$C_2$, *-*] (c -| d4);
+\draw(10,-4.15)node[](d5){} to [C,l_=$C_4$, *-*] (c -| d5);
+\draw(13,-4.15)node[](d6){} to [R,european,l=$R_L$,-*]  (c -| d6);
+\draw (8,0.5)  node[](d7){} to [short,-*]        (c -| d7) --(8,-3.6);
+
+% placement des lignes du haut et du bas
+\draw(2,1) -- (7.5,1) (8.5,1) --(11,1) to[short,i^={$I_L$}] (13,1);
+\draw(2,-4.15) -- (7.5,-4.15) (8.5,-4.15) --(13,-4.15);
+
+\end{circuitikz}
+\end{center}
+\legend{Redresseur}
+\label{fig:Redresseur}
+\end{figure}
+\shorthandon{:!}
+
+
+\newpage
+
+
+\section{\'Electricité}
+
+\subsection{Continu}
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[european,scale=1, every node/.style={scale=0.9}]
+
+\draw [>=latex,->] (0,0)--(7,0);
+\draw
+(-0.5,6.5)--(6.5,-0.5)
+(-0.7,6)node{\SI{12}{\volt}}
+(-0.7,1)node{\SI{2}{\volt}}
+(1,-0.5)node{\SI{1}{\ampere}}
+(6,-0.5)node{\SI{6}{\ampere}}
+(0,7.3)node{$U(V)$}
+(7.5,-0.2)node{$I(A)$}
+;
+%traits horizontaux
+\foreach \x in {0,1, ...,6}
+{
+\draw [dashed](0,\x)--(6,\x);
+}
+
+%traits verticaux
+\draw [>=latex,->] (0,0)--(0,7);
+\foreach \x in {1, ...,6}
+{
+\draw [dashed](\x,0)--(\x,6);
+}
+
+\begin{scope}[xshift=8.5 cm]
+\draw (0,1)to[R=$R$](0,3.5)to[V,v=$E$,i=$I$](0,6);
+\draw [>=latex,->] (1.2,1)--(1.2,6);
+\draw(1.5,3.5)node{$U$};
+
+\end{scope}
+
+\end{circuitikz}
+\legend{caractéristique électrique}
+%\label{}
+\end{figure}
+\shorthandon{;:!?}
+
+
+\newpage
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=0.7]
+\draw
+(0,3)to[R=$R$](3,3)to[R,l=$4R$](6,3)to[R=$4R$](9,3);
+\draw
+(0,0)to[R,l_=$R$](3,0)to[R,l_=$6R$](6,0)to[R,l_=$6R$](9,0);
+\draw
+(3,0)to[R=$12R$,*-*](3,3)
+(6,0)to[R=$R$,*-*](6,3)
+(9,0)to[R=$12R$,*-*](9,3)
+(3,3)--(3,4.5)--(9,4.5)--(9,3)
+(3,0)--(3,-1.5)--(9,-1.5)--(9,0)
+(-0.3,3)node{E}
+(-0.3,0)node{F}
+;
+\end{circuitikz}
+\legend{Calcul de résistance équivalente 1}
+%\label{}
+\end{figure}
+\shorthandon{;:!?}
+
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=0.7]
+\draw
+(0,3)to[R=$2R$](3,3)to[short](6,3)to[R,l^=$\displaystyle \frac{R}{2}$](9,3)to[R=$R$](13,3);
+\draw
+(0,0)to[R,l_=$2R$](3,0)to[short](6,0)to[R,l_=$\displaystyle \frac{R}{2}$](9,0)to[R,l_=$R$](13,0);
+\draw
+(3.5,0)to[R=$R$,*-*](3.5,3)
+(5.5,0)to[R=$2R$,*-*](5.5,3)
+(9,0)to[R=$2R$,*-*](9,3)
+(13,0)--(13,3)
+(-0.3,3)node{C}
+(-0.3,0)node{D}
+;
+\end{circuitikz}
+\legend{Calcul de résistance équivalente 2}
+%\label{}
+\end{figure}
+\shorthandon{;:!?}
+
+\newpage
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=1, every node/.style={scale=1}]
+
+\draw(0,0)to[R,l=$R$](0,4);
+\draw(1,0)to[R=$R$,*-*](1,4);
+\draw(2,0)to[R=$R$,*-*](2,4);
+\draw(5,0)to[R,l_=$R$](5,4);
+
+\draw(2.5,0)to[short,*-](2.5,-0.5);
+\draw(2.5,4)to[short,*-](2.5,4.5);
+
+\draw(0,0)--(5,0);
+\draw(0,4)--(5,4);
+
+\draw(3.2,2) node {$\bullet$};
+\draw(3.6,2) node {$\bullet$};
+\draw(4,2) node {$\bullet$};
+
+\draw[decorate,decoration={brace,raise=1.3cm}]
+(-0.1,3) -- (5.4,3) node[above=1.7cm,pos=0.5,sloped] {12 r\'esistances identiques}
+;
+\end{circuitikz}
+\legend{12 résistances identiques côte à côte}
+%\label{}
+\end{figure}
+\shorthandon{;:!?}
+
+
+
+\newpage
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=0.8, every node/.style={scale=0.8}]
+
+\draw(0,0)to[V=\SI{50}{\volt}](0,2)to[R=\SI{30}{\ohm}](0,4);
+\draw(2,0)to[V=\SI{50}{\volt},*-](2,2)to[R=\SI{30}{\ohm},-*](2,4);
+\draw(4,0)to[V=\SI{50}{\volt},*-](4,2)to[R=\SI{30}{\ohm},-*](4,4);
+\draw(7,0)to[V=\SI{50}{\volt}](7,2)to[R=\SI{30}{\ohm}](7,4);
+
+\draw(3.5,0)to[short,*-](3.5,-0.5);
+\draw(3.5,4)to[short,*-](3.5,4.5);
+
+\draw(0,0)--(7,0);
+\draw(0,4)--(7,4);
+
+\draw(5.1,2) node {$\bullet$};
+\draw(5.5,2) node {$\bullet$};
+\draw(5.9,2) node {$\bullet$};
+
+\draw[decorate,decoration={brace,raise=1.3cm}]
+(-0.1,3) -- (7.4,3) node[above=1.7cm,pos=0.5,sloped] {15 g\'en\'erateurs identiques}
+;
+\end{circuitikz}
+%\legend{}
+%\label{}
+\end{figure}
+
+\vspace{-0.2cm}
+
+
+Le générateur équivalent aux générateurs en parallèle ci-dessus est~:
+
+\vspace{-0.1cm}
+
+
+\begin{figure}[htbp]
+\begin{minipage}[c]{.20\linewidth}
+\begin{center}
+ \begin{circuitikz}[scale=0.8, every node/.style={scale=0.8}]
+\draw
+(0,0)to[V=\SI{750}{\volt}](0,2)
+(0,2)to[R=\SI{30}{\ohm}](0,4)
+(0,-0.3)node[below]{\huge{A}}
+;
+\end{circuitikz}
+\end{center}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{.20\linewidth}
+\begin{center}
+ \begin{circuitikz}[scale=0.8, every node/.style={scale=0.8}]
+\draw
+(0,0)to[V=\SI{50}{\volt}](0,2)
+(0,2)to[R=\SI{2}{\ohm}](0,4)
+(0,-0.3)node[below]{\huge{B}}
+;
+\end{circuitikz}
+\end{center}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{.20\linewidth}
+\begin{center}
+ \begin{circuitikz}[scale=0.8, every node/.style={scale=0.8}]
+\draw
+(0,0)to[V=\SI{750}{\volt}](0,2)
+(0,2)to[R=\SI{2}{\ohm}](0,4)
+(0,-0.3)node[below]{\huge{C}}
+;
+\end{circuitikz}
+\end{center}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{.20\linewidth}
+\begin{center}
+ \begin{circuitikz}[scale=0.8, every node/.style={scale=0.8}]
+\draw
+(0,0)to[V=\SI{50}{\volt}](0,2)
+(0,2)to[R=\SI{15}{\ohm}](0,4)
+(0,-0.3)node[below]{\huge{D}}
+;
+\end{circuitikz}
+\end{center}
+\end{minipage}
+\end{figure}
+\shorthandon{;:!?}
+
+
+\newpage
+
+\shorthandoff{;:!?}
+\begin{figure}[htbp]
+\begin{center}
+\begin{circuitikz}
+\draw
+
+(0,0)to[R,l=$\SI{10}{\ohm}$](0,2)
+(0,2)to[V=$\SI{10}{\volt}$](0,4)
+
+(2,4)to[V_=$\SI{5}{\volt}$](2,2)
+(2,0)to[R,l=$\SI{5}{\ohm}$,*-](2,2)
+
+
+(4,2)to[V=$\SI{20}{\volt}$](4,4)
+(4,0)to[R,l=$\SI{20}{\ohm}$,*-](4,2)
+
+(6,0)to[R,l=$\SI{20}{\ohm}$,*-*](6,4)
+
+(0,0)to[short,-*](8,0)
+(0,4)to[short,-*](8,4)
+(8,0)node[cground]{}
+(8,4)node[right]{$A$}
+;
+\end{circuitikz}
+\legend{Diviseur de tension chargé}
+\end{center}
+\end{figure}
+\shorthandon{;:!?}
+
+
+\newpage
+
+
+\shorthandoff{;:!?}
+\begin{figure}[htbp]
+ \begin{circuitikz}[scale=1.2, every node/.style={scale=1.2}]
+\draw
+(0,0)to[V=\SI{40}{\volt}](0,4)
+(2,0)to[R=\SI{40}{\ohm},*-*](2,2)
+(2,2)to[R=\SI{24}{\ohm},*-](2,4)
+(4,0)to[R=\SI{60}{\ohm}](4,2)
+(0,4)--(2,4)
+(0,0)--(4,0)
+(2,2)--(4,2)
+(2,0)node[below]{B}
+(2,2)node[left]{A}
+;
+\end{circuitikz}
+\legend{Millman}
+\end{figure}
+\shorthandon{;:!?}
+
+
+\vspace{2cm}
+
+
+Théorème de Kennelly~:
+
+\shorthandoff{;:!?}
+\begin{figure}[htbp]
+\begin{minipage}[c]{.40\linewidth}
+\begin{center}
+ \begin{circuitikz}[scale=1.2, every node/.style={scale=1.2}]
+\draw
+(0,0)to[R=\SI{50}{\ohm},*-*](4,0)
+(0,0)to[R=\SI{30}{\ohm},-*](2,3.46)
+(4,0)to[R=\SI{20}{\ohm}](2,3.46)
+(0,0)node[below]{3}
+(4,0)node[below]{2}
+(2,3.46)node[above]{1}
+;
+\end{circuitikz}
+\end{center}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{.1\linewidth}
+\begin{center}
+ \begin{tikz}
+\draw[->,>= stealth,line width=2mm] (0,0) -- (1.5,0);
+
+\end{tikz}
+\end{center}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{.40\linewidth}
+\begin{center}
+ \begin{circuitikz}[scale=1.2, every node/.style={scale=1.2}]
+\draw
+(2,3.46)to[R, l=$R_1$,*-*](2,1.5)
+(0,0)to[R, l=$R_2$,*-](2,1.5)
+(4,0)to[R, l=$R_3$,*-](2,1.5)
+(0,0)node[below]{3}
+(4,0)node[below]{2}
+(2,3.46)node[above]{1}
+;
+\end{circuitikz}
+\end{center}
+\end{minipage}
+\legend{Kennelly}
+\end{figure}
+\shorthandon{;:!?}
+
+
+\newpage
+
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=1, every node/.style={scale=1}]
+
+\draw
+(0,0)to[V,v=\SI{10}{\volt}](0,2)
+(2,2)to[cspst,l_=$K$](0,2)
+(2,2)to[R,l=\SI{10}{\kilo\ohm}](4,2)
+(4,2)to[C,l=\SI{100}{\micro\farad}](4,0)
+(4,0)--(0,0)
+;
+\end{circuitikz}
+\legend{Charge d'un condensateur à tension constante}
+\end{figure}
+
+\vspace{1cm}
+
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=1, every node/.style={scale=1}]
+
+\draw
+(0,0)to[V,v=\SI{50}{\volt}](0,2)
+(2,2)to[cspst,l_=$K$](0,2)
+(2,2)to[R,l=\SI{1}{\ohm}](4,2)
+(4,2)to[cute inductor,l=\SI{500}{\milli\henry}](4,0)
+(4,0)--(0,0)
+;
+\end{circuitikz}
+\legend{Charge d'une inductance à tension constante}
+\end{figure}
+
+\vspace{1cm}
+
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=0.8, every node/.style={scale=0.9}]
+
+\draw
+(0,0)to[V,v=\SI{60}{\volt}](0,2)
+(1.5,2)to[cspst,l_=$K$](0,2)
+(4,2)to[R,l=\SI{5}{\ohm}](1.5,2)
+(4,2)to[R,l_=\SI{10}{\ohm},*-*](4,0)
+(4,2)--(5,2)
+(5,2)to[C,l=\SI{500}{\micro\farad},i=$i$](5,0)
+(5,0)--(0,0)
+;
+\end{circuitikz}
+\legend{charge d'un condensateur}
+\end{figure}
+
+\vspace{1cm}
+
+
+\begin{center}
+\begin{circuitikz}[scale=1, every node/.style={scale=1}]
+\draw
+(0,0) node[spdt,xscale=-1] (spdt) {}
+(0.1,0.6)node{$K$}
+(-4,-3)to[V,v=\SI{30}{\volt}](-4,0)|-(spdt.out 1)
+(-2,-1)to[V,v=\SI{30}{\volt},-*](-2,-3)|-(spdt.out 2)
+(2,0)to[R,l=\SI{2}{\ohm}, i=$i$](2,-1.5)
+(spdt.in) -|(2,0)
+(2,-1.5)to[cute inductor, l=\SI{3}{\henry}](2,-3)
+(-4,-3)--(2,-3)
+;
+\end{circuitikz}
+\legend{charge et décharge d'une inductance}
+\end{center}
+\shorthandon{;:!?}
+
+\newpage
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=0.8, every node/.style={scale=0.8}]
+\draw
+(0,0)to[V,v=$\SI{30}{\volt}$](0,2)to[R=\SI{20}{\ohm}](0,4)
+(2,0)to[R=\SI{20}{\ohm},*-](2,2)
+(2,2)to[V,v=$\SI{50}{\volt}$,-*](2,4)
+(4,2)to[V,v=$\SI{30}{\volt}$,-*](4,0)
+(4,4)to[R=\SI{30}{\ohm},*-](4,2)
+(6,0)to[R=\SI{30}{\ohm},*-*](6,4)
+(0,0)to[short,-*](7,0)
+(0,4)to[short,-*](7,4)
+
+(7.3,4)node{$A$}
+(7.3,0)node{$B$}
+
+;
+\end{circuitikz}
+\legend{Encore un petit coup de Millman}
+\label{fig:question3}
+\end{figure}
+\shorthandon{;:!?}
+
+
+\vspace{2cm}
+
+\shorthandoff{;:!?}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=0.8, every node/.style={scale=0.8}]
+\draw
+
+(1,0)to[R,l=$R_2$,*-*](3,2)
+(3,2)to[R,l=$R_3$,*-*](5,0)
+(1,0)to[R,l=$R_4$,-*](3,-2)
+(3,-2)to[R,l=$R_5$,-*](5,0)
+(3,2)to[R,l=$R_6$,*-*](3,-2)
+(1,0)--(1,-4)
+(1,-4)to[R,l=$R_1$](3,-4)
+(5,-4)to[V=$E$](3,-4)
+(5,-4)--(5,0)
+
+(3,2.3)node{$A$}
+(3,-2.3)node{$B$}
+;
+
+\end{circuitikz}
+\legend{Thévenin}
+\label{fig:question1}
+\end{figure}
+\shorthandon{;:!?}
+
+
+
+
+\newpage
+
+
+
+
+
+
+
+\shorthandoff{;:!?}
+\begin{figure}
+\begin{center}
+\begin{circuitikz}[scale=0.8, every node/.style={scale=0.8}]
+\draw
+
+(0,0)to[V=$\SI{40}{\volt}$](0,4)
+(0,4)to[R,l=$\SI{10}{\ohm}$](3,4)
+(3,4)to[R,l=$\SI{40}{\ohm}$,*-](3,0)
+(0,0)to[R,l=$\SI{30}{\ohm}$](3,0)
+(3,4)to[R,l=$\SI{5}{\ohm}$](6,4)
+(3,0)to[R,l=$\SI{5}{\ohm}$,*-](6,0)
+(6,4)to[R,l=$\SI{30}{\ohm}$,*-](6,0)
+(6,4)to[R,l=$\SI{3}{\ohm}$](9,4)
+(6,0)to[R,l=$\SI{2}{\ohm}$,*-](9,0)
+(9,4)to[R,l=$\SI{20}{\ohm}$,*-](9,0)
+(9,0)to[short,*-*](10,0)
+(9,4)to[short,-*](10,4)
+
+(10,4)node[above]{$A$}
+(10,0)node[below]{$B$}
+;
+\end{circuitikz}
+\legend{Thévenin encore}
+\end{center}
+\end{figure}
+\shorthandon{;:!?}
+
+
+
+
+
+
+\shorthandoff{;:!?}
+\begin{figure}[h!]
+\begin{center}
+\begin{circuitikz}
+\draw
+(2,0)to[R,l_=$R_2$](4,0)
+(2,0)to[V,v=\SI{42}{\volt}](0,0)
+
+(2,2)to[R, l_=$R_1$](4,2)
+(0,2)to[R, l=\SI{12}{\ohm},i=\SI{1}{\ampere}](2,2)
+
+(4,4)to[V,v_=\SI{10}{\volt}](2,4)
+(2,4)to[R,l_=\SI{7}{\ohm}](0,4)
+
+(0,2)--(0,4)
+(4,2)--(4,4)
+(0,3)to[short,*-](-0.5,3)
+(4,3)to[short,*-](4.5,3)
+(-0.5,3)|-(0,0)
+(4.5,3)|-(4,0)
+;
+\draw[<-]
+(0,-1.2)--(4,-1.2)
+;
+\draw
+(2,-1.5)node{\SI{24}{\volt}}
+;
+\end{circuitikz}
+\legend{Ah ! les d.d.p. !}
+\end{center}
+\end{figure}
+\shorthandon{;:!?}
+
+
+
+
+
+
+\newpage
+
+
+
+\shorthandoff{;:!?}
+\begin{figure}[h!]
+\begin{center}
+\begin{circuitikz}
+\draw
+(0,0)to[V,v=\SI{40}{\volt}](0,4)
+(2,0)to[I](2,2)to[R,l=\SI{200}{\ohm},i_=\SI{100}{\milli\ampere}](2,4)
+(4,0)to[R,l=\SI{100}{\ohm}](4,4)
+(0,0)to[short,-*](2,0)--(4,0)
+(0,4)to[short,i={$I$},-*](2,4)--(4,4)
+;
+\draw[->]
+(1.4,0.5)--(1.4,1.5)
+;
+\draw
+(1.2,1)node{$U$}
+;
+\end{circuitikz}
+\legend{Thévenin}
+\end{center}
+\end{figure}
+\shorthandon{;:!?}
+
+
+
+
+\newpage
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Alternatif}
+
+
+
+
+
+
+
+
+
+\shorthandoff{;:!?}
+\begin{figure}[h!]
+\begin{center}
+\begin{circuitikz}[scale=1, every node/.style={scale=1}]
+\draw
+
+(0,0)to[sI,l=$100\phase{0^{\circ}}\;\text{V}$](0,4)
+(2,4)to[R,l=$\SI{30}{\ohm}$,*-](2,2)
+(2,2)to[C,l=$-j\SI{10}{\ohm}$,-*](2,0)
+(4,4)to[R,l=$\SI{10}{\ohm}$](4,2)
+(4,2)to[cute inductor,l=$j\SI{20}{\ohm}$](4,0)
+(0,0)--(4,0)
+(0,4)--(4,4)
+(2,4.1)node[above]{$A$}
+(2,-0.1)node[below]{$B$}
+(4,4.1)node[above]{$C$}
+(4,-0.1)node[below]{$D$}
+;
+\end{circuitikz}
+\legend{Alternatif monophasé}
+\end{center}
+\end{figure}
+\shorthandon{;:!?}
+
+
+
+
+
+\shorthandoff{;:!?}
+\begin{figure}[h!]
+\begin{center}
+\begin{circuitikz}[scale=1, every node/.style={scale=1}]
+	\draw
+	(0,0)to[short](1,0)to[R](3,0)
+(0,1)to[short](1,1)to[R](3,1)
+(0,2)to[short,i=$I$](1,2)to[R](3,2)
+(3,0)to[short,-*](3,1)--(3,2)
+	;
+\end{circuitikz}
+\legend{étoile}
+\end{center}
+\end{figure}
+\shorthandon{;:!?}
+
+\vspace{1cm}
+
+\shorthandoff{;:!?}
+\begin{figure}[h!]
+\begin{center}
+\begin{circuitikz}[scale=1, every node/.style={scale=1}]
+	\draw
+	(0,0)to[short](1,0)to[R](3,0)
+(0,1)to[short](1,1)to[R,i=$J$](3,1)
+(0,2)to[short,i=$I$](1,2)to[R](3,2)
+
+
+(1,0)to[short,*-](1,0.3)
+(1,1)to[short,*-](1,1.3)
+(1,2)to[short,*-](1,2.3)
+(3,2)--(3,1.7)
+(3,1)--(3,0.7)
+(3,1.7)--(1,1.3)
+(3,0.7)--(1,0.3)
+(1,2.3)--(3.3,2.3)--(3.3,0)--(3,0)
+	;
+\end{circuitikz}
+\legend{triangle}
+\end{center}
+\end{figure}
+\shorthandon{;:!?}
+
+\newpage
+
+\shorthandoff{;:!?}
+\begin{figure}[h!]
+\begin{center}
+\begin{circuitikz}[scale=1.2, every node/.style={scale=1.2}]
+	\draw
+	%montage triangle
+	(0,0)to[short](1,0)to[R](3,0)
+(0,1)to[short](1,1)to[R](3,1)
+(0,2)to[short,i=$I_{11}$](1,2)to[R](3,2)
+
+
+(1,0)to[short,*-](1,0.3)
+(1,1)to[short,*-](1,1.3)
+(1,2)to[short,*-](1,2.5)
+(3,2)--(3,1.7)
+(3,1)--(3,0.7)
+(3,1.7)--(1,1.3)
+(3,0.7)--(1,0.3)
+(1,2.5)--(3.3,2.5)--(3.3,0)--(3,0)
+
+%montage étoile
+
+(0,-3)to[short,i=$I_{21}$](1,-3)to[R](3,-3)
+(0,-4)to[short](1,-4)to[R](3,-4)
+(0,-5)to[short](1,-5)to[R](3,-5)
+(3,-3)to[short,-*](3,-4)--(3,-5)
+
+%connections
+
+(-3,2)to[short,i=$I_{T1}$](0,2)
+(-3,1)to[short](0,1)
+(0,0)to[short](-3,0)
+
+(0,-3)to[short,-*](0,2)
+(0,-4)--(-0.5,-4)to[short,-*](-0.5,1)
+(0,-5)--(-1,-5)to[short,-*](-1,0)
+
+%impédance réseau
+
+(-3.6,1.3)node{$\SI{220}{\volt} \text{ / } \SI{380}{\volt}$}
+(-3.6,0.7)node{$\SI{50}{\hertz}$}
+
+(2.5,-0.5)node{$\underline{Z}_1 = 38 \phase{20^{\circ}} \si{\ohm}$}
+
+(2.5,-2.5)node{$\underline{Z}_2 = 22 \phase{-30^{\circ}} \si{\ohm}$}
+;
+\end{circuitikz}
+\legend{2 charges triphasées}
+\end{center}
+\end{figure}
+\shorthandon{;:!?}
+
+
+\newpage
+
+\shorthandoff{;:!?}
+\begin{figure}[h!]
+\begin{center}
+\begin{circuitikz}[european,scale=0.7, every node/.style={scale=0.9}]
+
+  %% charge a étoile
+  \coordinate (Ca);
+  \foreach \anch/\ang in {$a_1$/0,$a_2$/120,$a_3$/240}
+  {%
+    \draw (Ca) to[R, l=$\underline{Z}_a$,*-] +({-\ang+90}:3)
+    coordinate (Z\anch)
+    %node[anchor={\ang}]{(Z\anch)}
+    ;
+  }
+
+
+%% charge b triangle 
+\begin{scope}[xshift=7.5cm]
+  \foreach \anch/\ang in {$b_1$/0,$b_2$/-120,$b_3$/-240}
+  {%
+    \draw ({\ang-30}:3) to[R,l=$\underline{Z}_b$,*-*] ({\ang+90}:3)
+    coordinate (Z\anch)
+    %node[anchor={\ang}]{(Z\anch)}
+   ;
+  }
+ \end{scope} 
+ 
+   
+  %% charge c étoile
+   
+  \coordinate (CYc)  at ($(Ca)+(15,0)$);
+  \foreach \anch/\ang in {$c_1$/0,$c_3$/-120,$c_2$/-240}
+  {%
+    \draw (CYc) to[R,l=$\underline{Z}_c$,*-] +({-\ang+90}:3)
+     coordinate (Z\anch)
+     %node[anchor={\ang}]{(Z\anch)}
+     ;
+  }
+  
+    
+  
+   %% Connections
+  \draw (Z$a_1$) -- +(0,1) to[short] ($(Z$b_1$)+(0,1)$) -- (Z$b_1$);
+  \draw ($(Z$b_1$)+(0,1)$)-| (Z$c_1$);  
+  \draw ($(Z$b_1$)+(0,1)$)node[circ]{};
+  
+   \draw (Z$a_2$)-- +(0,-1) -| (Z$b_2$);
+    \draw (Z$b_2$)-- +(0,-1) -| (Z$c_2$);
+  \draw ($(Z$b_2$)+(0,-1)$)node[circ]{};
+  
+  \draw (Z$a_3$) -- +(0,-2) -| ($(Z$b_3$)+(0,-2)$) -- (Z$b_3$);
+   \draw (Z$b_3$) -- +(0,-2) -| ($(Z$c_3$)+(0,-2)$) -- (Z$c_3$);
+   \draw ($(Z$b_3$)+(0,-2)$)node[circ]{};
+   
+   \draw (Z$a_1$)--+(0,1)
+   (-5,4)to[short,i=$\underline{I}_{1t}$](0,4)
+   (-5,4)node[left]{1};
+   \draw ($(Z$a_1$)+(0,1)$)node[circ]{};
+   \draw (Z$a_2$)--+(0,-1)--+(-7.7,-1)node[left]{2};
+    \draw ($(Z$a_2$)+(0,-1)$)node[circ]{};
+   \draw (Z$a_3$)--+(0,-2)--+(-2.5,-2)node[left]{3};
+    \draw ($(Z$a_3$)+(0,-2)$)node[circ]{};
+    
+    %%nom des charges
+    \draw
+    (0,-3)node{charge $a$}
+    (7.5,-3)node{charge $b$}
+    (15,-3)node{charge $c$}
+    ;
+
+\end{circuitikz}
+\legend{3 charges triphasées}
+\end{center}
+\end{figure}
+\shorthandon{;:!?}
+
+
+\newpage
+
+
+\shorthandoff{;:!?}
+\begin{figure}[h!]
+\begin{center}
+\begin{circuitikz}[european,scale=1.2, every node/.style={scale=1.1}]
+ \draw
+%%ligne
+ (0,5)to[R](5,5)to[short](7,5)to[R](10,5)
+ (0,5)node[left]{3}
+ (2.5,5.3)node[above]{$ 0,2 + j 0,2$}
+ 
+ (0,3)to[R](5,3)to[short](7,3)to[R](10,3)
+ (0,3)node[left]{2}
+ (2.5,3.3)node[above]{$ 0,2 + j 0,2$}
+ 
+ (0,1)to[R](5,1)to[short](7,1)to[R](10,1)
+ (0,1)node[left]{1}
+ (2.5,1.3)node[above]{$ 0,2 + j 0,2$}
+ 
+%%récepteur
+%petites lignes verticales
+ 
+(7,5)to[short,*-](7,5.4)
+(7,3)to[short,*-](7,3.4)
+(7,1)to[short,*-](7,1.4)
+(10,5)--(10,4.6)
+(10,3)--(10,2.6)
+
+%connexion 3-1
+(7,5.4)--(10.5,5.4)|-(10,1)
+
+%connexion 3-2
+(7,3.4)--(10,4.6)
+(7,1.4)--(10,2.6)
+(8.5,4.5)node{$\underline{Z}$}
+(8.5,2.5)node{$\underline{Z}$}
+(8.5,0.5)node{$\underline{Z}$}
+;
+
+%flèche d.d.p. imédance
+ \draw[latex-](1.5,5.9)--(3.3,5.9);
+\draw(2.5,6.2)node{$\underline{E}_l$};
+ ;
+
+%flèche tension composée sortie
+ \draw[latex-](6,4.8)--(6,1.2);
+ 
+ \draw(5.5,4)node{${\underline{U}_{31}}_s$};
+ 
+%flèche tension composée entrée
+ \draw[latex-](0.6,4.8)--(0.6,1.2);
+ 
+ \draw(1.1,4)node{${\underline{U}_{31}}_e$};
+ 
+%rectangle recepteur
+ \draw (6.4,0)rectangle(11,6)
+ (8.5,-0.4)node{récepteur}
+ ;
+ \draw (2.5,-0.4)node{ligne} ;
+ 
+\end{circuitikz}
+\legend{récepteur triphasé avec ligne imparfaite}
+\end{center}
+\end{figure}
+\shorthandon{;:!?}
+
+
+\newpage
+
+
+\section{Automatique}
+
+\subsection{Logigramme}
+
+
+
+\shorthandoff{;:!?}
+\begin{figure}[h!]
+\begin{center}
+    \begin{circuitikz}[scale=0.9, every node/.style={scale=0.9}]
+    
+     \draw
+        (0,2) node[european and port] (and1) {}
+        (0,0) node[european nand port] (and2) {}
+        (2,1) node[european or port] (or) {}
+        (and1.out) -| (or.in 1)
+        (and2.out) -| (or.in 2)
+        %(or.out) -- ++(right:0mm) |- ++(up:18mm) -| (and1.in 1);
+        (or.out) -- ++(right:2mm)node[circ] {} |- ++(up:20mm) -| (and1.in 1)
+        (and1.in 2)-- ++ (left:5mm)node[left]{A}
+        (and2.in 1)-- ++ (left:5mm)node[left]{B}
+        (and2.in 2)-- ++ (left:5mm)node[left]{C}
+        (or.out)--++(right:8mm)node[right]{S};
+           \end{circuitikz}
+\legend{logigramme}
+\end{center}
+\end{figure}
+\shorthandon{;:!?}
+
+
+
+
+
+
+
+
+
+\newpage
+
+\subsection{Tableaux de Karnaugh}
+
+
+\begin{figure}[h!]
+\begin{center}
+\begin{tikzpicture}[thick]
+\karnaughmap[omitidx]{1100 0101}
+\end{tikzpicture}
+\legend{Karnaugh 1}
+\end{center}
+\end{figure}
+
+\vspace{2cm}
+
+
+$f(x_1,x_2,x_3,x_4): x_1,x_3,x_2,x_4$
+
+\begin{figure}[h!]
+\begin{center}
+\begin{tikzpicture}
+\karnaughmap{4}{}
+{}{0010111101DDDDDD}
+{
+  \put(3,2){\color{red}\oval(1.9,3.9)}
+  \put(4,2){\color{blue}\oval(1.9,1.9)[l]}
+  \put(0,2){\color{blue}\oval(1.9,1.9)[r]}
+  \put(2,1){\color{green}\oval(1.9,1.9)}
+}
+\end{tikzpicture}
+\legend{Karnaugh 2}
+\end{center}
+\end{figure}
+
+
+\vspace{2cm}
+
+\begin{figure}[h!]
+\begin{center}
+\begin{tikzpicture}[thick]
+\karnaughmapcolorfield[outline]{2}{01}{teal!50}%
+\karnaughmapcolorfield[outline,ultra thick]{2}{3}{violet!50}%
+\karnaughmap{4}
+\end{tikzpicture}
+\legend{Karnaugh 3}
+\end{center}
+\end{figure}
+
+
+\newpage
+
+\begin{figure}[h!]
+\begin{center}
+\begin{tikzpicture}[thick]
+\karnaughmap[omitzeros=false,variables=abcde]{1111 0001 0010 0011 0100 0101 0110 1111}
+\end{tikzpicture}
+\legend{Karnaugh 32 cases}
+\end{center}
+\end{figure}
+
+\newpage
+
+\input kvmacros                %pour dessiner des tableaux de Karnaugh
+
+    \begin{karnaugh-map}
+        \manualterms{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
+        \implicant{0}{2}
+        \implicant{5}{15}
+        \implicantedge{1}{3}{9}{11}
+        \implicantcorner
+        \implicantedge{4}{12}{6}{14}
+    \end{karnaugh-map}
+    
+    
+   \kvunitlength=6mm
+\kvnoindex
+\karnaughmap{8}{$q_2^4:$}{{$a$}{$b$}{$c$}{$d$}{$e$}%
+{$f$}{$g$}{$h$}}{%
+0011001111001100%
+0011001111001100%
+0011001111001100%
+0011001111001100%
+0011001111001100%
+0011001111001100%
+0011001111001100%
+0011001111001100%
+0011001111001100%
+0011001111001100%
+0011001111001100%
+0011001111001100%
+0011001111001100%
+0011001111001100%
+0011001111001100%
+0011001111001100%
+}{}
+
+
+
+\newpage
+
+\subsection{Grafcet}
+
+\`A utiliser avec le package \og grafcet \fg{} de Robert Papanicola.
+
+\shorthandoff{:!}
+\begin{figure}[!hbtp]
+\centering
+\begin{tikzpicture}[scale=2, every node/.style={scale=2}]
+\EtapeInit[0,0]{100}
+\Transition[VX100]{100}
+\Etape[VT100]{110}
+\Transition{110}
+\Etape[VT110]{120}
+\Transition[VX120]{120}
+\LienRetour{T120}{X100}
+\Recept{T100}{$dcy            \cdot            a_0$}
+\ActionX{X110}{Sortir            A}
+\Recept{T110}{condition}
+\ActionX{X120}{Rentrer            }
+\Recept{T120}{$a_0$}
+\end{tikzpicture}
+\legend{grafcet 1}
+\end{figure}
+\shorthandon{:!}
+
+\newpage
+
+\vspace{1cm}
+
+
+\shorthandoff{:!}
+\begin{figure}[!hbtp]
+\centering
+\begin{tikzpicture}
+\EtapeInit[5,0]{100}
+\Transition{100}
+\Etape{110}
+\Transition{110}
+\Etape{120}
+\Transition{120}
+\LienRetour{T120}{X100}
+\Recept{T100}{$dcy \cdot a_0$}
+\ActionX{X110}{Sortir A}
+\Recept{T110}{condition}
+\ActionX{X120}{Rentrer }
+\Recept{T120}{$a_0$}
+\end{tikzpicture}
+\legend{grafcet 2}
+\end{figure}
+\shorthandon{:!}
+
+
+
+\vspace{1cm}
+
+
+\shorthandoff{:!}
+\begin{figure}[!hbtp]
+\centering
+\begin{tikzpicture}
+\EtapeInit[0,0]{100}
+\Transition{100}
+\Etape{110}
+\Transition{110}
+\Etape{120}
+\Transition{120}
+\LienRetour{T120}{X100}
+\Recept{T100}{$dcy \cdot a_0$}
+\ActionX{X110}{Sortir A}
+\Recept{T110}{condition}
+\ActionX{X120}{Rentrer }
+\Recept{T120}{$a_0$}
+
+\EtapeInit[5,0]{100}
+\Transition{100}
+\Etape{110}
+\Transition{110}
+\Etape{120}
+\Transition{120}
+\LienRetour{T120}{X100}
+\Recept{T100}{$dcy \cdot a_0$}
+\ActionX{X110}{Sortir A}
+\Recept{T110}{condition}
+\ActionX{X120}{Rentrer }
+\Recept{T120}{$a_0$}
+
+\EtapeInit[10,0]{100}
+\Transition{100}
+\Etape{110}
+\Transition{110}
+\Etape{120}
+\Transition{120}
+\LienRetour{T120}{X100}
+\Recept{T100}{$dcy \cdot a_0$}
+\ActionX{X110}{Sortir A}
+\Recept{T110}{condition}
+\ActionX{X120}{Rentrer }
+\Recept{T120}{$a_0$}
+\end{tikzpicture}
+\legend{grafcet 3}
+\end{figure}
+\shorthandon{:!}
+
+
+
+\vspace{1cm}
+
+
+\shorthandoff{:!}
+\begin{figure}[!hbtp]
+\centering
+\begin{tikzpicture}
+\EtapeInit[0,0]{100}
+\Transition{100}
+\Etape{110}
+\Transition{110}
+\Etape{120}
+\Transition{120}
+\LienRetour{T120}{X100}
+\Recept{T100}{$dcy \cdot a_0$}
+\ActionX{X110}{Sortir A}
+\Recept{T110}{condition}
+\ActionX{X120}{Rentrer }
+\Recept{T120}{$a_0$}
+
+\EtapeInit[5,0]{100}
+\Transition{100}
+\Etape{110}
+\Transition{110}
+\Etape{120}
+\Transition{120}
+\LienRetour{T120}{X100}
+\Recept{T100}{$dcy \cdot a_0$}
+\ActionX{X110}{Sortir A}
+\Recept{T110}{condition}
+\ActionX{X120}{Rentrer }
+\Recept{T120}{$a_0$}
+
+\EtapeInit[5,6]{100}
+\Transition{100}
+\Etape{110}
+\Transition{110}
+\Etape{120}
+\Transition{120}
+\LienRetour{T120}{X100}
+\Recept{T100}{$dcy \cdot a_0$}
+\ActionX{X110}{Sortir A}
+\Recept{T110}{condition}
+\ActionX{X120}{Rentrer }
+\Recept{T120}{$a_0$}
+\end{tikzpicture}
+\legend{grafcet 4}
+%\label{}
+\end{figure}
+\shorthandon{:!}
+
+\newpage
+
+
+\begin{figure}[!hbtp]
+\centering
+\begin{tikzpicture}[scale=1, every node/.style={scale=1}]
+
+\EtapeInit[0,0]{1}
+\Transition{1}
+\Etape{2}
+\Transition{2}
+\LienRetour{T2}{X1}
+
+\Recept{T1}{$dcy$}
+\ActionX{X2}{M}
+\ActionCond{X2}{$a$}
+\Action{X2}{T=\SI{10}{\second} }
+\Recept{T2}{$t/X2/10s$}
+
+
+\end{tikzpicture}
+\legend{grafcet avec condition sur l'action et temporisation}
+%\label{}
+\end{figure}
+
+
+\newpage
+
+
+\begin{figure}[!hbtp]
+\centering
+\begin{tikzpicture}[scale=0.7, every node/.style={scale=0.7}]
+
+\EtapeInit[0,0]{10}
+\Transition{10}
+\Etape{11}
+\Transition{11}
+\Etape{12}
+\Transition{12}
+\LienRetour{T12}{X10}
+
+\Recept{T10}{$dcy$}
+\ActionX{X11}{M}
+\Recept{T11}{$b \cdot c$}
+\Recept{T12}{b}
+
+\EtapeInit[5,0]{20}
+\Transition{20}
+\Etape{21}
+\Transition{21}
+\Etape{22}
+\Transition{22}
+\LienRetour{T22}{X20}
+
+\Recept{T20}{$X11$}
+\ActionX{X21}{N, T=\SI{5}{\second}}
+\Recept{T21}{t/X21/\SI{5}{\second}}
+\Recept{T22}{X32}
+
+\EtapeInit[10.5,0]{30}
+\Transition{30}
+\Etape{31}
+\Transition{31}
+\Etape{32}
+\Transition{32}
+\LienRetour{T32}{X30}
+
+\Recept{T30}{X22}
+\ActionX{X31}{P}
+\Recept{T31}{$d \cdot e$}
+\Recept{T32}{=1}
+
+
+
+\end{tikzpicture}
+\legend{3 petits grafcet}
+%\label{}
+\end{figure}
+
+
+\newpage
+
+\subsection{Ladder}
+
+Je n'ai pas trouvé de package spécifique permettant de réaliser du langage ladder.
+
+
+\shorthandoff{:!} 
+\begin{figure}[!hbtp]
+\begin{center}
+  \begin{verbatim}
+    | AUTO_MODE      AUTO_CMD            CMD    |
+    +---| |-------------| |------+-------( )----+
+    |                            |              |
+    | AUTO_MODE      MAN_CMD     |              |
+    +---|/|-------------| |------+              |
+    |                                           |
+    |                            |       n      |   
+    |                             ------(/)---- |   
+    |                            |              |   
+    |                            |              |   
+  \end{verbatim}
+\legend{ladder avec verbatim}
+%\label{}
+\end{center}
+\end{figure}
+\shorthandon{:!}
+
+
+\vspace{1cm}
+
+
+\shorthandoff{:!}
+\begin{figure}[!hbtp]
+\centering
+\begin{circuitikz}[scale=1, every node/.style={scale=1}]
+\draw
+%traits verticaux
+(0,0)--(0,4)
+(10,0)--(10,4)
+
+%première ligne du bas
+%trait de la barre verticale gauche au contact
+(0,1)--(1,1)
+
+%contact
+(1,0.6)--(1,1.4)
+(1.4,0.6)--(1.4,1.4)
+
+%trait du contact à la bobine
+(1.4,1)--(8,1)
+
+%bobine
+(8,1)arc(0:50:-0.6)
+(8,1)arc(0:-50:-0.6)
+(9,1)arc(0:50:0.6)
+(9,1)arc(0:-50:0.6)
+
+%trait de la bobine à la barre verticale droite
+(9,1)--(10,1)
+
+%deuxième ligne à partir du bas
+%trait de la barre verticale gauche au contact
+(0,3)--(1,3)
+
+%contact
+(1,2.6)--(1,3.4)
+(1.1,2.7)--(1.3,3.3)
+(1.4,2.6)--(1.4,3.4)
+
+%trait du contact à la bobine
+(1.4,3)--(8,3)
+
+%bobine
+(8,3)arc(0:50:-0.6)
+(8,3)arc(0:-50:-0.6)
+(9,3)arc(0:50:0.6)
+(9,3)arc(0:-50:0.6)
+(8.4,2.6)--(8.6,3.4)
+(8.5,3.8)node{bobine}
+
+%trait de la bobine à la barre verticale droite
+(9,3)--(10,3)
+;
+\end{circuitikz}
+\legend{Ladder avec Tikz}
+%\label{}
+\end{figure}
+\shorthandon{:!}
+
+
+\newpage
+
+
+
+%%%%%%%%%%%%%%%%%%%%
+%ENSCR 20170128
+%ALI amplificateur (ampli-op)
+\begin{tikzpicture}
+
+  \draw (0,-1.5) rectangle (2,0.5);
+
+  %legende
+  \draw (0.3,0) node {$+$};
+  \draw (0.3,-1) node {$-$};
+  \draw (1.7,0) node {$\infty$};
+  %un triangle
+  \draw (1.3,-0.1) -- ++(30:0.2) -- ++(150:0.2) --cycle ;
+
+\end{tikzpicture}
+
+\newpage
+
+
+%%%%%%%%%%%%%%%%%%%%
+%ENSCR 20170303
+%bobine, coil
+\begin{tikzpicture}
+
+ %3 spires definies par des courbes de bezier et une boucle for
+ \foreach \r in {0,...,2}
+ {\draw[scale=1/3,shift={(0,-\r)}]
+	(0,0) .. controls ++(2,0) and ++(1,0) ..
+	++(0,-1.5) .. controls ++(-1,0) and ++(-0.5,0) ..
+	++(0,0.5);
+ }
+ 
+ %une demi-spire pour finir
+ \draw[scale=1/3,shift={(0,-3)}] (0,0) .. controls ++(2,0) and ++(1,0) .. ++(0,-1.5);
+
+\end{tikzpicture}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%ENSCR 20170303
+%bobine, dans un circuit
+%on reprend la bobine précédente et on l'inclut dans un circuit
+\begin{tikzpicture}
+
+%circuit electrique: un rectangle
+\draw (0,0) rectangle (4,2);
+
+%source de tension
+\draw (0,1) circle(0.5cm);
+
+%resistance, remplie de blanc pour masquer le circuit
+\draw[fill=white] (3.7,1.5) rectangle (4.3,0.5);
+
+%la bobine
+%le point de depart de la bobine est situe en (0,0)
+%il faut la decaler pour la placer au bon endroit via le scope et le shift
+%elle est originalement verticale: il faut la tourner de 90 degres
+\begin{scope}[shift={(1.5,2)},rotate=90]
+{%un rectangle blanc sous la bobine pour masquer le circuit
+ \draw[white,fill=white] (-0.2,0) rectangle (0.4,-1.5);
+ %3 spires definies par des courbes de bezier, via une boucle for
+ \foreach \r in {0,...,2}
+ {
+  \draw[scale=1/3,shift={(0,-\r)}]
+	(0,0) .. controls ++(2,0) and ++(1,0) ..
+	++(0,-1.5) .. controls ++(-1,0) and ++(-0.5,0) ..
+	++(0,0.5);
+ }
+ %une demi-spire pour finir
+ \draw[scale=1/3,shift={(0,-3)}] (0,0) .. controls ++(2,0) and ++(1,0) .. ++(0,-1.5);
+}
+\end{scope}
+
+%fleches de tension et intensite
+\draw[->] (-0.6,0.1) -- (-0.6,1.9) node [midway,left] {$e_g$};
+
+\draw[->] (3.2,2.6) -- (1.2,2.6) node [midway,above] {$L\,\displaystyle\frac{\mathrm{d}i}{\mathrm{d}t}$};
+
+\draw[->] (4.6,0.1) -- (4.6,1.9) node [midway,right] {$R\,i$};
+
+\draw[thick,->] (0.4,2) -- +(0.01,0) node [below] {$i$};
+
+\end{tikzpicture}
+
+
+
+
+\end{document}
+
+
+\shorthandoff{;:!?}
+\shorthandon{;:!?}
+
+
+
+\vspace{1cm}
+
+\`A utiliser avec \begin{verbatim}
+\usetikzlibrary{positioning}
+\end{verbatim}
+
+\begin{center}
+\begin{tikzpicture}
+ \draw (0,0) node (A){};
+    \coordinate  (x) [right=of A]; 
+    \coordinate[right=of A]  (y) ;
+    \draw (x) -- ++(1,1);
+    \draw[red] (y) -- ++(1,1);
+    \draw (x) node[circ]{};
+     \draw (y) node[circ]{};
+
+\end{tikzpicture}
+\end{center}
+

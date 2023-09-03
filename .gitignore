@@ -123,6 +123,21 @@ venv.bak/
 # mypy
 .mypy_cache/
 .dmypy.json
+
+# LATEX !!
+## Core latex/pdflatex auxiliary files:
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
 dmypy.json
 
 # Pyre type checker
