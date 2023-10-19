@@ -13,7 +13,6 @@ Created on 26/Apr/2023
 
 import numpy as np
 from matplotlib import pyplot as plt
-from IPython.display import *
 
 #%% Définition du système
 import control as ct
@@ -23,7 +22,7 @@ den = np.array([1, -2, 1])
 
 tf_sys = ct.tf(num, den)
 
-display(tf_sys)
+print(tf_sys)
 
 #%% Diagramme de Bode
 
