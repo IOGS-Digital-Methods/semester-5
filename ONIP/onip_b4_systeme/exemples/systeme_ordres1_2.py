@@ -1,8 +1,14 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Spyder Editor
+Module Outils Numériques / Semestre 5 / Institut d'Optique
 
-This is a temporary script file.
+Approche Système / Systèmes du 1er et 2nd ordre
+
+Created on 19/Oct/2023
+
+@author: LEnsE / IOGS / Palaiseau
+@author: Julien Villemejane
 """
 
 import control
