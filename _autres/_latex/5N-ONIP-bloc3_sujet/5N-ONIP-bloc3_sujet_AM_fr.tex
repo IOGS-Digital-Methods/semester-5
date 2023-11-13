@@ -265,7 +265,7 @@ En résolvant ce problème, les étudiant$\cdot$e$\cdot$s seront capables de  :
 \hypertarget{stepbystep}{\heading{Etapes}{6pt}}
 
 \begin{description}
-	\item[Etape 1] Lecture d'un fichier de points 
+	\item[Etape 1] \textbf{Lecture d'un fichier de points}
 	
 	\begin{itemize}
 		\item \textit{Fichier : B3\_data\_01.csv} provenant d'un enregistrement sur un oscilloscope numérique.
@@ -274,15 +274,20 @@ En résolvant ce problème, les étudiant$\cdot$e$\cdot$s seront capables de  :
 		\item Afficher les signaux contenus dans le fichier
 	\end{itemize}
 	
-	\item[Etape 2] Calcul et affichage de la transformée de Fourier
+
+\qquad
+	
+	\item[Etape 2] \textbf{Calcul et affichage de la transformée de Fourier}
 	\begin{itemize}
 		\item Générer un signal périodique sinusoïdal
 		\item Calculer la FFT d'un signal simple
 		\item Afficher la FFT de ce signal
 		\item Générer des signaux plus complexes et valider l'affichage de la FFT
 	\end{itemize}
+	
+\qquad
 
-	\item[Etape 3] Simulation du phénomène de modulation/démodulation AM
+	\item[Etape 3] \textbf{Simulation du phénomène de modulation/démodulation AM}
 	\begin{itemize}
 		\item Générer des signaux de tests
 		\item Afficher la FFT de ces signaux
@@ -290,7 +295,9 @@ En résolvant ce problème, les étudiant$\cdot$e$\cdot$s seront capables de  :
 		\item Générer un fichier de points
 	\end{itemize}
 
-	\item[Etape 4] Démodulation d'un signal quelconque 
+\qquad
+
+	\item[Etape 4] \textbf{Démodulation d'un signal quelconque} 
 	\begin{itemize}
 		\item \textit{Fichier : B3\_data\_02.txt} provenant d'une génération d'un fichier en base 64 (fichier sonore initial en 24 kHz et 16 bits).
 		\item Lire un fichier en base 64
@@ -299,10 +306,96 @@ En résolvant ce problème, les étudiant$\cdot$e$\cdot$s seront capables de  :
 		\item Jouer le son décodé	
 	\end{itemize}	
 	
+\qquad
 	
-	\item[Bonus] Génération de fichiers modulés
+	\item[Bonus 1] \textbf{Démodulation multi-porteuse}
+	\begin{itemize}
+		\item \textit{Fichier : B3\_data\_03.txt} provenant d'une génération d'un fichier en base 64 (fichier sonore initial en 160 kHz et 16 bits). Multi-porteuses sinusoïdales.
+	\end{itemize}
+	
+	\item[Bonus 2] \textbf{Génération de fichiers modulés}
 	
 \end{description}
+
+\newpage
+
+\hypertarget{stepbystep}{\heading{Critères d'évaluation}{6pt}}
+
+\begin{itemize}
+	\item \textbf{METHODES NUMERIQUE}
+	\begin{itemize}
+		\item \textbf{Ecriture Matricielle / Vectorielle}
+		\begin{itemize}
+			\item utilisation des méthodes liées aux vecteurs/matrices (Numpy)
+			\item aucune boucle \textbf{for} inutile
+		\end{itemize}		 
+		\item \textbf{Organisation en actions élémentaires}
+		\begin{itemize}
+			\item les étapes sont découpées en fonctionnalité plus simple à tester
+		\end{itemize}
+		\item \textbf{Description des tests de validation}
+		\begin{itemize}
+			\item chaque fonction a été testée
+			\item chaque étape a été validée
+		\end{itemize}
+		\item \textbf{Organisation des informations à traiter}
+		\begin{itemize}
+			\item les données sont rangées dans des objets bien identifiés
+		\end{itemize}
+	\end{itemize}
+
+
+	\item \textbf{PROGRAMMATION}
+	\begin{itemize}
+		\item \textbf{Ecriture globale du code et commentaires (PEP 8)}
+		\begin{itemize}
+			\item variables et fonctions respectant les conventions d'écriture standard
+			\item commentaires utiles
+		\end{itemize}		 
+		\item \textbf{Utilisation, écriture de fonctions}
+		\begin{itemize}
+			\item paramètres et retours pertinents des fonctions
+		\end{itemize}
+		\item \textbf{Documentation des fonctions (PEP257)}
+		\begin{itemize}
+			\item paramètres et retours des fonctions sont documentés
+		\end{itemize}
+	\end{itemize}
+	
+
+	\item \textbf{INGENIEUR.E PHYSIQUE}
+	\begin{itemize}
+		\item \textbf{Graphiques pertinents et légendés}
+		\begin{itemize}
+			\item graphiques scientifiques (axes, titre...)
+			\item axes des graphiques légendés (passage temps/fréquence)
+		\end{itemize}		 
+		\item \textbf{Organisation en actions élémentaires}
+		\begin{itemize}
+			\item les étapes sont découpées en fonctionnalité plus simple à tester
+		\end{itemize}
+		\item \textbf{Génération de données pertinentes de tests}
+		\begin{itemize}
+			\item données de test (amplitudes, fréquences...) pertinentes
+		\end{itemize}
+		\item \textbf{Analyse des données et validation modèle}
+		\begin{itemize}
+			\item comparaison avec la théorie
+			\item analyse pertinente des signaux (temporels et fréquentiels)
+		\end{itemize}
+	\end{itemize}
+	
+	\item \textbf{AVANCEMENT}
+	\begin{itemize}
+		\item Etapes 1 et 2 : D
+		\item Etapes 1, 2 et 3 : C
+		\item Etapes 1, 2, 3 et 4 : B
+		\item Bonus 1 : A
+		\item Bonus 1 et 2 : A+
+	\end{itemize}
+\end{itemize}
+
+	
 
 %----------------------------------------------------------------------------------------
 
