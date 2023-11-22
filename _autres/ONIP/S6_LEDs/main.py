@@ -24,21 +24,49 @@ class working_plan:
         self.x_len = np.linspace(0, self.length, self.nb_x_len)
         self.nb_y_width = int(self.width / self.step + 1)
         self.y_width = np.linspace(0, self.width, self.nb_y_width)
+        self.sources_list = []
 
     def __str__(self):
         return f'Plan (L = {self.longueur} / l = {self.largeur}'
 
     def get_mesh(self):
-        self.mesh_x, self.mesh_y = np.meshgrid(self.x_len, self.y_width)
+        self.mesh_y, self.mesh_x = np.meshgrid(self.y_width, self.x_len)
         return self.mesh_x, self.mesh_y
 
-    def calculate_source_cart(self, source=None):
+    def add_source(self, source):
+        self.sources_list.append(source)
+
+    def print_sources_list(self):
+        for k in range(len(self.sources_list)):
+            print(f'{k+1}: {self.sources_list[k]}')
+
+    def calculate_source_cart(self, source):
         x_mesh, y_mesh = self.get_mesh()
-        zs = np.sqrt(x_mesh ** 2 + y_mesh ** 2)
-        return x_mesh, y_mesh, zs
+        zout = np.sqrt(x_mesh ** 2 + y_mesh ** 2)
+
+        dist_v, angle_v = self.get_angle_distance(x_mesh, y_mesh, 0, source)
+        zout = source.led_illumination(dist_v, angle_v)
+        return x_mesh, y_mesh, zout
 
     def get_x_y_vector(self):
         return self.x_len, self.y_width
+
+    def get_angle_distance(self, x, y, z, source):
+        x_s, y_s, z_s = source.get_coords()
+        radius = (x_s - x)**2 + (y_s - y)**2 + (z_s - z)**2
+        angle = 0
+        angle = np.arctan(np.sqrt((x_s-x)**2 + (y_s-y)**2)/(z_s-z))
+        return radius, angle
+
+    def display_global_cart(self):
+        zz_f = np.zeros((len(self.x_len), len(self.y_width)))
+        for k in range(len(self.sources_list)):
+            xx, yy, zz = wp.calculate_source_cart(source=self.sources_list[k])
+            zz_f += zz
+        plt.figure()
+        h = plt.pcolormesh(yy, xx, zz_f)
+        plt.colorbar()
+        plt.show()
 
 class LED_source:
 
@@ -54,7 +82,8 @@ class LED_source:
         :param zeta:   float, angle of emission
         '''
         self.I0 = I0
-        self.delta = delta*np.pi / 180
+        self.delta_deg = delta
+        self.delta = self.delta_deg*np.pi / 180
 
         self.x, self.y, self.z, self.theta, self.zeta = x, y, z, theta, zeta
         # definition of ux, uy, uz = unitary vector of the main source direction
@@ -63,7 +92,7 @@ class LED_source:
         self.uz = -(1-(self.ux**2+self.uy**2))**(1/2)
 
     def __str__(self):
-        return f'LED (I0={self.I0} / delta={self.delta})'
+        return f'LED (I0={self.I0} / delta={self.delta_deg})'
 
     def led_intensity(self, angle):
         """
@@ -87,30 +116,38 @@ class LED_source:
         angle_new = angle * np.pi / 180
         return self.led_intensity(angle) * np.cos(angle_new) / (distance**2)
 
+    def get_coords(self):
+        return self.x, self.y, self.z
+
+    def get_params(self):
+        return self.I0, self.zeta, self.theta
+
+    def display_radiation_diagram(self):
+        alpha = np.linspace(0, np.pi, 101)
+        led_intens = self.led_intensity(alpha)
+        plt.figure()
+        plt.plot(alpha*180/np.pi, led_intens)
+        plt.figure()
+        plt.polar(alpha, led_intens)
+        plt.show()
+
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    alpha = np.linspace(0, np.pi, 101)
-    led1 = LED_source(1, 30)
-    print(led1)
-    led_intens = led1.led_intensity(alpha)
-    led_illumi = led1.led_illumination(0.5, alpha)
-    plt.figure()
-    plt.plot(alpha*180/np.pi, led_intens)
-    plt.plot(alpha*180/np.pi, led_illumi)
-    plt.figure()
-    plt.polar(alpha, led_intens)
-    plt.show()
+    led1 = LED_source(1, 30, x=0.5, y=1)
+    led2 = LED_source(2, 20, x=0.2, y=0.2)
+    led3 = LED_source(5, 90, x=0.8, y=1.8)
 
-    wp = working_plan(2, 1, 0.01)
+    led1.display_radiation_diagram()
+
+    wp = working_plan(2, 1, 0.001)
+
+    wp.add_source(led1)
+    wp.add_source(led2)
+    wp.add_source(led3)
+    wp.print_sources_list()
 
     grid_x, grid_y = wp.get_mesh()
     print(grid_x.shape)
 
-    # Test graph
-
-    xx, yy, zz = wp.calculate_source_cart(source=led1)
-    plt.figure()
-    h = plt.contourf(xx, yy, zz)
-    plt.colorbar()
-    plt.show()
+    wp.display_global_cart()
