@@ -5,7 +5,7 @@ Module Outils Numériques / Semestre 5 / Institut d'Optique
 
 WAV File conversion to Base64
 
-Created on 26/oct/2023
+Created on 28/nov/2023
 
 @author: LEnsE / IOGS / Palaiseau
 @author: Julien Villemejane
