@@ -271,28 +271,29 @@ En résolvant ce problème, les étudiant$\cdot$e$\cdot$s seront capables de  :
 		\item \textit{Fichier : B3\_data\_01.csv} provenant d'un enregistrement sur un oscilloscope numérique.
 		\item Lire un fichier texte / tableur
 		\item Récupérer les données dans un vecteur
-		\item Afficher les signaux contenus dans le fichier
+		\item Afficher le signal contenu dans le fichier
 	\end{itemize}
 	
-
 \qquad
-	
-	\item[Etape 2] \textbf{Calcul et affichage de la transformée de Fourier}
+
+	\item[Etape 2] \textbf{Simulation du phénomène de modulation/démodulation AM}
 	\begin{itemize}
 		\item Générer un signal périodique sinusoïdal
-		\item Calculer la FFT d'un signal simple
-		\item Afficher la FFT de ce signal
-		\item Générer des signaux plus complexes et valider l'affichage de la FFT
+		\item Générer plusieurs signaux de tests (sinusoïdaux)
+		\item Afficher la FFT de ces signaux
+		\item Générer un signal modulé en amplitude et afficher la FFT de ces signaux
+		\item Démoduler le signal et afficher la FFT
 	\end{itemize}
 	
 \qquad
-
-	\item[Etape 3] \textbf{Simulation du phénomène de modulation/démodulation AM}
+	
+	\item[Etape 3] \textbf{Démodulation du signal}
 	\begin{itemize}
-		\item Générer des signaux de tests
-		\item Afficher la FFT de ces signaux
-		\item Démoduler le signal et afficher la FFT
-		\item Générer un fichier de points
+		\item Afficher la FFT du signal contenu dans le fichier de l'étape 1
+		\item Identifier la fréquence de la porteuse
+		\item Générer un signal sinusoïdal à cette fréquence et multiplier le signal initial avec cette porteuse
+		\item Afficher la FFT de ce nouveau signal 
+		\item Déterminer une méthode pour démoduler l'information contenue dans le signal d'origine	
 	\end{itemize}
 
 \qquad
@@ -300,9 +301,11 @@ En résolvant ce problème, les étudiant$\cdot$e$\cdot$s seront capables de  :
 	\item[Etape 4] \textbf{Démodulation d'un signal quelconque} 
 	\begin{itemize}
 		\item \textit{Fichier : B3\_data\_02.txt} provenant d'une génération d'un fichier en base 64 (fichier sonore initial en 24 kHz et 16 bits).
-		\item Lire un fichier en base 64
+		\item Lire un fichier et le décoder depuis le format base 64
 		\item Récupérer les données dans un vecteur
 		\item Afficher les signaux contenus dans le fichier
+		\item Afficher la transformée de Fourier du signal et en déduire la fréquence de la porteuse
+		\item Démoduler le signal sonore
 		\item Jouer le son décodé	
 	\end{itemize}	
 	
