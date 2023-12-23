@@ -2,13 +2,18 @@
 
 Ce dépôt regroupe l'ensemble des documents nécessaires au module **Outils Numériques** proposés aux futur.es ingénieur.es de SupOptique, semestre 5.
 
-Developpé par Julien VILLEMEJANE / **[LEnsE](http://lense.institutoptique.fr)** / [Institut d'Optique Graduate School](https://www.institutoptique.fr) / France
+Co-developpé par Sylvie LEBRUN, Xavier DELEN et Julien VILLEMEJANE / **[LEnsE](http://lense.institutoptique.fr)** / [Institut d'Optique Graduate School](https://www.institutoptique.fr) / France
 
-*Projet en cours de développement. Mise en place prévue en janvier 2024.*
+Contributions : Victor GONDRET (2023-2024)
+
+
+*Projet en cours de développement. Mis en place en septembre 2023.*
 
 ## Comment utiliser ce dépôt
 
 Vous pouvez télécharger l'ensemble du dépôt à l'aide de l'icône **CODE**, puis **Download ZIP**. Décompressez ensuite l'archive sur votre ordinateur.
+
+*Il est également possible de cloner ce dépôt par les méthodes habituelles de Git (pour les habitué.es).*
 
 Le dépôt regroupe les ressources suivantes :
 - **ONIP** : répertoire contenant les ressources nécessaires au module **Outils Numériques pour l'Ingénieur en Physique**
