@@ -4,11 +4,6 @@ import numpy as np
 from PIL import Image 
 from matplotlib import pyplot as plt
 
-image = Image.open('Profil1.tif')
-plt.figure()
-plt.imshow(image)
-
-
 
 def barycentre(tab2D):
 	width = tab2D.shape[0]
@@ -21,3 +16,9 @@ def barycentre(tab2D):
 	y_bary = np.sum(YY * tab2D) // sum_tab
 	return x_bary, y_bary
 
+
+if __name__ == '__main__':
+	image = Image.open('Profil1.tif')
+	plt.figure()
+	plt.imshow(image)
+	plt.show()
