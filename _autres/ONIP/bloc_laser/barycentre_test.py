@@ -18,7 +18,6 @@ def barycentre(tab2D):
     
 def find_max(tab2D):
     max_ind = np.argmax(tab2D)
-    print(max_ind)
     width = tab2D.shape[0]
     length = tab2D.shape[1]
     ind_x = int(max_ind / length)
@@ -48,12 +47,23 @@ if __name__ == '__main__':
     i_max_x, i_max_y = find_max(image)
     plt.axvline(i_max_y)
     plt.axhline(i_max_x)
+    x_b0, y_b0 = barycentre(image)
+    plt.axvline(x_b0, color='g')
+    plt.axhline(y_b0, color='g')
     
-    # Crop    
-    pas = 200
+    # Crop 
+    pas = 300
+    if(i_max_x < pas):
+        pas = i_max_x
+    if(i_max_y < pas):
+        pas = i_max_y
+    print(f'pas = {pas}')
     image_crop = image[i_max_x-pas:i_max_x+pas, i_max_y-pas:i_max_y+pas]
-        
+    print(f'Shape = {image_crop.shape}')
+    
+    # Find barycenter
     x_b, y_b = barycentre(image_crop)
+    print(f'x_b={x_b} / y_b={y_b}')
 
     plt.figure()
     plt.imshow(np.log(image_crop+0.1))
@@ -61,8 +71,24 @@ if __name__ == '__main__':
     plt.axhline(y_b)
 	
 	# slice
-    slice_image = image_crop[x_b, :]
+    pas_slice_a = 5
+    pas_slice_b = 50
+    plt.axhline(y_b-pas_slice_a, color='g')
+    plt.axhline(y_b+pas_slice_a, color='g')
+    plt.axhline(y_b-pas_slice_b, color='r')
+    plt.axhline(y_b+pas_slice_b, color='r')
+    
+    # slices
+    slice_image_one = image_crop[x_b, :]
+    slice_image_a = image_crop[x_b-pas_slice_a:x_b+pas_slice_a, :]
+    slice_image_a_sum = np.sum(slice_image_a, axis=0)
+    slice_image_b = image_crop[x_b-pas_slice_b:x_b+pas_slice_b, :]
+    slice_image_b_sum = np.sum(slice_image_b, axis=0)
+    
     plt.figure()
-    plt.plot(np.log(slice_image+0.1))
+    plt.plot(slice_image_one, label='1 line')
+    plt.plot(slice_image_a_sum /(2*pas_slice_a+1), label=f'{pas_slice_a*2+1} lines')
+    plt.plot(slice_image_b_sum /(2*pas_slice_b+1), label=f'{pas_slice_b*2+1} lines')
+    plt.legend()
     
     plt.show()
