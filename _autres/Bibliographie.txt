@@ -1,8 +1,0 @@
-Résolution de problèmes physiques 
--*-------------------------------
-A voir : https://fr.wikibooks.org/wiki/Python_pour_le_calcul_scientifique
-Aussi : https://sundnes.github.io/solving_odes_in_python/ode_book.pdf
-
-
-Utilisation de polynome avec Numpy :
-- https://fr.wikibooks.org/wiki/Python_pour_le_calcul_scientifique/Polyn%C3%B4mes
