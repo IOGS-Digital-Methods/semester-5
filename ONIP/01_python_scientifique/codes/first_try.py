@@ -1,3 +1,18 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Digital methods / Semester 5 / Institut d'Optique
+
+First example of using Python for scientific purpose.
+/!\ This code shows bad programming behaviors !
+
+Created on 03/Sept/2024
+
+@author: LEnsE / IOGS / Palaiseau
+@author: Julien Villemejane
+"""
+
+
 import numpy as nu
 
 def fonctionA(a, b, c):
