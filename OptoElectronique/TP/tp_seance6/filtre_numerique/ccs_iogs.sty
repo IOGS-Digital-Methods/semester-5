@@ -1,0 +1,62 @@
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[french]{babel}
+\usepackage{makeidx}
+\usepackage{eurosym}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage[, x11names]{xcolor}
+\usepackage[colorlinks]{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+\usepackage{pgfplots}
+\usepackage{multicol}
+\usepackage{titlesec}
+\textwidth 18 cm
+\textheight 24 cm
+\oddsidemargin -1cm
+\evensidemargin -1cm
+\topmargin -1.5cm
+%\renewcommand{\thesection}{\arabic{section}} 
+\usepackage{picins}
+\usepackage{pifont}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\usepackage[european, straightvoltages]{circuitikz}
+\usetikzlibrary{babel, patterns, patterns.meta, calc}
+
+\definecolor{violet_iogs}{RGB}{10, 50, 80}
+\definecolor{orange_iogs}{RGB}{255, 150, 10}
+
+\newcommand{\sectionbgcolor}[1]{%
+  \colorbox{violet_iogs}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{#1}}}
+\newcommand{\subsectionbgcolor}[1]{%
+  \colorbox{violet_iogs!70}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{#1}}}
+
+% Modifier le format des sections
+\titleformat{\section}
+  {\Large\bfseries\color{white}} % Format du texte de la section
+  {} % Lieu où le numéro de section apparaîtra
+  {0pt} % Espacement entre le numéro et le titre
+  {\sectionbgcolor} % Commande pour appliquer la couleur de fond
+  []
+
+\titleformat{\subsection}
+  {\large\bfseries\color{white}} % Format du texte de la section
+  {} % Lieu où le numéro de section apparaîtra
+  {0pt} % Espacement entre le numéro et le titre
+  {\subsectionbgcolor} % Commande pour appliquer la couleur de fond
+  []
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Real}{\vspace{0.2cm}\textbullet \quad }
+\newcommand{\CR}{\vspace{0.2cm}(CR) \ding{220} \quad }
+
+
+\usepackage{graphicx}
+\usepackage{subcaption} % pour les sous-figures
+\usepackage{caption}    % pour les légendes

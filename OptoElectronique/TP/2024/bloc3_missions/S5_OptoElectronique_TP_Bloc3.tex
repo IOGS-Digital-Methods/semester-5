@@ -1,0 +1,253 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Engineering problems / LaTeX Template
+%		Semester 5
+%		Institut d'Optique Graduate School
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	5N-OptoElec-Bloc1	/ caractérisation statique
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Created by:
+%	Julien VILLEMEJANE - 16/jul/2024
+% Modified by: Fabienne 06/09/24
+%	
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Professional Newsletter Template
+% LaTeX Template
+% Version 1.0 (09/03/14)
+%
+% Created by:
+% Bob Kerstetter (https://www.tug.org/texshowcase/) and extensively modified by:
+% Vel (vel@latextemplates.com)
+% 
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper,11pt]{article} % The default font size is 10pt; 11pt and 12pt are alternatives
+
+\usepackage{opto_elec_villemejane}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+
+% Page de garde
+\begin{titlepage}
+
+\begin{center}
+	\begin{minipage}{2.5cm}
+	\begin{center}
+		\includegraphics[width=8cm]{images/Logo-LEnsE.png}
+	\end{center}
+\end{minipage}\hfill
+\begin{minipage}{10cm}
+	\begin{center}
+	\textbf{Institut d'Optique Graduate School }\\[0.1cm]
+    \textbf{TP d'Opto-Électronique}
+
+
+	\end{center}
+\end{minipage}\hfill
+
+
+\vspace{5cm}
+
+
+{\huge \bfseries \textsc{Opto-Électronique}} \\[0.5cm]
+{\large \bfseries Travaux Pratiques} \\[0.2cm]
+Semestre 5
+
+\vspace{2cm}
+% Title
+\rule{\linewidth}{0.3mm} \\[0.4cm]
+{ \huge \bfseries\color{violet_iogs} Mettre en \oe{}uvre des montages de photodétection \\[0.4cm] }
+\rule{\linewidth}{0.3mm} \\[1cm]
+{\huge Bloc 3}
+
+\vfill
+
+% Bottom of the page
+%{\textbf{\large {Année universitaire} 2024-2025}}
+
+\end{center}
+\end{titlepage}
+
+\newpage
+\strut % empty page
+% Liens vers ressources
+\newpage
+\pagestyle{empty}
+
+\begin{minipage}[c]{.25\linewidth}
+	\includegraphics[width=5cm]{images/Logo-LEnsE.png}
+\end{minipage} \hfill
+\begin{minipage}[c]{.4\linewidth}
+
+\begin{center}
+\vspace{0.3cm}
+{\Large \textsc{Opto-Électronique}}
+
+\medskip
+
+5N-027-SCI \qquad \textbf{\Large TP Bloc 3}
+
+\end{center}
+\end{minipage}\hfill
+
+\vspace{0.5cm}
+
+\noindent \rule{\linewidth}{1pt}
+
+{\noindent\Large \rule[-7pt]{0pt}{30pt} \textbf{Mise en \oe{}uvre de montages de photodétection}}
+
+\noindent \rule{\linewidth}{1pt}
+
+{\large A l'issue des séances de TP et de TD concernant le bloc 3, les étudiant$\cdot$es seront capables de \textbf{mettre en oeuvre des montages de
+photodétection} et de comparer leurs performances fréquentielles et temporelles.
+
+\medskip
+
+\textit{Les sujets de TD ne sont pas inclus dans ce document.}
+
+\medskip
+
+\textit{Ce sujet est disponible au format électronique sur le site du LEnsE - https://lense.institutoptique.fr/ dans la rubrique Année / Première Année / Opto-Electronique S5 / Bloc 3.}
+
+\noindent \rule{\linewidth}{1pt}
+
+\medskip
+
+Pour cela, ils$\cdot$elles %[FaB]devront être
+seront capables de~:
+
+\begin{itemize}
+	\item Réaliser un circuit d'émission
+	\item Caractériser un montage de photodétection (simple, suiveur, transimpédance, transimpédance avec filtrage)
+	\item Choisir et adapter les éléments d'un montage de photodétection en fonction d'une application donnée
+\end{itemize}
+
+
+\noindent \rule{\linewidth}{1pt}
+
+\medskip
+
+\textbf{\large Liste des missions}
+
+\begin{description}
+	\item[Mission 3.1] \hyperref[mission31]{Réaliser un circuit d'émission à LED}
+	\item[Mission 3.2] \hyperref[mission32]{Mettre en oeuvre et caractériser un circuit de photodétection simple}
+	\item[Mission 3.3] \hyperref[mission33]{Mettre en oeuvre et caractériser un circuit de photodétection incluant un montage suiveur}
+	\item[Mission 3.4] \hyperref[mission34]{Mettre en oeuvre et caractériser un circuit de photodétection de type transimpédance}
+	\item[Mission 3.5] \hyperref[mission35]{Mettre en oeuvre et caractériser un circuit de photodétection de type transimpédance amélioré}
+	\item[Mission 3.6] Choisir et adapter un montage de photodétection à une application donnée
+\end{description}
+
+\noindent \rule{\linewidth}{1pt}
+
+\medskip
+
+\textbf{\large Liste des autres ressources}
+\begin{itemize}
+	\item \hyperref[ressource:ModeleTrans]{Montage transimpédance : modélisation}
+	\item \hyperref[fiche:Led]{Fiche : Diode / LED / Photodiode}
+	\item \hyperref[fiche:Photodetect]{Fiche : Photodétection}
+	\item \hyperref[fiche:AnHaOrdre2]{Fiche : Analyse Harmonique / Ordre 2}
+\end{itemize}
+
+
+
+\newpage
+\strut % empty page
+
+% Missions
+%[FaB]\include{missions/S5_Opto_TP_Bloc3_Mission3.1.tex}
+%[FaB]\include{missions/S5_Opto_TP_Bloc3_Mission3.2.tex}
+%[FaB]\include{missions/S5_Opto_TP_Bloc3_Mission3.3.tex}
+%[FaB]\include{missions/S5_Opto_TP_Bloc3_Mission3.4.tex}
+%[FaB]\include{missions/S5_Opto_TP_Bloc3_Mission3.5.tex}
+
+\input{missions/S5_Opto_TP_Bloc3_Mission3.1.tex}
+
+\newpage
+\strut % empty page
+\input{missions/S5_Opto_TP_Bloc3_Mission3.2.tex}
+\input{missions/S5_Opto_TP_Bloc3_Mission3.3.tex}
+\input{missions/S5_Opto_TP_Bloc3_Mission3.4.tex}
+\input{missions/S5_Opto_TP_Bloc3_Mission3.5.tex}
+
+
+\titleformat{\section}
+  {\null}{}{0pt}{}
+
+\newpage
+% Ressources
+\begin{center}
+	\begin{minipage}{2.5cm}
+	\begin{center}
+		\includegraphics[width=5cm]{images/Logo-LEnsE.png}
+	\end{center}
+\end{minipage}\hfill
+\begin{minipage}{10cm}
+	\begin{center}
+	\textbf{Institut d'Optique Graduate School }\\[0.1cm]
+    \textbf{TP d'Opto-Électronique}
+
+
+	\end{center}
+\end{minipage}\hfill
+
+
+\vspace{2cm}
+
+
+{\Large \bfseries \textsc{Opto-Électronique}} \\[0.5cm]
+{\large \bfseries Travaux Pratiques} \\[0.2cm]
+Semestre 5
+
+\vspace{1cm}
+
+% Title
+\rule{\linewidth}{0.3mm} \\[0.4cm]
+{ \Large \bfseries\color{violet_iogs} Ressources \\[0.4cm] }
+\rule{\linewidth}{0.3mm} \\[1cm]
+{\large Bloc 3}
+
+\end{center}
+
+\vspace{3cm}
+
+\textbf{\large Liste des ressources}
+\begin{itemize}
+	\item \hyperref[ressource:ModeleTrans]{Montage transimpédance : modélisation}
+	\item \hyperref[fiche:Led]{Fiche : Diode / LED / Photodiode}
+	\item \hyperref[fiche:Photodetect]{Fiche : Photodétection}
+	\item \hyperref[fiche:AnHaOrdre2]{Fiche : Analyse Harmonique / Ordre 2}
+\end{itemize}
+
+\vfill
+
+\newpage
+\strut % empty page
+
+\includepdf[pages=1, pagecommand={\section{\texorpdfstring{\hspace{-1em}}{Annexe Transimpédance}}}\label{ressource:ModeleTrans}]{ressources/AnnexeTransImp.pdf}
+\includepdf[pages=2-4]{ressources/AnnexeTransImp.pdf}
+
+%% Fiches 
+\includepdf[pages=-, landscape=true, pagecommand={\section{\texorpdfstring{\hspace{-1em}}{Fiche Diode / LED / Photodiode}}}\label{fiche:Led}]{../../Fiches/Fiche_Diode_LED_Photodiode.pdf}
+
+\includepdf[pages=-, landscape=true, pagecommand={\section{\texorpdfstring{\hspace{-1em}}{Fiche Photodétection}}}\label{fiche:Photodetect}]{../../Fiches/Fiche_Photodetection.pdf}
+
+\includepdf[pages=-, landscape=true, pagecommand={\section{\texorpdfstring{\hspace{-1em}}{Fiche Analyse Harmonique Ordre 1}}}\label{fiche:AnHaOrdre2}]{../../Fiches/Fiche_Analyse_Ordre2.pdf}
+
+\end{document}
+
+

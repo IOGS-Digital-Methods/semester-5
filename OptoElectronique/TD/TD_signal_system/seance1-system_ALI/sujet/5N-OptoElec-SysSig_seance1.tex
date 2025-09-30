@@ -1,0 +1,226 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Engineering problems / LaTeX Template
+%		Semester 5
+%		Institut d'Optique Graduate School
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	5N-ONIP-Block1	/ Python for Science
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Created by:
+%	Julien VILLEMEJANE - 25/sep/2024
+% Modified by:
+%	
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Professional Newsletter Template
+% LaTeX Template
+% Version 1.0 (09/03/14)
+%
+% Created by:
+% Bob Kerstetter (https://www.tug.org/texshowcase/) and extensively modified by:
+% Vel (vel@latextemplates.com)
+% 
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt]{article} % The default font size is 10pt; 11pt and 12pt are alternatives
+
+\input{../../../../../_assets/latex/5N_ONIP_structure.tex} % Include the document which specifies all packages and structural customizations for this template
+\usepackage{amsmath}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT INFORMATIONS
+%----------------------------------------------------------------------------------------
+\def\module{Opto-Electronique}
+\def\submodule{OptoElec}
+\def\moduleSmall{5N-027-SCI / OE}
+\def\year{2024-2025}
+\def\problem{TD Systèmes et Signaux}
+\def\problemName{OptoElec \& ONIP-1 / TD Systèmes et Signaux}
+
+\def\validation{}
+
+\def\scheduleCM{0}
+\def\scheduleTD{0}
+\def\scheduleTDcomputer{2}
+\def\scheduleTP{0}
+
+\def\workingTeam{Par binôme}
+
+\def\workingSpecial{}
+
+\def\keywords{Systèmes asservis;ALI;FFT}
+
+
+\begin{document}
+%----------------------------------------------------------------------------------------
+%	HEADER IMAGE
+%----------------------------------------------------------------------------------------
+
+\begin{figure}[H]
+\centering\includegraphics[width=0.3\linewidth]{../../../../../_assets/latex/logo_iogs.png}
+\end{figure}
+
+%----------------------------------------------------------------------------------------
+%	MAIN BODY - FIRST PAGE
+%----------------------------------------------------------------------------------------
+%
+
+\hypertarget{context}{\heading{\huge \problemName}{6pt}} % \hypertarget provides a label to reference using \hyperlink{label}{link text}
+
+%-----------------------------------
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+\begin{center}
+\textsc{\large Séance 1 / Systèmes asservis}
+\end{center}
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+%-----------------------------------
+
+%-----------------------------------
+\textbf{Exercice 1 / Modélisation numérique d'un système / ALI}
+
+Soit un système $A(j\omega)$ de type passe-bas, d'ordre 1, de gain statique $A_0$ et de pulsation de coupure $w_0$.
+
+\begin{enumerate}
+	\item Donner la fonction de transfert de ce système.
+	\item A l'aide de la bibliothèque \textbf{control} sous Python, définir la fonction de transfert de ce système à l'aide de la fonction \textsl{tf}.
+	\item Tracer la \textbf{réponse en fréquence} de ce système à l'aide de la fonction \textsl{bode\_plot}.
+	\item Tracer la \textbf{réponse indicielle} à l'aide de la fonction \textsl{step\_response}, puis \textbf{impulsionnelle} à l'aide de la fonction \textsl{impulse\_response}.
+	\item Calculer et afficher la \textbf{transformée de Fourier} de la réponse impulsionnelle. Que pouvez-vous en conclure ?
+	
+\end{enumerate}
+
+Applications Numériques : $A_0 = 10^5$, $f_0 = 30\operatorname{Hz}$.
+
+
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+%-----------------------------------
+\textbf{Exercice 2 / Rebouclage d'un système - Système asservi / ALI en régime "linéaire"}
+
+Il est possible de reboucler un système à l'aide d'un autre système. On parle alors d'un système asservi. 
+
+On prendra ici le système $A$ pour la boucle d'action et un système $B(j\omega) = 1 / K$, où $K$ est une constante, comme système de contre-réaction.
+
+\begin{enumerate}
+	\item Tracer le \textbf{schéma bloc} de ce système puis donner la \textbf{fonction de transfert} de ce système.
+	\item Que vaut le \textbf{produit} du gain statique par la fréquence de coupure de ce système ? Comparer cette valeur à celui du système $A$. Que pouvez-vous en conclure ?	
+	
+	\medskip	
+	
+	\item Définir la \textbf{fonction de transfert} du système $B$ à l'aide de la fonction \textsl{tf}.
+	\item Définir un système $C$ qui est le système complet avec la rétro-action, à l'aide de la fonction \textsl{feedback}.
+	\item Tracer la \textbf{réponse en fréquence} des systèmes $A$ et $C$ à l'aide de la fonction \textsl{bode\_plot} sur un même graphique.
+	\item Tracer la \textbf{réponse indicielle} des systèmes $A$ et $C$ à l'aide de la fonction \textsl{step\_response} sur un même graphique.
+\end{enumerate}
+
+Applications Numériques : $A_0 = 10^5$, $f_0 = 30\operatorname{Hz}$ et $K = 1$ puis $K = 10$.
+
+
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+%-----------------------------------
+\textbf{Exercice 3 / Système du second ordre}
+
+On se propose de simuler un système du second ordre dont la fonction de transfert peut être mise sous la forme suivante :
+
+$$H(j\omega) = \frac{A_0 \cdot (\frac{j \cdot \omega}{\omega_0})^2}{1 + 2 \cdot m \cdot \frac{j \cdot \omega}{\omega_0} + (\frac{j \cdot \omega}{\omega_0})^2}$$
+
+\begin{enumerate}
+	\item Définir ce système.
+	\item Tracer la réponse en fréquence de ce système pour $m = [0.1, 0.5, 0.7, 1.0, 2]$ sur un même graphique.
+	\item Tracer la réponse indicielle de ce système pour $m = [0.1, 0.5, 0.7, 1.0, 2]$ sur un même graphique.
+\end{enumerate}
+
+Applications Numériques : $A_0 = 10$, $f_0 = 1000\operatorname{Hz}$.
+
+
+
+\newpage
+%-----------------------------------
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+\begin{center}
+\textsc{\large Bibliothèque CONTROL}
+\end{center}
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+%-----------------------------------
+
+Plus d'aide sur la bibliothèque \textbf{control} : \href{https://python-control.readthedocs.io/en/0.10.1/}{https://python-control.readthedocs.io/en/0.10.1/}
+
+Pour importer la bibliothèque \textbf{control} :  
+\begin{lstlisting}[language=python]
+import control as ct
+\end{lstlisting}
+
+%-----------------------------------
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+\textbf{Définir un système}
+
+La \textbf{définition d'un système} par l'intermédiaire d'une fonction de transfert se fait à l'aide de la fonction \textsl{tf} :
+
+\begin{lstlisting}[language=python]
+# System with a transfert function : (3s + 4) / (6s^2 + 5s + 4).
+num = [3, 4]
+den = [6, 5, 4]
+sys1 = ct.tf(num, den)
+\end{lstlisting}
+
+%-----------------------------------
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+\textbf{Tracer la réponse en fréquence d'un système}
+
+Il est possible de tracer la réponse en fréquence d'un système à l'aide de la fonction \textsl{bode\_plot} : 
+
+\begin{lstlisting}[language=python]
+ct.bode_plot(sys1)
+plt.show()
+\end{lstlisting}
+
+\textit{Attention : cette fonction se base sur la bibliothèque Pyplot de Matplotlib. Il est indispensable de l'importer et de faire appel à la fonction show() pour visualiser les graphiques.}
+
+Il est également possible de passer une liste de système en argument de la fonction \textsl{bode\_plot} afin de comparer plusieurs systèmes entre eux.
+
+%-----------------------------------
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+\textbf{Tracer la réponse indicielle d'un système}
+
+Il est possible de tracer la réponse à un échelon d'un système à l'aide de la fonction \textsl{step\_response} : 
+
+\begin{lstlisting}[language=python]
+time = np.arange(0, 0.1, 0.0001)
+T, yout = ct.step_response(sys1, time)
+\end{lstlisting}
+
+Cette fonction renvoie deux vecteurs : un vecteur temps (\textsl{T}) et le signal de sortie de la réponse à l'échelon (\textsl{yout}). Le vecteur \textsl{time} n'est pas indispensable. S'il n'est pas fourni, il est automatiquement calculé par la fonction \textsl{step\_response}.
+
+Pour pouvoir afficher le graphique associé, il est indispensable d'utiliser une bibliothèque graphique de type Pyplot de Matplotlib.
+
+%-----------------------------------
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+\textbf{Tracer la réponse impulsionnelle d'un système}
+
+Il est possible de tracer la réponse à une impulsion d'un système à l'aide de la fonction \textsl{impulse\_response} : 
+
+\begin{lstlisting}[language=python]
+time = np.arange(0, 0.1, 0.0001)
+T, yout = ct.impulse_response(sys1, time)
+\end{lstlisting}
+
+Cette fonction renvoie le même type de données que \textsl{step\_response}
+
+
+%-----------------------------------
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+\textbf{Reboucler un système}
+
+Il est possible de reboucler un système par un autre système à l'aide de la fonction \textsl{feedback} : 
+
+\begin{lstlisting}[language=python]
+sys = ct.feedback(sys1, sys2)
+\end{lstlisting}
+
+
+\end{document} 

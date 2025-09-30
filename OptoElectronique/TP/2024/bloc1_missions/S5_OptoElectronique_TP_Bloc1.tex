@@ -1,0 +1,280 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Engineering problems / LaTeX Template
+%		Semester 5
+%		Institut d'Optique Graduate School
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	5N-OptoElec-Bloc1	/ caractérisation statique
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Created by:
+%	Julien VILLEMEJANE - 16/jul/2024
+% Modified by: Fabienne BERNARD - 30/08/24  Modifs pointées par : %[FaB] 
+% Fichier.sty modifié pour changer la police de caractère
+%	
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Professional Newsletter Template
+% LaTeX Template
+% Version 1.0 (09/03/14)
+%
+% Created by:
+% Bob Kerstetter (https://www.tug.org/texshowcase/) and extensively modified by:
+% Vel (vel@latextemplates.com)
+% 
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper,11pt,titlepage]{article} % The default font size is 10pt; 11pt and 12pt are alternatives
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{opto_elec_villemejane}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+
+
+% Page de garde
+\begin{titlepage}
+
+\begin{center}
+	\begin{minipage}{2.5cm}
+	\begin{center}
+		\includegraphics[width=8cm]{images/Logo-LEnsE.png}
+	\end{center}
+\end{minipage}\hfill
+\begin{minipage}{10cm}
+	\begin{center}
+	\textbf{Institut d'Optique Graduate School }\\[0.1cm]
+    \textbf{TP d'Opto-Électronique}
+
+
+	\end{center}
+\end{minipage}\hfill
+
+
+\vspace{5cm}
+
+
+{\huge \bfseries \textsc{Opto-Électronique}} \\[0.5cm]
+{\large \bfseries Travaux Pratiques} \\[0.2cm]
+Semestre 5
+
+\vspace{2cm}
+% Title
+\rule{\linewidth}{0.3mm} \\[0.4cm]
+{ \huge \bfseries\color{violet_iogs} Caractériser un dipôle \\[0.4cm] }
+\rule{\linewidth}{0.3mm} \\[1cm]
+{\huge Bloc 1}
+
+\vfill
+
+% Bottom of the page
+%{\textbf{\large {Année universitaire} 2024-2025}}
+
+\end{center}
+\end{titlepage}
+
+\newpage
+\strut % empty page
+%\cleardoublepage
+% Liens vers ressources
+\newpage
+\pagestyle{empty}
+
+\begin{minipage}[c]{.25\linewidth}
+	\includegraphics[width=5cm]{images/Logo-LEnsE.png}
+\end{minipage} \hfill
+\begin{minipage}[c]{.4\linewidth}
+
+\begin{center}
+\vspace{0.3cm}
+{\Large \textsc{Opto-Électronique}}
+
+\medskip
+
+5N-027-SCI \qquad \textbf{\Large TP Bloc 1}
+
+\end{center}
+\end{minipage}\hfill
+
+\vspace{0.5cm}
+
+\noindent \rule{\linewidth}{1pt}
+
+{\noindent\Large  \rule[-7pt]{0pt}{30pt}%[FaB]
+ \textbf{Caractérisation d'un dipôle}}
+
+\noindent \rule{\linewidth}{1pt}
+
+\bigskip %[FaB]
+
+{\large À l'issue des séances de TP et de TD concernant le bloc 1, les étudiant$\cdot$es seront capables de \textbf{caractériser un dipôle %
+électronique} %[FaB]
+(linéaire ou non-linéaire) statiquement 
+et en \textbf{déduire ses zones de fonctionnement}.}
+
+\medskip
+
+\textit{Les sujets de TD ne sont pas inclus dans ce document.}
+
+\medskip
+
+\textit{Ce sujet est disponible au format électronique sur le site du LEnsE - https://lense.institutoptique.fr/ dans la rubrique Année / Première Année / Opto-Electronique S5 / Bloc 1.}
+
+\noindent \rule{\linewidth}{1pt}
+
+\medskip
+
+Pour cela, ils$\cdot$elles %[FaB]devront être
+seront capables de~:
+
+\begin{itemize}
+	\item Lister %
+	les grandeurs et les %[FaB]
+	paramètres d'intérêt %importants 
+	du composant à partir d'une documentation technique fournie
+	\item Choisir les paramètres des instruments de mesures et des composants de protection
+	\item Tracer la caractéristique statique à l'aide :
+	\begin{itemize}
+		\item d'un multimètre
+		\item d'un oscilloscope en mode XY
+	\end{itemize}
+	\item Décrire le fonctionnement d'un montage à diodes
+\end{itemize}
+
+
+\noindent \rule{\linewidth}{1pt}
+
+\medskip
+
+\textbf{\large Liste des missions}
+
+\begin{description}
+	\item[Mission 1.1] \hyperref[mission11]{Tracer la caractéristique $i=f(u)$ d'une photodiode}
+	\item[Mission 1.2] \hyperref[mission12]{Mesurer le courant généré par une photodiode en mode capteur}
+	\item[Mission 1.3] \hyperref[mission13]{Tracer la caractéristique $i = f(u)$ d'un dipôle de manière automatisée}
+	\item[Mission 1.4] \hyperref[mission14]{Tracer la caractéristique $i = f(u)$ d'une LED}
+\end{description}
+
+\noindent \rule{\linewidth}{1pt}
+
+\medskip
+
+\textbf{\large Liste des autres ressources}
+\begin{itemize}
+	\item \hyperref[ressource:CaracStat]{Caractériser un dipôle}
+	\item \hyperref[doc:phdSFH206K]{Doc : SFH206K (photodiode)}
+	\item \hyperref[doc:ledRouge]{Doc : LED rouge}
+	\item \hyperref[fiche:Led]{Fiche : Diode / LED / Photodiode}
+	\item \hyperref[fiche:Photodetect]{Fiche : Photodétection}
+\end{itemize}
+
+\medskip
+
+Un \textbf{feuillet annexe}, présentant succinctement l'\textbf{ensemble des instruments}, est disponible sur chacune des paillasses.
+
+
+\newpage
+\strut % empty page
+% Missions
+%[FaB]\include{missions/S5_Opto_TP_Bloc1_Mission1.1.tex}
+\input{missions/S5_Opto_TP_Bloc1_Mission1.1.tex}
+
+%[FaB]\include{missions/S5_Opto_TP_Bloc1_Mission1.2.tex}
+\input{missions/S5_Opto_TP_Bloc1_Mission1.2.tex}
+%[FaB]\include{missions/S5_Opto_TP_Bloc1_Mission1.3.tex}
+\input{missions/S5_Opto_TP_Bloc1_Mission1.3.tex}
+%[FaB]\include{missions/S5_Opto_TP_Bloc1_Mission1.4.tex}
+\input{missions/S5_Opto_TP_Bloc1_Mission1.4.tex}
+
+
+\newpage
+% Ressources
+\begin{center}
+	\begin{minipage}{2.5cm}
+	\begin{center}
+		\includegraphics[width=5cm]{images/Logo-LEnsE.png}
+	\end{center}
+\end{minipage}\hfill
+\begin{minipage}{10cm}
+	\begin{center}
+	\textbf{Institut d'Optique Graduate School }\\[0.1cm]
+    \textbf{TP d'Opto-Électronique}
+
+
+	\end{center}
+\end{minipage}\hfill
+
+
+\vspace{2cm}
+
+
+{\Large \bfseries \textsc{Opto-Électronique}} \\[0.5cm]
+{\large \bfseries Travaux Pratiques} \\[0.2cm]
+Semestre 5
+
+\vspace{1cm}
+
+% Title
+\rule{\linewidth}{0.4mm} \\[0.4cm]
+{ \Large \bfseries\color{violet_iogs} Ressources \\[0.4cm] }
+\rule{\linewidth}{0.4mm} \\[1cm]
+{\large Bloc 1}
+
+\end{center}
+
+\vspace{3cm}
+
+\textbf{\large Liste des ressources}
+\begin{itemize}
+	\item \hyperref[ressource:CaracStat]{Caractériser un dipôle}
+	\begin{itemize}
+		\item \textit{Caractéristique Manuelle}
+		\item \textit{Caractéristique Automatisée}
+	\end{itemize}
+	\item \hyperref[doc:phdSFH206K]{Doc : SFH206K (photodiode)}
+	\item \hyperref[doc:ledRouge]{Doc : LED rouge}
+	\item \hyperref[fiche:Led]{Fiche : Diode / LED / Photodiode}
+	\item \hyperref[fiche:Photodetect]{Fiche : Photodétection}
+\end{itemize}
+
+\vfill
+
+\newpage
+\strut % empty page
+
+\input{ressources/S5_Opto_Carac_Statique.tex}
+\titleformat{\section}
+  {\null}{}{0pt}{}
+
+%% Docs techniques
+\includepdf[pages=4, pagecommand={\section{\texorpdfstring{\hspace{-1em}}{Doc SFH206K photodiode}}}\label{doc:phdSFH206K}]{ressources/osram_SFH206K.pdf}
+\includepdf[pages=5-8]{ressources/osram_SFH206K.pdf}
+
+\includepdf[pages=3]{ressources/kingbright_LED_Rouge.pdf}
+\includepdf[pages=2, pagecommand={\section{\texorpdfstring{\hspace{-1em}}{Doc Led Rouge}}}\label{doc:ledRouge}]{ressources/kingbright_LED_Rouge.pdf}
+\includepdf[pages=3]{ressources/kingbright_LED_Rouge.pdf}
+
+
+
+
+%% Fiches 
+\includepdf[pages=-, landscape=true, pagecommand={\section{\texorpdfstring{\hspace{-1em}}{Fiche Diode / LED / Photodiode}}}\label{fiche:Led}]{../../Fiches/Fiche_Diode_LED_Photodiode.pdf}
+
+\includepdf[pages=-, landscape=true, pagecommand={\section{\texorpdfstring{\hspace{-1em}}{Fiche Photodétection}}}\label{fiche:Photodetect}]{../../Fiches/Fiche_Photodetection.pdf}
+
+
+
+\end{document}
+
+

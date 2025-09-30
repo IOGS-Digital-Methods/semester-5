@@ -1,0 +1,183 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Engineering problems / LaTeX Template
+%		Semester 5
+%		Institut d'Optique Graduate School
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	5N-OptoElec-Bloc1	/ caractérisation statique
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Created by:
+%	Julien VILLEMEJANE - 16/jul/2024
+% Modified by: 06/09/24 
+%	
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Professional Newsletter Template
+% LaTeX Template
+% Version 1.0 (09/03/14)
+%
+% Created by:
+% Bob Kerstetter (https://www.tug.org/texshowcase/) and extensively modified by:
+% Vel (vel@latextemplates.com)
+% 
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper,11pt,twoside]{book} % The default font size is 10pt; 11pt and 12pt are alternatives
+
+\usepackage{opto_elec_villemejane}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+
+% Page de garde
+\begin{titlepage}
+
+\begin{center}
+	\begin{minipage}{2.5cm}
+	\begin{center}
+		\includegraphics[width=8cm]{images/Logo-LEnsE.png}
+	\end{center}
+\end{minipage}\hfill
+\begin{minipage}{10cm}
+	\begin{center}
+	\textbf{Institut d'Optique Graduate School }\\[0.1cm]
+    \textbf{TP d'Opto-Électronique}
+
+
+	\end{center}
+\end{minipage}\hfill
+
+
+\vspace{1.0cm}
+
+
+{\huge \bfseries \textsc{Opto-Électronique}} \\[0.5cm]
+{\large \bfseries Travaux Pratiques} \\[0.2cm]
+Semestre 5
+
+\vspace{0.5cm}
+% Title
+\rule{\linewidth}{0.3mm} \\[0.4cm]
+{ \huge \bfseries\color{violet_iogs} Notions et Protocoles \\[0.4cm] }
+\rule{\linewidth}{0.3mm} \\[1cm]
+
+
+{\large \textbf{Protocoles}}
+
+\begin{itemize}[label=$\blacktriangleright$]
+	\item \hyperref[ressource:CaracStat]{Tracer la \textbf{caractéristique statique} d'un dipôle}
+	\item \hyperref[ressource:RepIndic]{Tracer la \textbf{réponse indicielle} d'un système linéaire}
+	\item \hyperref[ressource:RepFreq]{Tracer la \textbf{réponse en fréquence} d'un système linéaire (\textbf{gain} et \textbf{phase})}
+	\item \hyperref[ressource:BandePassante]{Mesurer la \textbf{bande passante} d'un système linéaire}
+\end{itemize}
+
+\medskip
+
+
+{\large \textbf{Notions}}
+
+\begin{itemize}[label=$\blacktriangleright$]
+	\item \hyperref[fiche:Bases1]{Réseaux et Dipôles}
+	\item \hyperref[fiche:Bases2]{Systèmes linéaires et Superposition}
+	\item \hyperref[fiche:Capteurs]{Capteurs}
+	\item \hyperref[fiche:LED]{Diode, LED et photodiode}
+	\item \hyperref[fiche:Photodetection]{Photodétection}
+	\item \hyperref[fiche:ALI]{Amplificateur Linéaire Intégré / Principe et montages de base}
+	\item \hyperref[fiche:ALIModele]{Amplificateur Linéaire Intégré / Modélisation et rebouclage}
+	\item \hyperref[fiche:RegimeHarmonique]{Régime Harmonique}
+	\item \hyperref[fiche:AnHaOrdre1]{Filtrage / Analyse harmonique / Ordre 1}
+	\item \hyperref[fiche:AnHaOrdre2]{Filtrage / Analyse harmonique / Ordre 2}	
+	\item \hyperref[fiche:ModeleTransimpedance]{Systèmes bouclés simples / Exemple du transimpédance}
+	
+\end{itemize}
+
+
+\bigskip
+
+\textit{Ce document est disponible au format électronique sur le site du LEnsE - https://lense.institutoptique.fr/ dans la rubrique Année / Première Année / Opto-Electronique S5 / TP / Notions et Protocoles.}
+
+\medskip
+
+\begin{minipage}{5cm}
+\begin{center}
+\includegraphics[width=3cm]{./images/logocc}\\
+\small
+  © 2025 by LEnsE-IOGS 
+\end{center}
+\end{minipage}
+
+
+\end{center}
+\end{titlepage}
+
+
+
+% ----- DEUXIÈME PAGE (sans numérotation) -----
+\clearpage
+\thispagestyle{empty}
+\mbox{} % page vide ou mettre du texte si souhaité
+
+% ----- TROISIÈME PAGE (début de la numérotation à 1) -----
+\clearpage
+\setcounter{page}{1} % on commence la numérotation ici
+\pagenumbering{arabic} % pour utiliser les chiffres arabes
+\pagestyle{plain} % ou autre style si souhaité
+  
+
+% Protocoles
+\input{ressources/S5_Opto_Carac_Statique.tex}
+
+\input{ressources/S5_Opto_Reponse_Indicielle.tex}
+
+\input{ressources/S5_Opto_Reponse_Frequentielle.tex}
+
+\input{ressources/S5_Opto_Bande_Passante.tex}
+
+\cleardoublepage
+\ifodd\value{page}\else
+  \hbox{}\newpage
+\fi
+%% Fiches 
+
+\titleformat{\section}
+  {\null}{}{0pt}{}
+  
+\includepdf[pages=-, landscape=true, pagecommand={\section{\texorpdfstring{\hspace{-1em}}{Fiche Bases}}}\label{fiche:Bases1}]{../../../Fiches/Fiche_Bases1.pdf}
+
+
+\includepdf[pages=-, landscape=true, pagecommand={\section{\texorpdfstring{\hspace{-1em}}{Fiche Superposition}}}\label{fiche:Bases2}]{../../../Fiches/Fiche_Bases2.pdf}
+
+\includepdf[pages=-, landscape=true, pagecommand={\section{\texorpdfstring{\hspace{-1em}}{Fiche Bases}}}\label{fiche:Capteurs}]{../../../Fiches/Fiche_Capteurs.pdf}
+
+\includepdf[pages=-, landscape=true, pagecommand={\section{\texorpdfstring{\hspace{-1em}}{Fiche LED}}}\label{fiche:LED}]{../../../Fiches/Fiche_Diode_LED_Photodiode.pdf}
+
+\includepdf[pages=-, landscape=true, pagecommand={\section{\texorpdfstring{\hspace{-1em}}{Fiche Photodetection}}}\label{fiche:Photodetection}]{../../../Fiches/Fiche_Photodetection.pdf}
+
+\includepdf[pages=-, landscape=true, pagecommand={\section{\texorpdfstring{\hspace{-1em}}{Fiche ALI}}}\label{fiche:ALI}]{../../../Fiches/Fiche_ALI.pdf}
+
+\includepdf[pages=-, landscape=true, pagecommand={\section{\texorpdfstring{\hspace{-1em}}{Fiche ALI Modele}}}\label{fiche:ALIModele}]{../../../Fiches/Fiche_ALI_Modele.pdf}
+
+\includepdf[pages=-, landscape=true, pagecommand={\section{\texorpdfstring{\hspace{-1em}}{Fiche Regime Harmonique}}}\label{fiche:RegimeHarmonique}]{../../../Fiches/Fiche_Regime_Harmonique.pdf}
+
+
+\includepdf[pages=-, landscape=true, pagecommand={\section{\texorpdfstring{\hspace{-1em}}{Fiche Analyse Harmonique Ordre 1}}}\label{fiche:AnHaOrdre1}]{../../../Fiches/Fiche_Analyse_Ordre1.pdf}
+
+\includepdf[pages=-, landscape=true, pagecommand={\section{\texorpdfstring{\hspace{-1em}}{Fiche Analyse Harmonique Ordre 2}}}\label{fiche:AnHaOrdre2}]{../../../Fiches/Fiche_Analyse_Ordre2.pdf}
+
+
+\includepdf[pages=-, pagecommand={\section{\texorpdfstring{\hspace{-1em}}{Modèle transimpédance}}}\label{fiche:ModeleTransimpedance}]{ressources/AnnexeTransImp.pdf}
+
+\end{document}
+
+

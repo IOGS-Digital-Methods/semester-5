@@ -1,0 +1,382 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Engineering problems / LaTeX Template
+%		Semester 5
+%		Institut d'Optique Graduate School
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	5N-OptoElec-Sujet	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Created by:
+%	Julien VILLEMEJANE - 05/may/2025
+%	
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Professional Newsletter Template
+% LaTeX Template
+% Version 1.0 (09/03/14)
+%
+% Created by:
+% Bob Kerstetter (https://www.tug.org/texshowcase/) and extensively modified by:
+% Vel (vel@latextemplates.com)
+% 
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/li censes/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper,11pt,twoside]{book} % The default font size is 10pt; 11pt and 12pt are alternatives
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{opto_elec_villemejane}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+
+
+% Page de garde
+\begin{titlepage}
+
+\begin{center}
+	\begin{minipage}{2.5cm}
+	\begin{center}
+		\includegraphics[width=8cm]{images/Logo-LEnsE.png}
+	\end{center}
+\end{minipage}\hfill
+\begin{minipage}{10cm}
+	\begin{center}
+	\textbf{Institut d'Optique Graduate School }\\[0.1cm]
+    \textbf{TP d'Opto-Électronique}
+
+
+	\end{center}
+\end{minipage}\hfill
+
+
+\vspace{4cm}
+
+
+{\huge \bfseries \textsc{Opto-Électronique}} \\[0.5cm]
+{\large \bfseries Travaux Pratiques} \\[0.2cm]
+Semestre 5
+
+\vspace{2cm}
+% Title
+\rule{\linewidth}{0.3mm} \\[0.4cm]
+{ \huge \bfseries\color{violet_iogs} Développer et caractériser \\ un système de photodétection \\[0.4cm] }
+\rule{\linewidth}{0.3mm} \\[1cm]
+
+\vspace{4cm}
+
+% Bottom of the page
+%{\textbf{\large {Année universitaire} 2024-2025}}
+
+\textit{Ce sujet est disponible au format électronique sur le site du LEnsE - https://lense.institutoptique.fr/ dans la rubrique Année / Première Année / Opto-Electronique S5 / TP / Sujet.}
+
+\vspace{1cm}
+
+\begin{minipage}{5cm}
+\begin{center}
+\includegraphics[width=3cm]{./images/logocc}\\
+\small
+  © 2025 by LEnsE-IOGS 
+\end{center}
+\end{minipage}
+
+\end{center}
+\end{titlepage}
+
+% ----- DEUXIÈME PAGE (sans numérotation) -----
+\clearpage
+\thispagestyle{empty}
+\mbox{} % page vide ou mettre du texte si souhaité
+
+% ----- TROISIÈME PAGE (début de la numérotation à 1) -----
+\clearpage
+\setcounter{page}{1} % on commence la numérotation ici
+\pagenumbering{arabic} % pour utiliser les chiffres arabes
+\pagestyle{plain} % ou autre style si souhaité
+
+\begin{minipage}[c]{.25\linewidth}
+	\includegraphics[width=5cm]{images/Logo-LEnsE.png}
+\end{minipage} \hfill
+\begin{minipage}[c]{.4\linewidth}
+
+\begin{center}
+\vspace{0.3cm}
+{\Large \textsc{Opto-Électronique}}
+
+\medskip
+
+5N-027-SCI \qquad \textbf{\Large TP - Sujet}
+
+\end{center}
+\end{minipage}\hfill
+
+
+\section{Objectif global}
+
+L'objectif principal de l'ensemble des séances de TD et de TP de ce module est de \textbf{développer et caractériser un système de photodétection} permettant d'obtenir idéalement une tension proportionnelle à l'intensité lumineuse d'une source à mesurer.
+
+\section{Modalités}
+
+{\large À l'issue des séances de TP et de TD, les étudiant$\cdot$es seront capables de :
+
+\begin{description}
+	\item[\colorbox{violet_iogs}{\textcolor{white}{Bloc 1}}] \textbf{caractériser un dipôle électronique}
+(linéaire ou non-linéaire) et en \textbf{déduire ses zones de fonctionnement}
+	\item[\colorbox{violet_iogs}{\textcolor{white}{Bloc 2}}] \textbf{caractériser un système linéaire} dans les domaines temporel et fréquentiel
+	\item[\colorbox{violet_iogs}{\textcolor{white}{Bloc 3}}] \textbf{mettre en \oe{}uvre des montages de photodétection} et de \textbf{comparer leurs performances fréquentielles et temporelles}
+	\item[\colorbox{violet_iogs}{\textcolor{white}{Bloc 4}}] \textbf{documenter un travail scientifique/technique }
+\end{description}
+
+\textit{Une description plus détaillée de chacun des acquis d'apprentissage visés dans cette unité d'enseignement est donnée à la page suivante.}
+
+\section{Déroulement}
+
+\begin{center}
+	\includegraphics[width=\textwidth]{images/deroulement_2025.png}
+\end{center}
+
+\section{Autres ressources}
+
+Un \textbf{feuillet annexe}, présentant succinctement l'\textbf{ensemble des instruments}, est disponible sur chacune des paillasses.
+
+Un \textbf{document annexe} contient des ressources nécessaires pour les TP : documents constructeurs, aide de cours, protocoles d'utilisation du matériel...
+
+\medskip
+
+\textit{L'ensemble de ces documents est également disponible sur le site du LEnsE.}
+
+\newpage
+
+\section{Acquis d'Apprentissage Visés - AAV}
+
+Plus spécifiquement pour chacun des blocs suivants, les étudiant$\cdot$es seront capables de :
+
+\subsection{Bloc 1 - caractériser un dipôle électronique (linéaire ou non-linéaire) statiquement et en déduire ses zones de fonctionnement}
+
+\begin{description}
+	\item[\colorbox{violet_iogs!70}{\textcolor{white}{B 1.1}}] Lister les \textbf{grandeurs} et les \textbf{paramètres d'intérêt} du composant à partir d'une documentation technique fournie
+	\item[\colorbox{violet_iogs!70}{\textcolor{white}{B 1.2}}] Choisir les \textbf{paramètres des instruments de mesures} et des composants de protection
+	\item[\colorbox{violet_iogs!70}{\textcolor{white}{B 1.3}}] Tracer la \textbf{caractéristique statique} à l'aide :
+	\begin{itemize}
+		\item d'un multimètre
+		\item d'un oscilloscope en mode XY
+	\end{itemize}
+	\item[\colorbox{violet_iogs!70}{\textcolor{white}{B 1.4}}] Décrire le fonctionnement d'un montage simple à diodes
+\end{description}
+
+\subsection{Bloc 2 - caractériser un système linéaire dans les domaines temporel et fréquentiel}
+
+\begin{description}
+	\item[\colorbox{violet_iogs!70}{\textcolor{white}{B 2.1}}] Donner l'expression de la \textbf{réponse en fréquence} attendue à partir du schéma électrique d'un circuit passif ou contenant des ALI
+	\item[\colorbox{violet_iogs!70}{\textcolor{white}{B 2.2}}] Tracer l'allure de la \textbf{réponse en fréquence} d'un circuit sur l'écran d'un oscilloscope par une méthode de balayage en fréquence
+	\item[\colorbox{violet_iogs!70}{\textcolor{white}{B 2.3}}] Mesurer le \textbf{diagramme de Bode} en amplitude  d'un circuit linéaire point par point à l'aide :
+	\begin{itemize}
+		\item d'un oscilloscope
+		\item d'un dB mètre
+	\end{itemize}
+	\item[\colorbox{violet_iogs!70}{\textcolor{white}{B 2.4}}] Mesurer un \textbf{déphasage}
+	\item[\colorbox{violet_iogs!70}{\textcolor{white}{B 2.5}}] Définir et mesurer la \textbf{réponse indicielle} et/ou la \textbf{réponse impulsionnelle} d'un circuit
+	\item[\colorbox{violet_iogs!70}{\textcolor{white}{B 2.6}}] Proposer un \textbf{modèle mathématique} des caractéristiques d'un circuit à partir de relevés de mesure de la réponse en fréquence et/ou de la réponse indicielle
+\end{description}
+
+\subsection{Bloc 3 - mettre en \oe{}uvre des montages de photodétection et de comparer leurs performances fréquentielles et temporelles}
+
+\begin{description}
+	\item[\colorbox{violet_iogs!70}{\textcolor{white}{B 3.1}}] Réaliser un circuit contenant une source à LED
+	\item[\colorbox{violet_iogs!70}{\textcolor{white}{B 3.2}}] Caractériser un \textbf{circuit de photodétection} (simple, suiveur, transimpédance, transimpédance avec filtrage)
+	\item[\colorbox{violet_iogs!70}{\textcolor{white}{B 3.3}}] Choisir et adapter les \textbf{éléments d'un circuit de photodétection} en fonction d'une application donnée
+\end{description}
+
+\subsection{Bloc 4 - documenter un travail scientifique/technique}
+
+\begin{description}
+	\item[\colorbox{violet_iogs!70}{\textcolor{white}{B 4.1}}] Documenter un cahier de laboratoire numérique partagé incluant les différents protocoles réalisés, les résultats analysés et leurs analyses
+	\item[\colorbox{violet_iogs!70}{\textcolor{white}{B 4.2}}] Ecrire un compte-rendu d'une expérience scientifique
+	\item[\colorbox{violet_iogs!70}{\textcolor{white}{B 4.3}}] Produire un document de communication scientifique à partir d'une expérience (en équipe)
+\end{description}
+
+
+\newpage
+
+
+\begin{minipage}[c]{.25\linewidth}
+	\includegraphics[width=5cm]{images/Logo-LEnsE.png}
+\end{minipage} \hfill
+\begin{minipage}[c]{.4\linewidth}
+
+\begin{center}
+\vspace{0.3cm}
+{\Large \textsc{Opto-Électronique}}
+
+\medskip
+
+5N-027-SCI \qquad \textbf{\Large TP - Sujet}
+
+\end{center}
+\end{minipage}\hfill
+
+\vspace{0.5cm}
+
+\noindent \rule{\linewidth}{1pt}
+
+{\noindent\Large  \rule[-7pt]{0pt}{30pt}
+ \textbf{Travail à réaliser au cours des séances}}
+
+\noindent \rule{\linewidth}{1pt}
+
+
+\section{Livrables et cahier de laboratoire numérique}
+
+Au cours des différentes séances, vous serez amenés à \textbf{réaliser des expériences} afin de répondre à la problématique posée par les missions proposées. 
+
+\medskip
+
+Dans le cadre de ces expériences, vous devrez :
+
+\begin{enumerate}
+	\item vous \textbf{approprier} la problématique
+	\item proposer ou justifier un \textbf{protocole expérimental}
+	\item \textbf{câbler} un circuit et le \textbf{rendre opérationnel}
+	\item exécuter les protocoles expérimentaux
+	\item \textbf{collecter des résultats} et les présenter de manière pertinente
+	\item justifier ou proposer un \textbf{modèle mathématique}
+	\item expliquer la \textbf{cohérence} entre les résultats et la problématique traitée
+
+\end{enumerate}
+
+\bigskip
+
+
+\noindent \rule{\linewidth}{1pt}
+
+{\large
+Vous devrez \textbf{garder une trace} de l'ensemble des ces étapes dans un \textbf{cahier de laboratoire} sous forme \textbf{numérique} et \textbf{partagé} par les membres du binôme.
+}
+
+\noindent \rule{\linewidth}{1pt}
+
+\section{Démarche scientifique}
+
+En partant d'un \textbf{montage simple}, nous allons suivre une démarche scientifique pour \textbf{caractériser ce montage}, \textbf{en déduire son modèle mathématique} puis l'\textbf{améliorer} pour obtenir des montages aux performances dynamiques (fréquentielles ici) maitrisées.
+
+\medskip
+
+Pour cela, vous serez amenés à \textbf{utiliser et mettre en place des protocoles expérimentaux}, mettant en \oe{}uvre de l'instrumentation scientifique. Les \textbf{résultats obtenus} seront alors \textbf{à comparer au modèle mathématique}.
+
+\medskip
+
+Tout au long des séances, vous serez alors amené à \textbf{modifier le modèle} associé à chaque montage afin de prendre en compte les observations faites sur les résultats. Cela entrainera une amélioration du montage pour \textbf{améliorer les performances} et ainsi proposer un nouveau modèle puis de nouveaux essais pour le valider. Et ainsi de suite.
+
+\newpage
+\section{Approche par compétences et livrables}
+
+Ce module d'enseignement s'inscrit dans le \textbf{déploiement de l'approche par compétences} à l'IOGS (\href{https://tinyurl.com/APC-IOGS}{APC à l'IOGS}). Dans le cadre de ce module, les compétences suivantes seront particulièrement évaluées, au niveau 1, dans le cadre de diverses activités au cours des séances :
+
+\begin{description}
+	\item[\textbf{C3}] Réaliser et développer une solution technologique
+	\item[C4] Valider une solution technologique
+	\item[C5] Extraire et interpréter des informations et des données
+\end{description}
+
+\textit{La description des compétences est fournie en annexe pour chacune des 3 compétences.}
+
+
+\subsection{Validation de missions - séances 1 et 2}
+
+Vous devrez faire valider, en binôme, auprès d'un$\cdot$e encadrant$\cdot$e :
+
+\begin{itemize}
+	\item une \textbf{caractéristique statique} (photodiode)
+	\item une \textbf{réponse fréquentielle} (détecteur simple) incluant une \textbf{mesure de bande-passante} et de la \textbf{phase} associée
+\end{itemize}
+
+Vous devrez présenter l'ensemble des livrables attendus pour justifier de la validité de vos résultats : protocoles, résultats, analyse et comparaison au modèle théorique. %Lors de cette validation, il peut vous être demandé de faire à nouveau une des mesures présentées.
+
+
+\subsection{Compte-rendu - séance 4}
+
+Un \textbf{compte-rendu} par binôme est à remettre en fin de séance 4.
+
+\textit{Ce compte-rendu devra porter sur l'un des 3 montages réalisés au cours des séances 3 ou 4.}
+
+Ce document synthétique et riche de preuves (basées sur vos résultats expérimentaux) a pour objectif de revendiquer le fait que vous êtes \textbf{capable de réaliser et de caractériser un système linéaire dans les domaines temporel et fréquentiel}.
+
+\textit{Une grille d'auto-évaluation, identique à celle permettant d'évaluer les comptes-rendus de TP d'Optique, est fournie à la fin de ce document.}
+
+\subsubsection{Paragraphe sur l'impact sociétal et environnemental}
+
+Votre compte-rendu devra également \textbf{intégrer un paragraphe autour de l'impact sociétal et environnemental} de l'utilisation des 3 composants utilisés : LED, photodiode et amplificateur opérationnel/linéaire intégré.
+
+Ce paragraphe devra faire clairement ressortir les \textbf{précautions à prendre} pour la mise en \oe{}uvre de chacun de ces composants (grandeurs électriques limitantes), ainsi que leur \textbf{prix} et leur \textbf{impact carbone}.
+
+
+Quelques ressources :
+
+\begin{itemize}
+	\item \href{https://base-empreinte.ademe.fr/}{https://base-empreinte.ademe.fr/}
+	\item \href{https://www.openlca.org/}{https://www.openlca.org/}
+	\item \href{https://www.glimpact.com/european-global-impact-score}{https://www.glimpact.com/european-global-impact-score}
+\end{itemize}
+
+\subsection{Autres activités - séances 3 à 5}
+
+Un \textbf{test individuel} est prévu en séance 3 ou 4 (voir planning fourni lors de la séance 2) et un \textbf{atelier par équipe} en séance 5.
+
+\textit{Pour ces activités, veuillez vous référer au site du LEnsE, dans la rubrique Année / Première Année / Opto-Electronique S5 / Modalités.}
+
+
+
+\medskip
+
+% Séances
+\cleardoublepage
+\ifodd\value{page}\else
+  \hbox{}\newpage
+\fi
+
+\input{seances/S5_Opto_TP_Seance1.tex}
+
+\cleardoublepage
+\ifodd\value{page}\else
+  \hbox{}\newpage
+\fi
+\input{seances/S5_Opto_TP_Seance2.tex}
+
+
+\cleardoublepage
+\ifodd\value{page}\else
+  \hbox{}\newpage
+\fi
+\input{seances/S5_Opto_TP_Seances3_4.tex}
+
+
+
+\cleardoublepage
+\ifodd\value{page}\else
+  \hbox{}\newpage
+\fi
+\input{seances/S5_Opto_TP_Seance6.tex}
+
+
+\cleardoublepage
+\ifodd\value{page}\else
+  \hbox{}\newpage
+\fi
+
+\includepdf[pages={1,4-6}]{apc/IOGS-GrillesCompétences2025-2026.pdf}
+
+\includepdf[pages=-]{apc/GrillesCRs-1A.pdf}
+\includepdf[pages=-,landscape=true]{apc/S5_Optoelectronique_2024_AutoEval_Indiv.pdf}
+
+\end{document}
+
+

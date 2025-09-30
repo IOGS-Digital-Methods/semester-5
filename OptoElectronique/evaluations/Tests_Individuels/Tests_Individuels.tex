@@ -1,0 +1,226 @@
+\documentclass[a4paper]{book}%
+\input{../../../../_assets/latex/5N_ONIP_structure.tex}
+\usepackage{amsmath}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT
+%----------------------------------------------------------------------------------------
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+% SUJET 1
+%----------------------------------------------------------------------------------------
+
+	\input{EnTete.tex}	
+
+	\noindent \hrulefill
+	
+	\section*{Partie A / Etude d'un dipôle}
+	
+	On souhaite caractériser le dipôle mis à votre disposition. 
+
+	\begin{enumerate}
+		\item Tracer la caractéristique statique de ce dipôle.
+		\item Relever les paramètres importants d'utilisation.
+	\end{enumerate}
+
+	\noindent \hrulefill
+
+\textbf{ATTENTION} : Ne dépassez pas un courant de $20\operatorname{mA}$ et une tension inverse de $4\operatorname{V}$ pour le dipôle étudié.
+
+	\noindent \hrulefill
+	
+	\section*{Partie B / Caractérisation d'un système}
+
+	
+	On se propose d'étudier le montage suivant : 
+	
+	\begin{center}
+\begin{circuitikz} 
+	\node [op amp, fill=blue!10!white](A1) at (0,0){\texttt{ALI1}};
+	\draw (A1.-) to[short] ++(-.5,0) coordinate(A) to[short] ++(0,1.5) coordinate(B) to[R, l^=$R_2$] (B -| A1.out) coordinate(RR) to[short, -*] (A1.out);
+	\draw (A1.-) to[short,-*] ++(-.5,0) coordinate(AA) to[C, l_=$C$] ++(-2,0) to[R, l_=$R_1$] ++(-2.5,0) coordinate(BB) to [short,l_=${V_e}$, -o] ++(-1,0) coordinate(CC);
+
+	\draw (A1.+) to[short] ++(-.5,0) coordinate(AA2) node[cground]{};
+
+	\draw (A1.out) to [short,l=${V_S}$, -o] ++(1,0) coordinate(D);
+	
+\end{circuitikz}
+\end{center}		
+
+\bigskip
+
+Avec $R_1 = 33\operatorname{k\Omega}$, $R_2 = 100\operatorname{k\Omega}$ et $C = 10\operatorname{nF}$. L'ALI sera alimenté avec une alimentation symétrique de +/- $12\operatorname{V}$.
+
+\bigskip
+	
+	\begin{enumerate}
+		\item Faire une étude asymptotique en fréquence de ce montage.
+		\item Réaliser le montage proposé ci-dessus.
+		\item Tracer la \textbf{réponse en fréquence} de ce système et évaluer les \textbf{principales caractéristiques} (gain, bande-passante, ordre, déphasage pour des valeurs pertinentes de fréquence...).
+	\end{enumerate}	
+	
+	
+\includepdf[pages=-,landscape=true]{../S5_Optoelectronique_2024_AutoEval_Indiv.pdf}	
+
+
+\cleardoublepage
+%----------------------------------------------------------------------------------------
+% SUJET 2
+%----------------------------------------------------------------------------------------
+
+	\input{EnTete.tex} 
+
+	\noindent \hrulefill
+	
+	\section*{Partie A / Etude d'un dipôle}
+	
+	On souhaite caractériser le dipôle mis à votre disposition. 
+
+	\begin{enumerate}
+		\item Tracer la caractéristique statique de ce dipôle.
+		\item Relever les paramètres importants d'utilisation.
+	\end{enumerate}
+
+	\noindent \hrulefill
+
+\textbf{ATTENTION} : Ne dépassez pas un courant de $20\operatorname{mA}$ et une tension inverse de $4\operatorname{V}$ pour le dipôle étudié.
+
+	\noindent \hrulefill
+	
+	\section*{Partie B / Caractérisation d'un système}
+	
+	On se propose d'étudier le montage suivant : 
+	
+	\begin{center}
+\begin{circuitikz} 
+	\node [op amp, fill=blue!10!white](A1) at (0,0){\texttt{ALI1}};
+	\draw (A1.-) to[short] ++(-.5,0) coordinate(A) to[short] ++(0,1.5) coordinate(B) to[R, l^=$R_2$] (B -| A1.out) coordinate(RR) to[short, -*] (A1.out);
+	\draw (A1.-) to[short,-*] ++(-.5,0) coordinate(AA) to[R, l_=$R_1$] ++(-2.5,0) coordinate(BB) to [short,l_=${V_e}$, -o] ++(-1,0) coordinate(CC);
+
+	\draw (B) to[short,*-] ++ (0, 1.5) coordinate(RC) to[C, l=$C$] (RC -| A1.out) to[short,-*] (RR);
+	\draw (A1.+) to[short] ++(-.5,0) coordinate(AA2) node[cground]{};
+
+	\draw (A1.out) to [short,l=${V_S}$, -o] ++(1,0) coordinate(D);
+	
+\end{circuitikz}
+\end{center}		
+
+\bigskip
+
+Avec $R_1 = 2.2\operatorname{k\Omega}$, $R_2 = 10\operatorname{k\Omega}$ et $C = 100\operatorname{nF}$. L'ALI sera alimenté avec une alimentation symétrique de +/- $12\operatorname{V}$.
+
+\bigskip
+	
+	\begin{enumerate}
+		\item Faire une étude asymptotique en fréquence de ce montage.
+		\item Réaliser le montage proposé ci-dessus.
+		\item Tracer la \textbf{réponse en fréquence} de ce système et évaluer les \textbf{principales caractéristiques} (gain, bande-passante, ordre, déphasage pour des valeurs pertinentes de fréquence...).
+	\end{enumerate}	
+
+	
+\includepdf[pages=-,landscape=true]{../S5_Optoelectronique_2024_AutoEval_Indiv.pdf}
+
+\cleardoublepage
+%----------------------------------------------------------------------------------------
+% SUJET 3
+%----------------------------------------------------------------------------------------
+
+	\input{EnTete.tex} 
+	
+
+	\noindent \hrulefill
+	
+	\section*{Partie A / Etude d'un dipôle}
+	
+	On souhaite caractériser le dipôle mis à votre disposition.  
+
+	\begin{enumerate}
+		\item Tracer la caractéristique statique de ce dipôle.
+		\item Relever les paramètres importants d'utilisation.
+	\end{enumerate}
+
+	\noindent \hrulefill
+
+\textbf{ATTENTION} : Ne dépassez pas un courant de $20\operatorname{mA}$ et une tension inverse de $4\operatorname{V}$ pour le dipôle étudié.
+
+	\noindent \hrulefill
+	
+	\section*{Partie B / Caractérisation d'un système}
+	
+	On se propose d'étudier le montage suivant : 
+	
+	
+	\begin{center}
+\begin{circuitikz} 
+	\node [op amp, fill=blue!10!white](A1) at (0,0){\texttt{ALI1}};
+	\draw (A1.-) to[short] ++(-.5,0) coordinate(A) to[short] ++(0,1.5) coordinate(B) to[R, l^=$R_2$] (B -| A1.out) coordinate(RR) to[short, -*] (A1.out);
+	\draw (A1.-) to[short,-*] ++(-.5,0) coordinate(AA) to[R, l_=$R_1$] ++(-2.5,0) coordinate(BB) to [short,l_=${V_e}$, -o] ++(-1,0) coordinate(CC);
+
+	\draw (A1.+) to[short] ++(-.5,0) coordinate(AA2) node[cground]{};
+
+	\draw (A1.out) to [short,l=${V_S}$, -o] ++(1,0) coordinate(D);
+	
+\end{circuitikz}
+\end{center}	
+
+\bigskip
+
+Avec $R_1 = 1\operatorname{k\Omega}$ et $R_2 = 33\operatorname{k\Omega}$. L'ALI sera alimenté avec une alimentation symétrique de +/- $12\operatorname{V}$.
+	
+\bigskip
+
+	\begin{enumerate}
+		\item Faire une étude asymptotique en fréquence de ce montage.
+		\item Réaliser le montage proposé ci-dessus.
+		\item Tracer la \textbf{réponse en fréquence} de ce système et évaluer les \textbf{principales caractéristiques} (gain, bande-passante, ordre, déphasage pour des valeurs pertinentes de fréquence...).
+	\end{enumerate}		
+		
+	
+	
+\includepdf[pages=-,landscape=true]{../S5_Optoelectronique_2024_AutoEval_Indiv.pdf}
+
+\cleardoublepage
+%----------------------------------------------------------------------------------------
+% SUJET 4
+%----------------------------------------------------------------------------------------
+
+	\input{EnTete.tex} 
+
+	\section*{Partie A / Etude d'un dipôle}
+	
+	On souhaite caractériser le dipôle mis à votre disposition. 
+
+	\begin{enumerate}
+		\item Tracer la caractéristique statique de ce dipôle.
+		\item Relever les paramètres importants d'utilisation.
+	\end{enumerate}
+
+	\noindent \hrulefill
+
+\textbf{ATTENTION} : Ne dépassez pas un courant de $20\operatorname{mA}$ et une tension inverse de $4\operatorname{V}$ pour le dipôle étudié.
+
+	\noindent \hrulefill
+	
+	\section*{Partie B / Caractérisation d'un système}
+
+On se propose d'étudier le filtre 2 de la maquette proposée ($IN2$ et $OUT2$).
+
+Il s'agit d'un \textbf{filtre actif} qui nécessite une \textbf{alimentation symétrique} : 
+\begin{itemize}
+	\item NOIRE : masse
+	\item ROUGE : $+V_{CC}$
+	\item BLEU : $-V_{CC}$
+\end{itemize}
+
+\medskip
+
+\begin{enumerate}
+	\item Réaliser l'alimentation symétrique avec $V_{CC} = 12V$.
+	\item Alimenter ensuite la maquette.	
+	\item Tracer la \textbf{réponse en fréquence} de ce système et évaluer les \textbf{principales caractéristiques} (gain, bande-passante, ordre, déphasage pour des valeurs pertinentes de fréquence...).
+\end{enumerate}	
+
+\includepdf[pages=-,landscape=true]{../S5_Optoelectronique_2024_AutoEval_Indiv.pdf}
+
+\end{document}

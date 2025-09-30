@@ -1,0 +1,136 @@
+\newpage
+\pagestyle{empty}
+
+\begin{minipage}[c]{.25\linewidth}
+	\includegraphics[width=4cm]{images/Logo-LEnsE.png}
+\end{minipage} \hfill
+\begin{minipage}[c]{.4\linewidth}
+
+\begin{center}
+\vspace{0.3cm}
+{\Large \textsc{Opto-Electronique}}
+
+\medskip
+
+5N-027-SCI \qquad \textbf{\Large TP Bloc 2}
+
+\end{center}
+\end{minipage}\hfill
+
+\vspace{0.5cm}
+
+\noindent \rule{\linewidth}{1pt}
+
+{\noindent\Large \textbf{Mission 2.4} / Mesurer l'écart de phase entre deux signaux} 
+
+\noindent \rule{\linewidth}{1pt}
+
+\vspace{-0.5cm}
+
+\begin{center}
+
+Durée conseillée : 30 min / Séance 2
+
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Objectif de la mission}
+\label{mission24}
+
+On se propose de \textbf{mesurer la phase} séparant deux signaux électriques à l'aide de l'oscilloscope.
+
+\textit{On ajoutera un condensateur de $100\operatorname{nF}$ en parallèle de la résistance $R_2$ du montage de la Mission 2.1.}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Ressources}
+
+Vous pouvez utiliser les fiches résumées suivantes : 
+
+\begin{itemize}
+	\item \hyperref[fiche:ALIModele]{Fiche : Amplificateur Linéaire Intégré / Modèle}
+	\item \hyperref[fiche:AnHaOrdre1]{Fiche : Analyse Harmonique / Ordre 1}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Montage filtre actif passe-bas}
+
+\begin{multicols}{2}
+
+On se propose d'étudier le montage suivant. \textit{Tous les potentiels sont référencés par rapport à la masse.}
+
+La fonction de transfert de ce montage, en supposant l'ALI idéal, est la suivante : 
+
+$$\frac{V_s}{V_e} = -\frac{R_2}{R_1} \cdot \frac{1}{1 + j R_2 C \omega}$$
+
+\medskip
+
+\textit{On conservera les valeurs de $R_1$ et de $R_2$ du montage de la Mission 2.1, permettant d'obtenir un gain de $25\operatorname{dB}$.}
+
+\columnbreak
+
+\begin{center}
+\begin{circuitikz} 
+	\node [op amp, fill=blue!10!white](A1) at (0,0){\texttt{ALI1}};
+	\draw (A1.-) to[short] ++(-.5,0) coordinate(A) to[short] ++(0,1.5) coordinate(B) to[R, l^=$R_2$] (B -| A1.out) coordinate(RR) to[short, -*] (A1.out);
+	\draw (A1.-) to[short,-*] ++(-.5,0) coordinate(AA) to[R, l_=$R_1$] ++(-2.5,0) coordinate(BB) to [short,l_=${V_e}$, -o] ++(-1,0) coordinate(CC);
+
+	\draw (B) to[short,*-] ++ (0, 1.5) coordinate(RC) to[C, l=$C$] (RC -| A1.out) to[short,-*] (RR);
+	\draw (A1.+) to[short] ++(-.5,0) coordinate(AA2) node[cground]{};
+
+	\draw (A1.out) to [short,l=${V_S}$, -o] ++(1,0) coordinate(D);
+	
+\end{circuitikz}
+\end{center}
+\end{multicols}
+
+Ce montage a une fréquence caractéristique $f_c = \frac{1}{2 \cdot \pi \cdot R_2 \cdot C}$.
+
+\Manip Vérifier expérimentalement que la bande-passante à $-3\operatorname{dB}$ vaut approximativement $f_c$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Déphasage}
+
+En régime harmonique (à même fréquence), deux ondes sinusoïdales peuvent avoir des phases initiales différentes.
+
+Soient $u_1(t) = A_1 \cdot sin(2\pi f t + \varphi_1)$ et $u_2(t) = A_2 \cdot sin(2\pi f t + \varphi_2)$, le déphasage de l'une par rapport à l'autre à l'instant $t$ vaut : $\Delta\varphi = (2\pi f t + \varphi_2) - (2\pi f t + \varphi_1) = \varphi_2 - \varphi_1$
+
+\medskip
+
+Si $\Delta\varphi$ est positif, l'onde 2 est en avance de phase par rapport à l'onde 1. Sinon, l'onde 2 est en retard de phase par rapport à l'onde 1.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Phase et ordre d'un filtre}
+
+Lorsqu'on étudie des systèmes linéaires de type filtre, il est intéressant de relever le déphasage entre le signal de sortie et le signal d'entrée pour différents points remarquables :
+
+\begin{itemize}
+	\item à la fréquence caractéristique du système, le déphasage est égal à $k\cdot \pi/4$ où $k$ est un entier correspondant à l'ordre du filtre
+	\item loin de cette fréquence caractéristique (au moins une décade avant et après), pour vérifier le caractère inverseur d'un système par exemple.
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Travail à réaliser}
+
+\Manip Mesurer l'écart de phase entre les signaux $V_S$ et $V_e$ pour des fréquences égales à $f_c / 10$, $f_c$ et $10 f_c$ (où $f_c$ est la fréquence caractéristique du système).
+
+\Quest Déterminer l'ordre de ce filtre.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Livrables}
+
+
+Une \textbf{fiche de manipulation} en ligne (partagée dans le cahier de laboratoire) rappelant :
+
+\begin{itemize}
+	\item le protocole de mesure et de réglage (schémas de mesure, de câblage)
+	\item les mesures des phases
+\end{itemize}
+
+Une \textbf{analyse} du résultat obtenu.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

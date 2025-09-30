@@ -1,0 +1,132 @@
+\newpage
+\pagestyle{empty}
+
+\begin{minipage}[c]{.25\linewidth}
+	\includegraphics[width=4cm]{images/Logo-LEnsE.png}
+\end{minipage} \hfill
+\begin{minipage}[c]{.4\linewidth}
+
+\begin{center}
+\vspace{0.3cm}
+{\Large \textsc{Opto-Electronique}}
+
+\medskip
+
+5N-027-SCI \qquad \textbf{\Large TP Bloc 3}
+
+\end{center}
+\end{minipage}\hfill
+
+\vspace{0.5cm}
+
+\noindent \rule{\linewidth}{1pt}
+
+{\noindent\Large \textbf{Mission 3.4} / Mettre en \oe{}uvre et caractériser un circuit de photodétection de type transimpédance} 
+
+\vspace{-0.5cm}
+
+\begin{center}
+\noindent \rule{\linewidth}{1pt}
+
+Durée conseillée : 90 min / Séance 5
+
+\vspace{-0.2cm}
+\noindent \rule{\linewidth}{1pt}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Objectif de la mission}
+\label{mission34}
+
+On se propose d'\textbf{étudier le montage transimpédance}, un circuit très fréquemment utilisé pour la photodétection pour ses performances dynamiques. Ce montage est basé sur un amplificateur linéaire intégré également et permet d'augmenter la bande-passante des montages vus précédemment.
+
+On souhaite donc \textbf{vérifier les performances dynamiques} (réponse en fréquence notamment) de ce nouveau montage et conclure sur son intérêt.
+
+\medskip
+
+\textit{Afin de faciliter la compréhension des phénomènes mis en jeu dans ce montage, vous pouvez vous reporter à la ressource : \hyperref[ressource:ModeleTrans]{Montage transimpédance : modélisation}.}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Ressources}
+
+Vous pouvez utiliser les fiches résumées suivantes : 
+
+\begin{itemize}	
+	\item \href{https://lense.institutoptique.fr/ressources/Annee1/Electronique/fiches/2020_FR_Photodetection.pdf}{Photodétection}
+	\item \href{https://lense.institutoptique.fr/ressources/Annee1/Electronique/fiches/2021_FR_ALI.pdf}{Amplificateur Linéaire Intégré}
+\end{itemize}
+
+
+
+\subsection{Circuit à étudier}
+
+On se propose d'analyser le circuit ci-dessous, avec $R_{PHD} = 100\operatorname{k\Omega}$. L'amplificateur linéaire intégré sera alimenté à l'aide d'une alimentation symétrique +10V / -10V.
+
+\begin{center}
+\begin{circuitikz} 
+	\node [op amp, fill=blue!10!white](A1) at (0,0){\texttt{ALI1}};
+	\draw (A1.-) to[short] ++(-.5,0) coordinate(A) to[short] ++(0,1.5) coordinate(B) to[R=$R_{PHD}$] (B -| A1.out) to[short, -*] (A1.out);
+	\draw (A1.-) to[short,-*] ++(-.5,0) coordinate(AA) -- ++(-1,0) coordinate(AAA) to[empty photodiode] ++(-2,0) coordinate(BB);	
+	
+	\draw (AAA) to[short, i = $I_{photo}$, current arrow scale=8] ++(0.5,0);
+	\draw (A1.+) to[short, -*] ++(0,-1.5) coordinate(GG) node[ground]{};
+	
+	\draw (A1.out) to[short,-o] ++(1,0) coordinate(D);
+	
+	% Ground
+	\draw (GG) to[short, -o] (GG -| D);
+	
+	\draw (BB) to[battery2] (GG -| BB) -- (GG);
+	% fleche EP
+	\draw ($ (GG -| BB) + (-0.8,0.3) $) edge[->, green!40!black] ($ (BB) - (0.8,0.3) $); 
+	\node[text=green!40!black] (US) at ($ (GG -| BB)!.5!(BB) - (1.5,0) $){$E_P$};
+	
+	% fleche VS
+	\draw ($ (GG -| D) + (0,0.3) $) edge[->, green!40!black] ($ (D) - (0,0.3) $); 
+	\node[text=green!40!black] (US) at ($ (GG -| D)!.5!(D) - (0.5,0) $){$V_S$};	
+\end{circuitikz}
+\end{center}
+
+\Quest Quel est le lien entre $V_S$ et $I_{photo}$ ? Puis entre $I_{photo}$ et le flux lumineux capté par la photodiode $\Phi_e$ ?
+
+\subsection{Réponse en fréquence}
+
+\Manip Tracer l'allure rapide de la réponse en fréquence en gain de ce système pour des fréquences allant de $100~\operatorname{Hz}$ à $1~\operatorname{MHz}$.
+
+\Manip Faire une mesure de la bande-passante du montage.
+
+\Manip Reproduire les deux précédentes étapes pour des valeurs $R_{PHD} = 10\operatorname{k\Omega}$ et $R_{PHD} = 1\operatorname{M\Omega}$. 
+
+\Quest Quel est alors l'impact de $R_{PHD}$ sur le montage ?
+
+\subsection{Réponse indicielle}
+
+\Manip Tracer la réponse indicielle de ce système pour les 3 valeurs de résistance proposées précédemment : $R_{PHD} = 10\operatorname{k\Omega}$, $R_{PHD} = 100\operatorname{k\Omega}$ et $R_{PHD} = 1\operatorname{M\Omega}$.
+
+\Manip Mesurer le temps de réponse à 95\% dans chacun des cas.
+
+\Quest Comparer les résultats obtenus avec les mesures de bande-passante.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Livrables}
+
+Une \textbf{fiche de manipulation} en ligne (partagée dans le cahier de laboratoire) rappelant :
+
+\begin{itemize}
+	\item les protocoles de mesure et de réglage (schémas de mesure, de câblage)
+	\item les tableaux de mesures et les courbes obtenues
+\end{itemize}
+
+Une \textbf{analyse} du résultat obtenu, en particulier le lien entre le gain, la bande-passante du montage, le temps de réponse et la valeur de $R_{PHD}$.
+
+Une \textbf{analyse comparative} des montages de photodétection simple (mission 3.2), avec un montage suiveur (mission 3.3) et transimpédance (mission 3.4), précisant l'intérêt d'utiliser un tel montage.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

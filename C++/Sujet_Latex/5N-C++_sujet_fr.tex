@@ -1,0 +1,478 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Engineering problems / LaTeX Template
+%		Semester 5
+%		Institut d'Optique Graduate School
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	5N-OpE	/ Découverte du C++
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Created by:
+%	Julien VILLEMEJANE - 18/jun/2024
+% Modified by:
+%	
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Professional Newsletter Template
+% LaTeX Template
+% Version 1.0 (09/03/14)
+%
+% Created by:
+% Bob Kerstetter (https://www.tug.org/texshowcase/) and extensively modified by:
+% Vel (vel@latextemplates.com)
+% 
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt]{article} % The default font size is 10pt; 11pt and 12pt are alternatives
+
+\input{../../../_assets/latex/5N_ONIP_structure.tex} % Include the document which specifies all packages and structural customizations for this template
+\usepackage{amsmath}
+\usepackage{listings}
+\lstdefinestyle{cppStyle}{
+    language=C++,
+    basicstyle=\small\ttfamily,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{green!60!black},
+    stringstyle=\color{red},
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    captionpos=b
+}
+
+
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT INFORMATIONS
+%----------------------------------------------------------------------------------------
+\def\module{Découverte du C++}
+\def\submodule{C++}
+\def\moduleSmall{C++}
+\def\year{2024-2025}
+\def\problem{Introduction à C++}
+\def\problemName{Maitriser les concepts de base du langage C++}
+
+\def\validation{}
+
+\def\scheduleCM{0}
+\def\scheduleTD{2}
+\def\scheduleTDcomputer{0}
+\def\scheduleTP{0}
+
+\def\workingTeam{Seul ou par binôme}
+
+\def\workingSpecial{}
+
+\def\keywords{Typage; Fonction; Tableaux}
+
+
+\begin{document}
+%----------------------------------------------------------------------------------------
+%	HEADER IMAGE
+%----------------------------------------------------------------------------------------
+
+\begin{figure}[H]
+\centering\includegraphics[width=0.5\linewidth]{../../../_assets/latex/logo_iogs.png}
+\end{figure}
+
+%----------------------------------------------------------------------------------------
+%	SIDEBAR - FIRST PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{minipage}[t]{.33\linewidth} % Mini page taking up 30% of the actual page
+\begin{mdframed}[style=sidebar,frametitle={\module}] % Sidebar box
+
+%-----------------------------------------------------------
+%	DOCUMENT DESCRIPTION
+\begin{center}
+
+\textit{\large \centering \year}
+\end{center}
+
+
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+
+\begin{center}
+	\textit{\large \moduleSmall}
+\end{center}
+
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+
+\begin{center}
+	\textbf{\problem} ( \validation )
+\end{center}
+
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+
+%-----------------------------------------------------------
+
+\textbf{Concepts étudiés}
+
+\begin{itemize}
+\item[\textsc{\scriptsize [Num]}] Typage des données
+\item[\textsc{\scriptsize [Num]}] Fonctions et tableaux
+\end{itemize}
+
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+
+%-----------------------------------------------------------
+
+\textbf{Mots clefs}
+
+\keywords
+
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+
+%-----------------------------------------------------------
+
+\textbf{Sessions}
+
+\begin{itemize}
+\item[\textbf{\scheduleCM}] Cours(s) - 1h30
+\item[\textbf{\scheduleTD}] TD(s) - 1h30
+\item[\textbf{\scheduleTDcomputer}] TD(s) Machine - 2h00
+\item[\textbf{\scheduleTP}] TP(s) - 4h30
+\end{itemize}
+
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+
+{\large Travail}
+
+\textbf{\workingTeam}
+
+\textbf{\workingSpecial}
+
+%-----------------------------------------------------------
+\end{mdframed}
+
+
+\begin{minipage}[t]{.95\linewidth}
+\textbf{Institut d'Optique}\\
+Graduate School, \textit{France}\\
+\href{https://www.institutoptique.fr}{https://www.institutoptique.fr}
+
+\medskip
+\textbf{GitHub - Digital Methods}
+
+\href{https://github.com/IOGS-Digital-Methods}{https://github.com/IOGS-Digital-Methods}
+
+\end{minipage}
+
+\end{minipage}\hfill % End the sidebar mini page 
+% NO SPACE BETWEEN THE END OF SIDEBAR AND BEGIN OF MAIN PART
+%----------------------------------------------------------------------------------------
+%	MAIN BODY - FIRST PAGE
+%----------------------------------------------------------------------------------------
+%
+\begin{minipage}[t]{.65\linewidth} % Mini page taking up 65% of the actual page
+
+\hypertarget{context}{\heading{\huge \problemName}{6pt}} % \hypertarget provides a label to reference using \hyperlink{label}{link text}
+
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+
+%% Short introduction 
+
+Malgré une forte croissance de l'utilisation du langage \textbf{Python} dans le monde scientifique (analyse de données, machine learning, automatisation, prototypage rapide...), le langage \textbf{C++} reste encore parmi les plus performants en terme de rapidité d'exécution.
+
+C'est notamment grâce à son étape de \textbf{compilation} \textbf{langage de programmation compilé} et sa compatibilité avec le langage C qui en font un des langages de programmation les plus utilisés dans les applications où la performance est critique (logiciels systèmes - exploitation et drivers, traitement de données, systèmes embarqués).
+
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+
+L'objectif de ces deux séances est de prendre en main un environnement de développement simple (CodeBlocks) et de découvrir les bases du langage C++, à travers des exemples à tester et à modifier.
+
+Alors, à vos claviers...
+
+
+%%
+
+\bigskip
+
+%----------------------------------------------------------------------------------------
+%	IN-TEXT BOX / Intended learning outcomes
+%----------------------------------------------------------------------------------------
+
+\begin{mdframed}[style=aavbox,frametitle={Acquis d'Apprentissage Visés}]
+
+En résolvant ces problèmes, les étudiant$\cdot$e$\cdot$s seront capables de  :
+
+\centerline {\rule{.40\linewidth}{.1pt}} % Horizontal line
+
+\begin{enumerate}
+\item \textbf{Compiler un code en langage C++}
+\item \textbf{Définir des variables}
+\item \textbf{Définir des fonctions} pour faciliter la réutilisabilité d'un code
+\item \textbf{Définir et utiliser des tableaux}
+\item \textbf{Utiliser une bibliothèque de fonctions}
+\end{enumerate}
+
+\end{mdframed}
+
+
+\medskip
+%-----------------------------------------------------------
+
+\hypertarget{ressources}{\heading{Ressources}{6pt}} % \hypertarget provides a label to reference using \hyperlink{label}{link text}
+
+Cette séquence est basée sur le langage C++.
+
+Nous utiliserons l'environnement \textbf{CodeBlocks} (gratuit).
+
+Des tutoriels C++ sont en cours de développement à l'adresse suivante : \href{https://iogs-lense-training.github.io/cpp-basics-oop/}{https://iogs-lense-training.github.io/cpp-basics-oop/}. 
+
+\end{minipage} % End the main body - first page mini page
+
+%----------------------------------------------------------------------------------------
+%	MAIN BODY - SECOND PAGE
+%----------------------------------------------------------------------------------------
+\newpage
+
+%-----------------------------------------------------------
+
+\hypertarget{stepbystep}{\heading{Travail à réaliser}{6pt}} % \hypertarget provides a label to reference using \hyperlink{label}{link text}
+
+\textbf{Il est suggéré de créer un nouveau projet à chaque exercice afin de conserver une trace des programmes.}
+
+%-----------------------------------
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+\begin{center}
+\textsc{\large Séance 1}
+\end{center}
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+%-----------------------------------
+
+
+
+%-----------------------------------
+\textbf{Exercice 1 / Création d'un projet sous CodeBlocks (HelloWorld)}
+
+On se propose dans un premier temps de créer un nouveau projet C++ avec l'interface de développement CodeBlocks.
+
+\begin{enumerate}
+	\item Lancer l'application CodeBlocks.
+	\item Puis sélectionner \textsc{File/New/Project...} (\textsc{Fichier/Nouveau/Projet...} en français).
+	\item Sélectionner ensuite le modèle (\textit{template}) \textsc{Console Application}.
+	\item Sélectionner le langage \textsc{C++}.
+	\item Donner un titre à votre projet dans le champ \textsc{Project Title} puis sélectionner le répertoire dans lequel vous souhaitez sauvegarder votre projet dans le champ \textsc{Folder to create project in}.
+	\item Dans la fenêtre suivante, sélectionner le compilateur (\textit{Compiler}) : \textsc{GNU GCC Compiler} (installé avec CodeBlocks en sélectionnant la version incluant MingW).
+	\item Après validation, votre projet est créé dans la fenêtre principale de l'application. Ouvrir le dossier \textsc{Sources} dans le manager de projet et ouvrir le fichier intitilé \textsc{main.cpp}
+\end{enumerate}
+
+Il faut ensuite compiler le projet (\textit{Build}). Pour cela, il existe le raccourci clavier \textsl{CTRL + F9}.
+
+Une fois la compilation réussie avec succès, il reste à exécuter le programme (\textit{Run}). Pour cela, il existe le raccourci clavier \textsl{CTRL + F10}.
+
+
+\centerline {\rule{.50\linewidth}{.25pt}} % Horizontal line
+%-----------------------------------
+\textbf{Exercice 2 / Structure de base d'un code C++ et interaction}
+
+On se propose d'étudier le code \textit{\textbf{exo1\_2.cpp}} fourni.
+
+\begin{enumerate}
+	\item Créez un nouveau projet avec CodeBlocks.
+	\item Copiez-collez le code dans le fichier main.cpp du projet.
+	\item Exécutez le programme. Expliquez le code.
+	\item Modifiez le code pour demander à l'utilisateur de saisir le valeur de la variable \textit{resistance} avant de l'afficher.
+\end{enumerate}
+
+
+\centerline {\rule{.50\linewidth}{.25pt}} % Horizontal line
+%-----------------------------------
+\textbf{Exercice 3 / Mauvais calculs ?}
+
+On se propose d'étudier le code \textit{\textbf{exo1\_3.cpp}} fourni.
+
+\begin{enumerate}
+	\item Créez un nouveau projet avec CodeBlocks.
+	\item Copiez-collez le code dans le fichier main.cpp du projet.
+	\item Exécutez le programme. Est-ce le bon résultat ?
+	\item Expliquez l'erreur et modifiez le programme pour qu'il affiche le bon résultat.
+	\item Réécrivez les lignes contenant des \textit{printf} à l'aide de l'opérateur de sortie du C++ (\textit{cout}).
+	\item Ajoutez la possibilité à l'utilisateur de saisir les valeurs des variables \textbf{a} et \textit{b}.
+\end{enumerate}
+
+
+\centerline {\rule{.50\linewidth}{.25pt}} % Horizontal line
+\newpage
+%-----------------------------------
+\textbf{Exercice 4 / Conditions et itérations}
+
+Le code suivant permet de \textbf{faire un test} sur la variable a et d'afficher si sa valeur est supérieure à 8 ou non.
+
+\begin{lstlisting}[style=cppStyle]
+int a = 10;
+
+if(a > 8){
+	printf("a > 8\n");
+}
+else{
+	printf("a <= 8\n");
+}
+\end{lstlisting}
+
+
+Le code suivant permet d'\textbf{itérer un nombre de fois prédéfini} des actions (ici l'affichage des 5 premiers nombres entiers impairs).
+
+\begin{lstlisting}[style=cppStyle]
+int i;
+
+for(i = 0; i < 5; i++){
+	printf("[%d] -> %d \n", i, i*2+1);
+}
+\end{lstlisting}
+
+On propose d'étudier à présent les deux codes suivants :
+
+\begin{lstlisting}[style=cppStyle]
+int i = 0;
+
+do{
+	printf("[%d] -> %d \n", i, i*2+1);
+	i++;
+}while(i < 5);
+\end{lstlisting}
+
+\begin{lstlisting}[style=cppStyle]
+int i = 0;
+
+while(i < 5){
+	printf("[%d] -> %d \n", i, i*2+1);
+	i++;
+};
+\end{lstlisting}
+
+\begin{enumerate}
+	\item A quoi servent ces deux codes ? Quelle est leur différence ?
+	\item Écrire un programme qui demande à l'utilisateur de taper un entier N entre 0 et 20 bornes incluses et continue de demander tant que la valeur n'est pas correcte. La valeur finale sera affichée.
+\end{enumerate}
+
+
+\centerline {\rule{.50\linewidth}{.25pt}} % Horizontal line
+%-----------------------------------
+\textbf{Exercice 5 / Fonctions}
+
+On se propose d'étudier le code \textit{\textbf{exo1\_5.cpp}} fourni, qui contient une fonction \textit{somme} et un programme principal qui appelle cette fonction avec des paramètres particuliers.
+
+\begin{lstlisting}[style=cppStyle]
+/* Definition de la fonction somme */
+int somme(int a, int b){
+	int s = a + b;
+	return s;
+}
+\end{lstlisting}
+
+
+\begin{enumerate}
+	\item Écrire une fonction qui calcule u(N) défini par :
+
+\qquad \qquad u(n+1)=3*u(n)+4
+
+	\item Ecrire un programme de test qui demande à l'utilisateur de saisir un nombre entre 0 et 20 et qui exécute la fonction écrite précédemment.	
+\end{enumerate}
+
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+\newpage
+%-----------------------------------------------------------
+
+\hypertarget{stepbystep}{\heading{Travail à réaliser (suite)}{6pt}} % \hypertarget provides a label to reference using \hyperlink{label}{link text}
+
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+\begin{center}
+\textsc{\large Séance 2}
+\end{center}
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+%-----------------------------------
+
+\textbf{Exercice 1 / Bibliothèque de fonctions - tab1D}
+
+Soit les fichiers \textit{\textbf{tab1D.h}} et \textit{\textbf{tab1D.cpp}} contenant des fonctions associées à la gestion de tableaux en C++ et le fichier \textit{\textbf{exo2\_1.cpp}} contenant un test des fonctions contenues dans les fichiers précédemment cités.
+
+\begin{enumerate}
+	\item Créez un nouveau projet avec CodeBlocks.
+	\item Copiez-collez le code du fichier \textit{\textbf{exo2\_1.cpp}} fourni dans le fichier main.cpp du projet.
+	\item Ajoutez les fichiers \textit{\textbf{tab1D.h}} et \textit{\textbf{tab1D.cpp}} dans le répertoire du projet.
+	\item Exécutez le programme. 
+	\item Expliquez le code fourni et sa structure. Que contiennent notamment les fichiers \textit{\textbf{.h}} et \textit{\textbf{.cpp}} ? 
+\end{enumerate}
+
+\centerline {\rule{.50\linewidth}{.25pt}} % Horizontal line
+%-----------------------------------
+\textbf{Exercice 2 / Maximum, somme et moyenne d'un tableau 1D}
+
+Ajoutez les fonctions \textit{maxTabInt(...)}, \textit{sumTabInt(...)} et \textit{moyTabInt(...)} à la bibliothèque de fonctions sur les tableaux 1D, permettant respectivement de retourner le maximum, la somme et la moyenne d'un tableau d'entiers passé en argument.
+
+
+\centerline {\rule{.50\linewidth}{.25pt}} % Horizontal line
+%-----------------------------------
+\textbf{Exercice 3 / Masques binaires}
+
+Soit les variables \textbf{\lstinline|int a = 478;|} et \textbf{\lstinline|int k;|}.
+
+\begin{enumerate}
+	 \item Quel est le résultat des opérations \textbf{\lstinline|k = a << 3;|} et \textbf{\lstinline|k = a >> 2;|} ?
+	 \item Quel est le résultat de l'opération \textbf{\lstinline|k = a & 0b11111111;|} ?
+	 
+\medskip
+	 
+Soit les variables \textbf{\lstinline|int k1 = (a >> 8) & 0b11111111;|} et \textbf{\lstinline|int k2 = (a) & 0b11111111;|}.
+
+	\item Quel est le résultat de l'opération \textbf{\lstinline|k = (k1 << 8) + k2;|} ? Expliquez ces trois instructions.
+
+\end{enumerate}
+
+
+\centerline {\rule{.50\linewidth}{.25pt}} % Horizontal line
+%-----------------------------------
+\textbf{Exercice 4 / Chaine de caractères}
+
+On se propose d'étudier le code \textit{\textbf{exo2\_4.cpp}} fourni.
+
+\begin{enumerate}
+	\item Testez ce code et expliquez comment est gérée une chaine de caractères en C/C++.
+	\item Commentez les différents affichages de la variable \textbf{\lstinline|chaine[2]|}.
+	\item Qu'arrive-t-il à la variable \textbf{\lstinline|chaine[3]|} stockée dans la variable \textbf{\lstinline|c|}.
+	\item A quoi sert l'instruction \textbf{\lstinline|sprintf(...)|} ? Combien d'octets utilise la variable \textbf{\lstinline|chaine2|} ?
+		
+\end{enumerate}
+
+\centerline {\rule{.50\linewidth}{.25pt}} % Horizontal line
+%-----------------------------------
+\textbf{Exercice 5 / Transmission d'informations}
+
+On souhaite transmettre 5 données entières qui sont chacune comprise entre 0 et 179. 
+
+\begin{enumerate}
+	\item Proposez une solution pour les transmettre de manière asynchrone octet par octet de manière fiable, en utilisant le moins d'octets possible.
+	\item Cette solution est-elle toujours la moins gourmande en octets dans le cas de 5 nombres entiers compris entre 0 et 3599 ?
+\end{enumerate}
+
+\centerline {\rule{.50\linewidth}{.25pt}} % Horizontal line
+%-----------------------------------
+\textbf{Exercice B1 / Echange de variables}
+
+Écrire une fonction qui prend deux entiers A et B en paramètre, qui échange le contenu des variables A et B. 
+
+
+\centerline {\rule{.50\linewidth}{.25pt}} % Horizontal line
+%-----------------------------------
+\textbf{Exercice B2 / Remplissage d'un tableau 1D}
+
+Écrire un programme qui demande à l'utilisateur de saisir 10 entiers stockés dans un tableau. Le programme doit ensuite afficher l'indice du plus grand élément.
+
+
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+%----------------------------------------------------------------------------------------
+
+\end{document} 

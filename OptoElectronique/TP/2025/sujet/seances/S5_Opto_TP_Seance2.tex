@@ -1,0 +1,269 @@
+\newpage
+%\pagestyle{empty}
+
+\begin{minipage}[c]{.25\linewidth}
+	\includegraphics[width=4cm]{images/Logo-LEnsE.png}
+\end{minipage} \hfill
+\begin{minipage}[c]{.4\linewidth}
+
+\begin{center}
+\vspace{0.3cm}
+{\Large \textsc{Opto-Électronique}}
+
+\medskip
+
+5N-027-SCI \qquad \textbf{\Large TP Séance 2}
+
+\end{center}
+\end{minipage}\hfill
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Objectif de la séance}
+
+Lors de cette seconde séance, vous allez :
+
+\begin{itemize}
+	\item mettre en place un \textbf{banc de caractérisation} d'un montage de photodétection
+	\begin{itemize}
+		\item \textbf{caractériser statiquement une LED}	
+		\item réaliser un \textbf{émetteur de flux lumineux} basé sur une source à LED
+	\end{itemize} 
+	
+	\item mettre en \oe{}uvre un \textbf{montage simple de photodétection} et le \textbf{caractériser fréquentiellement} et \textbf{temporellement}
+\end{itemize} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Premier modèle du montage de photodétection}
+
+Les premiers résultats obtenus lors de la précédente séance autour du montage simple de photodétection ont permis de conclure que ce type de montage permettait d'\textbf{obtenir une tension proportionnelle au flux lumineux}.
+
+\medskip
+
+On peut montrer que la fonction de transfert théorique d'un tel montage vaut :
+
+\[
+\boxed{V_s = R_{PHD} \cdot I_{photo} = R_{PHD} \cdot k \cdot \Phi_{e}}
+\]
+
+où $k$ est la sensibilité de la photodiode et $\Phi_e$ le flux lumineux à mesurer.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Validité du modèle}
+
+On souhaite \textbf{vérifier que cette loi reste valable} quelque soit la fréquence et l'amplitude du flux lumineux d'entrée.
+
+\medskip
+
+Pour cela, on souhaite pouvoir remplir le tableau suivant (à reproduire dans votre cahier de laboratoire) et \textbf{mesurer la réponse en fréquence de ce montage} :
+
+\medskip
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+  \hline
+  $R_{PHD}$ & $|V_s|_{MAX}$ & [B]ande [P]assante & [BP]/$R_{PHD}$ \\
+  \hline
+  $10\operatorname{k\Omega}$ & & & \\
+  \hline
+  $100\operatorname{k\Omega}$ & & & \\
+  \hline
+  $1\operatorname{M\Omega}$ & & & \\
+  \hline
+\end{tabular}
+\end{center}
+
+où $|V_s|_{MAX}$ est l'amplitude maximale du signal de sortie, [BP] est la bande-passante à $-3\operatorname{dB}$ du système et [BP]/$R_{PHD}$ le rapport de la bande-passante sur la valeur de la résistance $R_{PHD}$.
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Nécessité d'une source lumineuse paramètrable}
+
+Afin de pouvoir étudier le montage de photodétection pour différentes fréquences, il est \textbf{indispensable} d'avoir à disposition \textbf{une source lumineuse dont la fréquence du flux lumineux est modifiable}.
+
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Etude statique d'une LED - \textit{Durée : 60 min}}
+
+Nous allons chercher à \textbf{caractériser statiquement} une source lumineuse de type \textbf{LED}, c'est à dire \textbf{tracer expérimentalement la loi mathématique} qui lie le courant traversant le dipôle et la différence de potentiel à ses bornes.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Ressources}
+
+\begin{itemize}
+	\item Fiche : Diode / LED / Photodiode
+	\item Protocole : Caractéristique statique d'un dipôle / Caractéristique Manuelle
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{LED Rouge}
+
+On utilisera une LED Rouge de type \textbf{\texttt{Kingbright L-1503ID}} (une partie de la documentation est fournie en annexe).
+
+\Quest Rechercher et relever, dans la documentation technique du constructeur de la LED Rouge, les valeurs intéressantes pour la mise en \oe{}uvre pratique (électrique et optique) d'un tel composant.
+
+
+\subsection{Choix des appareils et des composants}
+
+Dans le schéma proposé dans la rubrique \textbf{Caractéristique manuelle} du tutoriel \textit{Caractéristique statique d'un dipôle}, une résistance $R_P$ est proposée comme protection en courant.
+
+\Quest Comment choisir cette résistance et comment régler les différents appareils de mesure?
+
+\Manip Relever la caractéristique $i=f(u)$ de cette LED pour des tensions $u$ positives ET négatives. 
+
+\Manip Déterminer les zones d'utilisation possible de ce composant. 
+
+\medskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Cahier de laboratoire / Check-List}
+
+\begin{itemize}[label=$\square$]
+	\item protocoles utilisés (avec schéma de câblage, paramètres des instruments de mesure et étapes expérimentales)
+	\item courbe de la caractéristique statique
+	\item analyse de la courbe
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\section{Réalisation d'un émetteur lumineux - \textit{Durée : 60 min}}
+
+Afin de pouvoir caractériser en fréquence le montage de photodétection, nous allons avoir besoin d'un émetteur lumineux dont il est possible de \textbf{contrôler la fréquence du flux lumineux émis} (voir circuit sur la figure~\ref{fig:schem_emit_trans}).
+
+\begin{figure}[h!]
+    \centering
+\begin{circuitikz}
+	\draw (-2,0) to[short, o-*] (-1, 0) -- (0, 0) to[R=$R_{LED}$] (0, 2);
+	\draw (-2, 4.5) to[short, o-] (0, 4.5) to[led, l_=$LED$] (0, 2);
+	\draw (-1,0) node[ground](GND){};
+	\draw (-2,0.3) edge[->, red!40!black] (-2,4.2);
+	\node[text=red!40!black] (Vin) at (-2.5,2.25){$V_e$};
+	
+	\draw[->, thick, blue!40!black, decorate, decoration={snake, amplitude=1mm, segment length=4mm}] (0.8,3.25) -- (2.2,3.25);
+	\node[text=blue!40!black] (Phi) at (1.5,4){$\Phi_e$};
+
+	\draw (7,0) to[battery2, invert] (7,4.5) -- (3,4.5);
+	% fleche
+	\draw (7.5,0.3) edge[->, thick] (7.5,4.2);
+	\node (Ein) at (8,2.25){$E$};
+	
+	\draw (3,2) to[empty photodiode, -] (3,4.5);
+	\draw (3,2.8) to[short, i = $I_{photo}$, current arrow scale=8] ++(0,-0.5);
+
+	\draw (3,2) to[R=$R_{PHD}$, *-] (3,0) to[short, -*] (4,0) -- (7,0);
+	\draw (3,2) to[short, -o] ++(1.5,0);
+	\draw (4,0) node[ground](GND){};
+	% fleche
+	\draw (4.5,0.3) edge[->, thick, green!40!black] (4.5,1.7); 
+	\node[text=green!40!black] (US) at (5,1){$V_S$};
+\end{circuitikz}
+    \caption{Schéma du circuit émetteur (à gauche) et du circuit de photodétection simple (à droite)}
+    \label{fig:schem_emit_trans}
+\end{figure}
+
+où $\Phi_e$ est le flux lumineux résultant de l'émetteur.
+
+\medskip
+
+On souhaite un \textbf{flux lumineux sinusoïdal} dont il est possible de contrôler la fréquence de modulation. \textit{Attention, on ne parle pas ici de la variation de la longueur d'onde de la source lumineuse mais bien de la modulation du flux lumineux en amplitude.}
+
+\Quest Quel signal doit-on appliquer sur $V_e$ ? Quels sont les paramètres à donner à ce signal (amplitude, valeur moyenne...) pour obtenir un flux lumineux sinusoïdal ?
+
+\Quest A quoi correspond la résistance $R_{LED}$ ? Comment vérifier que le flux est sinusoïdal (sans utiliser le montage de photodétection proposé puisqu'on ne connaît pas sa réponse en fréquence) ?
+
+\Manip Réaliser le système d'émission et vérifier son bon fonctionnement.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Cahier de laboratoire / Check-List}
+
+\begin{itemize}[label=$\square$]
+	\item paramètres utilisés pour le générateur $V_e$
+	\item protocole de vérification de la forme du flux lumineux
+	\item validation du fonctionnement (capture d'écran d'oscilloscope)
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Montage de photodétection - Rappel}
+
+Dans le circuit précédent, la partie de droite correspond au montage de photodétection que nous allons par la suite chercher à caractériser.
+
+\Quest A quoi sert la tension $E$ ? De quelle nature doit-elle être ?
+
+\Quest Quelle fonction de transfert cherche-t-on à caractériser sur ce montage de photodétection ? 
+
+\Quest A-t-on accès directement à la valeur du flux lumineux $\Phi_e$ ? De quoi dépend le flux lumineux reçu par la photodiode (en lien avec celui émis par la LED) ? Quelles seront alors les précautions à prendre lors des prochaines mesures ?
+
+
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Réponse en fréquence du montage - \textit{Durée : 120 min}}
+
+On souhaite à présent \textbf{vérifier la validité du modèle proposé initialement} pour le montage simple de photodétection pour des flux lumineux modulés à différentes fréquences.
+
+Pour cela, on placera le système émetteur devant le montage de photodétection à caractériser (voir schéma de la section précédente).
+
+\subsection{Ressources}
+
+\begin{itemize}
+	\item Fiche : Photodétection
+	\item Fiche : Filtrage / Analyse Harmonique / Ordre 1
+	\item Protocole : Réponse en fréquence d'un système linéaire / Procédure "classique"
+	\item Protocole : Mesure de bande-passante
+	\item Protocole : Réponse indicielle d'un système linéaire
+\end{itemize}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Réponse en fréquence}
+
+\Manip Placer le montage émetteur face au montage de photodétection (la LED en face de la partie sensible de la photodiode). Utiliser une résistance $R_{PHD} = 100\operatorname{k\Omega}$.
+
+\Manip Tracer le \textbf{diagramme de Bode en gain} de ce système pour des fréquences allant de $100~\operatorname{Hz}$ à $1~\operatorname{MHz}$, à l'aide de mesure réalisée à l'oscilloscope.
+
+\Quest Quelle était la réponse en fréquence attendue théoriquement ? 
+
+\Manip Mesurer la bande-passante à $-3\operatorname{dB}$ de ce montage.
+
+\medskip
+
+\Manip Refaire le tracé du diagramme de Bode et la mesure de la bande-passante pour des résistances $R_{PHD} = 10\operatorname{k\Omega}$ et $R_{PHD} = 1\operatorname{M\Omega}$
+
+\Quest Conclure sur le modèle à utiliser pour ce montage. 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Validation des résultats}
+
+\Real Préparer une présentation (3-4 min maximum) rassemblant les \textbf{schémas de mesure}, les \textbf{protocoles utilisés}, les \textbf{calculs réalisés}, les \textbf{résultats pertinents} obtenus ainsi qu'une \textbf{brève analyse} de ces derniers.
+
+\medskip
+
+\noindent \rule{\linewidth}{1pt}
+
+\textbf{\Large Faire valider l'ensemble par un$\cdot$e encadrant$\cdot$e}
+
+\medskip
+
+Cette présentation devra clairement faire ressortir des preuves en lien avec :
+
+\begin{itemize}
+	\item les compétences \fbox{C3}, \fbox{C4} et \fbox{C5}
+	\item les AAV du \fbox{bloc 2}
+\end{itemize}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

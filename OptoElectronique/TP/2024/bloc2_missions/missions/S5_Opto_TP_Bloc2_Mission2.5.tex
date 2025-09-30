@@ -1,0 +1,106 @@
+\newpage
+\pagestyle{empty}
+
+\begin{minipage}[c]{.25\linewidth}
+	\includegraphics[width=4cm]{images/Logo-LEnsE.png}
+\end{minipage} \hfill
+\begin{minipage}[c]{.4\linewidth}
+
+\begin{center}
+\vspace{0.3cm}
+{\Large \textsc{Opto-Electronique}}
+
+\medskip
+
+5N-027-SCI \qquad \textbf{\Large TP Bloc 2}
+
+\end{center}
+\end{minipage}\hfill
+
+\vspace{0.5cm}
+
+\noindent \rule{\linewidth}{1pt}
+
+{\noindent\Large \textbf{Mission 2.5} / Tracer la réponse indicielle d'un système} 
+
+\noindent \rule{\linewidth}{1pt}
+
+\vspace{-0.5cm}
+
+\begin{center}
+
+Durée conseillée : 60 min / Séance 2
+
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Objectif de la mission}
+\label{mission25}
+
+On se propose de \textbf{tracer la réponse indicielle} d'un montage et de montrer l'impact du gain du montage sur le temps de réponse du montage.
+
+\textit{On reprendra le montage de la Mission 2.4.}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Ressources}
+
+Vous pouvez utiliser les fiches résumées suivantes : 
+
+\begin{itemize}
+	\item \hyperref[fiche:ALIModele]{Fiche : Amplificateur Linéaire Intégré / Modèle}
+	\item \hyperref[fiche:AnHaOrdre1]{Fiche : Analyse Harmonique / Ordre 1}
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Réponse indicielle}
+
+La réponse indicielle fournit des informations essentielles sur les \textbf{caractéristiques dynamiques} d'un système.
+
+Elle est aussi appelée \textbf{réponse à un échelon} unitaire. Elle correspond à la sortie d'un système lorsqu'un signal de type échelon est appliqué en entrée.
+
+Un échelon unitaire est une fonction qui passe de 0 à 1 à un instant donné, généralement considéré à $t = 0$. 
+
+Elle permet d'analyser le comportement transitoire et le comportement à l'état stable d'un système. Par exemple, on peut observer le temps de montée, le temps de stabilisation, le dépassement (ordre supérieur à 2), et l'erreur en régime permanent.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lien avec la réponse impulsionnelle et la réponse en fréquence}
+
+La réponse indicielle est liée à la réponse impulsionnelle $h(t)$ d'un système par la relation suivante :
+
+$$u_S(t) = \int_{0}^t h(x)dx$$
+
+Cela signifie que la réponse indicielle est l'intégrale de la réponse impulsionnelle.
+
+On rappelle également que la réponse en fréquence, que l'on peut modéliser par la fonction de transfert d'un circuit en fonction de la fréquence $H(j\omega)$ est la transformée de Fourier de la réponse impulsionnelle $h(t)$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Travail à réaliser}
+
+\Manip Tracer la réponse indicielle du système et relever le temps de réponse à $95\%$ pour la valeur de rapport $\frac{R_2}{R_1}$ permettant d'obtenir un gain dans la bande-passante de $25\operatorname{dB}$.
+
+\Manip Tracer la réponse indicielle de ce système pour 2 autres valeurs du rapport $\frac{R_2}{R_1}$. Calculer également la nouvelle valeur de la fréquence caractéristique du montage ($f_c = R_2 \cdot $). Relever le temps de réponse à $95\%$ pour ces deux valeurs de rapport $\frac{R_2}{R_1}$.
+
+\medskip
+
+\textit{La somme des résistances $R_1 + R_2$ doit être comprise entre $10\operatorname{k\Omega}$ et $50\operatorname{k\Omega}$}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Livrables}
+
+
+Une \textbf{fiche de manipulation} en ligne (partagée dans le cahier de laboratoire) rappelant :
+
+\begin{itemize}
+	\item le protocole de mesure et de réglage (schémas de mesure, de câblage)
+	\item les mesures du temps de réponse à $95\%$
+	\item les captures d'écran de l'oscilloscope pour les différentes réponses indicielles
+\end{itemize}
+
+Une \textbf{analyse} du résultat obtenu et une étude du lien entre la bande-passante et le temps de réponse à 95\%.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

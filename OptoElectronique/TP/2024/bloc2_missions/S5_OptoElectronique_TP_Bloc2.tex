@@ -1,0 +1,282 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Engineering problems / LaTeX Template
+%		Semester 5
+%		Institut d'Optique Graduate School
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	5N-OptoElec-Bloc1	/ caractérisation statique
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Created by:
+%	Julien VILLEMEJANE - 16/jul/2024
+% Modified by: 06/09/24 % Modified by: Fabienne BERNARD - 30/08/24  Modifs pointées par : %[FaB]
+%	
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Professional Newsletter Template
+% LaTeX Template
+% Version 1.0 (09/03/14)
+%
+% Created by:
+% Bob Kerstetter (https://www.tug.org/texshowcase/) and extensively modified by:
+% Vel (vel@latextemplates.com)
+% 
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper,11pt]{article} % The default font size is 10pt; 11pt and 12pt are alternatives
+
+\usepackage{opto_elec_villemejane}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+
+% Page de garde
+\begin{titlepage}
+
+\begin{center}
+	\begin{minipage}{2.5cm}
+	\begin{center}
+		\includegraphics[width=8cm]{images/Logo-LEnsE.png}
+	\end{center}
+\end{minipage}\hfill
+\begin{minipage}{10cm}
+	\begin{center}
+	\textbf{Institut d'Optique Graduate School }\\[0.1cm]
+    \textbf{TP d'Opto-Électronique}
+
+
+	\end{center}
+\end{minipage}\hfill
+
+
+\vspace{5cm}
+
+
+{\huge \bfseries \textsc{Opto-Électronique}} \\[0.5cm]
+{\large \bfseries Travaux Pratiques} \\[0.2cm]
+Semestre 5
+
+\vspace{2cm}
+% Title
+\rule{\linewidth}{0.3mm} \\[0.4cm]
+{ \huge \bfseries\color{violet_iogs} Caractériser un système linéaire \\[0.4cm] }
+\rule{\linewidth}{0.3mm} \\[1cm]
+{\huge Bloc 2}
+
+\vfill
+
+% Bottom of the page
+%{\textbf{\large {Année universitaire} 2024-2025}}
+
+\end{center}
+\end{titlepage}
+
+\newpage
+\strut % empty page
+% Liens vers ressources
+\newpage
+\pagestyle{empty}
+
+\begin{minipage}[c]{.25\linewidth}
+	\includegraphics[width=5cm]{images/Logo-LEnsE.png}
+\end{minipage} \hfill
+\begin{minipage}[c]{.4\linewidth}
+
+\begin{center}
+\vspace{0.3cm}
+{\Large \textsc{Opto-Electronique}}
+
+\medskip
+
+5N-027-SCI \qquad \textbf{\Large TP Bloc 2}
+
+\end{center}
+\end{minipage}\hfill
+
+\vspace{0.5cm}
+
+\noindent \rule{\linewidth}{1pt}
+
+{\noindent\Large \rule[-7pt]{0pt}{30pt}  \textbf{Caractérisation %
+de la dynamique %[FaB]
+d'un système linéaire}}
+
+\noindent \rule{\linewidth}{1pt}
+
+{\large À l'issue des séances de TP et de TD concernant le bloc 2, les étudiant$\cdot$es seront capables de \textbf{caractériser un système linéaire} dans les domaines temporel et fréquentiel.}
+
+\medskip
+
+\textit{Les sujets de TD ne sont pas inclus dans ce document.}
+
+\medskip
+
+\textit{Ce sujet est disponible au format électronique sur le site du LEnsE - https://lense.institutoptique.fr/ dans la rubrique Année / Première Année / Opto-Electronique S5 / Bloc 2.}
+
+\noindent \rule{\linewidth}{1pt}
+
+\medskip
+
+Pour cela, ils$\cdot$elles %[FaB]devront être
+seront capables de~:
+\begin{itemize}
+	\item %[FaB]Calculer une fonction de transfert
+	Déterminer la réponse en fréquence attendue à partir du schéma électrique d'un circuit passif ou contenant des ALI,
+	\item Tracer l'allure %[FaB]d'une réponse en fréquence RF (balayage)
+	de la \textbf{réponse en fréquence} d'un circuit sur l'écran d'un oscilloscope par une méthode de balayage en fréquence
+	\item %[FaB]Tracer un digramme de Bode en gain à l'aide : 
+	Mesurer le \textbf{diagramme de Bode} en amplitude  d'un circuit linéaire point par point à l'aide :
+	\begin{itemize}
+		\item d'un oscilloscope
+		\item d'un dB mètre
+	\end{itemize}
+	\item Mesurer un \textbf{déphasage}
+	\item %[FaB] Tracer une réponse indicielle
+	Définir et mesurer la \textbf{réponse indicielle} et/ou la \textbf{réponse impulsionnelle} d'un circuit
+	\item %[FaB]Modéliser un système à partir d'une réponse en fréquence ou d'une réponse indicielle
+	Proposer un \textbf{modèle mathématique} des caractéristiques d'un circuit à partir de relevés de mesure de la réponse en fréquence et/ou de la réponse indicielle
+\end{itemize}
+
+
+\noindent \rule{\linewidth}{1pt}
+
+\medskip
+
+\textbf{\large Liste des missions}
+
+\begin{description}
+	\item[Mission 2.1] \hyperref[mission21]{Tracer la réponse en fréquence d'un montage amplificateur inverseur et déterminer ses limites}
+	\item[Mission 2.2] \hyperref[mission22]{Mesurer la bande-passante d'un montage linéaire}	
+	\item[Mission 2.3] \hyperref[mission23]{Tracer l'allure rapide de la réponse en fréquence}	
+	\item[Mission 2.4] \hyperref[mission24]{Mesurer l'écart de phase entre deux signaux}
+	\item[Mission 2.5] \hyperref[mission25]{Tracer la réponse indicielle d'un système}
+\end{description}
+
+
+\noindent \rule{\linewidth}{1pt}
+
+\medskip
+
+\textbf{\large Liste des autres ressources}
+
+\begin{itemize}
+	\item \hyperref[ressource:RepFreq]{Tracer la réponse en fréquence d'un système linéaire}
+	\item \hyperref[fiche:ALI]{Fiche : Amplificateur Linéraire Intégré (ALI)}
+	\item \hyperref[fiche:ALIModele]{Fiche : ALI / Modèle}
+	\item \hyperref[fiche:RegimeHarmonique]{Fiche : Régime Harmonique}
+	\item \hyperref[fiche:AnHaOrdre1]{Fiche : Analyse Harmonique / Ordre 1}
+\end{itemize}
+
+\medskip
+
+Un \textbf{feuillet annexe}, présentant succinctement l'\textbf{ensemble des instruments}, est disponible sur chacune des paillasses.
+
+\newpage
+\strut % empty page
+% Missions
+
+%[FaB]\include{missions/S5_Opto_TP_Bloc2_Mission2.1.tex}
+%[FaB]\\include{missions/S5_Opto_TP_Bloc2_Mission2.2.tex}
+%[FaB]\\include{missions/S5_Opto_TP_Bloc2_Mission2.3.tex}
+%[FaB]\\include{missions/S5_Opto_TP_Bloc2_Mission2.4.tex}
+%[FaB]\\include{missions/S5_Opto_TP_Bloc2_Mission2.5.tex}
+
+\input{missions/S5_Opto_TP_Bloc2_Mission2.1.tex}
+\newpage
+\strut % empty page
+\input{missions/S5_Opto_TP_Bloc2_Mission2.2.tex}
+\input{missions/S5_Opto_TP_Bloc2_Mission2.3.tex}
+\input{missions/S5_Opto_TP_Bloc2_Mission2.4.tex}
+\input{missions/S5_Opto_TP_Bloc2_Mission2.5.tex}
+
+
+\newpage
+% Ressources
+\begin{center}
+	\begin{minipage}{2.5cm}
+	\begin{center}
+		\includegraphics[width=5cm]{images/Logo-LEnsE.png}
+	\end{center}
+\end{minipage}\hfill
+\begin{minipage}{10cm}
+	\begin{center}
+	\textbf{Institut d'Optique Graduate School }\\[0.1cm]
+    \textbf{TP d'Opto-Électronique}
+
+
+	\end{center}
+\end{minipage}\hfill
+
+
+\vspace{2cm}
+
+
+{\Large \bfseries \textsc{Opto-Électronique}} \\[0.5cm]
+{\large \bfseries Travaux Pratiques} \\[0.2cm]
+Semestre 5
+
+\vspace{1cm}
+
+% Title
+\rule{\linewidth}{0.3mm} \\[0.4cm]
+{ \Large \bfseries\color{violet_iogs} Ressources \\[0.4cm] }
+\rule{\linewidth}{0.3mm} \\[1cm]
+{\large Bloc 2}
+
+\end{center}
+
+\vspace{3cm}
+
+\textbf{\large Liste des ressources}
+\begin{itemize}
+	\item \hyperref[ressource:RepFreq]{Tracer la réponse en fréquence d'un système linéaire}
+	\item \hyperref[fiche:ALI]{Fiche : Amplificateur Linéraire Intégré (ALI)}
+	\item \hyperref[fiche:ALIModele]{Fiche : ALI / Modèle}
+	\item \hyperref[fiche:RegimeHarmonique]{Fiche : Régime Harmonique}
+	\item \hyperref[fiche:AnHaOrdre1]{Fiche : Analyse Harmonique / Ordre 1}
+\end{itemize}
+
+\vfill
+
+\newpage
+\strut % empty page
+
+
+
+% Ressources
+%[FaB]\\include{ressources/S5_Opto_Reponse_Frequentielle.tex}
+\input{ressources/S5_Opto_Reponse_Frequentielle.tex}
+\titleformat{\section}
+  {\null}{}{0pt}{}
+
+%% Docs techniques
+%\includepdf[pages=4, pagecommand={\section{\texorpdfstring{\hspace{-1em}}{Doc SFH206K photodiode}}}\label{doc:phdSFH206K}]{ressources/osram_SFH206K.pdf}
+%\includepdf[pages=5-8]{ressources/osram_SFH206K.pdf}
+
+
+
+%% Fiches 
+\includepdf[pages=-, landscape=true, pagecommand={\section{\texorpdfstring{\hspace{-1em}}{Fiche ALI}}}\label{fiche:ALI}]{../../Fiches/Fiche_ALI.pdf}
+
+\includepdf[pages=-, landscape=true, pagecommand={\section{\texorpdfstring{\hspace{-1em}}{Fiche ALI Modele}}}\label{fiche:ALIModele}]{../../Fiches/Fiche_ALI_Modele.pdf}
+
+\includepdf[pages=-, landscape=true, pagecommand={\section{\texorpdfstring{\hspace{-1em}}{Fiche Regime Harmonique}}}\label{fiche:RegimeHarmonique}]{../../Fiches/Fiche_Regime_Harmonique.pdf}
+
+
+\includepdf[pages=-, landscape=true, pagecommand={\section{\texorpdfstring{\hspace{-1em}}{Fiche Analyse Harmonique Ordre 1}}}\label{fiche:AnHaOrdre1}]{../../Fiches/Fiche_Analyse_Ordre1.pdf}
+
+
+
+\end{document}
+
+

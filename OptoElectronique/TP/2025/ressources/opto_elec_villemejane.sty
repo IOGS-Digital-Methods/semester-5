@@ -1,0 +1,95 @@
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[french]{babel}
+\usepackage{makeidx}
+\usepackage{eurosym}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage[, x11names]{xcolor}
+
+\definecolor{violet_iogs}{RGB}{10, 50, 80}
+\definecolor{orange_iogs}{RGB}{255, 150, 10}
+
+\usepackage[colorlinks,linkcolor=violet_iogs,
+urlcolor=violet_iogs, citecolor=orange_iogs]{hyperref}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+\usepackage{pgfplots}
+\usepackage{multicol}
+\usepackage{titlesec}
+\textwidth 18 cm
+\textheight 24 cm
+\oddsidemargin -1cm
+\evensidemargin -1cm
+\topmargin -1.5cm
+%\renewcommand{\thesection}{\arabic{section}} 
+\usepackage{pifont}
+
+%[FaB]
+\renewcommand{\rmdefault}{bch}
+\renewcommand{\sfdefault}{pag} 
+\renewcommand{\ttdefault}{pcr} 
+
+
+\usepackage{enumitem}
+
+
+% Inclure des pdf
+\usepackage{pdfpages}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\usepackage[european, straightvoltages]{circuitikz}
+\usetikzlibrary{babel, patterns, patterns.meta, calc}
+
+\newcommand{\sectionbgcolor}[1]{%
+  \colorbox{violet_iogs}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{#1}}}
+\newcommand{\sectionUnbgcolor}[1]{%
+  \colorbox{orange_iogs}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{#1}}}
+\newcommand{\subsectionbgcolor}[1]{%
+  \colorbox{violet_iogs!70}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{#1}}}
+\newcommand{\subsectionUnbgcolor}[1]{%
+  \colorbox{orange_iogs}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{#1}}}
+
+% Modifier le format des sections
+\titleformat{\section}
+  {\Large\bfseries\color{white}} % Format du texte de la section
+  {} % Lieu où le numéro de section apparaîtra
+  {0pt} % Espacement entre le numéro et le titre
+  {\sectionbgcolor} % Commande pour appliquer la couleur de fond
+  []
+
+\titleformat{\subsection}
+  {\large\bfseries\color{white}} % Format du texte de la section
+  {} % Lieu où le numéro de section apparaîtra
+  {0pt} % Espacement entre le numéro et le titre
+  {\subsectionbgcolor} % Commande pour appliquer la couleur de fond
+  []
+
+\titleformat{name=\section,numberless}
+  {\Large\bfseries\color{white}} % Format du texte de la section
+  {} % Lieu où le numéro de section apparaîtra
+  {0pt} % Espacement entre le numéro et le titre
+  {\sectionUnbgcolor} % Commande pour appliquer la couleur de fond
+  []
+
+\titleformat{name=\subsection,numberless}
+  {\large\bfseries\color{white}} % Format du texte de la section
+  {} % Lieu où le numéro de section apparaîtra
+  {0pt} % Espacement entre le numéro et le titre
+  {\subsectionUnbgcolor} % Commande pour appliquer la couleur de fond
+  []
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Compteurs de questions/manips
+\newcommand{\Prepa}{\vspace{0.2cm}\ding{220} \textbf{\large{}P~} \quad }
+\newcommand{\Quest}{\vspace{0.2cm}\ding{220} \textbf{\large{}Q~} \quad }
+\newcommand{\Manip}{\vspace{0.2cm}\ding{220} \textbf{\large{}M~} \quad }
+\newcommand{\Real}{\vspace{0.2cm}\ding{220} \quad }
+\newcommand{\CR}{\vspace{0.2cm}(CR) \ding{220} \quad }

@@ -1,0 +1,174 @@
+\newpage
+\pagestyle{empty}
+
+\begin{minipage}[c]{.25\linewidth}
+	\includegraphics[width=4cm]{images/Logo-LEnsE.png}
+\end{minipage} \hfill
+\begin{minipage}[c]{.4\linewidth}
+
+\begin{center}
+\vspace{0.3cm}
+{\Large \textsc{Opto-Electronique}}
+
+\medskip
+
+5N-027-SCI \qquad \textbf{\Large TP Bloc 2}
+
+\end{center}
+\end{minipage}\hfill
+
+\vspace{0.5cm}
+
+\noindent \rule{\linewidth}{1pt}
+
+{\noindent\Large \rule[-7pt]{0pt}{30pt}  \textbf{Mission 2.1} / Tracer la réponse en fréquence d'un montage amplificateur inverseur et déterminer ses limites} 
+
+\noindent \rule{\linewidth}{1pt}
+
+\vspace{-0.5cm}
+
+\begin{center}
+
+Durée conseillée : 90 min / Séance 1
+
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Objectif de la mission}
+\label{mission21}
+
+On se propose de \textbf{caractériser en fréquence} un montage à amplificateur linéaire intégré de type inverseur, c'est à dire de \textbf{tracer expérimentalement la loi mathématique} qui lie le gain du montage à la fréquence du signal injecté.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Ressources}
+
+Vous pouvez utiliser les fiches résumées suivantes : 
+
+\begin{itemize}
+	\item \hyperref[fiche:ALI]{Fiche : Amplificateur Linéaire Intégré}
+	\item \hyperref[fiche:ALIModele]{Fiche : Amplificateur Linéaire Intégré / Modèle}
+	\item \hyperref[fiche:RegimeHarmonique]{Fiche : Régime Harmonique}
+	\item \hyperref[fiche:AnHaOrdre1]{Fiche : Analyse Harmonique / Ordre 1}
+\end{itemize}
+
+
+
+\subsection{Amplificateur Linéaire Intégré}
+
+Les \textbf{amplificateurs linéaires intégrés} (ALI) ou \textbf{amplificateurs opérationnels} (AOP) sont des composants actifs très largement utilisés dans le domaine de l'électronique pour \textbf{amplifier et mettre en forme} les signaux provenant de capteurs. 
+
+\medskip
+
+Nous allons étudier ici les deux principales limitations d'un ALI (ou circuit à AOP) en régime linéaire :
+
+\begin{itemize}
+	\item[\scriptsize$\blacksquare$] la \textbf{bande passante} qui est la limitation en fréquence du circuit à ALI ;	
+	\item[\scriptsize$\blacksquare$] le \textbf{\textit{slew-rate}} ou vitesse de balayage maximale (voir \hyperref[parslewrate]{paragraphe sur le slew-rate}).
+\end{itemize}
+
+\medskip
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+\Quest Rechercher, dans la documentation technique du composant \texttt{TL081}, les valeurs du \textit{slew-rate} et de la bande passante pour un gain unitaire (notée aussi produit "gain $\times$ bande~passante", GBW).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Montage amplificateur inverseur}
+
+\begin{multicols}{2}
+
+On se propose d'étudier le montage suivant. \textit{Tous les potentiels sont référencés par rapport à la masse.}
+
+La fonction de transfert de ce montage, en supposant l'ALI idéal, est la suivante : 
+
+$$\frac{V_s}{V_e} = -\frac{R_2}{R_1}$$
+
+\medskip
+
+\Quest Quelles valeurs de résistances choisir pour obtenir un gain de $25~\operatorname{dB}$ ? \textit{La somme des résistances doit être comprise entre $10\operatorname{k\Omega}$ et $50\operatorname{k\Omega}$.}
+
+\columnbreak
+
+\begin{center}
+\begin{circuitikz} 
+	\node [op amp, fill=blue!10!white](A1) at (0,0){\texttt{ALI1}};
+	\draw (A1.-) to[short] ++(-.5,0) coordinate(A) to[short] ++(0,1.5) coordinate(B) to[R, l^=$R_2$] (B -| A1.out) coordinate(RR) to[short, -*] (A1.out);
+	\draw (A1.-) to[short,-*] ++(-.5,0) coordinate(AA) to[R, l_=$R_1$] ++(-2.5,0) coordinate(BB) to [short,l_=${V_e}$, -o] ++(-1,0) coordinate(CC);
+	\draw (A1.+) to[short] ++(-.5,0) coordinate(AA2) node[cground]{};
+	\draw (A1.out) to [short,l=${V_S}$, -o] ++(1,0) coordinate(D);
+	
+\end{circuitikz}
+\end{center}
+\end{multicols}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Alimentation symétrique}
+Certains composants, notamment les amplificateurs linéaires intégrés, sont capables de traiter des différences de potentiel positives et négatives. Pour cela, il est nécessaire de les alimenter de manière symétrique, c'est-à-dire, avec deux sources de tension fournissant des tensions opposées, souvent notées \texttt{+VCC}, pour l'alimentation positive, et \texttt{-VCC}, pour l'alimentation négative. 
+
+\Quest A partir de la documentation technique, noter le câblage du composant \texttt{TL081} et les tensions d'alimentation maximales. 
+
+\Manip Réaliser une \textbf{alimentation symétrique +10V / -10V} à partir des alimentations stabilisées disponibles et mettre en place un système de contrôle de ces tensions.
+
+\textit{Vous trouverez des informations concernant les différents instruments dans un fascicule disponible sur l'ensemble des paillasses.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Réponse en fréquence de ce montage}
+
+\Manip Réaliser le montage précédent et alimenter le avec l'alimentation symétrique réalisée.
+
+\Manip Tracer le \textbf{diagramme de Bode en gain} de ce système pour des fréquences allant de $100~\operatorname{Hz}$ à $1~\operatorname{MHz}$, à l'aide de mesure réalisée à l'oscilloscope. 
+
+Vous pouvez vous aider des ressources proposées à la fin du document : \hyperref[ressource:RepFreq]{Tracer la réponse en fréquence d'un système linéaire} (Partie \textit{Procédure "classique"}) ainsi .
+
+\Manip Mesurer le \textit{slew-rate} de l'ALI.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Livrables}
+
+
+Une \textbf{fiche de manipulation} en ligne (partagée dans le cahier de laboratoire) rappelant :
+
+\begin{itemize}
+	\item les protocoles de mesure et de réglage (schémas de mesure, de câblage)
+	\item un schéma de câblage de l'alimentation symétrique (et une photo)	
+	\item les tableaux de mesures et les courbes obtenues
+\end{itemize}
+
+Une \textbf{analyse} du résultat obtenu.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Validation}
+
+Les missions 2.1 et 2.2 doivent être validées par un$\cdot$e encadrant$\cdot$e lors de la séance 1 (ou 2). 
+
+Vous présenterez les résultats obtenus ainsi que l'ensemble des documents que vous avez rédigé (cahier de manipulation, courbes...) pour ces deux missions \textbf{à la fin de la mission 2.2}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Autre ressource}
+\label{parslewrate}
+
+\paragraph{A propos du \textit{slew-rate} } Le \textit{slew-rate}  est une limite d'utilisation des ALI en \textbf{régime linéaire}. Cette limitation se traduit par une déformation du signal de sortie comme illustrée par la figure \ref{fig_SlewRate2}.
+
+
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=0.6]{images/SlewRate.pdf}
+\caption{Illustration de la déformation due à la limitation du slew-rate, pour un montage suiveur (gain unitaire)}  \label{fig_SlewRate2} 
+\end{figure}
+
+Le \textit{slew-rate}, $\mathrm{SR}$, est donc quantifié par la pente maximale en $\operatorname{V/\mu s}$ que la tension de sortie peut atteindre.
+\begin{equation*}
+\mathrm{SR}=\text{max} \left( \frac{dV_\text{s}}{dt} \right )
+\end{equation*}
+
+\textbf{Attention aux conditions de mesures, en particulier, toujours s'assurer que le signal n'est pas déformé par le  \textit{slew-rate} lorsqu'on mesure la bande passante !}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

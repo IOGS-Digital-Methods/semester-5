@@ -1,0 +1,295 @@
+\newpage
+%\pagestyle{empty}
+
+\begin{minipage}[c]{.25\linewidth}
+	\includegraphics[width=4cm]{images/Logo-LEnsE.png}
+\end{minipage} \hfill
+\begin{minipage}[c]{.4\linewidth}
+
+\begin{center}
+\vspace{0.3cm}
+{\Large \textsc{Opto-Électronique}}
+
+\medskip
+
+5N-027-SCI \qquad \textbf{\Large TP Séance 1}
+
+\end{center}
+\end{minipage}\hfill
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Objectif de la séance}
+
+Lors de cette première séance, vous allez :
+
+\begin{itemize}
+	\item étudier un premier \textbf{montage de photodétection} et déterminer certaines de ses caractéristiques
+	\item \textbf{caractériser statiquement le capteur} de ce montage, la photodiode
+	\item \textbf{mettre en \oe{}uvre un montage d'amplification} basé sur un amplificateur linéaire intégré (ALI) et le \textbf{caractériser fréquentiellement} et \textbf{temporellement}
+\end{itemize} 
+
+\medskip
+
+Vous allez également vous \textbf{familiariser avec l'utilisation des appareils de mesure} mis à
+votre disposition au cours des séances de Travaux Pratiques d'Opto-Électronique et \textbf{mettre en \oe{}uvre des protocoles expérimentaux standards} en photonique.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Etude d'un montage simple de photodétection - \textit{Durée : 90 min}}
+
+On s'intéresse au circuit de la figure~\ref{fig:schem_photo} avec $E = 5 \, V$ (tension continue), une photodiode de type \textbf{\texttt{SFH206K}} (documentation fournie dans le document annexe) et $R_{PHD} = 100 \, k\Omega$:
+
+\begin{figure}[h!]
+    \centering
+\begin{circuitikz}
+	\draw (0,0) to[battery2, invert] (0,3) -- (2,3);
+	% fleche
+	\draw (-0.5,0.3) edge[->] (-0.5,2.7);
+	\node (Ein) at (-1,1.5){$E$};
+	
+	\draw (5,3) to[empty photodiode] (2,3);
+	\draw (2,3) to[short, i = $I_{photo}$, current arrow scale=8] ++(0.5,0);
+
+	\draw (5,3) to[R=$R_{PHD}$, *-*] (5,0) -- (0,0);
+	\draw (5,0) to[short, -o] ++(1.5,0);
+	\draw (5,3) to[short, -o] ++(1.5,0);
+	\draw (5,0) node[ground](GND){};
+	% fleche
+	\draw (6.5,0.3) edge[->, green!40!black] (6.5,2.7); 
+	\node[text=green!40!black] (US) at (7.1,1.5){$V_S$};
+
+	\node (PhiE) at (3,2){$\Phi_e$};	
+	
+\end{circuitikz}
+    \caption{Schéma du circuit de photodétection simple}
+    \label{fig:schem_photo}
+\end{figure}
+
+On souhaite pouvoir remplir le tableau suivant (à reproduire dans votre cahier de laboratoire) :
+
+\medskip
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+  \hline
+  Grandeur & Unité & Flux ambiant & Obscurité & Lampe de bureau \\
+  \hline
+  Intensité lumineuse $\Phi_e$ &  &  &  &  \\
+  \hline
+  Tension $V_S$ &  &  &  &  \\
+  \hline
+  Courant $I_{photo}$ &  &  &  &  \\
+  \hline
+\end{tabular}
+\end{center}
+
+\Quest Proposer des protocoles (avec les schémas associés incluant les appareils de mesure) pour remplir ce tableau.
+
+\Quest Quel est le lien entre la tension $V_S$ et le flux lumineux mesuré $\Phi_e$ ?
+
+\medskip
+
+\Manip Câbler le montage ci-dessus, en incluant les instruments de mesure adéquats et relever les informations nécessaires pour le tableau précédent.
+
+\Quest Chercher dans la documentation technique de la photodiode la valeur de la \textbf{sensibilité spectrale} et comparer le courant mesuré au courant théorique. Que pouvez-vous conclure ?
+
+\Manip Visualiser la tension aux bornes de $R_{PHD}$ à l'aide d'un oscilloscope et comparer le signal observé au signal attendu. 
+
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Etude statique d'une photodiode - \textit{Durée : 60 min}}
+
+Le système de photodétection précédent inclus un \textbf{capteur particulier}, une photodiode, que nous allons à présent chercher à \textbf{caractériser statiquement}, c'est à dire de \textbf{tracer expérimentalement la loi mathématique} qui lie le courant traversant le dipôle et la différence de potentiel à ses bornes.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Ressources}
+
+\begin{itemize}
+	\item Fiche : Diode / LED / Photodiode
+	\item Fiche : Photodétection
+	\item Protocole : Caractéristique statique d'un dipôle / Caractéristique Manuelle
+\end{itemize}
+
+
+\subsection{Photodiode \texttt{SFH206K}}
+
+On utilisera une photodiode de type \textbf{\texttt{SFH206K}} (une partie de la documentation est fournie en annexe).
+
+\Quest Rechercher et relever dans la documentation technique du constructeur de la photodiode \texttt{SFH206K} les valeurs intéressantes pour la mise en \oe{}uvre pratique (électrique et optique) d'un tel composant.
+
+
+\subsection{Choix des appareils et des composants}
+
+Dans le schéma proposé dans la rubrique \textbf{Caractéristique manuelle} du tutoriel \textit{Caractéristique statique d'un dipôle}, une résistance $R_P$ est proposée comme protection en courant.
+
+\Quest Comment choisir cette résistance et comment régler les différents appareils de mesure?
+
+\Manip Relever la caractéristique $i=f(u)$ de cette photodiode, lorsqu'elle est plongée dans l'obscurité, pour des tensions $u$ positives ET négatives.
+
+\Manip Relever la caractéristique $i=f(u)$ de cette photodiode, lorsqu'elle est soumise à un flux lumineux constant, pour des tensions $u$ positives ET négatives. Quelle précaution faut-il prendre lors de cette mesure ?
+
+\Manip Déterminer les zones d'utilisation possible de ce composant. Quel modèle peut-on alors proposer pour ce capteur ? 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Validation des résultats}
+
+\Real Préparer une présentation (3-4 min maximum) rassemblant les \textbf{schémas de mesure}, les \textbf{protocoles utilisés}, les \textbf{calculs réalisés}, les \textbf{résultats pertinents} obtenus ainsi qu'une \textbf{brève analyse} de ces derniers.
+
+\medskip
+
+\noindent \rule{\linewidth}{1pt}
+
+\textbf{\Large Faire valider l'ensemble par un$\cdot$e encadrant$\cdot$e}
+
+\medskip
+
+Cette présentation devra clairement faire ressortir des preuves en lien avec :
+
+\begin{itemize}
+	\item les compétences \fbox{C3}, \fbox{C4} et \fbox{C5}
+	\item les AAV du \fbox{bloc 1}
+\end{itemize}
+
+
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Etude fréquentielle d'un montage amplificateur - \textit{Durée : 120 min}}
+
+On se propose d'étudier le circuit \textbf{amplificateur inverseur} dont le schéma est donné dans la figure~\ref{fig:schem_ampli} :
+
+\begin{figure}[h!]
+    \centering
+\begin{circuitikz} 
+	\node [op amp, fill=blue!10!white](A1) at (0,0){\texttt{AOP1}};
+	\draw (A1.-) to[short] ++(-.5,0) coordinate(A) to[short] ++(0,1.5) coordinate(B) to[R=$R_2$] (B -| A1.out) to[short, -*] (A1.out);
+	\draw (A1.-) to[short,-*] ++(-.5,0) coordinate(AA) to[R=$R_1$] ++(-2.5,0) coordinate(BB) to[short,-o] ++(-.5,0) coordinate(CC);
+	\draw (A1.+) to[short] ++(0,-0.5) node[ground]{};
+	\draw (A1.out) to[short,-o] ++(1,0) coordinate(D);
+	\draw (-4.6,-1) edge[->,color={green!40!black}] (-4.6,0.3);
+	\node[text={green!40!black}] (Ve) at (-5.1,-0.35){$V_e$}; 
+	\draw (-4.6,-1.3)  to[open,-o] ++(0,0) node[ground](GND){};
+	\draw (2.2,-1) edge[->, color={red}] (2.2,-0.3);
+	\node[text={red}] (Vs) at (1.7,-0.6){$V_s$}; 
+	\draw (2.2,-1.3)  to[open,-o] ++(0,0) node[ground](GND){};
+	
+\end{circuitikz}
+    \caption{Schéma d'un circuit amplificateur inverseur}
+    \label{fig:schem_ampli}
+\end{figure}
+
+Ce montage utilise un \textbf{amplificateur linéaire intégré (ALI)}. Pour ce TP, on choisira un ALI de type \textbf{\texttt{TL081}}.
+
+\medskip
+
+On peut montrer que la fonction de transfert théorique d'un tel montage vaut :
+
+\[
+\boxed{\frac{V_s}{V_e} = - \frac{R_2}{R_1}}
+\]
+
+\medskip
+
+On souhaite \textbf{vérifier que cette loi reste valable} quelque soit la fréquence et l'amplitude du signal d'entrée.
+
+\medskip
+
+Pour cela, on souhaite pouvoir remplir le tableau suivant (à reproduire dans votre cahier de laboratoire) :
+
+\medskip
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+  \hline
+  Gain (dB) & [A]mplification & $R_1$ & $R_2$ & [B]ande [P]assante & Produit [A].[BP] & $\Delta{}T_{95\%}$\\
+  \hline
+  $12$ &  &  &  & & & \\
+  \hline
+  $32$ &  &  &  & & & \\
+  \hline
+\end{tabular}
+\end{center}
+
+où l'amplification correspond à $\frac{V_s}{V_e}$, $R_1$ et $R_2$ les valeurs des résistances choisies, la bande-passante à $-3\operatorname{dB}$ et $\Delta{}T_{95\%}$ est le temps de réponse à 95\%.
+
+
+
+\subsection{Ressources}
+
+\begin{itemize}
+	\item Fiche : Amplificateur Linéaire Intégré
+	\item Fiche : Amplificateur Linéaire Intégré / Modèle
+	\item Fiche : Régime Harmonique
+	\item Fiche : Filtrage / Analyse Harmonique / Ordre 1
+	\item Protocole : Réponse en fréquence d'un système linéaire / Procédure "classique"
+	\item Protocole : Réponse indicielle d'un système linéaire
+\end{itemize}
+
+
+\clearpage
+\subsection{Alimentation symétrique}
+Certains composants, notamment les amplificateurs linéaires intégrés, sont capables de traiter des différences de potentiel positives et négatives. Pour cela, il est nécessaire de les alimenter de manière symétrique, c'est-à-dire, avec deux sources de tension fournissant des tensions opposées, souvent notées \texttt{+VCC}, pour l'alimentation positive, et \texttt{-VCC}, pour l'alimentation négative. 
+
+\Quest A partir de la documentation technique, noter le câblage du composant \textbf{\texttt{TL081}} et les tensions d'alimentation maximales. 
+
+\Manip Réaliser une \textbf{alimentation symétrique +10V / -10V} à partir des alimentations stabilisées disponibles et mettre en place un système de contrôle de ces tensions.
+
+\Quest Quelles précautions faudra-t-il prendre sur la tension d'entrée de ce montage ?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Réponse en fréquence}
+
+\Quest Quelles valeurs de résistances choisir pour obtenir un gain de $12~\operatorname{dB}$ ? \textit{La somme des résistances doit être comprise entre $10\operatorname{k\Omega}$ et $50\operatorname{k\Omega}$.}
+
+\Manip Réaliser le montage précédent et alimenter le avec l'alimentation symétrique réalisée.
+
+\Manip Tracer le \textbf{diagramme de Bode en gain} de ce système pour des fréquences allant de $100~\operatorname{Hz}$ à $1~\operatorname{MHz}$, à l'aide de mesure réalisée à l'oscilloscope. 
+
+\Quest Quelle était la réponse en fréquence attendue théoriquement ? 
+
+\Manip Mesurer la bande-passante à $-3\operatorname{dB}$ de ce montage.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent \rule{\linewidth}{1pt}
+
+\Manip Modifier la résistance $R_1$ pour obtenir un gain de $32~\operatorname{dB}$.
+
+\Manip Tracer le \textbf{diagramme de Bode en gain} de ce système pour des fréquences allant de $100~\operatorname{Hz}$ à $1~\operatorname{MHz}$, à l'aide de mesure réalisée à l'oscilloscope. 
+
+\Manip Mesurer la bande-passante à $-3\operatorname{dB}$ de ce nouveau montage.
+
+\Quest Préciser alors le modèle à utiliser pour ce montage. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Réponse indicielle}
+
+\Manip Pour les deux montages précédents, visualiser la réponse indicielle.
+
+\Manip Mesurer le temps de réponse à 95\%.
+
+\Quest Quel est le lien entre ce temps et la bande-passante mesurée dans la partie précédente ?
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Cahier de laboratoire / Check-List}
+
+\begin{itemize}[label=$\square$]
+	\item tableau comparatif rempli
+	\item protocoles utilisés (avec schéma de câblage, paramètres des instruments de mesure et étapes expérimentales)
+	\item diagrammes de Bode légendés
+	\item captures d'écran d'oscilloscope des réponses indicielles
+	\item analyse des résultats
+	\item modélisation du système
+\end{itemize}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,127 @@
+\newpage
+\pagestyle{empty}
+
+\begin{minipage}[c]{.25\linewidth}
+	\includegraphics[width=4cm]{images/Logo-LEnsE.png}
+\end{minipage} \hfill
+\begin{minipage}[c]{.4\linewidth}
+
+\begin{center}
+\vspace{0.3cm}
+{\Large \textsc{Opto-Electronique}}
+
+\medskip
+
+5N-027-SCI \qquad \textbf{\Large TP Bloc 3}
+
+\end{center}
+\end{minipage}\hfill
+
+\vspace{0.5cm}
+
+\noindent \rule{\linewidth}{1pt}
+
+{\noindent\Large \textbf{Mission 3.3} / Mettre en \oe{}uvre et caractériser un circuit de photodétection incluant un montage suiveur} 
+
+\vspace{-0.5cm}
+
+\begin{center}
+\noindent \rule{\linewidth}{1pt}
+
+Durée conseillée : 60 min / Séance 5
+
+\vspace{-0.2cm}
+\noindent \rule{\linewidth}{1pt}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Objectif de la mission}
+\label{mission33}
+
+On se propose d'\textbf{améliorer les performances dynamiques} du montage précédent en ajoutant un \textbf{montage suiveur} (basé sur un amplificateur linéaire intégré) entre le montage simple et les éléments de mesure (oscilloscope).
+
+On souhaite également \textbf{vérifier les performances dynamiques} (réponse en fréquence notamment) de ce nouveau montage et conclure sur l'intérêt de l'ajout d'un étage suiveur.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Ressources}
+
+Vous pouvez utiliser les fiches résumées suivantes : 
+
+\begin{itemize}	
+	\item \href{https://lense.institutoptique.fr/ressources/Annee1/Electronique/fiches/2020_FR_Photodetection.pdf}{Photodétection}
+	\item \href{https://lense.institutoptique.fr/ressources/Annee1/Electronique/fiches/2021_FR_ALI.pdf}{Amplificateur Linéaire Intégré}
+	\item \href{https://lense.institutoptique.fr/ressources/Annee1/Electronique/fiches/2020_FR_FiltreOrdre1.pdf}{Filtrage du premier ordre}
+\end{itemize}
+
+\subsection{Circuit à étudier}
+
+On se propose d'analyser le circuit ci-dessous, avec $R_{PHD} = 100\operatorname{k\Omega}$. L'amplificateur linéaire intégré sera alimenté à l'aide d'une alimentation symétrique +10V / -10V.
+
+\medskip
+
+\begin{center}
+\begin{circuitikz}
+	\draw (0,0) to[battery2, invert] (0,4.5) -- (2,4.5);
+	% fleche
+	\draw (-0.5,0.3) edge[->] (-0.5,4.2);
+	\node (Ein) at (-1,2.25){$E$};
+	
+	\draw (2,2) to[empty photodiode] (2,4.5);
+	\draw (2,2.8) to[short, i = $I_{photo}$, current arrow scale=8] ++(0,-0.5);
+
+	\draw (2,2) to[R=$R_{PHD}$, *-*] (2,0) -- (0,0);
+	\draw (2,2) -- ++(2.5,0);
+	\draw (1,0) node[ground](GND){};
+	\draw (2,0) to[short, -o] ++(1.5,0) coordinate(VRG);
+	% fleche
+	\draw (3.5,0.3) edge[->, green!40!black] (3.5,1.7); \node[text=green!40!black] (UR) at (4.3,1){$V_{RPHD}$};
+	\draw (3.5,0) to[short, -o] ++(0,0);
+	
+	\draw (4.5,2) node[op amp, fill=blue!10!white, anchor=+](A1) {\texttt{ALI1}};
+	\draw (A1.-) to[short] ++(-.5,0) coordinate(A) to[short] ++(0,1.5) coordinate(B) to[short] (B -| A1.out) to[short, -*] (A1.out);
+	\draw (A1.+) to[short,-o] ++(-1,0) coordinate(C);
+	\draw (A1.out) to[short,-o] ++(1,0) coordinate(D);	
+	\draw (VRG) -- (VRG -| A1.out) coordinate(VOUTGND);
+	\draw (VOUTGND) to[short,-o] ++(1,0) coordinate(VSGND);
+	
+	% fleche
+	\draw (VSGND) ++(0,0.3) edge[->, green!40!black] ($ (D) - (0,0.3) $); \node[text=green!40!black] (US) at ($ (VSGND)!.5!(D) + (0.5,0) $){$V_S$};	% point central entre les deux points
+\end{circuitikz}
+\end{center}
+
+\Quest Quel est le lien entre $V_S$ et $V_{RPHD}$ ? Puis entre $V_S$ et $I_{photo}$ ? Puis entre $I_{photo}$ et le flux lumineux capté par la photodiode $\Phi_e$ ?
+
+\Quest Quelle est la forme théorique de la réponse en fréquence de ce montage ?
+
+\subsection{Réponse en fréquence}
+
+\Manip Tracer l'allure rapide de la réponse en fréquence en gain de ce système pour des fréquences allant de $100~\operatorname{Hz}$ à $1~\operatorname{MHz}$.
+
+\Manip Faire une mesure de la bande-passante du montage.
+
+\Manip Reproduire les deux précédentes étapes pour des valeurs $R_{PHD} = 10\operatorname{k\Omega}$ et $R_{PHD} = 1\operatorname{M\Omega}$. 
+
+\Quest Quel est alors l'impact de $R_{PHD}$ sur le montage ?
+
+\Quest Quel est l'apport du montage suiveur ?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Livrables}
+
+Une \textbf{fiche de manipulation} en ligne (partagée dans le cahier de laboratoire) rappelant :
+
+\begin{itemize}
+	\item les protocoles de mesure et de réglage (schémas de mesure, de câblage)
+	\item les tableaux de mesures et les courbes obtenues
+\end{itemize}
+
+Une \textbf{analyse} du résultat obtenu, en particulier le lien entre le gain, la bande-passante du montage, le temps de réponse et la valeur de $R_{PHD}$.
+
+Une \textbf{analyse comparative} du montage de photodétection simple (mission 3.2) et d'un montage suiveur (mission 3.3), précisant l'intérêt d'utiliser un tel montage.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

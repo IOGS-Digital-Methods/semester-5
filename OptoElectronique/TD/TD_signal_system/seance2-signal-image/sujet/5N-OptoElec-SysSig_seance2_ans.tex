@@ -1,0 +1,154 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Engineering problems / LaTeX Template
+%		Semester 5
+%		Institut d'Optique Graduate School
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	5N-ONIP-Block1	/ Python for Science
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Created by:
+%	Julien VILLEMEJANE - 25/sep/2024
+% Modified by:
+%	
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Professional Newsletter Template
+% LaTeX Template
+% Version 1.0 (09/03/14)
+%
+% Created by:
+% Bob Kerstetter (https://www.tug.org/texshowcase/) and extensively modified by:
+% Vel (vel@latextemplates.com)
+% 
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt]{article} % The default font size is 10pt; 11pt and 12pt are alternatives
+
+\input{../../../../../_assets/latex/5N_ONIP_structure.tex} % Include the document which specifies all packages and structural customizations for this template
+\usepackage{amsmath}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT INFORMATIONS
+%----------------------------------------------------------------------------------------
+\def\module{Opto-Electronique}
+\def\submodule{OptoElec}
+\def\moduleSmall{5N-027-SCI / OE}
+\def\year{2024-2025}
+\def\problem{TD Systèmes et Signaux}
+\def\problemName{OptoElec \& ONIP-1 / TD Systèmes et Signaux}
+
+\def\validation{}
+
+\def\scheduleCM{0}
+\def\scheduleTD{0}
+\def\scheduleTDcomputer{2}
+\def\scheduleTP{0}
+
+\def\workingTeam{Par binôme}
+
+\def\workingSpecial{}
+
+\def\keywords{Systèmes asservis;ALI;FFT}
+
+
+\begin{document}
+%----------------------------------------------------------------------------------------
+%	HEADER IMAGE
+%----------------------------------------------------------------------------------------
+
+\begin{figure}[H]
+\centering\includegraphics[width=0.3\linewidth]{../../../../../_assets/latex/logo_iogs.png}
+\end{figure}
+
+%----------------------------------------------------------------------------------------
+%	MAIN BODY - FIRST PAGE
+%----------------------------------------------------------------------------------------
+%
+\begin{minipage}[t]{1.0\linewidth} % Mini page taking up 65% of the actual page
+
+\hypertarget{context}{\heading{\huge \problemName}{6pt}} % \hypertarget provides a label to reference using \hyperlink{label}{link text}
+
+%-----------------------------------
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+\begin{center}
+\textsc{\large Séance 2 / Signaux, images et FFT}
+\end{center}
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+%-----------------------------------
+
+\medskip
+
+\begin{mdframed}[style=sidebar,frametitle={}]
+\large
+Un tutoriel sur la FFT est proposé sur la page suivante, section \textbf{\large FFT with Python} :
+
+\begin{center}
+\Large
+\href{https://iogs-lense-training.github.io/python-for-science/}{https://iogs-lense-training.github.io/python-for-science/}
+\end{center}
+
+\end{mdframed}
+
+%-----------------------------------
+\textbf{Exercice 1 / FFT sur des signaux 1D}
+
+\begin{enumerate}
+	\item Définir une fonction qui génère un signal sinusoïdal d'une amplitude donnée et d'une fréquence donnée. Le vecteur temps devra également être passé en argument.
+	\item Générer 2 signaux sinusoïdaux :
+	\begin{itemize}
+		\item le premier $sine\_a$ de fréquence $200\operatorname{Hz}$ et d'amplitude $1$
+		\item le second $sine\_b$ de fréquence $287\operatorname{Hz}$ et d'amplitude $2$
+	\end{itemize}
+	\item Tracer ces deux signaux sur un même graphique.
+
+	On se propose d'étudier un signal $sine\_c$ correspondant à la somme de ces deux signaux : $sine\_c = sine\_a + sine\_b$
+	
+	\item Tracer le signal $sine\_c$ sur un graphique.
+	
+	\medskip
+	
+	\item Calculer la FFT de ce signal et tracer cette réponse en fréquence sur un nouveau graphique, sans spécifier l'axe des fréquences. Que pouvez-vous conclure ?
+	
+	\medskip
+	
+	\item Construire l'axe des fréquences à l'aide de la fonction \textsl{numpy.fft.fftfreq}.
+	\item Afficher la FFT du signal précédent en se basant cette fois-ci sur l'axe des fréquences générés à l'aide de \textsl{numpy.fft.fftfreq}.
+\end{enumerate}
+
+
+
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+%-----------------------------------
+\textbf{Exercice 2 / FFT sur des images}
+
+On se propose d'étudier le script \textsl{image\_filter.py} (associé à l'image \textsc{test\_image.png}), disponible sur le site du LEnsE, rubrique Année / Première Année / Outils Numériques / TD Systèmes et Signaux.
+
+\begin{enumerate}
+	\item Tester ce script.
+	\item Modifier la valeur du rayon (\textit{radius}) associée à la fonction \textsl{circular\_mask.py} et relancer le script.
+	\item Expliquer les différentes étapes et l'impact sur l'image finale.
+\end{enumerate}
+
+
+\centerline {\rule{.70\linewidth}{.25pt}} % Horizontal line
+%-----------------------------------
+\textbf{Exercice 3 / FFT en 2D}
+
+Le script \textsl{trame\_generator.py}, disponible sur le site du LEnsE, rubrique Année / Première Année / Outils Numériques / TD Systèmes et Signaux, contient une fonction permettant de générer des trames sinusoïdales en 2D.
+
+\begin{enumerate}
+	\item A l'aide de cette fonction, générer une trame sinusoïdale de taille $400\operatorname{pixels}$ par $300\operatorname{pixels}$ avec un angle de $63^\circ$ et un pas de $30\operatorname{pixels}$.
+	\item Afficher l'image.
+	\item Tracer et afficher la FFT de cette image (attention au \textit{shift}).
+	\item Tester pour des pas et des angles différents.
+\end{enumerate}
+
+\end{minipage}
+
+\end{document} 

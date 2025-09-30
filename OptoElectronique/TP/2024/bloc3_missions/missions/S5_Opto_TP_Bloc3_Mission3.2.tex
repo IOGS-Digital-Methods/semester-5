@@ -1,0 +1,179 @@
+\newpage
+\pagestyle{empty}
+
+\begin{minipage}[c]{.25\linewidth}
+	\includegraphics[width=4cm]{images/Logo-LEnsE.png}
+\end{minipage} \hfill
+\begin{minipage}[c]{.4\linewidth}
+
+\begin{center}
+\vspace{0.3cm}
+{\Large \textsc{Opto-Electronique}}
+
+\medskip
+
+5N-027-SCI \qquad \textbf{\Large TP Bloc 3}
+
+\end{center}
+\end{minipage}\hfill
+
+\vspace{0.5cm}
+
+\noindent \rule{\linewidth}{1pt}
+
+{\noindent\Large \textbf{Mission 3.2} / Mettre en \oe{}uvre et caractériser un circuit de photodétection simple} 
+
+\vspace{-0.5cm}
+
+\begin{center}
+\noindent \rule{\linewidth}{1pt}
+
+Durée conseillée : 90 min / Séance 3 ou 4
+
+\vspace{-0.2cm}
+\noindent \rule{\linewidth}{1pt}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Objectif de la mission}
+\label{mission32}
+
+On se propose de \textbf{réaliser un circuit de photodétection "simple"} et de \textbf{caractériser ses performances dynamiques} (réponse en fréquence notamment).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Ressources}
+
+\begin{itemize}
+	\item \hyperref[fiche:Photodetect]{Fiche : Photodétection}
+\end{itemize}
+
+
+\subsection{Circuit à étudier}
+
+\begin{multicols}{2}
+On se propose d'analyser le circuit ci-contre, avec $R_{PHD} = 100\operatorname{k\Omega}$.
+
+
+\Quest Quel est le lien entre $V_S$ et $I_{photo}$ ? Puis entre $I_{photo}$ et le flux lumineux capté par la photodiode $\Phi_e$ ?
+
+\Quest Si le flux lumineux reçu est sinusoïdal, quelle sera la forme de la tension de sortie $V_S$ ? Quelles sont les limites en amplitude de ce montage ?
+
+\Manip Réaliser le montage. Placer-le devant le montage d'émission réalisé dans la mission 3.1.
+
+\medskip
+
+\columnbreak
+
+\begin{center}
+\begin{circuitikz}
+	\draw (0,0) to[battery2, invert] (0,4.5) -- (2,4.5);
+	% fleche
+	\draw (-0.5,0.3) edge[->] (-0.5,4.2);
+	\node (Ein) at (-1,2.25){$E$};
+	
+	\draw (2,2) to[empty photodiode, *-*] (2,4.5) to[short, -o] ++(1.5,0);
+	\draw (2,2.8) to[short, i = $I_{photo}$, current arrow scale=8] ++(0,-0.5);
+
+	\draw (2,2) to[R=$R_{PHD}$, *-*] (2,0) -- (0,0);
+	\draw (2,2) to[short, -o] ++(1.5,0);
+	\draw (1,0) node[ground](GND){};
+	\draw (2,0) to[short, -o] ++(1.5,0);
+	% fleche
+	\draw (3.5,2.3) edge[->] (3.5,4.2); \node (Ud) at (4,3.25){$u_d$};
+	% fleche
+	\draw (3.5,0.3) edge[->, green!40!black] (3.5,1.7); \node[text=green!40!black] (US) at (4,1){$V_S$};
+	\draw (3.5,0) to[short, -o] ++(0,0);
+\end{circuitikz}
+\end{center}
+
+\end{multicols}
+
+\Manip Relever les formes du courant $I_f$ dans la LED et de la tension $V_S$ pour diverses valeurs de fréquence du signal d'entrée.
+
+\Quest Quel est l'impact de $E$ sur la tension de sortie $V_S$ ?
+
+\Quest Quelle est la forme théorique de la réponse en fréquence de ce montage ?
+
+
+
+
+\subsection{Réponse en fréquence}
+
+\Manip Tracer l'allure rapide de la réponse en fréquence en gain de ce système pour des fréquences allant de $100~\operatorname{Hz}$ à $1~\operatorname{MHz}$.
+
+\Manip Faire une mesure de la bande-passante du montage.
+
+\Manip Reproduire les deux précédentes étapes pour des valeurs $R_{PHD} = 10\operatorname{k\Omega}$ et $R_{PHD} = 1\operatorname{M\Omega}$. 
+
+\Quest Quel est alors l'impact de $R_{PHD}$ sur les performances du montage ?
+
+\subsection{Réponse indicielle}
+
+\Manip Tracer la réponse indicielle de ce système pour les 3 valeurs de résistance proposées précédemment : $R_{PHD} = 10\operatorname{k\Omega}$, $R_{PHD} = 100\operatorname{k\Omega}$ et $R_{PHD} = 1\operatorname{M\Omega}$.
+
+\Manip Mesurer le temps de réponse à 95\% dans chacun des cas.
+
+\Quest Comparer les résultats obtenus avec les mesures de bande-passante.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Modélisation}
+
+Afin d'expliquer le phénomène observé précédemment, il est possible d'affiner le modèle utilisé pour l'étude du montage précédent en prenant en compte les éléments "perturbateurs".
+
+Voici le modèle plus complet du montage étudié précédemment.
+
+\begin{center}
+\begin{circuitikz}
+	% blocs
+	\fill[green,fill opacity=.1] (-0.4,-0.2) rectangle (0.5,5.2);
+	\fill[blue,fill opacity=.1] (4.8,2.2) rectangle (10.6,-0.2);	
+	\fill[orange,fill opacity=.1] (1.5,5.2) rectangle (5.1,2.3);
+	% legende blocs
+	%\fill[green,fill opacity=.1] (9,5.5) rectangle (11,4.7);
+	%\node (pol) at (10,5.1){Polarisation};
+	%\fill[orange,fill opacity=.1] (9,4.5) rectangle (11,3.7);
+	%\node (pol) at (10,4.1){Photodiode};	
+	%\fill[blue,fill opacity=.1] (9,3.5) rectangle (11,2.7);
+	%\node (pol) at (10,3.1){Affichage};	
+	% circuit
+	\draw (-0.5,0.3) edge[->] (-0.5,4.7); \node (Ein) at (-1,2.5){$E$};
+	\draw (0,0) to[battery2, invert] (0,5) -- (2,5) to[I, *-*] (2,2.5) -- (2,2) to[R=$R_{PHD}$, *-*] (2,0) -- (0,0);
+	\draw (2,3.3) to[short, i = $ I_{photo}$, current arrow scale=10] ++(0,-0.5);
+	\draw (2,5) -- (3.5,5) to[C=$C_{PHD}$] (3.5,2.5) -- (2,2.5);
+	\draw (1.3,2.8) edge[->] (1.3,4.7); 	\node (Ud) at (0.7,3.5){$u_d$};
+		
+	\draw (3.5,0.3) edge[->, green!40!black] (3.5,1.7); \node[text=green!40!black] (US) at (4,1){$V_S$};
+	
+	\draw (2,2) -- (5.5,2) to[C=$C_{cab}$, *-*] (5.5,0) -- (2,0);
+	\draw (5.5,2) -- (7.5,2) to[C=$C_{osc}$, *-*] (7.5,0) -- (5.5,0);
+	\draw (7.5,2) -- (9.5,2) to[R=$R_{osc}$] (9.5,0) -- (7.5,0);
+
+\end{circuitikz}
+\end{center}
+
+
+\Quest A quoi correspondent les différents éléments présents ?
+
+\Quest A partir des mesures réalisées précédemment, comment remonter aux valeurs du modèle précédent ? Donner les valeurs des différents éléments qu'il est possible de calculer.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Livrables}
+
+
+Une \textbf{fiche de manipulation} en ligne (partagée dans le cahier de laboratoire) rappelant :
+
+\begin{itemize}
+	\item les protocoles de mesure et de réglage (schémas de mesure, de câblage)
+	\item les tableaux de mesures et les courbes obtenues
+\end{itemize}
+
+Une \textbf{analyse} du résultat obtenu, en particulier le lien entre le gain, la bande-passante du montage, le temps de réponse et la valeur de $R_{PHD}$.
+
+Un \textbf{tableau comparatif} de ces différents éléments pour les 3 valeurs de $R_{PHD}$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
