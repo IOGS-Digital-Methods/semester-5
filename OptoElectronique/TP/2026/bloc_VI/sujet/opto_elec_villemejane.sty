@@ -1,0 +1,171 @@
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[french]{babel}
+\usepackage{makeidx}
+\usepackage{eurosym}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage[, x11names]{xcolor}
+\usepackage[colorlinks]{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+\usepackage{pgfplots}
+\usepackage{multicol}
+\usepackage{titlesec}
+\textwidth 18 cm
+\textheight 24 cm
+\oddsidemargin -1cm
+\evensidemargin -1cm
+\topmargin -1.5cm
+%\renewcommand{\thesection}{\arabic{section}} 
+\usepackage{pifont}
+
+%[FaB]
+\renewcommand{\rmdefault}{bch}
+\renewcommand{\sfdefault}{pag} 
+\renewcommand{\ttdefault}{pcr} 
+
+
+
+
+
+% Inclure des pdf
+\usepackage{pdfpages}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\usepackage[european, straightvoltages]{circuitikz}
+\usetikzlibrary{babel, patterns, patterns.meta, calc}
+
+\definecolor{violet_iogs}{RGB}{10, 50, 80}
+\definecolor{orange_iogs}{RGB}{255, 150, 10}
+
+\newcommand{\sectionbgcolor}[1]{%
+  \colorbox{violet_iogs}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{#1}}}
+\newcommand{\sectionUnbgcolor}[1]{%
+  \colorbox{orange_iogs}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{#1}}}
+\newcommand{\subsectionbgcolor}[1]{%
+  \colorbox{violet_iogs!80}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{#1}}}
+\newcommand{\subsubsectionbgcolor}[1]{%
+  \colorbox{violet_iogs!60}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{#1}}}
+\newcommand{\subsectionUnbgcolor}[1]{%
+  \colorbox{orange_iogs}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{#1}}}
+
+% Modifier le format des sections
+\titleformat{\section}
+  {\LARGE\bfseries\color{white}} % Format du texte de la section
+  {} % Lieu où le numéro de section apparaîtra
+  {0pt} % Espacement entre le numéro et le titre
+  {\sectionbgcolor} % Commande pour appliquer la couleur de fond
+  []
+
+\titleformat{\subsection}
+  {\Large\bfseries\color{white}} % Format du texte de la section
+  {} % Lieu où le numéro de section apparaîtra
+  {0pt} % Espacement entre le numéro et le titre
+  {\subsectionbgcolor} % Commande pour appliquer la couleur de fond
+  []
+
+\titleformat{\subsubsection}
+  {\large\color{white}} % Format du texte de la section
+  {} % Lieu où le numéro de section apparaîtra
+  {10pt} % Espacement entre le numéro et le titre
+  {\subsubsectionbgcolor} % Commande pour appliquer la couleur de fond
+  []
+
+\titleformat{name=\section,numberless}
+  {\LARGE\bfseries\color{white}} % Format du texte de la section
+  {} % Lieu où le numéro de section apparaîtra
+  {0pt} % Espacement entre le numéro et le titre
+  {\sectionUnbgcolor} % Commande pour appliquer la couleur de fond
+  []
+
+\titleformat{name=\subsection,numberless}
+  {\Large\bfseries\color{white}} % Format du texte de la section
+  {} % Lieu où le numéro de section apparaîtra
+  {0pt} % Espacement entre le numéro et le titre
+  {\subsectionUnbgcolor} % Commande pour appliquer la couleur de fond
+  []
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Compteurs de questions/manips
+\newcommand{\Prepa}{\vspace{0.2cm}\ding{220} \textbf{\large{}P~} \quad }
+\newcommand{\Quest}{\vspace{0.2cm}\ding{220} \textbf{\large{}Q~} \quad }
+\newcommand{\Manip}{\vspace{0.2cm}\ding{220} \textbf{\large{}M~} \quad }
+\newcommand{\Real}{\vspace{0.2cm}\textbullet \quad }
+\newcommand{\CR}{\vspace{0.2cm}(CR) \ding{220} \quad }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Box
+
+\usepackage[framemethod=TikZ]{mdframed}% Required for creating boxes
+\mdfdefinestyle{sidebar}{
+    linecolor=black, % Outer line color
+    outerlinewidth=0.5pt, % Outer line width
+    roundcorner=0pt, % Amount of corner rounding
+    innertopmargin=10pt, % Top margin
+    innerbottommargin=10pt, % Bottom margin
+    innerrightmargin=10pt, % Right margin
+    innerleftmargin=10pt, % Left margin
+    backgroundcolor=white, % Box background color
+    frametitlealignment=\centering,
+    frametitlebackgroundcolor=gray!20, % Title background color
+    frametitlerule=false, % Title rule - true or false
+    frametitlerulecolor=white, % Title rule color
+    frametitlerulewidth=0.5pt, % Title rule width
+    frametitlefont=\Large\bfseries, % Title heading font specification
+    font=\small
+}
+
+\mdfdefinestyle{intextbox}{
+    linecolor=black, % Outer line color
+    outerlinewidth=0.5pt, % Outer line width
+    roundcorner=10pt, % Amount of corner rounding
+    innertopmargin=7pt, % Top margin
+    innerbottommargin=7pt, % Bottom margin
+    innerrightmargin=7pt, % Right margin
+    innerleftmargin=7pt, % Left margin
+    backgroundcolor=white, % Box background color
+    frametitlealignment=\centering,
+    frametitlebackgroundcolor=gray!20, % Title background color
+    frametitlerule=false, % Title rule - true or false
+    frametitlerulecolor=white, % Title rule color
+    frametitlerulewidth=0.5pt, % Title rule width
+    frametitlefont=\Large\bfseries % Title heading font specification
+}
+
+\mdfdefinestyle{aavbox}{
+    linecolor=black, % Outer line color
+    outerlinewidth=0.2pt, % Outer line width
+    roundcorner=5pt, % Amount of corner rounding
+    innertopmargin=7pt, % Top margin
+    innerbottommargin=7pt, % Bottom margin
+    innerrightmargin=7pt, % Right margin
+    innerleftmargin=7pt, % Left margin
+    backgroundcolor=gray!10, % Box background color
+    frametitlealignment=\centering,
+    frametitlebackgroundcolor=gray!30, % Title background color
+    frametitlerule=false, % Title rule - true or false
+    frametitlerulecolor=white, % Title rule color
+    frametitlerulewidth=0.2pt, % Title rule width
+    frametitlefont=\Large\bfseries % Title heading font specification
+}
+
+% lstlisting package
+\usepackage{listings}
+\lstset{language = Python, 
+	basicstyle={\small \color{black}}, 
+	tabsize = 3,
+	commentstyle=\color{black!70!green},
+	linewidth=160mm,
+	framexleftmargin=5mm, frame=shadowbox, rulesepcolor=\color{black},
+  	numbers=left,
+	xleftmargin=40pt,
+	escapechar=|
+}
