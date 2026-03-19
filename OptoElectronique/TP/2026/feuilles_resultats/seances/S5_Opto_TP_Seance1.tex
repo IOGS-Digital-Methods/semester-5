@@ -62,7 +62,13 @@ expérimentale : \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 \medskip
 
 \noindent
-\underline{\textbf{Annexe à fournir}} : \textbf{Protocole rédigé} pour la mesure des grandeurs (incluant schéma de câblage des instruments de mesure)
+\underline{\textbf{Annexe à fournir}} :
+
+\begin{itemize}[label=$\square$]
+	\item \textbf{Protocole rédigé} pour la mesure des grandeurs (incluant schéma de câblage des instruments de mesure)
+\end{itemize}
+
+ 
 
 \medskip
 
@@ -119,7 +125,10 @@ expérimentale : \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 \medskip
 
 \noindent
-\underline{\textbf{Annexe à fournir}} : \textbf{Tracé} des caractéristiques statiques 
+\underline{\textbf{Annexe à fournir}} : 
+\begin{itemize}[label=$\square$]
+	\item \textbf{Relevé} des caractéristiques statiques 
+\end{itemize}
  
 \medskip
 
@@ -148,29 +157,36 @@ expérimentale : \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Partie 3 / Etude fréquentielle d'un montage amplificateur}
 
-
-Pour cela, on souhaite pouvoir remplir le tableau suivant (à reproduire dans votre cahier de laboratoire) :
-
-
 \textbf{Tableau 2 / Comparaison de la bande passante d'un montage amplificateur inverseur en fonction du gain}
 
 
 \medskip
 
 \begin{center}
-\begin{tabular}{|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{1.5cm}|>{\centering\arraybackslash}p{1.5cm}|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{2cm}|}
+\begin{tabular}{|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{1.5cm}|>{\centering\arraybackslash}p{1.5cm}|>{\centering\arraybackslash}p{2.2cm}|>{\centering\arraybackslash}p{2.2cm}|>{\centering\arraybackslash}p{2cm}|}
   \hline
   Gain (dB) & [A]mplification & $R_1$ & $R_2$ & [B]ande [P]assante & Produit [A].[BP] & $\Delta{}T_{95\%}$\\
   \hline
-  $12$ &  &  &  & & & \rule{0pt}{1.5em} \\
+  $12$ &  &  &  & & & \rule{0pt}{1.8em} \\
   \hline
-  $32$ &  &  &  & & & \rule{0pt}{1.5em} \\
+  $32$ &  &  &  & & & \rule{0pt}{1.8em} \\
   \hline
 \end{tabular}
 \end{center}
 
 où l'amplification correspond à $\frac{V_s}{V_e}$, $R_1$ et $R_2$ les valeurs des résistances choisies, la bande-passante à $-3\operatorname{dB}$ et $\Delta{}T_{95\%}$ est le temps de réponse à 95\%.
+ 
+\medskip
 
+\noindent
+\underline{\textbf{Annexes à fournir}} : 
+
+\begin{itemize}[label=$\square$]
+	\item \textbf{Protocole de mesure} de la bande-passante à -3dB
+	\item \textbf{Protocole de mesure} du temps de réponse
+	\item \textbf{Relevé} des diagrammes de Bode 
+	\item \textbf{Relevé} de la réponse indicielle
+\end{itemize}
  
 \medskip
 
@@ -184,62 +200,37 @@ où l'amplification correspond à $\frac{V_s}{V_e}$, $R_1$ et $R_2$ les valeurs 
 \end{minipage}
 \hfill
 \begin{minipage}{0.23\linewidth}
-\validationBox{\checkBox{} Caractéristique} 
+\validationBox{\checkBox{} Rép. Fréq.} 
 \end{minipage}
 \hfill
 \begin{minipage}{0.23\linewidth}
-\validationBox{\checkBox{} Modèle} 
+\validationBox{\checkBox{} Rép. Indic.} 
 \end{minipage}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Réponse en fréquence}
+\section{Auto-évaluation}
 
-\Quest Quelles valeurs de résistances choisir pour obtenir un gain de $12~\operatorname{dB}$ ? \textit{La somme des résistances doit être comprise entre $10\operatorname{k\Omega}$ et $50\operatorname{k\Omega}$.}
-
-\Manip Réaliser le montage précédent et alimenter le avec l'alimentation symétrique réalisée.
-
-\Manip Tracer le \textbf{diagramme de Bode en gain} de ce système pour des fréquences allant de $100~\operatorname{Hz}$ à $1~\operatorname{MHz}$, à l'aide de mesure réalisée à l'oscilloscope. 
-
-\Quest Quelle était la réponse en fréquence attendue théoriquement ? 
-
-\Manip Mesurer la bande-passante à $-3\operatorname{dB}$ de ce montage.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\noindent \rule{\linewidth}{1pt}
-
-\Manip Modifier la résistance $R_1$ pour obtenir un gain de $32~\operatorname{dB}$.
-
-\Manip Tracer le \textbf{diagramme de Bode en gain} de ce système pour des fréquences allant de $100~\operatorname{Hz}$ à $1~\operatorname{MHz}$, à l'aide de mesure réalisée à l'oscilloscope. 
-
-\Manip Mesurer la bande-passante à $-3\operatorname{dB}$ de ce nouveau montage.
-
-\Quest Préciser alors le modèle à utiliser pour ce montage. 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Réponse indicielle}
-
-\Manip Pour les deux montages précédents, visualiser la réponse indicielle.
-
-\Manip Mesurer le temps de réponse à 95\%.
-
-\Quest Quel est le lien entre ce temps et la bande-passante mesurée dans la partie précédente ?
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Cahier de laboratoire / Check-List}
-
-\begin{itemize}[label=$\square$]
-	\item tableau comparatif rempli
-	\item protocoles utilisés (avec schéma de câblage, paramètres des instruments de mesure et étapes expérimentales)
-	\item diagrammes de Bode légendés
-	\item captures d'écran d'oscilloscope des réponses indicielles
-	\item analyse des résultats
-	\item modélisation du système
-\end{itemize}
-
-
+\begin{center}
+\begin{tabular}{|p{2cm}|>{\centering\arraybackslash}p{3.4cm}|>{\centering\arraybackslash}p{3.4cm}|>{\centering\arraybackslash}p{3.4cm}|>{\centering\arraybackslash}p{3.4cm}|}
+  \hline
+   & A & B & C & D \\
+  \hline
+  \textbf{Démarche} & Choix protocole adapté, réalisé de façon autonome  & Choix protocole adapté mais sans justification & Choix protocole adapté mais avec aide extérieure & Protocole intégralement fourni \\
+  \hline
+  
+  \textbf{Protocole} & Mis en oeuvre de manière rigoureuse et précise, temps raisonnable & Mis en oeuvre avec de l'aide lors d'une étape & Mis en oeuvre avec de l'aide à plusieurs étapes & Pas de mise en oeuvre \\
+  \hline
+  
+  \textbf{Réalisation} & Circuit fiable permettant de réperer facilement les erreurs & Circuit fonctionnel et fiable, avec de l'aide pour la validation & Circuit fonctionnel mais de faible fiabilité & Pas de réalisation \\
+  \hline
+  
+  \textbf{Résultats} & Résultats cohérents avec justification des écarts & Résultats corrects mais sans incertitudes fiables & Résultats approximatifs sans justification des erreurs & Pas de résultats exploitables \\
+  \hline
+  
+  \textbf{Analyse} & Explications pertinentes avec modèle physique & Explications partielles avec modèle physique & Idée vague du modèle physique & Pas d'interprétation \\
+  \hline
+\end{tabular}
+\end{center}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
