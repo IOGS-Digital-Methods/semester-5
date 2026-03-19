@@ -96,6 +96,9 @@ expérimentale : \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 \hfill \\
 \hfill \\
 \hfill \\
+\hfill \\
+\hfill \\
+\hfill \\
 \hfill 
 } 
 \end{minipage}
@@ -103,6 +106,9 @@ expérimentale : \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 \begin{minipage}{0.48\linewidth}
 \resultBox{
 \textbf{Modèle du capteur} \\
+\hfill \\
+\hfill \\
+\hfill \\
 \hfill \\
 \hfill \\
 \hfill \\
@@ -145,45 +151,45 @@ expérimentale : \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
 Pour cela, on souhaite pouvoir remplir le tableau suivant (à reproduire dans votre cahier de laboratoire) :
 
+
+\textbf{Tableau 2 / Comparaison de la bande passante d'un montage amplificateur inverseur en fonction du gain}
+
+
 \medskip
 
 \begin{center}
-\begin{tabular}{|c|c|c|c|c|c|c|}
+\begin{tabular}{|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{1.5cm}|>{\centering\arraybackslash}p{1.5cm}|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{2cm}|}
   \hline
   Gain (dB) & [A]mplification & $R_1$ & $R_2$ & [B]ande [P]assante & Produit [A].[BP] & $\Delta{}T_{95\%}$\\
   \hline
-  $12$ &  &  &  & & & \\
+  $12$ &  &  &  & & & \rule{0pt}{1.5em} \\
   \hline
-  $32$ &  &  &  & & & \\
+  $32$ &  &  &  & & & \rule{0pt}{1.5em} \\
   \hline
 \end{tabular}
 \end{center}
 
 où l'amplification correspond à $\frac{V_s}{V_e}$, $R_1$ et $R_2$ les valeurs des résistances choisies, la bande-passante à $-3\operatorname{dB}$ et $\Delta{}T_{95\%}$ est le temps de réponse à 95\%.
 
+ 
+\medskip
 
-
-\subsection{Ressources}
-
-\begin{itemize}
-	\item Fiche : Amplificateur Linéaire Intégré
-	\item Fiche : Amplificateur Linéaire Intégré / Modèle
-	\item Fiche : Régime Harmonique
-	\item Fiche : Filtrage / Analyse Harmonique / Ordre 1
-	\item Protocole : Réponse en fréquence d'un système linéaire / Procédure "classique"
-	\item Protocole : Réponse indicielle d'un système linéaire
-\end{itemize}
-
-
-\clearpage
-\subsection{Alimentation symétrique}
-Certains composants, notamment les amplificateurs linéaires intégrés, sont capables de traiter des différences de potentiel positives et négatives. Pour cela, il est nécessaire de les alimenter de manière symétrique, c'est-à-dire, avec deux sources de tension fournissant des tensions opposées, souvent notées \texttt{+VCC}, pour l'alimentation positive, et \texttt{-VCC}, pour l'alimentation négative. 
-
-\Quest A partir de la documentation technique, noter le câblage du composant \textbf{\texttt{TL081}} et les tensions d'alimentation maximales. 
-
-\Manip Réaliser une \textbf{alimentation symétrique +10V / -10V} à partir des alimentations stabilisées disponibles et mettre en place un système de contrôle de ces tensions.
-
-\Quest Quelles précautions faudra-t-il prendre sur la tension d'entrée de ce montage ?
+\noindent
+\begin{minipage}{0.23\linewidth}
+\validationBox{\checkBox{} Câblage}  
+\end{minipage}
+\hfill
+\begin{minipage}{0.23\linewidth}
+\validationBox{\checkBox{} Mesures}
+\end{minipage}
+\hfill
+\begin{minipage}{0.23\linewidth}
+\validationBox{\checkBox{} Caractéristique} 
+\end{minipage}
+\hfill
+\begin{minipage}{0.23\linewidth}
+\validationBox{\checkBox{} Modèle} 
+\end{minipage}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Réponse en fréquence}
