@@ -1,0 +1,239 @@
+\newpage
+%\pagestyle{empty}
+
+\begin{minipage}[c]{.25\linewidth}
+	\includegraphics[width=4cm]{images/LEnsE_IOGS.jpg}
+\end{minipage} \hfill
+\begin{minipage}[c]{.4\linewidth}
+
+\begin{center}
+\vspace{0.3cm}
+{\Large \textsc{Opto-Électronique}}
+
+\medskip
+
+5N-027-SCI \qquad \textbf{\Large TP1 - Résultats}
+
+\end{center}
+\end{minipage}\hfill
+
+
+\noindent \rule{\linewidth}{1pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent {\large NOM : \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\qquad	Prénom : \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\qquad Groupe : \_\_\_\_\_\_}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Partie 1 / Montage simple de photodétection}
+
+\noindent
+\resultBox[1cm]{\Large Lien entre $V_S$ et $\Phi_e$ : \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ }
+
+\medskip
+
+\textbf{Tableau 1 / Comparaison de mesures pour différents éclairages}
+
+\large{
+\begin{center}
+\begin{tabular}{|p{4cm}|>{\centering\arraybackslash}p{1cm}|>{\centering\arraybackslash}p{1.8cm}|>{\centering\arraybackslash}p{2.8cm}|>{\centering\arraybackslash}p{2.8cm}|>{\centering\arraybackslash}p{2.8cm}|}
+  \hline
+  Grandeur &  & Unité & Flux ambiant & Obscurité & Lampe bureau \\
+  \hline
+  Intensité lumineuse & {\Large $\Phi_e$} &  &  &  & \rule{0pt}{1.5em} \\
+  \hline
+  Tension & {\Large $V_S$} &  &  &  & \rule{0pt}{1.5em}  \\
+  \hline
+  Courant & {\Large $I_{photo}$} &  &  &  & \rule{0pt}{1.5em} \\
+  \hline
+\end{tabular}
+\end{center}
+}
+
+\noindent
+\resultBox{\Large{
+\textbf{Sensibilité spectrale} : \\
+théorique : \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \qquad \qquad
+expérimentale : \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ 
+}
+}
+
+\medskip
+
+\noindent
+\underline{\textbf{Annexe à fournir}} : \textbf{Protocole rédigé} pour la mesure des grandeurs (incluant schéma de câblage des instruments de mesure)
+
+\medskip
+
+\noindent
+\begin{minipage}{0.23\linewidth}
+\validationBox{\checkBox{} Câblage}  
+\end{minipage}
+\hfill
+\begin{minipage}{0.23\linewidth}
+\validationBox{\checkBox{} Mesures}
+\end{minipage}
+\hfill
+\begin{minipage}{0.23\linewidth}
+\validationBox{\checkBox{} Théorie} 
+\end{minipage}
+\hfill
+\begin{minipage}{0.23\linewidth}
+\validationBox{\checkBox{} Oscilloscope} 
+\end{minipage}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Partie 2 / Etude statique d'une photodiode}
+
+\noindent
+\begin{minipage}{0.48\linewidth}
+\resultBox{
+\textbf{SFH206K - Caractéristiques} \\
+\hfill \\
+\hfill \\
+\hfill \\
+\hfill 
+} 
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\linewidth}
+\resultBox{
+\textbf{Modèle du capteur} \\
+\hfill \\
+\hfill \\
+\hfill \\
+\hfill 
+}
+\end{minipage}
+
+\medskip
+
+\noindent
+\underline{\textbf{Annexe à fournir}} : \textbf{Tracé} des caractéristiques statiques 
+ 
+\medskip
+
+\noindent
+\begin{minipage}{0.23\linewidth}
+\validationBox{\checkBox{} Câblage}  
+\end{minipage}
+\hfill
+\begin{minipage}{0.23\linewidth}
+\validationBox{\checkBox{} Mesures}
+\end{minipage}
+\hfill
+\begin{minipage}{0.23\linewidth}
+\validationBox{\checkBox{} Caractéristique} 
+\end{minipage}
+\hfill
+\begin{minipage}{0.23\linewidth}
+\validationBox{\checkBox{} Modèle} 
+\end{minipage}
+
+
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Partie 3 / Etude fréquentielle d'un montage amplificateur}
+
+
+Pour cela, on souhaite pouvoir remplir le tableau suivant (à reproduire dans votre cahier de laboratoire) :
+
+\medskip
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+  \hline
+  Gain (dB) & [A]mplification & $R_1$ & $R_2$ & [B]ande [P]assante & Produit [A].[BP] & $\Delta{}T_{95\%}$\\
+  \hline
+  $12$ &  &  &  & & & \\
+  \hline
+  $32$ &  &  &  & & & \\
+  \hline
+\end{tabular}
+\end{center}
+
+où l'amplification correspond à $\frac{V_s}{V_e}$, $R_1$ et $R_2$ les valeurs des résistances choisies, la bande-passante à $-3\operatorname{dB}$ et $\Delta{}T_{95\%}$ est le temps de réponse à 95\%.
+
+
+
+\subsection{Ressources}
+
+\begin{itemize}
+	\item Fiche : Amplificateur Linéaire Intégré
+	\item Fiche : Amplificateur Linéaire Intégré / Modèle
+	\item Fiche : Régime Harmonique
+	\item Fiche : Filtrage / Analyse Harmonique / Ordre 1
+	\item Protocole : Réponse en fréquence d'un système linéaire / Procédure "classique"
+	\item Protocole : Réponse indicielle d'un système linéaire
+\end{itemize}
+
+
+\clearpage
+\subsection{Alimentation symétrique}
+Certains composants, notamment les amplificateurs linéaires intégrés, sont capables de traiter des différences de potentiel positives et négatives. Pour cela, il est nécessaire de les alimenter de manière symétrique, c'est-à-dire, avec deux sources de tension fournissant des tensions opposées, souvent notées \texttt{+VCC}, pour l'alimentation positive, et \texttt{-VCC}, pour l'alimentation négative. 
+
+\Quest A partir de la documentation technique, noter le câblage du composant \textbf{\texttt{TL081}} et les tensions d'alimentation maximales. 
+
+\Manip Réaliser une \textbf{alimentation symétrique +10V / -10V} à partir des alimentations stabilisées disponibles et mettre en place un système de contrôle de ces tensions.
+
+\Quest Quelles précautions faudra-t-il prendre sur la tension d'entrée de ce montage ?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Réponse en fréquence}
+
+\Quest Quelles valeurs de résistances choisir pour obtenir un gain de $12~\operatorname{dB}$ ? \textit{La somme des résistances doit être comprise entre $10\operatorname{k\Omega}$ et $50\operatorname{k\Omega}$.}
+
+\Manip Réaliser le montage précédent et alimenter le avec l'alimentation symétrique réalisée.
+
+\Manip Tracer le \textbf{diagramme de Bode en gain} de ce système pour des fréquences allant de $100~\operatorname{Hz}$ à $1~\operatorname{MHz}$, à l'aide de mesure réalisée à l'oscilloscope. 
+
+\Quest Quelle était la réponse en fréquence attendue théoriquement ? 
+
+\Manip Mesurer la bande-passante à $-3\operatorname{dB}$ de ce montage.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent \rule{\linewidth}{1pt}
+
+\Manip Modifier la résistance $R_1$ pour obtenir un gain de $32~\operatorname{dB}$.
+
+\Manip Tracer le \textbf{diagramme de Bode en gain} de ce système pour des fréquences allant de $100~\operatorname{Hz}$ à $1~\operatorname{MHz}$, à l'aide de mesure réalisée à l'oscilloscope. 
+
+\Manip Mesurer la bande-passante à $-3\operatorname{dB}$ de ce nouveau montage.
+
+\Quest Préciser alors le modèle à utiliser pour ce montage. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Réponse indicielle}
+
+\Manip Pour les deux montages précédents, visualiser la réponse indicielle.
+
+\Manip Mesurer le temps de réponse à 95\%.
+
+\Quest Quel est le lien entre ce temps et la bande-passante mesurée dans la partie précédente ?
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Cahier de laboratoire / Check-List}
+
+\begin{itemize}[label=$\square$]
+	\item tableau comparatif rempli
+	\item protocoles utilisés (avec schéma de câblage, paramètres des instruments de mesure et étapes expérimentales)
+	\item diagrammes de Bode légendés
+	\item captures d'écran d'oscilloscope des réponses indicielles
+	\item analyse des résultats
+	\item modélisation du système
+\end{itemize}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
