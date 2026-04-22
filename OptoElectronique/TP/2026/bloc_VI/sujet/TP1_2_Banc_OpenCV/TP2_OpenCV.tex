@@ -1,0 +1,465 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Engineering problems / LaTeX Template
+%		Semester 6
+%		Institut d'Optique Graduate School
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	6N-IntNum-BlocVI
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Created by:
+%	Julien VILLEMEJANE - 20/nov/2025
+%	
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  TP 2
+
+
+\newpage
+\begin{center}
+	\begin{minipage}{2.5cm}
+	\begin{center}
+		\includegraphics[width=5cm]{../images/Logo-LEnsE.png}
+	\end{center}
+\end{minipage}\hfill
+\begin{minipage}{10cm}
+	\begin{center}
+	\textbf{Institut d'Optique Graduate School }\\[0.1cm]
+    \textbf{Interfaçage Numérique}
+
+
+	\end{center}
+\end{minipage}\hfill
+
+
+\vspace{2cm}
+
+
+{\Large \bfseries \textsc{Interfaçage Numérique}} \\[0.5cm]
+{\large \bfseries Travaux Pratiques} \\[0.2cm]
+Semestre 6
+
+\vspace{1cm}
+
+% Title
+\rule{\linewidth}{0.4mm} \\[0.4cm]
+{ \Large \bfseries\color{violet_iogs} TP2 - Bases de traitement d'images sous OpenCV \\[0.4cm] }
+\rule{\linewidth}{0.4mm} \\[1cm]
+
+\end{center}
+
+\vfill
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%    A A V / Objectifs
+
+
+Lors de cette séance, vous devrez écrire vos propres scripts en \textbf{Python} (avec l'IDE PyCharm par exemple) permettant de réaliser des opérations de base de manipulation d'images, à l'aide notamment de la célèbre bibliothèque \textbf{OpenCV}.
+
+\bigskip
+
+\textbf{Une feuille de résultats est à remplir et à présenter tout au long de la séance de TP.}
+
+\section{Ressources}
+
+Un tutoriel sur les bases d'OpenCV est disponible à l’adresse suivante : 
+
+\href{https://iogs-lense-training.github.io/image-processing/}{https://iogs-lense-training.github.io/image-processing/}
+
+Des {codes en Python}, proposant des exemples à tester, sont disponibles sur le site du LEnsE dans la rubrique \textit{Année / Première Année / Interfaçage Numérique S6 / Bloc 2 Vision Industrielle / Répertoire vers codes à tester}. 
+
+\textit{Un fichier archivé, nommé \textsc{\_step\_by\_step.zip}, regroupe l'ensemble des codes à tester au cours de cette séance, ainsi que les images à traiter.}
+
+\medskip
+
+Un \textbf{kit d'images} est disponible sur le site du LEnsE dans la rubrique \textit{Année / Première Année / Interfaçage Numérique S6 / Bloc 2 Vision Industrielle / Kit d'images}. 
+
+
+\section{Accumulation de preuves / Méthode de travail}
+
+Il est conseillé pour ce TP de \textbf{créer un nouveau projet PyCharm} sur votre session (\textit{attention à l'endroit où vous stockerez ce projet - U: sur les sessions Windows de l'IOGS}).
+
+Les différents algorithmes proposés dans ce TP, ainsi que ceux que vous serez amenés à modifier ou créer, pourront vous resservir dans d'autres projets. Nous vous conseillons donc fortement de les \textbf{sauvegarder} précieusement et de les \textbf{commenter} autant que possible afin de retrouver rapidement les principes mis en jeu derrière les fonctionnalités de OpenCV.
+
+\medskip
+
+Il serait également pertinent de votre part de rédiger un \textbf{journal de bord} sur ce TP en incluant les résultats (images, histogrammes...) et vos analyses des fonctionnalités et de leur intérêt en traitement d'images.
+
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%    Etape par étape
+
+\section{Rappel sur les images numériques}
+
+Une image RVB contient 3 canaux (Rouge, Vert, Bleu ou \textit{RGB} en anglais), tandis qu'une image en niveaux de gris n'en a qu'un. Une image en niveau de gris sera \textbf{3 fois plus rapide} à analyser qu'une image en couleur RVB mais toute notion de couleur sera alors perdue.
+
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{../images/images_array_gray_rgb.png}
+\end{center}
+
+
+La couleur des objets peut s'avérer inutile lorsqu'on cherche, par exemple, à détecter des formes particulières ou des contours dans une image.
+
+De nombreux algorithmes d'analyse d'image ou de vision par ordinateur travaillent plus efficacement sur des images en niveaux de gris, permettant notamment d'uniformiser l'entrée des algorithmes et de réduire les informations redondantes liées à la couleur.
+
+
+%%%%%%%%%%%%%    Etape A
+\section{A - Ouvrir une image {[20 min]}}
+
+\Manip Ouvrir le fichier \textsc{01\_open\_image.py} du répertoire des codes à tester.
+
+\Manip Exécuter ce code.
+
+\Quest Que fait ce programme ? Quelle est la taille de chacune des images ? Quel est le type de données d'un élément ?
+
+\Quest Que vaut le premier pixel de chacune des images ? A quoi correspondent les données fournies ?
+
+
+%%%%%%%%%%%%%    Etape B
+\section{B - Calculer l'histogramme d'une image et l'afficher {[20 min]}}
+
+\Manip Ouvrir le fichier \textsc{02\_histogram\_image.py} du répertoire des codes à tester. Exécuter ce code.
+
+\Quest Que fait ce programme ? A quoi correspond la valeur affichée pour la ligne \fbox{\texttt{histogram[100]}} ?
+
+\Quest A quoi correspond la valeur affichée par l'exécution de la ligne \fbox{\texttt{print(np.sum(histogram))}} ?
+
+\bigskip
+
+\textit{Il peut être intéressant de \textbf{créer une fonction qui affiche automatiquement l'histogramme} d'une image à partir de ses données. Elle sera très utile dans la suite du TP pour voir l'impact des effets appliqués sur les images.}
+
+
+%%%%%%%%%%%%%    Etape C
+\section{C - Améliorer numériquement la qualité d'une image {[20 min]}}
+
+Pour modifier le contraste et la luminosité d'une image, il faut appliquer une transformation linéaire \textbf{à chaque pixel} de l'image pouvant être exprimé mathématiquement comme suit :
+
+$$P_{new} = \alpha \cdot P_{old} + \beta$$
+
+où $\alpha$ est le facteur de contraste. Une valeur supérieure à 1 augmente le contraste, tandis qu'une valeur entre 0 et 1 le réduit.
+
+$\beta$ est l'offset de luminosité. Une valeur positive rend l'image plus lumineuse, tandis qu'une valeur négative l'assombrit.
+
+\medskip
+
+On utilise la fonction \textsl{cv2.convertScaleAbs()} pour modifier le contraste et la luminosité de l'image.
+
+\bigskip
+
+\Manip Ouvrir le fichier \textsc{03\_enhance\_contrast\_brightness.py} du répertoire des codes à tester. Exécuter ce code.
+
+\Manip Modifier le contraste de l'image et comparer les histogrammes de l'image originale et de la version modifiée pour différente valeur de $\alpha$.
+
+\Quest L'affichage de la nouvelle image est-il correct ?
+
+\Manip Réafficher l'image avec les options suivantes de \fbox{\texttt{imshow}} : \fbox{\texttt{vmin=0}} et \fbox{\texttt{vmax=255}}
+
+\noindent \rule{\linewidth}{1pt}
+
+\Manip Calculer la moyenne de tous les pixels de l'image originale et comparer à la moyenne des pixels de l'image modifiée.
+
+\Manip Modifier la luminosité de l'image et comparer les histogrammes de l'image originale et de la version modifiée pour différente valeur de $\beta$. 
+
+\Manip Calculer la moyenne de tous les pixels de l'image originale et comparer à la moyenne des pixels de l'image modifiée.
+
+\Quest Que pouvez-vous conclure sur les effets du contraste et de la luminosité ?
+
+\noindent \rule{\linewidth}{1pt}
+
+\Manip Ouvrir une image RGB et appliquer les mêmes effets. Que pouvez-vous conclure ?
+
+
+%%%%%%%%%%%%%    Etape D
+\section{D - Binariser l'image {[20 min]}}
+
+La binarisation d'une image consiste à transformer une image en niveaux de gris (ou parfois en couleur) en une image ne contenant que deux valeurs possibles : généralement 0 (noir) et 1 (blanc).
+
+L'objectif de la binarisation est de réduire drastiquement les informations à traiter tout en essayant de séparer clairement le premier plan (objets) de l'arrière-plan.
+
+\medskip
+
+\Manip Ouvrir le fichier \textsc{04\_threshold.py} du répertoire des codes à tester. Exécuter ce code. Modifier la valeur du seuil et comparer les images résultantes.
+
+\Quest Que fait ce code ? Est-ce que le choix du seuil a un impact sur la valeur résultante pour la méthode d'Otsu ? 
+
+\textit{Vous trouverez un peu plus de détails sur les méthode de binarisation à l'adresse suivante : } 
+
+\href{https://docs.opencv.org/4.x/d7/d4d/tutorial_py_thresholding.html}{https://docs.opencv.org/4.x/d7/d4d/tutorial\_py\_thresholding.html}
+
+\noindent \rule{\linewidth}{1pt}
+
+\Manip Ouvrir une image RGB et appliquer les mêmes effets. Que pouvez-vous conclure ?
+
+
+\newpage
+%%%%%%%%%%%%%    Etape E
+\section{E - Opérations de pré-traitement {[40 min]}}
+Les opérations de pré-traitement dans le traitement d'images sont essentielles pour améliorer la qualité des images avant d'appliquer des algorithmes plus complexes, comme la segmentation, la détection d'objets ou la classification. Ces étapes de pré-traitement visent à réduire le bruit ou améliorer la structure de
+l'image.
+
+Parmi les opérations de pré-traitement classiques, on peut citer :
+\begin{itemize}
+	\item \textbf{Correction des couleurs} : Balance des blancs, Correction gamma, Amélioration de contraste...
+	\item \textbf{Réduction de bruit} : Filtrage linéaire pour atténuer les bruits sans trop affecter les détails importants de l'image, Filtrage non linéaire pour éliminer les bruits impulsionnels, Filtrage anisotrope...
+	\item \textbf{Opérations morphologiques} : érosion pour éliminer du bruit, dilatation pour combler des lacunes dans les objets, ouverture et fermeture pour enlever les petites anomalies ou remplir les petits trous dans une image
+	\item \textbf{Filtrage fréquentiel} pour éliminer ou atténuer des fréquences particulières (comme des motifs de bruit répétitifs)
+\end{itemize}
+
+
+
+\subsection{Éléments structurants d'une opération morphologique (noyau)}
+
+\begin{mdframed}[style=sidebar,frametitle={}]
+Notions : \href{https://iogs-lense-training.github.io/image-processing/contents/opencv_erod_dila.html#kernels-for-erosion-and-dilation}{\textit{Éléments structurants}}
+\end{mdframed}
+
+
+Les \textbf{transformations dites morphologiques} se basent sur l'application d'un \textbf{élément structurant} (ou noyau) que l'on va superposer sur chaque pixel de l'image. 
+
+\medskip
+
+Un \textbf{élément structurant} (ou noyau) est une petite matrice (généralement de taille et de forme prédéfinies, comme un carré, un disque, une ligne, etc.) qui sert de sonde pour inspecter et modifier les pixels d'une image.  
+
+\begin{center}
+	\includegraphics[width=\textwidth]{../images/kernel.png}
+\end{center}
+
+Les éléments structurants jouent un rôle clé en traitement d'image, notamment dans les opérations de morphologie mathématique. Ces opérations sont principalement utilisées pour analyser et traiter des images binaires ou en niveaux de gris en modifiant leurs formes ou en extrayant des structures spécifiques.
+
+\Manip Ouvrir le fichier \textsc{05\_kernel.py} du répertoire des codes à tester. Exécuter ce code.
+
+\Quest Quel est le type de des objets noyaux résultants ?
+
+\Manip Générer un noyau en forme de croix de taille 3 par 3 pixels et afficher ce noyau.
+
+\Manip Générer un second noyau en forme de cercle (ellipse) de taille 5 par 5 pixels et afficher ce noyau.
+
+\Manip Générer une ellipse de taille 31 par 21 pixels et afficher ce noyau.
+
+\newpage
+\subsection{Opérations d'ouverture et de fermeture}
+
+\begin{mdframed}[style=sidebar,frametitle={}]
+Notions : \href{https://iogs-lense-training.github.io/image-processing/contents/opencv_open_close.html#opening-operation}{\textit{Opening}} - \href{https://iogs-lense-training.github.io/image-processing/contents/opencv_open_close.html#closing-operation}{\textit{Closing}} 
+\end{mdframed}
+
+\Manip Ouvrir le fichier \textsc{07\_opening\_closing.py} du répertoire des codes à tester. Exécuter ce code.
+
+\Quest Quelles sont les opérations effectuées sur l'image \textsl{a\_letter\_noise.jpg} ? Quels sont les noyaux utilisés pour ces opérations ?
+
+\Quest De quel type est l'image utilisée pour ces opérations ?
+
+\Manip Modifier la taille des noyaux et tester à nouveau ces opérations.
+
+\Quest Que pouvez-vous conclure sur l'utilité des opérations d'ouverture et de fermeture sur une image ? Sur l'impact de la forme et de la taille du noyau ?
+
+% L'opération d'opening est utile pour supprimer les petits bruits tout en maintenant la forme et la taille des objets plus grands dans l'image.
+
+\noindent \rule{\linewidth}{1pt}
+
+\Manip Ouvrir une image RGB (\textit{formes\_bruit.png par exemple}) et appliquer les mêmes effets. Que pouvez-vous conclure ?
+
+\Manip Ouvrir cette même image en niveau de gris et appliquer les mêmes effets. Que pouvez-vous conclure ?
+
+\subsection{Opération de gradient}
+
+\Manip Ouvrir le fichier \textsc{08\_gradient.py} du répertoire des codes à tester. Exécuter ce code.
+
+\Quest Quelle est l'opération réalisée sur l'image \textsl{grad\_image\_cross\_3} ? Quelle est la suite d'opérations réalisée sur l'image \textsl{grad\_sub\_image\_cross\_3} ?
+
+\Quest Que pouvez-vous conclure sur le lien entre ces deux méthodes ?
+
+\Manip Proposer une méthode "fiable" pour comparer facilement ces deux images. Mettre en oeuvre cette méthode.
+
+\Manip Modifier la taille des noyaux et tester à nouveau ces opérations.
+
+\Quest Que pouvez-vous conclure sur l'utilité de l'opération de gradient sur une image ? Sur l'impact de la forme et de la taille du noyau ?
+
+% Le gradient met en évidence les bords des objets dans une image, ce qui peut être utile pour détecter des contours ou des transitions nettes dans l'intensité des pixels.
+
+
+\newpage
+%%%%%%%%%%%%%    Etape E
+\section{F - Calculer la FFT d'une image {[30 min]}}
+
+\Manip Ouvrir le fichier \textsc{09\_fft.py} du répertoire des codes à tester. Exécuter ce code.
+
+\Quest Quelle est la taille de l'image initiale ? Quel est le type et quelle est la taille de l'objet \textsl{fft\_image} ? De quel type sont ses éléments ?
+
+\Quest Expliquer l'intérêt de l'affichage du logarithme de la valeur absolue de la FFT.
+
+\noindent \rule{\linewidth}{1pt}
+
+\Quest Que permet de faire la fonction \textsl{circular\_mask} sur la FFT ? Commenter le résultat obtenu sur l'image recréée à partir de cette FFT modifiée.
+
+\Quest Quel est l'impact de la taille du masque ? A quoi sont dues les "vaguelettes" que l'on aperçoit sur l'image résultante ?
+
+\noindent \rule{\linewidth}{1pt}
+
+\Quest Que se passe-t-il sur une image RGB ? Quelle est la taille de la FFT ?
+
+\noindent \rule{\linewidth}{1pt}
+
+\Manip Générer une trame sinusoïdale en deux dimensions (200 x 300 pixels) à l'aide de la fonction \textsl{sine\_trame} de la bibliothèque \textsl{images\_manipulation}. Calculer sa FFT et afficher les résultats.
+
+\Quest Commenter le résultat obtenu pour différentes périodes spatiales et différents angles.
+
+
+%%%%%%%%%%%%%    Etape G
+\section{G - Appliquer un filtre moyenneur sur une image {[30 min]}}
+
+L'utilisation de filtres permet de prendre en compte les pixels voisins en exploitant les relations locales dans une image, ce qui est crucial pour des tâches comme la suppression de bruit, la détection de contours, l'extraction de caractéristiques, et l'amélioration de la qualité visuelle. Travailler sur des pixels isolés limite l'analyse à des informations ponctuelles, tandis que considérer les voisins permet une compréhension plus riche et contextuelle de l'image.
+
+\medskip
+
+\Manip Ouvrir le fichier \textsc{10\_blur\_mean.py} du répertoire des codes à tester. Exécuter ce code.
+
+\Quest Commenter les effets des deux méthodes utilisées pour lisser l'image. Quelle méthode est utilisée ici pour montrer de manière objective les modifications apportées à l'image ? 
+
+\Quest Que se passe-t-il sur une image RGB ? 
+
+\noindent \rule{\linewidth}{1pt}
+
+Le fichier \textsc{10a\_blur\_mean\_slice.py} propose une autre méthode pour comparer les effets du lissage.
+
+\Manip Ouvrir le fichier \textsc{10a\_blur\_mean\_slice.py} du répertoire des codes à tester. Exécuter ce code.
+
+\Quest Quelle est cette méthode ? 
+
+\Manip Calculer et afficher la FFT de chacune des images précédentes (originale et modifiées). 
+
+\Quest Quelle est la fonction réalisée par les deux filtres précédents ?
+
+\noindent \rule{\linewidth}{1pt}
+
+On cherche à présent à voir l'impact de la taille du noyau sur l'image finale.
+
+\Manip Ouvrir le fichier \textsc{10b\_blur\_mean\_kernel.py} du répertoire des codes à tester. Exécuter ce code.
+
+\Quest Que pouvez-vous conclure sur l'impact de la taille du noyau ? \textit{Vous pourrez également comparer les FFT...}
+
+\newpage
+
+%%%%%%%%%%%%%    Etape I
+\section{I - Appliquer un filtre passe-haut sur une image {[40 min]}}
+
+
+Le \textbf{filtre moyenneur} (vu précédemment) permet de conserver les \textbf{éléments à basse fréquence spatiale} dans l'image. C'est une méthode intéressante pour supprimer des bruits ponctuels (des éléments isolés et donc "rapides"). Il est également possible en choisissant un autre élément structurant de réaliser l'opération complémentaire qui supprime le fond continu et ne conserve que les transitions de fréquence spatiale élevée (bords d'un objet par exemple).
+
+\medskip
+
+Il est possible d'utiliser la fonction \textsl{cv2.filter2D()} pour appliquer un noyau particulier sur une image.
+
+\subsection{Opérateur de Roberts}
+
+L'\textbf{opérateur de Roberts} est l'un des premiers filtres de \textbf{détection de contours}. Il repose sur la convolution avec deux petits noyaux 2x2, conçus pour approximer les dérivées en diagonale de l'image.
+
+Les noyaux de convolution sont les suivants :
+
+$$K_x = \begin{bmatrix}
++1 & 0 \\
+0 & -1
+\end{bmatrix},
+\quad
+K_y =
+\begin{bmatrix}
+0 & +1 \\
+-1 & 0
+\end{bmatrix}.
+$$
+
+Il est alors possible de calculer l'amplitude du gradient par l'opération suivante: 
+
+$$\text{Amplitude} = \sqrt{G_x^2 + G_y^2}$$ où $G_x$ est le résultat de la convolution de l'image par le noyau $K_x$ et $G_y$ le résultat de la convolution de l'image par le noyau $K_y$.
+
+Une forte amplitude indique un contour ou un bord marqué. Une faible amplitude indique une région où l'intensité est relativement constante.
+
+\medskip
+
+\Manip Ouvrir le fichier \textsc{12\_roberts.py} du répertoire des codes à tester. Exécuter ce code.
+
+\Quest Commenter les résultats. Que pouvez-vous conclure sur l'effet de ce filtre ?
+
+\Manip Appliquer cet effet sur l'image \textsl{noise\_vi\_small.png}.
+
+\Quest La détection de contours est-elle optimale ?
+
+\noindent \rule{\linewidth}{1pt}
+
+\Manip Appliquer un filtre gaussien à l'aide d'un noyau de taille 11 x 11 et d'écart-type de 2. Appliquer l'effet précédent à l'image résultante.
+
+\Quest La détection de contours est-elle améliorée ?
+
+\newpage
+\subsection{Opérateur de Sobel}
+
+L'\textbf{opérateur de Sobel} permet de réaliser une opération similaire à celui de Roberts, mais en étant moins sensible aux bruits dans l'image, puisqu'il se base sur un noyau plus large et ainsi lisse l'image dans la direction perpendiculaire au gradient mesuré.
+
+Les noyaux de convolution sont les suivants :
+
+$$G_x = \begin{bmatrix}
+-1 & 0 & 1 \\
+-2 & 0 & 2 \\
+-1 & 0 & 1 
+\end{bmatrix},
+\quad
+G_y =
+\begin{bmatrix}
+-1 & -2 & -1 \\
+0 & 0 & 0 \\
+1 & 2 & 1 
+\end{bmatrix}.
+$$
+
+De la même façon que précédemment, on peut calculer l'amplitude du gradient par l'opération suivante : 
+
+$$\text{Amplitude} = \sqrt{G_x^2 + G_y^2}$$ où $G_x$ est le résultat de la convolution de l'image par le noyau $K_x$ et $G_y$ le résultat de la convolution de l'image par le noyau $K_y$.
+
+\medskip
+
+\Manip Ouvrir le fichier \textsc{12\_sobel.py} du répertoire des codes à tester. Exécuter ce code.
+
+\Manip Visualiser l'image originale, le résultat du filtrage selon X et le résultat du filtrage selon Y.
+
+\Quest Commenter les résultats. Que pouvez-vous conclure sur l'effet de ce filtre ?
+
+\Manip Appliquer cet effet sur l'image \textsl{noise\_vi\_small.png}.
+
+\Quest La détection de contours est-elle optimale ?
+
+\noindent \rule{\linewidth}{1pt}
+
+\Manip Appliquer un filtre gaussien à l'aide d'un noyau de taille 11 x 11 et d'écart-type de 2. Appliquer l'effet précédent à l'image résultante.
+
+\Quest La détection de contours est-elle améliorée ?
+
+\noindent \rule{\linewidth}{1pt}
+
+\Quest Que se passe-t-il sur une image RGB ? 
+
+\subsection{Méthodes de Harris et de Canny}
+
+L'\textbf{algorithme de Canny} est une technique de détection qui a pour objectif d'identifier les bords significatifs d'une image tout en minimisant le bruit.
+
+Cet algorithme comprend les étapes suivantes : \textbf{lissage} (réduction du bruit avec un filtre gaussien), \textbf{calcul du gradient} (obtention de la magnitude et de la direction des contours), \textbf{suppression non maximale} (affinage des contours pour ne garder que les crêtes locales) et \textbf{seuils double} (application de deux seuils pour conserver les contours forts et connecter les contours faibles pertinents).
+
+\medskip
+
+L'\textbf{opérateur de Harris} permet de détecter des coins ou points d'intérêt dans une image, utiles pour la reconnaissance d'objets, le suivi de mouvement ou la reconstruction 3D.
+
+Il est basé sur la mesure de la variation de l'intensité d'image dans des zones de l'image (par convolution avec un noyau). Les coins correspondent à des régions où la variation de l'intensité est forte dans plusieurs directions. Enfin un calcul d'une matrice de structure et d'une fonction de réponse R pour identifier les coins significatifs est réalisé.
+
+\medskip
+
+\Manip Ouvrir le fichier \textsc{13\_harris\_canny.py} du répertoire des codes à tester. Exécuter ce code.
+
+\Quest Commenter les résultats. 
+
+\Manip Appliquer cet effet sur d'autres images.
+
+
