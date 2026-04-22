@@ -123,13 +123,11 @@ Dans cette section, vous allez pouvoir :
 
 \Quest Que représente l'histogramme d'une image ? A quoi peut-il servir ?
 
-\Quest De quelle nature est l'image obtenue par l'acquisition ?
-
 \Manip Placer le \textit{black level} à 0. Modifier le \textbf{temps d'intégration} de la caméra. 
 
 \Quest Que se passe-t-il sur l'image ? Sur l'histogramme ?
 
-\Quest Quelles sont les valeurs minimale et maximale prises par les pixels de la caméra ? Quelle est alors la \textbf{profondeur binaire} de la caméra utilisée ?
+\Quest Quelles sont les valeurs minimale et maximale que peuvent prendre les pixels de la caméra ? Quelle est alors la \textbf{profondeur binaire} de la caméra utilisée ?
 
 \noindent \rule{\linewidth}{1pt}
 
@@ -228,7 +226,7 @@ Dans cette section, nous allons nous intéresser à quelques fonctionnalités pe
 
 \Quest Quel est l'effet de la taille du noyau sur le filtrage ?
 
-\Quest Qu'en est-il avec le filtre de type \textsl{Médian} ? 
+\Quest Qu'en est-il avec les filtres de type \textsl{Blur Gaussien} et \textsl{Médian} ? 
 
 \vfill
 
@@ -252,21 +250,29 @@ Nous allons nous intéresser ici à l'éclairage \textbf{Effilux EFFI-Ring}, ver
 
 \Manip Allumer l'\textbf{éclairage annulaire} du banc (trois couleurs). Placer un \textbf{fond uniforme} sous l'éclairage (feuille blanche, paillasse...).
 
-\Manip Sélectionner l'ensemble du champ visible par la caméra. Ajuster le temps d'intégration pour obtenir une image non saturée avec un éclairage blanc. 
+\Manip Sélectionner l'\textbf{ensemble du champ visible} par la caméra. Ajuster le temps d'intégration pour obtenir une image non saturée avec un éclairage blanc. Noter le temps d'intégration choisi. 
 
 \Manip Ouvrir l'onglet \fbox{\textsc{Outils pour Images}} puis sélectionner le mode \fbox{\textsc{Profil dans l'image}}. Visualiser les profils vertical et horizontal au centre de l'image (environ).
 
 % A terme ! Outil de mesure du profil (ou sauvegarde du profil pour analyse par la suite)
 
-\Manip Mesurer l'écart entre le maximum et le minimum d'éclairement.
+\Manip Mesurer les niveaux de gris minimal et maximal obtenus pour cet éclairement. 
 
 \Quest Que pouvez-vous conclure sur l'éclairage à cette distance de travail ? 
 
 \noindent \rule{\linewidth}{1pt}
 
-\Manip Refaire ces mesures pour différentes hauteurs de travail.
+On souhaite à présent remplir le tableau XX de la feuille de résultats et mesurer l'écart d'intensité relevé dans la zone centrale du champ de vision pour 3 hauteurs de travail différentes.
+
+\Manip Sélectionner une zone d'intérêt de 400 x 400 pixels au centre du champ de vision de la caméra.
+
+\Manip Mesurer les niveaux de gris minimal et maximal obtenus pour \textbf{3 hauteurs de travail différentes} : 25cm, 12cm et 6cm (environ) entre le fond et la caméra. 
+
+\medskip
 
 \textit{\textbf{Ne déplacer pas la potence de la caméra}. Déplacer un support uniforme sous la caméra (feuille blanche par exemple)}.
+
+\medskip
 
 \Quest Retrouve-t-on une courbe de réponse proche de celle du constructeur ?
 
@@ -282,9 +288,11 @@ Selon la nature de la pièce à analyser (métallique, transparente, texturée..
 \newpage
 \section{D - Linéarité du capteur {[30 min]}}
 
+On souhaite vérifier la linéarité du capteur en fonction du temps d'intégration, pour les 3 couleurs d'éclairage ainsi que du blanc. On souhaite alors remplir le tableau XX de la feuille de résultats.
+
 \Manip Placer un cube de couleur dans le champ de la caméra. Allumer l'éclairage annulaire en blanc. Ajuster la zone d'intérêt pour visualiser une zone quasiment uniforme de l'objet. Placer le \textit{black level} à 0.
 
-\Manip Ajuster le temps d'intégration pour obtenir un histogramme dont les valeurs de niveau de gris ne dépassent les  2/3 de la valeur maximale de la caméra. 
+\Manip Ajuster le temps d'intégration le plus élevé de vos relevés de mesure pour obtenir un histogramme dont les valeurs de niveau de gris ne dépassent les  2/3 de la valeur maximale de la caméra. 
 
 \Quest Quel type de profil obtient-on ? Quelle forme d'histogramme ?
 
@@ -292,7 +300,6 @@ Selon la nature de la pièce à analyser (métallique, transparente, texturée..
 
 \Quest Quelle relation obtient-on entre ce niveau de gris et le temps d'intégration ? Que peut-on en conclure sur le capteur ?
 
-\Quest Est-ce vrai pour les 3 couleurs prises indépendamment ?
 
 
 \section{E - Champ de vision et résolution spatiale {[40 min]}}

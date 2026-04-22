@@ -11,7 +11,7 @@ import numpy as np
 
 image_gray = cv2.imread('./_data/robot.jpg', cv2.IMREAD_GRAYSCALE)
 
-alpha = 1.2
+alpha = 0.4
 beta = 10
 image2 = cv2.convertScaleAbs(image_gray, alpha=alpha, beta=beta)
 
@@ -33,4 +33,5 @@ ax[1,0].set_title('Histogram of initial image')
 ax[1,1].bar(x, histogram2[:,0], width=1, color='black')
 ax[1,1].set_xlim([0, 256])  # Limits for the x-axis
 ax[1,1].set_title('Histogram of modified image')
-plt.show()
+
+

@@ -45,4 +45,7 @@ ax[1].set_title('Cross 3x3 Kernel')
 ax[2].imshow(closing_image_square_3, cmap='gray')
 ax[2].set_title('Square 3x3 Kernel')
 
-plt.show()
+#plt.show()
+
+
+

@@ -43,3 +43,5 @@ ax[0].set_title('Initial Gray Image')
 ax[1].imshow(magnitude, cmap='gray')
 ax[1].set_title('Sobel Process')
 plt.show()
+
+

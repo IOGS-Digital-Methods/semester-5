@@ -42,5 +42,3 @@ ax[1,0].set_title('New Gray Image')
 ax[1,1].imshow(np.log(np.abs(fft_mask)+0.001), cmap='gray')
 ax[1,1].set_title('FFT of Initial Gray Image')
 plt.show()
-
-

@@ -34,3 +34,4 @@ ax[1].imshow(binary_image_gauss, cmap='gray')
 ax[1].set_title('Gauss Binary Image')
 
 plt.show()
+

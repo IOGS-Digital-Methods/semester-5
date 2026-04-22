@@ -27,4 +27,9 @@ ax[0,1].imshow(G_x, cmap='gray')
 ax[0,1].set_title('Roberts X')
 ax[1,1].imshow(G_y, cmap='gray')
 ax[1,1].set_title('Roberts Y')
+
+
+plt.figure()
+plt.imshow(Amp, cmap='gray')
+plt.title('Roberts Amplitude')
 plt.show()
