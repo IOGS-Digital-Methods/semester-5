@@ -1,0 +1,293 @@
+\newpage
+%\pagestyle{empty}
+
+\begin{minipage}[c]{.25\linewidth}
+	\includegraphics[width=4cm]{images/LEnsE_IOGS.jpg}
+\end{minipage} \hfill
+\begin{minipage}[c]{.42\linewidth}
+
+\begin{center}
+\vspace{0.3cm}
+{\Large \textsc{Opto-Électronique}}
+
+\medskip
+
+5N-027-SCI \qquad \textbf{\Large TP VI2 - Résultats}
+
+\end{center}
+\end{minipage}\hfill
+
+
+\noindent \rule{\linewidth}{1pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent {\large NOM : \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\qquad	Prénom : \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\qquad Groupe : \_\_\_\_\_\_}
+
+\bigskip
+
+\noindent
+\underline{\textbf{Annexes à présenter pour chaque partie}} :
+
+\begin{itemize}[label=$\square$]
+	\item \textbf{Images} : avant et après traitement, ainsi que différence entre ces images
+	\item \textbf{Histogrammes} : avant et après traitement (si pertinents)
+	\item \textbf{Analyse} (de quelques lignes) de l'effet des traitements proposés
+\end{itemize}
+\vspace{-0.5cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{A - Ouvrir une image}
+\vspace{-0.3cm}
+
+\textbf{Tableau VI-5 / Type de données et taille des matrices}
+\vspace{-0.3cm}
+
+\begin{center}
+\begin{tabular}{|>{\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{5cm}|>{\centering\arraybackslash}p{4cm}|>{\centering\arraybackslash}p{4cm}|}
+  \hline
+  Format image & Taille matrice & Canaux & Type de données \\
+  \hline
+  \textit{Grayscale} & & & \rule{0pt}{1.4em} \\
+  \hline
+  RGB & & & \rule{0pt}{1.4em} \\
+  \hline
+\end{tabular}
+\end{center}
+\vspace{-0.3cm}
+
+\noindent
+\resultBox{
+\textbf{{\huge \danger} Ordre canaux couleur OpenCV : }
+} 
+
+\vspace{-0.5cm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{C - Contraste / Luminosité}
+\vspace{-0.3cm}
+
+\textbf{Tableau VI-6 / Effet du contraste et de la luminosité sur une image}
+\vspace{-0.3cm}
+
+\begin{center}
+\begin{tabular}{|>{\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{10cm}|}
+  \hline
+  Format image & Possible & Effets \\
+  \hline
+  \textit{Grayscale} & OUI/NON & \rule{0pt}{2em} \\
+  \hline
+  RGB & OUI/NON & \rule{0pt}{2em} \\
+  \hline
+\end{tabular}
+\end{center}
+
+\noindent
+\begin{minipage}{0.31\linewidth}
+\resultBox{
+\textbf{$\alpha = 0.5$}
+} 
+\end{minipage}
+\hfill
+\begin{minipage}{0.31\linewidth}
+\resultBox{
+\textbf{Moy. Avant = \qquad \qquad}
+} 
+\end{minipage}
+\hfill
+\begin{minipage}{0.31\linewidth}
+\resultBox{
+\textbf{Moy. Après = \qquad \qquad}
+} 
+\end{minipage}
+
+
+\noindent
+\begin{minipage}{0.31\linewidth}
+\resultBox{
+\textbf{$\alpha = 1.2$}
+} 
+\end{minipage}
+\hfill
+\begin{minipage}{0.31\linewidth}
+\resultBox{
+\textbf{Moy. Avant = \qquad \qquad}
+} 
+\end{minipage}
+\hfill
+\begin{minipage}{0.31\linewidth}
+\resultBox{
+\textbf{Moy. Après = \qquad \qquad}
+} 
+\end{minipage}
+
+\noindent
+\resultBox{
+\textbf{{\huge \danger} Affichage des images : \\
+\hfill \\
+\hfill
+}
+} 
+
+\noindent
+\begin{minipage}{0.23\linewidth}
+\validationBox{\checkBox{} Contraste}  
+\end{minipage}
+\hfill
+\begin{minipage}{0.23\linewidth}
+\validationBox{\checkBox{} Affichage}
+\end{minipage}
+\hfill
+\begin{minipage}{0.23\linewidth}
+\hfill 
+\end{minipage}
+\hfill
+\begin{minipage}{0.23\linewidth}
+\hfill
+\end{minipage}
+\vspace{-0.3cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{D - Binarisation}
+\vspace{-0.3cm}
+
+\textbf{Tableau VI-7 / Effet de la binarisation sur une image}
+\vspace{-0.3cm}
+
+\begin{center}
+\begin{tabular}{|>{\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{10cm}|}
+  \hline
+  Format image & Possible & Effets \\
+  \hline
+  \textit{Grayscale} & OUI/NON & \rule{0pt}{2em} \\
+  \hline
+  RGB & OUI/NON & \rule{0pt}{1em} \\
+  \hline
+\end{tabular}
+\end{center}
+
+\noindent
+\resultBox{
+\textbf{Méthode "fiable" : }
+} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{E - Ouverture / Fermeture}
+\vspace{-0.3cm}
+
+\textbf{Tableau VI-8 / Effet de l'opération morphologique de fermeture sur une image}
+\vspace{-0.3cm}
+
+\begin{center}
+\begin{tabular}{|>{\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{9cm}|}
+  \hline
+  Format image & Possible & Pertinent & Effets \\
+  \hline
+  Binaire & OUI/NON & OUI/NON & \rule{0pt}{3em} \\
+  \hline
+  \textit{Grayscale} & OUI/NON & OUI/NON & \rule{0pt}{2em} \\
+  \hline
+  RGB & OUI/NON & OUI/NON & \rule{0pt}{2em} \\
+  \hline
+\end{tabular}
+\end{center}
+\vspace{-0.3cm}
+
+\noindent
+\resultBox{
+\textbf{Effet ouverture sur image binaire : \\
+\hfill \\
+\hfill
+}
+} 
+\vspace{-0.3cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{F - Transformée de Fourier}
+\vspace{-0.3cm}
+
+\textbf{Tableau VI-9 / Résultat d'une FFT sur une image}
+\vspace{-0.3cm}
+
+\begin{center}
+\begin{tabular}{|>{\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{5cm}|>{\centering\arraybackslash}p{4cm}|}
+  \hline
+  Format image & Possible & Taille données & Type de données \\
+  \hline
+  \textit{Grayscale} & OUI/NON & & \rule{0pt}{1.2em} \\
+  \hline
+  RGB & OUI/NON & & \rule{0pt}{1.2em} \\
+  \hline
+\end{tabular}
+\end{center}
+\vspace{-0.3cm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{G - Moyenneur}
+
+
+\textbf{Tableau VI-10 / Effet du filtre moyenneur sur une image}
+\vspace{-0.3cm}
+
+\begin{center}
+\begin{tabular}{|>{\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{10cm}|}
+  \hline
+  Format image & Possible & Effets \\
+  \hline
+  \textit{Grayscale} & OUI/NON & \rule{0pt}{3em} \\
+  \hline
+  RGB & OUI/NON & \rule{0pt}{2em} \\
+  \hline
+\end{tabular}
+\end{center}
+
+
+\noindent
+\resultBox{
+\textbf{Différence Gaussien / Moyen : \\
+\hfill \\
+\hfill
+}
+} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{H - Sobel}
+
+\textbf{Tableau VI-11 / Effet de l'opérateur de Sobel sur une image}
+\vspace{-0.3cm}
+
+\begin{center}
+\begin{tabular}{|>{\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{10cm}|}
+  \hline
+  Format image & Possible & Effets \\
+  \hline
+  Binaire & OUI/NON & \rule{0pt}{3em} \\
+  \hline
+  \textit{Grayscale} & OUI/NON & \rule{0pt}{2em} \\
+  \hline
+  RGB & OUI/NON & \rule{0pt}{2em} \\
+  \hline
+\end{tabular}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
