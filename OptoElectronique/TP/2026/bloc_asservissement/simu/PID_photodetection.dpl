@@ -1,0 +1,31 @@
+<Qucs Schematic 0.0.19>
+<Properties>
+  <View=-368,294,1143,1437,1.21,213,0>
+  <Grid=10,10,0>
+  <DataSet=PID_photodetection.dat>
+  <DataDisplay=PID_photodetection.sch>
+  <OpenDisplay=1>
+  <Script=PID_photodetection.m>
+  <RunScript=0>
+  <showFrame=0>
+  <FrameText0=Titre>
+  <FrameText1=Auteur :>
+  <FrameText2=Date :>
+  <FrameText3=Version :>
+</Properties>
+<Symbol>
+</Symbol>
+<Components>
+</Components>
+<Wires>
+</Wires>
+<Diagrams>
+  <Rect 10 952 1057 638 3 #c0c0c0 1 00 1 0 2e-05 0.0005 1 -1.06045 0.2 1.65699 1 -1 0.2 1 315 0 225 "" "" "">
+	<"V_PID.Vt" #0000ff 0 3 0 0 0>
+	<"V_Error.Vt" #ff0000 4 3 0 2 0>
+	<"V_step_point.Vt" #ff00ff 3 3 0 3 0>
+	<"V_perturb.Vt" #aa5500 0 3 0 0 0>
+  </Rect>
+</Diagrams>
+<Paintings>
+</Paintings>
