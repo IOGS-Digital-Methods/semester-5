@@ -42,9 +42,10 @@ def create_closed_loop(sys_plant, sys_controller, sys_sensor):
 K_p_values = [0.1, 1, 5, 20]
 K_i = 1e6
 
-# Stockage des résultats
+# Results
 results_p_only = {}
 results_pi = {}
+results_pi_ki = {}
 
 for kp in K_p_values:
     # Correcteur P seul
@@ -71,7 +72,7 @@ for kp, response in results_p_only.items():
 ax1.set_xlabel('Time (µs)')
 ax1.set_ylabel('Amplitude')
 ax1.set_title('Step response - P correction')
-ax1.set_ylim(-0.1, 1.5)
+ax1.set_ylim(-0.1, 2)
 ax1.legend()
 ax1.grid(True)
 
@@ -83,7 +84,7 @@ for kp, response in results_pi.items():
 ax2.set_xlabel('Time (µs)')
 ax2.set_ylabel('Amplitude')
 ax2.set_title('Step response - PI correction')
-ax2.set_ylim(-0.1, 1.5)
+ax2.set_ylim(-0.1, 2)
 ax2.legend()
 ax2.grid(True)
 
@@ -125,4 +126,46 @@ ax4.grid(True)
 
 
 plt.tight_layout()
+plt.show()
+
+
+### Integral
+K_i_values = [1e5, 1e6, 1e7]
+kp = 1
+
+for ki in K_i_values:
+    # Correcteur PI
+    sys_PI = create_pid(kp=kp, ki=ki)
+    sys_fb_PI = create_closed_loop(sys_A, sys_PI, sys_M)
+    results_pi_ki[ki] = ct.step_response(sys_fb_PI, time_pts)
+
+fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+
+# Step response - P correction
+ax1 = axes[0]
+ax1.plot(step_time, step_value, 'k--', alpha=0.5, linewidth=1.5, label='Step')
+for ki, response in results_pi_ki.items():
+    ax1.plot(time_pts * 1e6, response.outputs, label=f'Ki = {ki:.0e}')
+ax1.plot(time_pts * 1e6, results_p_only[kp].outputs, linestyle= 'dotted', linewidth=2, label='P only')
+ax1.set_xlabel('Time (µs)')
+ax1.set_ylabel('Amplitude')
+ax1.set_title(f'Step response - PI correction (Kp = {kp})')
+ax1.set_ylim(-0.1, 2)
+ax1.legend()
+ax1.grid(True)
+
+# Step response - PI correction
+ax2 = axes[1]
+ax2.plot(step_time, step_value, 'k--', alpha=0.5, linewidth=1.5, label='Step')
+for kp, response in results_pi.items():
+    ax2.plot(time_pts * 1e6, response.outputs, label=f'Kp = {kp}, Ki = {K_i:.0e}')
+ax2.set_xlabel('Time (µs)')
+ax2.set_ylabel('Amplitude')
+ax2.set_title('Step response - PI correction')
+ax2.set_ylim(-0.1, 2)
+ax2.legend()
+ax2.grid(True)
+
+plt.tight_layout()
+
 plt.show()
