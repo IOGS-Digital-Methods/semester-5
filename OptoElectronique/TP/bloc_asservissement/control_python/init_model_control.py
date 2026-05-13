@@ -57,4 +57,11 @@ plt.plot(time_pts, y_fb, label='controlled system - no correction')
 plt.legend()
 plt.title('Forced response global system')
 
+plt.figure()
+plt.plot(time_pts, u, label='input step_point')
+plt.plot(time_pts, y_fb, label='controlled system - no correction')
+plt.legend()
+plt.grid()
+plt.title('Forced response global system')
+
 plt.show()
