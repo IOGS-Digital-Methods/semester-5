@@ -1,0 +1,102 @@
+\newpage
+\pagestyle{empty}
+
+\begin{minipage}[c]{.25\linewidth}
+	\includegraphics[width=4cm]{images/Logo-LEnsE.png}
+\end{minipage} \hfill
+\begin{minipage}[c]{.4\linewidth}
+
+\begin{center}
+\vspace{0.3cm}
+{\Large \textsc{Opto-Électronique}}
+
+\medskip
+
+\textbf{\Large Ressources}
+
+\end{center}
+\end{minipage}\hfill
+
+\vspace{0.5cm}
+
+\noindent \rule{\linewidth}{1pt}
+\section{Calculer la résistance de protection d'une diode (LED)}
+\label{ressource:RLed}
+
+Les \textbf{diodes} sont des \textbf{composants non linéaires} capables de \textbf{laisser passer du courant dans une direction}. Il n'existe cependant \textbf{aucune limitation naturelle de ce courant} si ce n'est la destruction du composant par effet Joule. Le fabricant donne alors une intensité maximale à ne pas dépasser (ou une puissance maximale que le composant peut dissiper) pour conserver les propriétés initiales du composant.
+
+Afin de limiter ce courant, qu'on nommera $i_F$ (F pour \textit{Forward} ou direct), il est \textbf{indispensable} d'ajouter une \textbf{résistance de protection} en série avec une LED comme dans le schéma de la figure~\ref{fig:r_led_man}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%
+\begin{figure}[h!]
+    \centering
+\begin{tikzpicture}
+    \draw(0,-2)--(0,2)--(4,2)--(4,-2)--cycle;
+    \node[fill=white, minimum height= 0.2cm] at (0,0) {}; 
+    \draw(-0.5,0.1)--++(1,0);
+    \draw[line width=4pt] (-0.25,-0.1)--++(0.5,0);
+    
+    
+    %\draw[fill=white] (0,0) circle (0.5cm);
+    %\draw [>=stealth, ->, very thick] (0,-0.25)--(0,0.25);
+    \node at (-1,0) {$E$};
+    \node[draw, fill=white, minimum width=0.3cm, minimum height=1cm, rounded corners =2pt] at (4,1) {};
+    \node [xshift=0.8cm] at (4,1) {$R_{P}$};
+    \draw(1,-2)--++(0,-0.4); \draw(0.6,-2.4)--++(0.8,0); \draw (0.75,-2.5)--++(0.5,0);\draw (0.85,-2.6)--++(0.3,0); 
+    
+    \node[circle,draw, fill =white](Voltmetre) at (2,-1) {$\operatorname{V}$};
+    \draw (Voltmetre.north)|-(4,0) node[gray] {$\bullet$};
+    \draw (Voltmetre.south)--(2,-2) node {$\bullet$};
+    \node[circle,draw, fill =white](Ametre) at (3,-2) {$\operatorname{A}$};
+    \node[gray] at (4,-2) {$\bullet$};
+
+    %\draw (Ametre.east)--++(1,0) node (int) [midway]   {$\bullet$} --++(0,1) --++(0.4,0.8);
+%\draw (0.5,2) -| (4.4,0.5);
+%\draw (0.5,-1)  -|(Ametre.west);
+%\draw (Voltmetre.north)--(2,2) node {$\bullet$};
+%\draw (Voltmetre.south)--(2,-1) node {$\bullet$};
+
+    
+            \begin{scope}[xshift=3.75cm,yshift=-0.6cm]%LED
+            \draw[fill=white] (0,0)--++(0.5,0)--++(-0.25,-0.5)--cycle;
+            \draw (0,-0.5)--++(0.5,0) node[above right, yshift=0.5cm]{LED};
+            \draw[->,>=latex,rounded corners=2pt, line width=1pt] (0.75,-0.4) --++ (0.25,0.25)--++(0,-0.25)--++(0.25,0.25);
+            \node (A1) at (0.25,0) {};
+            \node (K1) at (0.25,-0.5) {};
+            \end{scope}        
+\end{tikzpicture}
+    \caption{Schéma du circuit de protection d'une LED.}
+    \label{fig:r_led_man}
+\end{figure}
+
+
+\subsection{Caractéristiques importantes}
+
+$I_{Fmax}$ ou $P_{max}$ : courant direct maximal admissible par la diode, ou puissance maximale que le composant peut dissiper.
+
+$V_F$ : tension directe lorsque la diode est parcourue par un courant.
+
+\subsection{Équations autour du montage}
+
+$u_e = u_d + u_R$ et $u_R = R_P * i_F$
+
+$$u_e = u_d + R_p * i_F$$
+
+On obtient alors $i_F = \frac{u_e - u_d}{R_P}$
+
+Le courant $i_F$ est maximal lorsque la diode est passante. On pourra faire l'hypothèse, dans ce cas, que la tension $u_d$ à ces bornes vaut $V_F$.
+
+Ainsi, l'équation précédente devient : $i_F = \frac{u_e - V_F}{R_P}$
+
+Le but est que le courant $i_F$ soit toujours inférieur à $I_{Fmax}$, on obtient alors l'inégalité suivante :
+
+$$\frac{u_e - V_F}{R_P} < I_{Fmax}$$
+
+\subsection{Calcul de la résistance de protection minimale}
+
+L'inégalité précédente donne : 
+
+$$R_P > \frac{u_e - V_F}{I_{Fmax}}$$
+

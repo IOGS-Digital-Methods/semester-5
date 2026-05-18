@@ -34,7 +34,7 @@ Vous allez également vous \textbf{familiariser avec l'utilisation des appareils
 votre disposition au cours des séances de Travaux Pratiques d'Opto-Électronique et \textbf{mettre en \oe{}uvre des protocoles expérimentaux standards} en photonique.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Etude d'un montage simple de photodétection - \textit{Durée : 90 min}}
+\section{Etude d'un montage simple de photodétection - \textit{Durée : 60 min}}
 
 On s'intéresse au circuit de la figure~\ref{fig:schem_photo} avec $E = 5 \, V$ (tension continue), une photodiode de type \textbf{\texttt{SFH206K}} (documentation fournie dans le document annexe) et $R_{PHD} = 100 \, k\Omega$:
 
@@ -64,25 +64,11 @@ On s'intéresse au circuit de la figure~\ref{fig:schem_photo} avec $E = 5 \, V$ 
     \label{fig:schem_photo}
 \end{figure}
 
-On souhaite pouvoir remplir le tableau suivant (à reproduire dans votre cahier de laboratoire) :
+On souhaite pouvoir remplir le tableau 1 de la feuille de résultats du TP1.
 
 \medskip
 
-\begin{center}
-\begin{tabular}{|c|c|c|c|c|}
-  \hline
-  Grandeur & Unité & Flux ambiant & Obscurité & Lampe de bureau \\
-  \hline
-  Intensité lumineuse $\Phi_e$ &  &  &  &  \\
-  \hline
-  Tension $V_S$ &  &  &  &  \\
-  \hline
-  Courant $I_{photo}$ &  &  &  &  \\
-  \hline
-\end{tabular}
-\end{center}
-
-\Quest Proposer des protocoles (avec les schémas associés incluant les appareils de mesure) pour remplir ce tableau.
+\Quest Proposer des protocoles (avec les schémas associés incluant les appareils de mesure) pour mesurer l'\textbf{intensité lumineuse} ($\Phi_e$), l'\textbf{intensité du courant dans la photodiode} ($I_{photo}$) et la \textbf{tension de sortie du montage} ($V_S$) lorsque la photodiode est dans l'obscurité, plongée dans un le flux ambiant de la pièce ou éclairée par une lampe de bureau.
 
 \Quest Quel est le lien entre la tension $V_S$ et le flux lumineux mesuré $\Phi_e$ ?
 
@@ -93,6 +79,8 @@ On souhaite pouvoir remplir le tableau suivant (à reproduire dans votre cahier 
 \Quest Chercher dans la documentation technique de la photodiode la valeur de la \textbf{sensibilité spectrale} et comparer le courant mesuré au courant théorique. Que pouvez-vous conclure ?
 
 \Manip Visualiser la tension aux bornes de $R_{PHD}$ à l'aide d'un oscilloscope et comparer le signal observé au signal attendu. 
+
+\Quest Analyser le résultat.
 
 
 \clearpage
@@ -133,27 +121,9 @@ On choisira $R_P = 270\operatorname{\Omega}$ et $R_I = 10\operatorname{\Omega}$.
 
 \Manip Relever la caractéristique $i=f(u)$ de cette photodiode, lorsqu'elle est soumise à un flux lumineux constant, pour des tensions $u$ positives ET négatives. Quelle précaution faut-il prendre lors de cette mesure ?
 
+\Quest Quels sont les ordres de grandeur des courants mesurés ?
+
 \Manip Déterminer les zones d'utilisation possible de ce composant. Quel modèle peut-on alors proposer pour ce capteur ? 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Validation des résultats}
-
-\Real Préparer une présentation (3-4 min maximum) rassemblant les \textbf{schémas de mesure}, les \textbf{protocoles utilisés}, les \textbf{calculs réalisés}, les \textbf{résultats pertinents} obtenus ainsi qu'une \textbf{brève analyse} de ces derniers.
-
-\medskip
-
-\noindent \rule{\linewidth}{1pt}
-
-\textbf{\Large Faire valider l'ensemble par un$\cdot$e encadrant$\cdot$e}
-
-\medskip
-
-Cette présentation devra clairement faire ressortir des preuves en lien avec :
-
-\begin{itemize}
-	\item les compétences \fbox{C3}, \fbox{C4} et \fbox{C5}
-	\item les AAV du \fbox{bloc 1}
-\end{itemize}
 
 
 
@@ -201,23 +171,7 @@ On souhaite \textbf{vérifier que cette loi reste valable} quelque soit la fréq
 
 \medskip
 
-Pour cela, on souhaite pouvoir remplir le tableau suivant (à reproduire dans votre cahier de laboratoire) :
-
-\medskip
-
-\begin{center}
-\begin{tabular}{|c|c|c|c|c|c|c|}
-  \hline
-  Gain (dB) & [A]mplification & $R_1$ & $R_2$ & [B]ande [P]assante & Produit [A].[BP] & $\Delta{}T_{95\%}$\\
-  \hline
-  $12$ &  &  &  & & & \\
-  \hline
-  $32$ &  &  &  & & & \\
-  \hline
-\end{tabular}
-\end{center}
-
-où l'amplification correspond à $\frac{V_s}{V_e}$, $R_1$ et $R_2$ les valeurs des résistances choisies, la bande-passante à $-3\operatorname{dB}$ et $\Delta{}T_{95\%}$ est le temps de réponse à 95\%.
+Pour cela, on souhaite pouvoir remplir le tableau 2 de la feuille de résultats du TP1.
 
 
 
@@ -277,19 +231,6 @@ Certains composants, notamment les amplificateurs linéaires intégrés, sont ca
 
 \Quest Quel est le lien entre ce temps et la bande-passante mesurée dans la partie précédente ?
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Cahier de laboratoire / Check-List}
-
-\begin{itemize}[label=$\square$]
-	\item tableau comparatif rempli
-	\item protocoles utilisés (avec schéma de câblage, paramètres des instruments de mesure et étapes expérimentales)
-	\item diagrammes de Bode légendés
-	\item captures d'écran d'oscilloscope des réponses indicielles
-	\item analyse des résultats
-	\item modélisation du système
-\end{itemize}
 
 
 
