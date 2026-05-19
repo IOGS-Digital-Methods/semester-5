@@ -32,41 +32,27 @@ Afin de limiter ce courant, qu'on nommera $i_F$ (F pour \textit{Forward} ou dire
 %%%%%
 \begin{figure}[h!]
     \centering
-\begin{tikzpicture}
-    \draw(0,-2)--(0,2)--(4,2)--(4,-2)--cycle;
-    \node[fill=white, minimum height= 0.2cm] at (0,0) {}; 
-    \draw(-0.5,0.1)--++(1,0);
-    \draw[line width=4pt] (-0.25,-0.1)--++(0.5,0);
-    
-    
-    %\draw[fill=white] (0,0) circle (0.5cm);
-    %\draw [>=stealth, ->, very thick] (0,-0.25)--(0,0.25);
-    \node at (-1,0) {$E$};
-    \node[draw, fill=white, minimum width=0.3cm, minimum height=1cm, rounded corners =2pt] at (4,1) {};
-    \node [xshift=0.8cm] at (4,1) {$R_{P}$};
-    \draw(1,-2)--++(0,-0.4); \draw(0.6,-2.4)--++(0.8,0); \draw (0.75,-2.5)--++(0.5,0);\draw (0.85,-2.6)--++(0.3,0); 
-    
-    \node[circle,draw, fill =white](Voltmetre) at (2,-1) {$\operatorname{V}$};
-    \draw (Voltmetre.north)|-(4,0) node[gray] {$\bullet$};
-    \draw (Voltmetre.south)--(2,-2) node {$\bullet$};
-    \node[circle,draw, fill =white](Ametre) at (3,-2) {$\operatorname{A}$};
-    \node[gray] at (4,-2) {$\bullet$};
+\begin{circuitikz}
+	\draw (0,3) to[short, -] (3,3);
+	% fleche
+	\draw (0.5,0.3) edge[->] (0.5,2.7);
+	\node (Ein) at (0,1.5){$u_E$};
+	
+	\draw (5,3) to[empty diode, invert] (2,3);
+	\draw (2,3) to[short, i>=$ $, current arrow scale=8] ++(0.5,0);
+	\node (Ein) at (2,3.5){$i_F$};
+	\draw (4.5,2.3) edge[->, green!40!black] (2.5,2.3); 
+	\node[text=green!40!black] (US) at (3.5,2){$u_D$};
 
-    %\draw (Ametre.east)--++(1,0) node (int) [midway]   {$\bullet$} --++(0,1) --++(0.4,0.8);
-%\draw (0.5,2) -| (4.4,0.5);
-%\draw (0.5,-1)  -|(Ametre.west);
-%\draw (Voltmetre.north)--(2,2) node {$\bullet$};
-%\draw (Voltmetre.south)--(2,-1) node {$\bullet$};
-
-    
-            \begin{scope}[xshift=3.75cm,yshift=-0.6cm]%LED
-            \draw[fill=white] (0,0)--++(0.5,0)--++(-0.25,-0.5)--cycle;
-            \draw (0,-0.5)--++(0.5,0) node[above right, yshift=0.5cm]{LED};
-            \draw[->,>=latex,rounded corners=2pt, line width=1pt] (0.75,-0.4) --++ (0.25,0.25)--++(0,-0.25)--++(0.25,0.25);
-            \node (A1) at (0.25,0) {};
-            \node (K1) at (0.25,-0.5) {};
-            \end{scope}        
-\end{tikzpicture}
+	\draw (5,3) to[R=$R_{P}$, *-*] (5,0) -- (0,0);
+	\draw (5,0) to[short, -o] ++(1.5,0);
+	\draw (5,3) to[short, -o] ++(1.5,0);
+	\draw (5,0) node[ground](GND){};
+	% fleche
+	\draw (6.5,0.3) edge[->, green!40!black] (6.5,2.7); 
+	\node[text=green!40!black] (US) at (7.1,1.5){$u_R$};
+	
+\end{circuitikz}
     \caption{Schéma du circuit de protection d'une LED.}
     \label{fig:r_led_man}
 \end{figure}
@@ -74,25 +60,28 @@ Afin de limiter ce courant, qu'on nommera $i_F$ (F pour \textit{Forward} ou dire
 
 \subsection{Caractéristiques importantes}
 
-$I_{Fmax}$ ou $P_{max}$ : courant direct maximal admissible par la diode, ou puissance maximale que le composant peut dissiper.
+Les principales caractéristiques à relever sont : 
 
-$V_F$ : tension directe lorsque la diode est parcourue par un courant.
+\begin{description}
+	\item[$I_{Fmax}$] courant direct maximal admissible par la diode, ou $P_{max}$ puissance maximale que le composant peut dissiper (selon les constructeurs),
+	\item[$V_F$] tension directe lorsque la diode est parcourue par un courant.
+\end{description}
 
 \subsection{Équations autour du montage}
 
-$u_e = u_d + u_R$ et $u_R = R_P * i_F$
+Les lois classiques de l'électrocinétique (mailles, noeuds, Ohm...) donnent les équations suivantes pour le circuit précédent :
 
-$$u_e = u_d + R_p * i_F$$
+$$u_e = u_d + u_R \qquad u_R = R_P * i_F$$
 
-On obtient alors $i_F = \frac{u_e - u_d}{R_P}$
+On obtient alors : $$i_F = \frac{u_e - u_d}{R_P}$$
 
 Le courant $i_F$ est maximal lorsque la diode est passante. On pourra faire l'hypothèse, dans ce cas, que la tension $u_d$ à ces bornes vaut $V_F$.
 
-Ainsi, l'équation précédente devient : $i_F = \frac{u_e - V_F}{R_P}$
+Ainsi, l'équation précédente devient : $$i_F = \frac{u_e - V_F}{R_P}$$
 
 Le but est que le courant $i_F$ soit toujours inférieur à $I_{Fmax}$, on obtient alors l'inégalité suivante :
 
-$$\frac{u_e - V_F}{R_P} < I_{Fmax}$$
+$$\boxed{\frac{u_e - V_F}{R_P} < I_{Fmax}}$$
 
 \subsection{Calcul de la résistance de protection minimale}
 
@@ -100,3 +89,20 @@ L'inégalité précédente donne :
 
 $$R_P > \frac{u_e - V_F}{I_{Fmax}}$$
 
+Le terme de droite est maximal lorsque $u_E$ est maximal. $u_E$ correspond à la tension d'entrée de ce montage. Sa valeur est limitée par le générateur utilisé pour produire cette différence de potentiel.
+
+On choisira alors $u_e = U_{emax}$ pour le calcul de la valeur minimale de $R_P$.
+
+{\Large
+$$\boxed{R_P > \frac{U_{emax} - V_F}{I_{Fmax}}}$$
+}
+
+\bigskip
+
+Il est possible alors de prendre une \textbf{marge de sécurité sur la valeur de la résistance} $R_P$. Cependant si cette marge est trop grande, le courant maximal serait très en dessous de la valeur limite et le composant (type LED) pourrait ne pas fonctionner correctement (loin de sa valeur nominale).
+
+\bigskip
+
+Il peut également être intéressant de vérifier la \textbf{puissance} que va dissiper la résistance.
+
+$$P = R_P * I_{Fmax}$$
