@@ -122,13 +122,29 @@ où $|V_s|_{MAX}$ est l'amplitude maximale du signal de sortie, [BP] est la band
 
 Une seconde maquette permettra également de \textbf{comparer une version améliorée du transimpédance} et l'\textbf{impact de la tension de polarisation} sur les performances dynamiques du montage.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Ressources}
+
+Vous pouvez utiliser les fiches résumées suivantes : 
+
+\begin{itemize}	
+	\item Protocole : Réponse en fréquence d'un système linéaire
+	\item Protocole : Mesure de bande-passante
+	\item Protocole : Réponse indicielle d'un système linéaire
+\end{itemize}
+
 \bigskip
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Montage 1 / Circuit simple de photodétection}
 
 \textbf{Hypothèse} : une photodiode, dans sa zone de fonctionnement en capteur, produit un courant proportionnel au flux lumineux qu'elle reçoit
 
 \textbf{Réalisation} : mise en série de la photodiode avec une résistance pour convertir le courant en une différence de potentiel mesurable et visualisable en fonction du temps
+
+\bigskip
+
+\textit{Voir le schéma du montage dans le sujet du TP2.}
 
 \newpage
 \subsection{Montage 2 / Suiveur}
@@ -236,49 +252,34 @@ Une seconde maquette permettra également de \textbf{comparer une version améli
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Travail à réaliser autour des maquettes}
 
-Il s'agit dans cette séance de
+Il s'agit dans cette séance de \textbf{caractériser des circuits de photodétection} et \textbf{comparer leurs performances dynamiques} (fréquence et temps).
 
-\begin{itemize}[label=$\square$]
-	\item protocoles utilisés (avec schéma de câblage, paramètres des instruments de mesure et étapes expérimentales)
-	\item diagrammes de Bode
-	\item captures d'écran des réponses à un échelon
-	\item mesures des grandeurs caractéristiques (bande-passante, temps de réponse, fréquence de résonance...)
-	\item analyse des différents résultats pour 3 valeurs de $R_{PHD}$ ($10\operatorname{k\Omega}$, $100\operatorname{k\Omega}$ et $1\operatorname{M\Omega}$)
-	\item éléments de modélisation et lien entre les grandeurs caractéristiques et la valeur de $R_{PHD}$
+\bigskip
+
+Il est demandé pour chacun des montages (et pour les 3 valeurs de résistance $R_{PHD}$ proposées : $10\operatorname{k\Omega}$, $100\operatorname{k\Omega}$ et $1\operatorname{M\Omega}$) : 
+
+\begin{itemize}%[label=$\square$]
+	\item de \textbf{définir les liens théoriques} entre la tension de sortie $V_S$ et le flux lumineux capté par la photodiode $\Phi_e$ (par l'intermédiaire du courant imposé par la photodiode - $I_{photo}$)
+	\item de \textbf{rédiger les protocoles utilisés} (avec schéma de câblage, paramètres des instruments de mesure et étapes expérimentales) pour caractériser les montages
+	\item de \textbf{relever le diagramme de Bode} (mode automatique) ainsi que la réponse à un échelon
+	\item de \textbf{mesurer les grandeurs caractéristiques} suivantes : bande-passante, temps de réponse, fréquence de résonance...
+	\item d'analyser ces différents résultats
 \end{itemize}
 
+\bigskip
 
-\Quest Quel est le lien entre $V_S$ et $V_{RPHD}$ ? Puis entre $V_S$ et $I_{photo}$ ? Puis entre $I_{photo}$ et le flux lumineux capté par la photodiode $\Phi_e$ ?
-
-\Quest Quelle est la forme théorique de la réponse en fréquence de ce montage ?
-
+Vous devrez \textbf{proposer un livrable final} qui présente une \textbf{étude comparative des différents montages} en insistant sur la dépendance des grandeurs caractéristiques avec la valeur de la résistance $R_{PHD}$.
 
 
 \section{Maquette 1 / Etude comparative de 3 montages - \textit{Durée : 120 min}}
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Ressources}
-
-Vous pouvez utiliser les fiches résumées suivantes : 
-
-\begin{itemize}	
-	\item Protocole : Réponse en fréquence d'un système linéaire
-	\item Protocole : Mesure de bande-passante
-	\item Protocole : Réponse indicielle d'un système linéaire
-\end{itemize}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Maquette}
-
-
 
 
 \clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Etape 2 / Transimpédance - \textit{Durée : 120 min}}
+\section{Maquette 2 / Transimpédance - \textit{Durée : 120 min}}
 
 On se propose d'\textbf{étudier le montage transimpédance}, un circuit très fréquemment utilisé pour la photodétection pour ses performances dynamiques. Ce montage est basé sur un amplificateur linéaire intégré également et permet d'augmenter la bande-passante des montages vus précédemment.
 
@@ -343,18 +344,6 @@ On se propose d'analyser le circuit de la figure~\ref{fig:schem_trans}, avec $R_
 \Quest Quel est le lien entre $V_S$ et $I_{photo}$ ? Puis entre $I_{photo}$ et le flux lumineux capté par la photodiode $\Phi_e$ ?
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Cahier de laboratoire / Check-List}
-
-\begin{itemize}[label=$\square$]
-	\item protocoles utilisés (avec schéma de câblage, paramètres des instruments de mesure et étapes expérimentales)
-	\item diagrammes de Bode
-	\item captures d'écran des réponses à un échelon
-	\item mesures des grandeurs caractéristiques (bande-passante, temps de réponse, fréquence de résonance...)
-	\item analyse des différents résultats pour 3 valeurs de $R_{PHD}$ ($10\operatorname{k\Omega}$, $100\operatorname{k\Omega}$ et $1\operatorname{M\Omega}$)
-	\item éléments de modélisation et lien entre les grandeurs caractéristiques et la valeur de $R_{PHD}$
-\end{itemize}
-
 
 
 \clearpage
@@ -401,19 +390,6 @@ On se propose d'analyser le circuit de la figure~\ref{fig:schem_trans_opt}, avec
 \Quest Quelle valeur de $C_T$ faut-il pour éliminer le phénomène de résonance ?
 
 \textit{Vous pouvez vous reporter à la ressource : \textbf{Montage transimpédance : modélisation}.}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Cahier de laboratoire / Check-List}
-
-\begin{itemize}[label=$\square$]
-	\item protocoles utilisés (avec schéma de câblage, paramètres des instruments de mesure et étapes expérimentales)
-	\item diagrammes de Bode
-	\item captures d'écran des réponses à un échelon
-	\item mesures des grandeurs caractéristiques (bande-passante, temps de réponse, fréquence de résonance...)
-	\item analyse des différents résultats pour 3 valeurs de $R_{PHD}$ ($10\operatorname{k\Omega}$, $100\operatorname{k\Omega}$ et $1\operatorname{M\Omega}$)
-	\item éléments de modélisation et lien entre les grandeurs caractéristiques et la valeur de $R_{PHD}$
-\end{itemize}
 
 
 
