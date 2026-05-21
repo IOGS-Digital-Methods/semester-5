@@ -19,9 +19,9 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Objectif des séances}
+\section{Objectif de la séance}
 
-Lors de ces séances, vous allez :
+Lors de cette troisième séance, vous allez :
 
 \begin{itemize}
 	\item utiliser le \textbf{banc de caractérisation} mis en place précédemment pour :
@@ -131,6 +131,7 @@ Vous pouvez utiliser les fiches résumées suivantes :
 	\item Protocole : Réponse en fréquence d'un système linéaire
 	\item Protocole : Mesure de bande-passante
 	\item Protocole : Réponse indicielle d'un système linéaire
+	\item Fiche : Filtrage actif / Analyse Harmonique / Ordre 2
 \end{itemize}
 
 \bigskip
@@ -244,51 +245,12 @@ Vous pouvez utiliser les fiches résumées suivantes :
     \label{fig:schem_trans}
 \end{figure}
 
-
-\clearpage
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Travail à réaliser autour des maquettes}
-
-Il s'agit dans cette séance de \textbf{caractériser des circuits de photodétection} et \textbf{comparer leurs performances dynamiques} (fréquence et temps).
-
 \bigskip
 
-Il est demandé pour chacun des montages (et pour les 3 valeurs de résistance $R_{PHD}$ proposées : $10\operatorname{k\Omega}$, $100\operatorname{k\Omega}$ et $1\operatorname{M\Omega}$) : 
-
-\begin{itemize}%[label=$\square$]
-	\item de \textbf{définir les liens théoriques} entre la tension de sortie $V_S$ et le flux lumineux capté par la photodiode $\Phi_e$ (par l'intermédiaire du courant imposé par la photodiode - $I_{photo}$)
-	\item de \textbf{rédiger les protocoles utilisés} (avec schéma de câblage, paramètres des instruments de mesure et étapes expérimentales) pour caractériser les montages
-	\item de \textbf{relever le diagramme de Bode} (mode automatique) ainsi que la réponse à un échelon
-	\item de \textbf{mesurer les grandeurs caractéristiques} suivantes : bande-passante, temps de réponse, fréquence de résonance...
-	\item d'analyser ces différents résultats
-\end{itemize}
-
-\bigskip
-
-Vous devrez \textbf{proposer un livrable final} qui présente une \textbf{étude comparative des différents montages} en insistant sur la dépendance des grandeurs caractéristiques avec la valeur de la résistance $R_{PHD}$.
+\textit{Afin de faciliter la compréhension des phénomènes mis en jeu dans ce montage, vous pouvez vous reporter à la ressource : \textbf{Montage transimpédance : modélisation}.}
 
 
-\section{Maquette 1 / Etude comparative de 3 montages - \textit{Durée : 120 min}}
-
-
-
-
-
-\clearpage
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Maquette 2 / Transimpédance - \textit{Durée : 120 min}}
-
-On se propose d'\textbf{étudier le montage transimpédance}, un circuit très fréquemment utilisé pour la photodétection pour ses performances dynamiques. Ce montage est basé sur un amplificateur linéaire intégré également et permet d'augmenter la bande-passante des montages vus précédemment.
-
-On souhaite donc \textbf{vérifier les performances dynamiques} (réponse en fréquence notamment) de ce nouveau montage et conclure sur son intérêt.
-
-
-
-
-\subsection{Etape 3 / Transimpédance amélioré}
+\subsection{Montage 4 / Transimpédance avec filtrage}
 
 \textbf{Hypothèse} : l'ajout d'une capacité dans le montage transimpédance permet de contrôler parfaitement la bande-passante et de supprimer la résonance du montage précédent
 
@@ -296,67 +258,7 @@ On souhaite donc \textbf{vérifier les performances dynamiques} (réponse en fr�
 
 \textbf{Résultats attendus} : légère dégradation de bande-passante du système de photodétection (dépendance à $R_{PHD}$) mais suppression de la résonance
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Ressources}
-
-Vous pouvez utiliser les fiches résumées suivantes (en plus de celles de l'étape précédente) : 
-
-\begin{itemize}	
-	\item Fiche : Filtrage actif / Analyse Harmonique / Ordre 2
-\end{itemize}
-
-\textit{Afin de faciliter la compréhension des phénomènes mis en jeu dans ce montage, vous pouvez vous reporter à la ressource : \textbf{Montage transimpédance : modélisation}.}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Montage}
-
-On se propose d'analyser le circuit de la figure~\ref{fig:schem_trans}, avec $R_{PHD} = 100\operatorname{k\Omega}$. L'amplificateur linéaire intégré sera alimenté à l'aide d'une alimentation symétrique +10V / -10V.
-
-\begin{figure}[h!]
-    \centering
-\begin{circuitikz} 
-	\node [op amp, fill=blue!10!white](A1) at (0,0){\texttt{ALI1}};
-	\draw (A1.-) to[short] ++(-.5,0) coordinate(A) to[short] ++(0,1.5) coordinate(B) to[R=$R_{PHD}$] (B -| A1.out) to[short, -*] (A1.out);
-	\draw (A1.-) to[short,-*] ++(-.5,0) coordinate(AA) -- ++(-1,0) coordinate(AAA) to[empty photodiode] ++(-2,0) coordinate(BB);	
-	
-	\draw (AAA) to[short, i = $I_{photo}$, current arrow scale=8] ++(0.5,0);
-	\draw (A1.+) to[short, -*] ++(0,-1.5) coordinate(GG) node[ground]{};
-	
-	\draw (A1.out) to[short,-o] ++(1,0) coordinate(D);
-	
-	% Ground
-	\draw (GG) to[short, -o] (GG -| D);
-	
-	\draw (BB) to[battery2] (GG -| BB) -- (GG);
-	% fleche EP
-	\draw ($ (GG -| BB) + (-0.8,0.3) $) edge[->, green!40!black] ($ (BB) - (0.8,0.3) $); 
-	\node[text=green!40!black] (US) at ($ (GG -| BB)!.5!(BB) - (1.5,0) $){$E_P$};
-	
-	% fleche VS
-	\draw ($ (GG -| D) + (0,0.3) $) edge[->, green!40!black] ($ (D) - (0,0.3) $); 
-	\node[text=green!40!black] (US) at ($ (GG -| D)!.5!(D) - (0.5,0) $){$V_S$};	
-\end{circuitikz}    
-\caption{Schéma du circuit de photodétection de type transimpédance}
-    \label{fig:schem_trans}
-\end{figure}
-
-\Quest Quel est le lien entre $V_S$ et $I_{photo}$ ? Puis entre $I_{photo}$ et le flux lumineux capté par la photodiode $\Phi_e$ ?
-
-
-
-
-\clearpage
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Etape 3 / Transimpédance amélioré - \textit{Durée : 120 min}}
-
-On se propose de \textbf{s'affranchir d'un des défauts majeur du montage transimpédance}, sa résonance. On souhaite donc \textbf{vérifier les performances dynamiques} (réponse en fréquence notamment) de ce nouveau montage et conclure sur son intérêt.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Montage}
-
-On se propose d'analyser le circuit de la figure~\ref{fig:schem_trans_opt}, avec $R_{PHD} = 100\operatorname{k\Omega}$. L'amplificateur linéaire intégré sera alimenté à l'aide d'une alimentation symétrique +10V / -10V.
+\medskip
 
 \begin{figure}[h!]
     \centering
@@ -387,9 +289,70 @@ On se propose d'analyser le circuit de la figure~\ref{fig:schem_trans_opt}, avec
     \label{fig:schem_trans_opt}
 \end{figure}
 
-\Quest Quelle valeur de $C_T$ faut-il pour éliminer le phénomène de résonance ?
+\bigskip
 
-\textit{Vous pouvez vous reporter à la ressource : \textbf{Montage transimpédance : modélisation}.}
+\textit{Afin de faciliter la compréhension des phénomènes mis en jeu dans ce montage, vous pouvez vous reporter à la ressource : \textbf{Montage transimpédance : modélisation}.}
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Travail à réaliser autour des maquettes}
+
+Il s'agit dans cette séance de \textbf{caractériser des circuits de photodétection} et \textbf{comparer leurs performances dynamiques} (fréquence et temps).
+
+\bigskip
+
+Il est demandé pour chacun des montages (et pour les 3 valeurs de résistance $R_{PHD}$ proposées : $10\operatorname{k\Omega}$, $100\operatorname{k\Omega}$ et $1\operatorname{M\Omega}$) : 
+
+\begin{itemize}%[label=$\square$]
+	\item de \textbf{définir les liens théoriques} entre la tension de sortie $V_S$ et le flux lumineux capté par la photodiode $\Phi_e$ (par l'intermédiaire du courant imposé par la photodiode - $I_{photo}$)
+	\item de \textbf{rédiger les protocoles utilisés} (avec schéma de câblage, paramètres des instruments de mesure et étapes expérimentales) pour caractériser les montages
+	\item de \textbf{relever le diagramme de Bode} (mode automatique) ainsi que la réponse à un échelon
+	\item de \textbf{mesurer les grandeurs caractéristiques} suivantes : bande-passante, temps de réponse, fréquence de résonance...
+	\item d'analyser ces différents résultats
+\end{itemize}
+
+\bigskip
+
+Vous devrez \textbf{proposer un livrable final} qui présente une \textbf{étude comparative des différents montages} en insistant sur la dépendance des grandeurs caractéristiques avec la valeur de la résistance $R_{PHD}$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Maquette 1 / Étude comparative de 4 montages}
+
+\textit{Le schéma de la maquette est fournie en annexe de ce document.}
+
+
+\noindent \rule{\linewidth}{1pt}
+
+La maquette doit-être alimentée par une alimentation symétrique de +/- 15V.
+
+\noindent \rule{\linewidth}{1pt}
+
+\begin{center}
+\begin{tabular}{|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{10cm}|}
+  
+  \Xhline{2pt}
+  Signal & Direction & Description\\
+  \Xhline{2pt}
+  \textbf{IN1} & Entrée & Signal appliqué sur les LED \\
+  \hline
+  \textbf{IN2} & Entrée &  \\
+  \Xhline{2pt}
+  \textbf{OUT1} & Sortie & Sortie du montage transimpédance \\
+  \hline
+  \textbf{OUT2} & Sortie & Sortie du montage simple avec suiveur \\
+  \hline
+  \textbf{OUT3} & Sortie & Sortie du montage de photodétection simple \\
+  \hline
+  \textbf{OUT4} & Sortie & Image du courant dans les LED ($R_{LED} = 270 \Omega$) \\
+  \Xhline{2pt}
+\end{tabular}
+\end{center}
+
 
 
 
