@@ -49,6 +49,7 @@
 \begin{minipage}{10cm}
 	\begin{center}
 	\textbf{Institut d'Optique Graduate School }\\[0.1cm]
+    \textbf{\textsc{\Large Opto-Electronique}}\\[0.1cm]
     \textbf{\textsc{\Large Interfaçage Numérique}}
 
 
@@ -58,7 +59,7 @@
 
 \vspace{1cm}
 {\large \bfseries Travaux Pratiques} \\[0.2cm]
-Semestre 5
+Semestres 5 et 6
 
 \vspace{1cm}
 % Title
@@ -142,6 +143,7 @@ Les documentations de la caméra et de l'éclairage sont disponibles aux adresse
 	\item Camera BASLER a2A1920-uc/umBAS (Résumé)
 	\item Source EFFI-Ring - Spectre et données / Version RGB
 	\item Cubes de couleur - Réflectance
+	\item Contraste d'un objectif / FTM
 	\item Rappels sur les caméra CMOS
 	\item Rappels sur le traitement d'images
 \end{itemize}
@@ -208,11 +210,28 @@ Données provenant de la documentation technique.
 
 \section*{Cubes de couleur - Réflectance}
 
+Les \textbf{mesures de réflectance} ont été acquises par un \textbf{spectro-colorimètre} de type \textit{KONICA MINOLTA CM2600d} (méthode proposée en TP de photométrie en 2ème année du cursus ingénieur)
+
 \begin{center}
 	\includegraphics[width=0.7\textwidth]{../images/cubes_reflectance.png}
 \end{center}
 
+
 %
+
+
+\section*{Contraste d'un objectif / FTM}
+
+La \textbf{Fonction de Transfert de Modulation} (FTM) (\textit{Modulation Transfer Function} en anglais - \textit{MTF}), permet de caractériser la capacité d'un système optique à restituer les détails d'un objet. Elle décrit comment le \textbf{contraste d'un motif périodique} est transmis par le système \textbf{en fonction de la fréquence spatiale} (c’est-à-dire de la finesse des détails observés).
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../images/mtf_optics_edmundoptics.png}
+    \caption{Courbes FTM pour un objectif de 35 mm à la même WD et à différentes ouvertures : f/4 (a) et f/2 (b). \textbf{\textit{Edmund Optics}}}
+    \label{fig:mtf_edmund}
+\end{figure}
+
+
+{\small https://www.edmundoptics.fr/knowledge-center/application-notes/imaging/mtf-curves-and-lens-performance/ } 
 
 
 \newpage

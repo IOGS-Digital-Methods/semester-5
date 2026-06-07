@@ -127,7 +127,7 @@ Dans cette section, vous allez pouvoir :
 
 \Quest Que se passe-t-il sur l'image ? Sur l'histogramme ?
 
-\Quest Quelles sont les valeurs minimale et maximale que peuvent prendre les pixels de la caméra ? Quelle est alors la \textbf{profondeur binaire} de la caméra utilisée ?
+\Quest Quelles sont les valeurs minimale et maximale que peuvent prendre les pixels de la caméra ? Quelle est alors la \textbf{profondeur binaire} (\textit{i.e.} le nombre de bits sur lequel est codé chacun des pixels) de la caméra utilisée ?
 
 \noindent \rule{\linewidth}{1pt}
 
@@ -262,7 +262,7 @@ Nous allons nous intéresser ici à l'éclairage \textbf{Effilux EFFI-Ring}, ver
 
 \noindent \rule{\linewidth}{1pt}
 
-On souhaite à présent remplir le tableau XX de la feuille de résultats et mesurer l'écart d'intensité relevé dans la zone centrale du champ de vision pour 3 hauteurs de travail différentes.
+On souhaite à présent remplir le \textbf{tableau VI-1} de la feuille de résultats et mesurer l'écart d'intensité relevé dans la zone centrale du champ de vision pour 3 hauteurs de travail différentes.
 
 \Manip Sélectionner une zone d'intérêt de 400 x 400 pixels au centre du champ de vision de la caméra.
 
@@ -288,7 +288,7 @@ Selon la nature de la pièce à analyser (métallique, transparente, texturée..
 \newpage
 \section{D - Linéarité du capteur {[30 min]}}
 
-On souhaite vérifier la linéarité du capteur en fonction du temps d'intégration, pour les 3 couleurs d'éclairage ainsi que du blanc. On souhaite alors remplir le tableau XX de la feuille de résultats.
+On souhaite vérifier la linéarité du capteur en fonction du temps d'intégration, pour les 3 couleurs d'éclairage ainsi que du blanc. On souhaite alors remplir le \textbf{tableau VI-2} de la feuille de résultats.
 
 \Manip Placer un cube de couleur dans le champ de la caméra. Allumer l'éclairage annulaire en blanc. Ajuster la zone d'intérêt pour visualiser une zone quasiment uniforme de l'objet. Placer le \textit{black level} à 0.
 
@@ -321,7 +321,7 @@ Selon la dimension de la scène à visualiser, cette grandeur peut s'exprimer pa
 \begin{figure}[!h]
 \begin{center}
 	\includegraphics[width=0.8\textwidth]{../images/optique_champ_derossi.png}
-	\caption{Système optique et champ de vision d'une caméra numérique - illustration provenant du cours d'optique instrumentale de Sébastien de Rossi.}
+	\caption{Système optique et champ de vision d'une caméra numérique - \textit{illustration provenant du cours d'optique instrumentale de Sébastien de Rossi}.}
 	\label{fig:fov}
 \end{center}
 \end{figure}
@@ -350,15 +350,15 @@ Quelques \textbf{données sur la caméra utilisée sont fournies en annexe} de c
 
 \Quest Vérifier par le calcul que la focale mentionnée sur l'objectif est correcte.
 
-\noindent \rule{\linewidth}{1pt}
+\section{F - Résolution et contraste {[30 min]}}
 
-\Quest A partir des dimensions mesurées précédemment (champ de vision) et de la taille du capteur, qu'elle est la taille minimale qu'il est possible de mesurer à l'aide de ce système de vision ?
+\Quest A partir des dimensions mesurées précédemment (champ de vision) et de la taille du capteur, qu'elle est la taille minimale qu'il est possible de mesurer à l'aide de ce système de vision (côté objet) ?
 
 \Quest Que devient cette valeur si on rapproche l'objet de la caméra en divisant la hauteur de travail par 2 ? Le champ de vision est-il modifié ?
 
 \medskip
 
-Pour le vérifier, nous allons utiliser des mires de type Foucault. Ces mires sont des répétitions spatiales d'un même motif (succession de bandes noires et blanches) espacé d'une distance connue.
+Pour vérifier la résolution spatiale du système de vision, nous allons \textbf{utiliser des mires} (type Foucault). Ces mires sont des répétitions spatiales d'un même motif (succession de bandes noires et blanches) espacé d'une distance connue.
 
 \Manip Placer une mire dans le champ de la caméra.
 
@@ -372,7 +372,11 @@ Pour le vérifier, nous allons utiliser des mires de type Foucault. Ces mires so
 
 \Quest Que constatez-vous en fonction du pas de la mire ?
 
-\Manip Mesurer la hauteur des variations pour différents espacements des bandes.
+On souhaite remplir le \textbf{tableau VI-3} de la feuille de résultats.
+
+\Manip Mesurer la hauteur des variations (valeur minimale et valeur maximale) pour différents espacements des bandes.
+
+\Manip Calculer l'écart entre la valeur maximale et la valeur minimale puis la valeur normalisée. \textit{On normalisera les données par rapport à l'écart pour un pas de 2~mm.}
 
 \medskip
 
@@ -392,8 +396,8 @@ En normalisant ces mesures par rapport à la plus grande variation, on peut mesu
 
 \Quest Quelle est la précision de la mesure ?
 
-\newpage
-\section{F - Première modélisation {[50 min]}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{G - Première modélisation {[60 min]}}
 
 Dans cette section, nous allons nous intéressé à la visualisation d'objets colorés par l'intermédiaire d'une caméra monochrome et de sources ayant des longueurs d'onde connues et distinctes, afin de donner un premier modèle simplifiée d'une chaine d'acquisition d'image (voir figure~\ref{fig:model}).
 
@@ -420,6 +424,8 @@ On donne en annexe les réflectances des cubes de couleur que vous avez à votre
 
 \noindent \rule{\linewidth}{1pt}
 
+On souhaite remplir les \textbf{tableaux VI-4a et VI-4b} de la feuille de résultats, pour deux temps d'intégration différents (sans saturation).
+
 \Manip Placer les cubes de couleur dans le champ de la caméra l'un après l'autre. Sélectionner une zone d'intérêt d'environ 500 pixels par 500 pixels autour des objets à visualiser. 
 
 \Manip Pour chaque source (Rouge, Vert, Bleu) et pour chaque cube de couleur (pour un temps d'intégration donné et fixé pour l'ensemble des mesures), relever la valeur moyenne d'intensité lumineuse. 
@@ -427,5 +433,11 @@ On donne en annexe les réflectances des cubes de couleur que vous avez à votre
 \Quest Les résultats sont-ils cohérents avec la théorie ?
 
 \Manip Mettre en oeuvre votre méthode de détection des couleurs et présenter vos résultats.
+
+\Manip Refaire cette expérience pour un second temps d'intégration différent du premier (temps divisé par deux par exemple).
+
+\Quest Ces mesures sont-elles dépendantes du temps d'intégration ?
+
+\Quest Cette méthode de discrimination des cubes en fonction de leur couleur est-elle robuste à un changement de temps d'intégration ? Que proposez-vous comme amélioration ?
 
 

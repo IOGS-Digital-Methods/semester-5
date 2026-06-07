@@ -99,7 +99,7 @@ Il serait également pertinent de votre part de rédiger un \textbf{journal de b
 Une image RVB contient 3 canaux (Rouge, Vert, Bleu ou \textit{RGB} en anglais), tandis qu'une image en niveaux de gris n'en a qu'un. Une image en niveau de gris sera \textbf{3 fois plus rapide} à analyser qu'une image en couleur RVB mais toute notion de couleur sera alors perdue.
 
 \begin{center}
-	\includegraphics[width=0.8\textwidth]{../images/images_array_gray_rgb.png}
+	\includegraphics[width=0.6\textwidth]{../images/images_array_gray_rgb.png}
 \end{center}
 
 
@@ -119,6 +119,14 @@ De nombreux algorithmes d'analyse d'image ou de vision par ordinateur travaillen
 
 \Quest Que vaut le premier pixel de chacune des images ? A quoi correspondent les données fournies ?
 
+\Manip Remplir le \textbf{tableau VI-5} de la feuille de résultats pour une image en nuance de gris et une image RGB, en précisant : 
+\begin{itemize}
+	\item la taille de la matrice dans le cas des deux images
+	\item le nombre de canaux
+	\item le type de données stockées dans ces matrices
+\end{itemize}
+
+\Quest Dans le cas d'une image en RGB, à quelles couleurs correspondent chacun des canaux ?
 
 %%%%%%%%%%%%%    Etape B
 \section{B - Calculer l'histogramme d'une image et l'afficher {[20 min]}}
@@ -155,25 +163,32 @@ On utilise la fonction \textsl{cv2.convertScaleAbs()} pour modifier le contraste
 
 \Manip Modifier le contraste de l'image et comparer les histogrammes de l'image originale et de la version modifiée pour différente valeur de $\alpha$.
 
+\Manip Remplir le \textbf{tableau VI-6} de la feuille de résultats pour une image en nuance de gris et une image RGB, en précisant : 
+\begin{itemize}
+	\item si l'opération est possible
+	\item l'effet visualisé sur l'image résultante
+\end{itemize}
+
+\Manip Modifier la luminosité de l'image et comparer les histogrammes de l'image originale et de la version modifiée pour différente valeur de $\beta$. 
+
+\subsection{Moyenne des images}
+
+\Manip Pour les \textbf{valeurs de contraste précisées dans la feuille de résultats} ($\alpha = 0.5$ et $\alpha = 1.2$), pour une image en nuance de gris :
+
+\begin{itemize}
+	\item Calculer la moyenne de tous les pixels de l'image originale
+	\item Calculer la moyenne de tous les pixels de l'image modifiée
+\end{itemize} 
+
+\subsection{Affichage des images avec \textit{Matplotlib.pyplot}}
+
 \Quest L'affichage de la nouvelle image est-il correct ?
 
 \Manip Réafficher l'image avec les options suivantes de \fbox{\texttt{imshow}} : \fbox{\texttt{vmin=0}} et \fbox{\texttt{vmax=255}}
 
-\noindent \rule{\linewidth}{1pt}
+\Quest Que pouvez-vous conclure sur la méthode \textit{imshow} de la bibliothèque \textit{Matplotlib.pyplot} ? 
 
-\Manip Calculer la moyenne de tous les pixels de l'image originale et comparer à la moyenne des pixels de l'image modifiée.
-
-\Manip Modifier la luminosité de l'image et comparer les histogrammes de l'image originale et de la version modifiée pour différente valeur de $\beta$. 
-
-\Manip Calculer la moyenne de tous les pixels de l'image originale et comparer à la moyenne des pixels de l'image modifiée.
-
-\Quest Que pouvez-vous conclure sur les effets du contraste et de la luminosité ?
-
-\noindent \rule{\linewidth}{1pt}
-
-\Manip Ouvrir une image RGB et appliquer les mêmes effets. Que pouvez-vous conclure ?
-
-
+\newpage
 %%%%%%%%%%%%%    Etape D
 \section{D - Binariser l'image {[20 min]}}
 
@@ -195,6 +210,13 @@ L'objectif de la binarisation est de réduire drastiquement les informations à 
 
 \Manip Ouvrir une image RGB et appliquer les mêmes effets. Que pouvez-vous conclure ?
 
+\Manip Remplir le \textbf{tableau VI-7} de la feuille de résultats en précisant : 
+\begin{itemize}
+	\item si l'opération est possible
+	\item l'effet visualisé sur l'image résultante
+\end{itemize}
+
+\Quest A partir de ces observations, quelle est la méthode la plus fiable pour binariser une image afin de détecter des éléments (objets) dans une scène ?
 
 \newpage
 %%%%%%%%%%%%%    Etape E
@@ -258,13 +280,14 @@ Notions : \href{https://iogs-lense-training.github.io/image-processing/contents/
 
 \Quest Que pouvez-vous conclure sur l'utilité des opérations d'ouverture et de fermeture sur une image ? Sur l'impact de la forme et de la taille du noyau ?
 
-% L'opération d'opening est utile pour supprimer les petits bruits tout en maintenant la forme et la taille des objets plus grands dans l'image.
-
 \noindent \rule{\linewidth}{1pt}
 
 \Manip Ouvrir une image RGB (\textit{formes\_bruit.png par exemple}) et appliquer les mêmes effets. Que pouvez-vous conclure ?
 
 \Manip Ouvrir cette même image en niveau de gris et appliquer les mêmes effets. Que pouvez-vous conclure ?
+
+\Manip Synthétiser vos résultats dans le \textbf{tableau VI-8} de la feuille de résultats. 
+
 
 \subsection{Opération de gradient}
 
@@ -293,15 +316,18 @@ Notions : \href{https://iogs-lense-training.github.io/image-processing/contents/
 
 \Quest Expliquer l'intérêt de l'affichage du logarithme de la valeur absolue de la FFT.
 
-\noindent \rule{\linewidth}{1pt}
+\Manip Remplir le \textbf{tableau VI-9} de la feuille de résultats, pour une image en nuance de gris et en RGB, en précisant : 
+\begin{itemize}
+	\item si l'opération est possible
+	\item la taille des données de la FFT
+	\item le type de données contenues dans la matrice (FFT)
+\end{itemize} 
+
+\subsection{Transformation de l'image via la FFT}
 
 \Quest Que permet de faire la fonction \textsl{circular\_mask} sur la FFT ? Commenter le résultat obtenu sur l'image recréée à partir de cette FFT modifiée.
 
 \Quest Quel est l'impact de la taille du masque ? A quoi sont dues les "vaguelettes" que l'on aperçoit sur l'image résultante ?
-
-\noindent \rule{\linewidth}{1pt}
-
-\Quest Que se passe-t-il sur une image RGB ? Quelle est la taille de la FFT ?
 
 \noindent \rule{\linewidth}{1pt}
 
@@ -322,6 +348,8 @@ L'utilisation de filtres permet de prendre en compte les pixels voisins en explo
 \Quest Commenter les effets des deux méthodes utilisées pour lisser l'image. Quelle méthode est utilisée ici pour montrer de manière objective les modifications apportées à l'image ? 
 
 \Quest Que se passe-t-il sur une image RGB ? 
+
+\Manip Synthétiser vos résultats dans le \textbf{tableau VI-10} de la feuille de résultats. 
 
 \noindent \rule{\linewidth}{1pt}
 
@@ -345,7 +373,7 @@ On cherche à présent à voir l'impact de la taille du noyau sur l'image finale
 
 \newpage
 
-%%%%%%%%%%%%%    Etape I
+%%%%%%%%%%%%%    Etape H
 \section{H - Appliquer un filtre passe-haut sur une image {[40 min]}}
 
 
@@ -395,7 +423,10 @@ Une forte amplitude indique un contour ou un bord marqué. Une faible amplitude 
 
 \Quest La détection de contours est-elle améliorée ?
 
-\newpage
+\bigskip
+
+\bigskip
+
 \subsection{Opérateur de Sobel}
 
 L'\textbf{opérateur de Sobel} permet de réaliser une opération similaire à celui de Roberts, mais en étant moins sensible aux bruits dans l'image, puisqu'il se base sur un noyau plus large et ainsi lisse l'image dans la direction perpendiculaire au gradient mesuré.
@@ -416,6 +447,8 @@ G_y =
 \end{bmatrix}.
 $$
 
+
+\newpage
 De la même façon que précédemment, on peut calculer l'amplitude du gradient par l'opération suivante : 
 
 $$\text{Amplitude} = \sqrt{G_x^2 + G_y^2}$$ où $G_x$ est le résultat de la convolution de l'image par le noyau $K_x$ et $G_y$ le résultat de la convolution de l'image par le noyau $K_y$.
@@ -441,6 +474,8 @@ $$\text{Amplitude} = \sqrt{G_x^2 + G_y^2}$$ où $G_x$ est le résultat de la con
 \noindent \rule{\linewidth}{1pt}
 
 \Quest Que se passe-t-il sur une image RGB ? 
+
+\Manip Synthétiser vos résultats dans le \textbf{tableau VI-11} de la feuille de résultats. 
 
 \subsection{Méthodes de Harris et de Canny}
 
