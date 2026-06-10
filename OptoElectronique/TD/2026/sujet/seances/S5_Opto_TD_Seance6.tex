@@ -1,0 +1,111 @@
+\newpage
+%\pagestyle{empty}
+
+\begin{minipage}[c]{.25\linewidth}
+	\includegraphics[width=4cm]{images/LEnsE_IOGS.jpg}
+\end{minipage} \hfill
+\begin{minipage}[c]{.4\linewidth}
+
+\begin{center}
+\vspace{0.3cm}
+{\Large \textsc{Opto-Électronique}}
+
+\medskip
+
+5N-027-SCI \qquad \textbf{\Large TD Séance 6}
+
+\end{center}
+\end{minipage}\hfill
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{TD6 - ALI / Limites et transimpédance}
+
+\textit{Ce TD fait suite au TD2, au TD4 et au TD5, dans lesquelles certaines notions ont déjà abordées.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercice 1 - Modélisation des ALI}
+
+On se propose d'étudier le montage suivant : 
+
+\begin{center}
+\begin{circuitikz}
+	\draw (0,0) node[above]{} ++(1,0) node[ground](GND){}
+	node[op amp, noinv input up, anchor=+, fill=blue!10!white](OA){\texttt{AOP1}}
+	(OA.-) to[short,-, i<_=$i^-$] ++(0,-1) coordinate(FB) 
+	to[R=$R_1$, i=$I_1$] ++(-2,0) to[C=$C$, -o] ++(-2,0) 
+	(FB) to[R=$R_2$, *-] (FB -| OA.out) to[short,-, i<_=$I_2$] (OA.out)
+	to [short, *-o] ++(1,0) node[above]{};
+	\draw (-3,-2.3) edge[<-,color={green!40!black}] (-3, -4);
+	\draw (-3,-4.3) to[open,-o] ++(0,0) node[ground](GND){};
+	\node[text={green!40!black}] (Ve) at (-3.5,-3.3){$V_E$}; 
+	\draw (4.3,-1) edge[<-,color={red}] (4.3, -4);
+	\draw (4.3,-4.3) to[open,-o] ++(0,0) node[ground](GND){};
+	\node[text={red}] (Vs) at (4.8,-2.7){$V_S$}; 
+\end{circuitikz}
+\end{center}
+
+\begin{enumerate}
+	\item Donnez la fonction de transfert de ce montage dans le cas des hypothèses classiques sur les amplificateurs intégrés (régime linéaire en particulier : $V^+ = V^-$).
+
+	\item Donnez la fonction de transfert de ce même montage en faisant l'hypothèse que la relation qui régit l'amplificateur linéaire est la suivante : $V_S = A_0 \cdot (V^+ - V^-)$. 
+
+	\item Donnez la fonction de transfert de ce même montage en faisant l'hypothèse que la relation qui régit l'amplificateur linéaire est la suivante : $V_S = A(j\omega) \cdot (V^+ - V^-)$. 
+	
+	On prendra $$A(j\omega) = \frac{A_0}{1 + j \omega / \omega_0}$$
+	
+	\item Expliquez alors la différence de comportement obtenu entre les 3 modélisations.
+\end{enumerate}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercice 2 - Amplifier un signal}
+Proposez un circuit permettant d'amplifier un signal de $27dB$, tout en garantissant une bande-passante de $400 kHz$.
+
+On utilisera des amplificateurs linéaires intégrés de type TL081 (documentation partielle donnée en annexe du TD2).
+
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercice 3 - Montage transimpédance / Modélisation}
+
+On se propose dans un premier temps d'utiliser le montage de photodétection de type transimpédance.
+
+
+\begin{figure}[!h]
+\centering
+\begin{circuitikz} 
+	\node [op amp](A1) at (0,0){\texttt{ALI1}};
+	\draw (A1.-) to[short] ++(-.5,0) coordinate(A) to[short] ++(0,1.5) coordinate(B) to[R=$R_F$, i=$i_R$] (B -| A1.out) to[short, -*] (A1.out);
+	\draw (A1.- -| -5,0) node[ground]{};
+	\draw (A1.- -| -5,0) to[I, invert, i=$i_{Phd}$, *-*] (A);
+	\draw (A1.- -| -5,0) -- ++(0,1.5) to[C, l=$C_{Phd}$, i=$i_C$, -*] (B);
+	\draw (A1.+) to[short] ++(0,-0.5) node[ground]{};
+	\draw (A1.out) -- ++(1,0) coordinate(D);
+	\draw (2.2,-2.1) edge[->, color={red}] (2.2,-0.3);
+	\node[text={red}] (Vs) at (1.7,-1.2){$V_s$}; 
+	\draw (D) -- ++(1,0) to[C,l=$C_{e}$, *-*] ++(0,-2.5) coordinate(G);
+	\draw (G) node[ground]{};
+	\draw (G) -- ++(2,0) to[R,l=$R_e$] ++(0,2.5) -- ++(-2,0);
+\end{circuitikz}
+\end{figure}
+
+\bigskip
+
+\begin{enumerate}
+	\item Donnez la fonction de transfert du montage en fonction du flux lumineux reçu (ALI idéal).
+	\item Quelle est alors la limite en fréquence d'un tel montage ?
+	
+	\bigskip
+	
+	On prendra le modèle suivant pour l'amplificateur linéaire :
+
+$$V_S = \frac{A_0}{1 + j \cdot \frac{\omega}{\omega_0}} \cdot (V^+ - V^-)$$
+	
+	\item Calculez la fonction de transfert $T(j\cdot \omega) = V_S /  i_{PHD}$ de ce montage.
+	\item Que devient alors la limite en fréquence de ce montage ?
+\end{enumerate}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

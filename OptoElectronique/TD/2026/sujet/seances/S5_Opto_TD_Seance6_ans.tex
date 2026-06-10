@@ -1,0 +1,202 @@
+\newpage
+%\pagestyle{empty}
+
+\begin{minipage}[c]{.25\linewidth}
+	\includegraphics[width=4cm]{images/LEnsE_IOGS.jpg}
+\end{minipage} \hfill
+\begin{minipage}[c]{.4\linewidth}
+
+\begin{center}
+\vspace{0.3cm}
+{\Large \textsc{Opto-Électronique}}
+
+\medskip
+
+5N-027-SCI \qquad \textbf{\Large TD Séance 6}
+
+\end{center}
+\end{minipage}\hfill
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{TD6 - ALI / Limites et transimpédance}
+
+\textit{Ce TD fait suite au TD2, au TD4 et au TD5, dans lesquelles certaines notions ont déjà abordées.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercice 1 - Modélisation des ALI}
+
+On se propose d'étudier le montage suivant : 
+
+\begin{center}
+\begin{circuitikz}
+	\draw (0,0) node[above]{} ++(1,0) node[ground](GND){}
+	node[op amp, noinv input up, anchor=+, fill=blue!10!white](OA){\texttt{AOP1}}
+	(OA.-) to[short,-, i<_=$i^-$] ++(0,-1) coordinate(FB) 
+	to[R=$R_1$, i=$I_1$] ++(-2,0) to[C=$C$, -o] ++(-2,0) 
+	(FB) to[R=$R_2$, *-] (FB -| OA.out) to[short,-, i<_=$I_2$] (OA.out)
+	to [short, *-o] ++(1,0) node[above]{};
+	\draw (-3,-2.3) edge[<-,color={green!40!black}] (-3, -4);
+	\draw (-3,-4.3) to[open,-o] ++(0,0) node[ground](GND){};
+	\node[text={green!40!black}] (Ve) at (-3.5,-3.3){$V_E$}; 
+	\draw (4.3,-1) edge[<-,color={red}] (4.3, -4);
+	\draw (4.3,-4.3) to[open,-o] ++(0,0) node[ground](GND){};
+	\node[text={red}] (Vs) at (4.8,-2.7){$V_S$}; 
+\end{circuitikz}
+\end{center}
+
+\begin{enumerate}
+	\item Donnez la fonction de transfert de ce montage dans le cas des hypothèses classiques sur les amplificateurs intégrés (régime linéaire en particulier : $V^+ = V^-$).
+
+	\item Donnez la fonction de transfert de ce même montage en faisant l'hypothèse que la relation qui régit l'amplificateur linéaire est la suivante : $V_S = A_0 \cdot (V^+ - V^-)$. 
+
+	\item Donnez la fonction de transfert de ce même montage en faisant l'hypothèse que la relation qui régit l'amplificateur linéaire est la suivante : $V_S = A(j\omega) \cdot (V^+ - V^-)$. 
+	
+	On prendra $$A(j\omega) = \frac{A_0}{1 + j \omega / \omega_0}$$
+	
+	\item Expliquez alors la différence de comportement obtenu entre les 3 modélisations.
+\end{enumerate}
+
+\subsection*{Réponse}
+
+TO DO
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercice 2 - Amplifier un signal}
+Proposez un circuit permettant d'amplifier un signal de $27dB$, tout en garantissant une bande-passante de $400 kHz$.
+
+On utilisera des amplificateurs linéaires intégrés de type TL081 (documentation partielle donnée en annexe du TD2).
+
+
+\subsection*{Réponse}
+%%%%%%%%%%%%%%%%%%%
+
+On souhaite un gain $G_{dB} = 27\operatorname{dB}$.
+
+On rappelle que $G_{dB} = 20 \cdot \log (A)$ avec $A$ l'amplification.
+
+Ainsi $A = 10^{\frac{G_{dB}}{20}} = 22.4$.
+
+\medskip
+
+Le \textbf{produit gain bande-passante est constant} sur un ALI. Dans le cas du \textit{TL081}, il vaut : $GBP = 3\operatorname{MHz}$.
+
+La fréquence de coupure obtenue avec un ALI de type TL081 et une amplification de 22.4 serait : $f_c = \frac{GBP}{A} = 134\operatorname{kHz} < 400\operatorname{kHz}$. 
+
+\textbf{Un seul étage n'est donc pas suffisant.}
+
+\medskip
+
+En mettant plusieurs étages amplificateurs en cascade, les amplifications se multiplient. Ainsi pour 2 étages, si on appelle $K$ l'amplification d'un étage, on obtient alors $A = K^2$.
+
+Chaque étage aura alors une amplification $K = \sqrt{A} = 4.73$. La bande-passante d'un étage sera alors $f_c = \frac{GBP}{K} = 634\operatorname{kHz} > 400\operatorname{kHz}$.
+
+Il faudra alors utiliser 2 étages amplificateurs inverseurs (ou non-inverseurs) dont l'amplification sera de 4.73.
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercice 3 - Montage transimpédance / Modélisation}
+
+On se propose dans un premier temps d'utiliser le montage de photodétection de type transimpédance.
+
+
+\begin{figure}[!h]
+\centering
+\begin{circuitikz} 
+	\node [op amp](A1) at (0,0){\texttt{ALI1}};
+	\draw (A1.-) to[short] ++(-.5,0) coordinate(A) to[short] ++(0,1.5) coordinate(B) to[R=$R_F$, i=$i_R$] (B -| A1.out) to[short, -*] (A1.out);
+	\draw (A1.- -| -5,0) node[ground]{};
+	\draw (A1.- -| -5,0) to[I, invert, i=$i_{Phd}$, *-*] (A);
+	\draw (A1.- -| -5,0) -- ++(0,1.5) to[C, l=$C_{Phd}$, i=$i_C$, -*] (B);
+	\draw (A1.+) to[short] ++(0,-0.5) node[ground]{};
+	\draw (A1.out) -- ++(1,0) coordinate(D);
+	\draw (2.2,-2.1) edge[->, color={red}] (2.2,-0.3);
+	\node[text={red}] (Vs) at (1.7,-1.2){$V_s$}; 
+	\draw (D) -- ++(1,0) to[C,l=$C_{e}$, *-*] ++(0,-2.5) coordinate(G);
+	\draw (G) node[ground]{};
+	\draw (G) -- ++(2,0) to[R,l=$R_e$] ++(0,2.5) -- ++(-2,0);
+\end{circuitikz}
+\end{figure}
+
+\bigskip
+
+\begin{enumerate}
+	\item Donnez la fonction de transfert du montage en fonction du flux lumineux reçu (ALI idéal).
+	\item Quelle est alors la limite en fréquence d'un tel montage ?
+	
+	\bigskip
+	
+	On prendra le modèle suivant pour l'amplificateur linéaire :
+
+$$V_S = \frac{A_0}{1 + j \cdot \frac{\omega}{\omega_0}} \cdot (V^+ - V^-)$$
+	
+	\item Calculez la fonction de transfert $T(j\cdot \omega) = V_S /  i_{PHD}$ de ce montage.
+	\item Que devient alors la limite en fréquence de ce montage ?
+\end{enumerate}
+
+
+\subsection*{Réponse - cas idéal}
+
+On se basant sur les hypothèses habituelles pour un amplificateur intégré, on se trouve dans le cas d'un fonctionnement linéaire ($V^+ = V^-$) et on pourra supposer les courants d'entrée négligeables. On obtient alors que : $$\boxed{V_S = -R_F \cdot I_{PHD}}$$
+
+\qquad
+
+Même en modélisant le système de mesure par une capacité $C_e$ et une résistance $R_e$ en parallèle, on s'aperçoit que ces éléments n'interviennent plus dans le calcul de la fonction de transfert. Le courant fourni à ces éléments ne provient pas de la photodiode (contrairement au montage 1) mais provient de l'ALI (et de son alimentation).
+
+\qquad
+
+Expérimentalement, cependant, on retrouve un phénomène passe-bas, inexpliqué par les relations obtenues précédemment (voir thème 2 de TP).
+
+
+\subsection*{Réponse - modèle ALI du premier ordre}
+
+Si on s'intéresse à présent au modèle un peu plus réaliste d'un ALI, on peut alors calculer la fonction de transfert du montage précédent de manière à interpréter les résultats expérimentaux obtenus.
+
+On a $V^+ = 0$.
+
+\textbf{Calcul de $V^-$}
+
+Loi des noeuds : $i_{PHD} + i_C = i_R$  (on supposera $i^- = 0$).
+
+\textit{\textbf{Calcul de $i_R$}}
+
+Loi des mailles : $V^- - R_F \cdot i_R - V_S = 0$
+
+Ainsi : $\boxed{i_R = \frac{V^- - V_S}{R_F}}$
+
+\textit{\textbf{Calcul de $i_C$}}
+
+On posera $Z_C = \frac{1}{C_{PHD} \cdot \omega}$
+
+Loi des mailles :  $V^- + Z_C \cdot i_C = 0$
+
+Ainsi : $\boxed{i_C = \frac{-V^-}{Z_C}}$
+
+\textit{\textbf{Calcul de $V^-$}}
+
+$i_{PHD} + \frac{-V^-}{Z_C} = \frac{V^- - V_S}{R_F}$
+
+Ainsi : $i_{PHD} = V^- \cdot (1/R_F + 1/Z_C) - V_S/R_F$
+
+On obtient alors : $$\boxed{V^- = \frac{1}{1 + j \cdot R_F \cdot C_{PHD} \cdot \omega} \cdot (R_F \cdot i_{PHD} + VS)}$$
+
+\textbf{Calcul de $V_S$}
+
+On a $V_S = A(j\omega) \cdot (V^+ - V^-)$.
+
+On obtient alors : $$V_S = - A(j\omega) \cdot \frac{V_S + R_F \cdot i_{PHD}}{1 + j R_F C_{PHD} \omega}$$
+
+On obtient ainsi la fonction de transfert suivante : 
+$$\boxed{\frac{V_S}{i_{PHD}} = \frac{- A(j\omega) \cdot R_F}{1 + A(j\omega) + j R_F C_{PHD} \omega}}$$
+
+\textbf{Calcul complet}
+
+En remplaçant $A(j\omega)$ par $\frac{A_0}{1 + j \cdot \frac{\omega}{\omega_0}}$, on obtient alors la fonction de transfert suivante :
+
+$$\boxed{\frac{V_S}{i_{PHD}} = \frac{- A_0 \cdot R_F}{(1 + j R_F C_{PHD} \omega) \cdot (1 + j \omega/\omega_0) + A_0}}$$
+
+\bigskip
+
+Ce système correspond alors à un filtre passe-bas du second ordre. Selon les valeurs de $R_F$, $C_{PHD}$, $A_0$ et $\omega_0$, il peut y avoir une résonance (voir document \textbf{Notions et Ressources} en TP d'Opto Electronique).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
