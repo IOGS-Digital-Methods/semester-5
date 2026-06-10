@@ -19,7 +19,7 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Objectif de la séance}
+\section{Objectifs de la séance}
 
 Lors de cette troisième séance, vous allez :
 
@@ -113,6 +113,8 @@ Pour cela, on souhaite pouvoir remplir le tableau suivant (\textbf{à reproduire
   \hline
   transimpédance & & & & \\
   \hline
+  transimpédance avec filtrage & & & & \\
+  \hline
 \end{tabular}
 \end{center}
 
@@ -120,7 +122,7 @@ où $|V_s|_{MAX}$ est l'amplitude maximale du signal de sortie, [BP] est la band
 
 \bigskip
 
-Une seconde maquette permettra également de \textbf{comparer une version améliorée du transimpédance} et l'\textbf{impact de la tension de polarisation} sur les performances dynamiques du montage.
+Vous devrez également vous intéresser à l'\textbf{impact de la tension de polarisation} sur les performances dynamiques du montage (bande-passante et amplitude maximale).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Ressources}
@@ -170,11 +172,10 @@ Vous pouvez utiliser les fiches résumées suivantes :
 	\node[text=blue!40!black] (Phi) at (-2.5,4){$\Phi_e$};
 	
 	
-
 	\draw (0,0) to[battery2, invert] (0,4.5) -- (2,4.5);
 	% fleche
-	\draw (-0.5,0.3) edge[->] (-0.5,4.2);
-	\node (Ein) at (-1,2.25){$E$};
+	\draw (-0.5,0.3) edge[->, green!40!black] (-0.5,4.2);
+	\node[text=green!40!black] (Ein) at (-1,2.25){$E_P$};
 	
 	\draw (2,2) to[empty photodiode] (2,4.5);
 	\draw (2,2.8) to[short, i = $I_{photo}$, current arrow scale=8] ++(0,-0.5);
@@ -289,18 +290,17 @@ Vous pouvez utiliser les fiches résumées suivantes :
     \label{fig:schem_trans_opt}
 \end{figure}
 
-\bigskip
-
-\textit{Afin de faciliter la compréhension des phénomènes mis en jeu dans ce montage, vous pouvez vous reporter à la ressource : \textbf{Montage transimpédance : modélisation}.}
 
 \clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Travail à réaliser autour des maquettes}
+\section{Maquette 1 / Étude comparative de 4 montages de photodétection}
 
 Il s'agit dans cette séance de \textbf{caractériser des circuits de photodétection} et \textbf{comparer leurs performances dynamiques} (fréquence et temps).
+
+\subsection{Travail à réaliser}
 
 \bigskip
 
@@ -321,7 +321,7 @@ Vous devrez \textbf{proposer un livrable final} qui présente une \textbf{étude
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Maquette 1 / Étude comparative de 4 montages}
+\subsection{Maquette 1 / Description}
 
 \textit{Le schéma de la maquette est fournie en annexe de ce document.}
 
@@ -333,7 +333,7 @@ La maquette doit-être alimentée par une alimentation symétrique de +/- 15V.
 \noindent \rule{\linewidth}{1pt}
 
 \begin{center}
-\begin{tabular}{|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{10cm}|}
+\begin{tabular}{|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{10cm}|}
   
   \Xhline{2pt}
   Signal & Direction & Description\\
@@ -350,10 +350,100 @@ La maquette doit-être alimentée par une alimentation symétrique de +/- 15V.
   \hline
   \textbf{OUT4} & Sortie & Image du courant dans les LED ($R_{LED} = 270 \Omega$) \\
   \Xhline{2pt}
+  \textbf{POT 15} & Potentiomètre & Réglage de la tension de polarisation ($E_P$) \\
+  \Xhline{2pt}
 \end{tabular}
 \end{center}
 
+\bigskip
 
+\noindent \rule{\linewidth}{1pt}
+
+\bigskip
+
+\textbf{3 valeurs de résistance !}
+
+Il existe 3 versions de cette maquette, pour chacune des valeurs de résistance à comparer. Vous devrez donc reprendre le même travail sur ces 3 versions afin d'en extraire des données et ainsi analyser l'impact de la résistance $R_{PHD}$ sur chacun des montages.
+
+\noindent \rule{\linewidth}{1pt}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Maquette 2 / Asservissement d'intensité lumineuse}
+
+Un système de photodétection permet de mesurer l'intensité lumineuse résultant d'un ensemble de sources à un endroit donné. Nous allons à présent utiliser l'un des montages étudiés précédemment comme capteur de luminosité dans un système d'asservissement de l'intensité lumineuse d'une LED.
+
+\textit{Les différents étages de ce système ont été (ou seront - selon les groupes) étudiés en TD, ainsi que l'impact d'une boucle d'asservissement sur un système.}
+
+\bigskip
+
+\begin{center}
+{\Large
+\begin{tikzpicture}
+\sbEntree{E}
+\sbComp{comp}{E}
+\sbRelier[$E_C$]{E}{comp}
+\sbStyleBloc{fill=schema_PID}
+\sbBloc{reg}{PID}{comp}
+\sbRelier[$\varepsilon$]{comp}{reg}
+\sbStyleBloc{fill=schema_action}
+\sbBloc{sys}{LED $D_1$}{reg}
+\sbStyleBlocDefaut
+\sbRelier[u]{reg}{sys}
+\sbSortie{S}{sys}
+\sbRelier[$E_S$]{sys}{S}
+\sbDecaleNoeudy[4]{S}{U}
+\sbStyleBloc{fill=schema_feed}
+\sbBlocr{cap}{Photodétection}{U}
+\sbStyleBlocDefaut
+\sbRelieryx{sys-S}{cap}
+\sbRelierxy[m]{cap}{comp}
+\end{tikzpicture}
+}
+\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Maquette 2 / Description}
+
+\textit{Le schéma de la maquette est fournie en annexe de ce document.}
+
+
+\noindent \rule{\linewidth}{1pt}
+
+La maquette doit-être alimentée par une alimentation symétrique de +/- 15V.
+
+\noindent \rule{\linewidth}{1pt}
+
+\begin{center}
+\begin{tabular}{|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{10cm}|}
+  
+  \Xhline{2pt}
+  Signal & Direction & Description\\
+  \Xhline{2pt}
+  \textbf{IN1} & Entrée & Consigne d'intensité lumineuse $E_C$ \\
+  \hline
+  \textbf{IN2} & Entrée & Perturbation (LED secondaire) \\
+  \Xhline{2pt}
+  \textbf{OUT1} & Sortie & Mesure en sortie du système de photodétection $m$ \\
+  \hline
+  \textbf{OUT2} & Sortie & Image du courant dans la LED D1 ($R_{LED} = 270\operatorname{\Omega}$) \\
+  \hline
+  \textbf{OUT3} & Sortie & Erreur entre consigne et mesure $\varepsilon$ \\
+  \hline
+  \textbf{OUT4} & Sortie & Sortie du correcteur PID $u$ \\
+  \Xhline{2pt}
+  \textbf{POT 5} & Potentiomètre & Réglage de la tension d'offset sur la LED D1 \\
+  \Xhline{2pt}
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\subsection{Travail à réaliser}
+
+\textit{Le sujet est disponible sur le site du LEnsE.}

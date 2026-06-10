@@ -6,10 +6,14 @@
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{amsmath}
-\usepackage[, x11names]{xcolor}
+\usepackage[dvipsnames, x11names]{xcolor}
 
 \definecolor{violet_iogs}{RGB}{10, 50, 80}
 \definecolor{orange_iogs}{RGB}{255, 150, 10}
+
+\definecolor{schema_action}{RGB}{0, 255, 255}
+\definecolor{schema_PID}{RGB}{232, 232, 232}
+\definecolor{schema_feed}{RGB}{194, 224, 174}
 
 \usepackage[colorlinks,linkcolor=violet_iogs,
 urlcolor=violet_iogs, citecolor=orange_iogs]{hyperref}
@@ -44,9 +48,9 @@ urlcolor=violet_iogs, citecolor=orange_iogs]{hyperref}
 
 \usepackage{tikz}
 \usepackage{pgfplots}
-
 \usepackage[european, straightvoltages]{circuitikz}
-\usetikzlibrary{babel, patterns, patterns.meta, calc}
+\usetikzlibrary{babel, patterns, patterns.meta, calc,arrows.meta,positioning,calc}
+\usepackage{schemabloc}
 
 \newcommand{\sectionbgcolor}[1]{%
   \colorbox{violet_iogs}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{#1}}}
