@@ -120,31 +120,58 @@ Avec : $C_1 = C_2 = 1000\operatorname{pF}$ et $R_1 = R_2 = \operatorname{k\Omega
 \end{enumerate}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Réponse}
 
-%\begin{center}
-%{\Large
-%\begin{tikzpicture}
-%\sbEntree{E}
-%\sbComp{comp}{E}
-%\sbRelier[$E_C$]{E}{comp}
-%\sbStyleBloc{fill=schema_PID}
-%\sbBloc{reg}{PID}{comp}
-%\sbRelier[$\varepsilon$]{comp}{reg}
-%\sbStyleBloc{fill=schema_action}
-%\sbBloc{sys}{LED $D_1$}{reg}
-%\sbStyleBlocDefaut
-%\sbRelier[u]{reg}{sys}
-%\sbSortie{S}{sys}
-%\sbRelier[$E_S$]{sys}{S}
-%\sbDecaleNoeudy[4]{S}{U}
-%\sbStyleBloc{fill=schema_feed}
-%\sbBlocr{cap}{Photodétection}{U}
-%\sbStyleBlocDefaut
-%\sbRelieryx{sys-S}{cap}
-%\sbRelierxy[m]{cap}{comp}
-%\end{tikzpicture}
-%}
-%\end{center}
+\textbf{Question 1}
+
+\begin{center}
+\begin{tikzpicture}
+\sbEntree{E}       
+\sbBlocL[4]{Int}{$\frac{K_i}{j \cdot \omega}$}{E}
+\node[above right=0.25em of E]{$E$};
+\sbDecaleNoeudy[4]{Int}{Der}
+\sbDecaleNoeudy[-4]{Int}{Prop}
+\sbBloc[-1.5]{Der}{$K_d \cdot j \cdot \omega$}{Der}  \sbRelieryx{E-Int}{Der}
+\sbBloc[-1.5]{Prop}{$K_p$}{Prop}        \sbRelieryx{E-Int}{Prop}
+\sbCompSum{Somme}{Int}{+}{+}{+}{ }
+\sbRelier{Int}{Somme}  
+\sbRelierxy{Prop}{Somme}
+\sbRelierxy{Der}{Somme}
+\sbSortie{S}{Somme}
+\sbRelier[$S$]{Somme}{S}
+\end{tikzpicture}
+\end{center}
+
+
+
+
+\textbf{Question 2}
+
+\begin{center}
+{\Large
+\begin{tikzpicture}
+\sbEntree{E}
+\sbComp{comp}{E}
+\sbRelier[$E_C$]{E}{comp}
+\sbStyleBloc{fill=schema_PID}
+\sbBloc{reg}{PID}{comp}
+\sbRelier[$\varepsilon$]{comp}{reg}
+\sbStyleBloc{fill=schema_action}
+\sbBloc{sys}{LED $D_1$}{reg}
+\sbStyleBlocDefaut
+\sbRelier[u]{reg}{sys}
+\sbSortie{S}{sys}
+\sbRelier[$E_S$]{sys}{S}
+\sbDecaleNoeudy[4]{S}{U}
+\sbStyleBloc{fill=schema_feed}
+\sbBlocr{cap}{Photodétection}{U}
+\sbStyleBlocDefaut
+\sbRelieryx{sys-S}{cap}
+\sbRelierxy[m]{cap}{comp}
+\end{tikzpicture}
+}
+\end{center}
 
 
 
