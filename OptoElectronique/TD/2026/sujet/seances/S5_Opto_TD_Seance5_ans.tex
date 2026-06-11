@@ -23,19 +23,181 @@
 \textit{Ce TD fait suite au TD2 et au TD4, dans lesquelles certaines notions ont déjà abordées. Il s'appuie notamment sur les structures de base vu dans le TD4.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Exercice 1 - Filtre universel}
+\subsection{Exercice 1 - Filtre universel / UAF42}
+
+Soit la structure suivante, basée sur les montages vus précédemment :
+
+\begin{center}
+	\includegraphics[width=15cm]{images/universel_structure.png}
+\end{center}
+
+\begin{enumerate}
+	\item Calculer $V_{HP}$ en fonction de $V_{in}$ et des divers composants.	
+	\item Calculer $V_{BP}$ et $V_{LP}$.	
+	\item Que peuvent signifier les noms donnés aux signaux de sortie ?
+	
+	\bigskip
 
 
+On s'intéresse au composant \textbf{UAF42}, dont quelques pages de documentation technique sont données en annexe.
 
+	\item Retrouve-t-on la structure étudiée précédemment dans le schéma de la page 1 de la documentation technique ?
+	\item Le câblage de la figure 1 de la page 6 de la documentation technique est-il conforme à la structure universelle proposée précédemment ?
+	\item Retrouve-t-on la fonction de transfert calculée précédemment ?
+	\item Que doivent valoir $R_{F1}$ et $R_{F2}$ pour obtenir une pulsation de coupure de $30~10^3\operatorname{rd/s}$ ?
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Réponse}
+
+\textbf{Question 1}
+
+	$V_{HP} = V_{in} + V_{BP} + V_{LP}$
+
+\medskip
+
+\textbf{Question 2}
+	
+	Or, $V_{BP} = -\frac{V_{HP}}{j \cdot R_F \cdot C \cdot \omega} $ et $V_{LP} = -\frac{V_{BP}}{j \cdot R_F \cdot C \cdot \omega} = \frac{V_{HP}}{(j \cdot R_F \cdot C \cdot \omega)^2}$
+	
+	Ainsi :
+	
+	$$V_{HP} = V_{in} - \frac{V_{HP}}{j \cdot R_F \cdot C \cdot \omega} - \frac{V_{HP}}{(j \cdot R_F \cdot C \cdot \omega)^2}$$
+	
+	On obtient alors la fonction de transfert suivante :
+	
+	$$\frac{V_{HP}}{V_{in}} = \frac{(j \cdot R_F \cdot C \cdot \omega)^2}{1 + j \cdot R_F \cdot C \cdot \omega + (j \cdot R_F \cdot C \cdot \omega)^2}$$
+
+
+\medskip
+
+\textbf{Question 3}
+
+
+	On s'aperçoit que les fonctions de transfert trouvées aux questions précédentes correspondent respectivement à :
+	\begin{itemize}
+		\item $\frac{V_{HP}}{V_{in}}$ celle d'un filtre passe-haut du second ordre (High Pass)
+		\item $\frac{V_{BP}}{V_{in}}$ celle d'un filtre passe-bande (Band Pass)
+		\item $\frac{V_{LP}}{V_{in}}$ celle d'un filtre passe-bas du second ordre (Low Pass)
+	\end{itemize}
+	
+	
+\medskip
+
+\textbf{Questions 4/5}
+
+
+On retrouve l'ensemble des éléments précédents.
+
+\begin{center}
+	\includegraphics[width=10cm]{images/universel_structure_corr.png}
+\end{center}
+
+\medskip
+
+\textbf{Questions 6}
+
+Si on s'intéresse aux équations données à la page 5 de la documentation technique, on retrouve en effet des fonctions de transfert proches de celle calculée précédemment. Avec $s = j \cdot \omega$.	
+
+
+\medskip
+
+\textbf{Questions 7}
+
+La documentation technique donne $$\omega_n^2 = \frac{R_2}{R_1} \cdot \frac{1}{R_{F1} \cdot R_{F2} \cdot C_1 \cdot C_2}$$
+
+Avec : $C_1 = C_2 = 1000\operatorname{pF}$ et $R_1 = R_2 = \operatorname{k\Omega}$
+
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Exercice 2 - Asservissement d'intensité lumineuse}
 
 \textit{Ce TD est en lien avec la dernière partie des TP sur la photodétection.}
 
+\begin{enumerate}
+	\item Proposez une architecture pour un \textbf{correcteur PID} (proportionnel, intégral, dérivé).
+	\item Proposez une architecture permettant d'\textbf{asservir l'intensité lumineuse} d'un éclairage à LED sur une surface (plan de travail par exemple).
+\end{enumerate}
 
+
+
+%\begin{center}
+%{\Large
+%\begin{tikzpicture}
+%\sbEntree{E}
+%\sbComp{comp}{E}
+%\sbRelier[$E_C$]{E}{comp}
+%\sbStyleBloc{fill=schema_PID}
+%\sbBloc{reg}{PID}{comp}
+%\sbRelier[$\varepsilon$]{comp}{reg}
+%\sbStyleBloc{fill=schema_action}
+%\sbBloc{sys}{LED $D_1$}{reg}
+%\sbStyleBlocDefaut
+%\sbRelier[u]{reg}{sys}
+%\sbSortie{S}{sys}
+%\sbRelier[$E_S$]{sys}{S}
+%\sbDecaleNoeudy[4]{S}{U}
+%\sbStyleBloc{fill=schema_feed}
+%\sbBlocr{cap}{Photodétection}{U}
+%\sbStyleBlocDefaut
+%\sbRelieryx{sys-S}{cap}
+%\sbRelierxy[m]{cap}{comp}
+%\end{tikzpicture}
+%}
+%\end{center}
+
+
+
+
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Exercice 3 - Capacité commutée}
 
 
+Nous allons nous intéresser à présent à des filtres dont la fréquence de coupure est pilotable par un signal extérieur.
+
+\bigskip
+
+On donne dans un premier temps la structure suivante, dont l'interrupteur $K$ est piloté par le signal de commande ci-dessous :
+
+\begin{center}
+	\includegraphics{images/capa_comm.png} 
+	\includegraphics{images/capa_comm_signal.png}
+\end{center}
+
+
+\medskip
+
+\begin{enumerate}
+	\item Calculez la charge stockée dans $C_0$ entre les instants 0 et $T/2$, puis entre les instants $T/2$ et $T$.
+	\item Quelle quantité de charges passe de A vers B entre les instants 0 et T ?
+	\item Calculez alors le courant moyen circulant du point A au point B pendant une période T. 
+	\item Donnez l'expression de la résistance équivalente $R_{AB}$ vue entre les bornes A et B de cette cellule.
+\end{enumerate}
+
+
+\centerline {\rule{.5\linewidth}{.25pt}} % Horizontal line
+
+\bigskip
+
+On réalise un intégrateur à partir du circuit de la figure 2.
+
+\begin{enumerate}
+	\item Donnez la fonction de transfert du circuit $T(j\omega) = u_2/u_1$ en fonction de $R_{AB}$ et de $C$.
+
+
+\begin{center}
+	\includegraphics{images/capa_comm_integrateur.png}
+\end{center}
+
+	\item Que devient alors la fonction de transfert $T(j\omega{}) = u_2/u_1$ en fonction des éléments du système ($C_0$ et $C$) ?
+
+	\item Quel est l'intérêt d'un tel circuit ?
+\end{enumerate}
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\includepdf[pages=-]{docs/uaf42.pdf}

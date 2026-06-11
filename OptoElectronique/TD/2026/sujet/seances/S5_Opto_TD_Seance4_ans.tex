@@ -22,17 +22,258 @@
 
 \textit{Ce TD fait suite au TD2, dans lesquelles certaines notions ont déjà abordées.}
 
+Dans ce TD, on fera l'hypothèse que les amplificateurs linéaires intégrés sont parfaits (pas de limite de bande-passante).
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Exercice 1 - Sommateur}
 
+Soit le circuit suivant : 
 
+\begin{center}
+\begin{circuitikz} 
+	\node [op amp, fill=blue!10!white](A1) at (0,0){\texttt{AOP1}};
+	\draw (A1.-) to[short] ++(-.5,0) coordinate(A) to[short, -*] ++(0,1.5) coordinate(B) to[R=$Z_S$, i=$I_S$] (B -| A1.out) to[short, -*] (A1.out);
+		
+	\draw (A1.-) to[short,-*] ++(-.5,0) coordinate(AA) to[R=$Z_1$, i<=$I_1$] ++(-2.5,0) coordinate(BB) to[short,-o] ++(-.5,0) coordinate(CC);
+	
+	\draw (B) to[R=$Z_i$, i<=$I_i$] ++(-2.5, 0) to[short, -o] ++(-1.5, 0);
+	
+	\draw (B) -- ++(0, 1.5) to[R=$Z_N$, i<=$I_N$] ++(-2.5, 0) to[short, -o] ++(-2.5, 0);	
+	
+	\draw (A1.+) to[short] ++(0,-0.5) node[ground]{};
+	\draw (A1.out) to[short,-o] ++(1,0) coordinate(D);
+	\draw (-4.6,-1) edge[->,color={green!40!black}] (-4.6,0.3);
+	\node[text={green!40!black}] (Ve) at (-5.1,-0.35){$V_{e1}$};		\draw (-4.6,-1.3)  to[open,-o] ++(0,0) node[ground](GND){};
+
+
+	\draw (-5.6,-1) edge[->,color={green!40!black}] (-5.6,1.7);
+	\node[text={green!40!black}] (Ve) at (-6.1,0.65){$V_{ei}$};	
+	\draw (-5.6,-1.3)  to[open,-o] ++(0,0) node[ground](GND){};
+	
+	\draw (-6.6,-1) edge[->,color={green!40!black}] (-6.6,3.1);
+	\node[text={green!40!black}] (Ve) at (-7.1,1.35){$V_{eN}$};	
+	\draw (-6.6,-1.3)  to[open,-o] ++(0,0) node[ground](GND){};
+	 
+	
+	\draw (2.2,-1) edge[->, color={red}] (2.2,-0.3);
+	\node[text={red}] (Vs) at (1.7,-0.6){$V_s$}; 
+	\draw (2.2,-1.3)  to[open,-o] ++(0,0) node[ground](GND){};
+	
+\end{circuitikz}
+\end{center}
+
+\begin{enumerate}
+	\item Calculez les courants $I_i$ pour chacune des branches d'entrée.
+	\item Calculez le courant $I_S$ traversant l'impédance $Z_S$.
+	\item Trouvez alors la relation entre $V_S$ et la somme des différentes tensions $V_i$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Réponse}
+
+\textbf{Question 1}
+
+Le montage autour de l'ALI possède une boucle de contre-réaction (via l'impédance $Z_S$). On peut donc faire l'hypothèse que le montage fonctionne en régime "linéaire", ainsi $V^+ = V^-$.
+
+De plus, $V^+ = 0$.
+
+Aux bornes de l'impédance $Z_i$, on a la différence de potentiel $V_{ei} - V^-$ et par la loi d'Ohms : $I_i = \frac{V_{ei} - V^-}{Z_i}$.
+
+\medskip
+
+\textbf{Question 2}
+
+Aux bornes de l'impédance $Z_S$, on a la différence de potentiel $V^- - V_S$ et par la loi d'Ohms : $I_S = \frac{V^- - V_S}{Z_S}$.
+
+\medskip
+
+\textbf{Question 3}
+
+Au noeud du potentiel $V^-$, on peut écrire que la somme des courants $I_i$ est égale à $I_S$ ($i^- = 0$, impédance d'entrée très grande).
+
+Ainsi : $V_S = - \sum_{i=1}^{N} \frac{Z_S}{Z_i} * V_{ei}$
+
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Exercice 2 - Intégrateur}
+\subsection{Exercice 2 - Dérivateur}
+
+Soit le circuit suivant : 
+
+\begin{center}
+\begin{circuitikz} 
+	\node [op amp, fill=blue!10!white](A1) at (0,0){\texttt{AOP1}};
+	\draw (A1.-) to[short] ++(-.5,0) coordinate(A) to[short] ++(0,1.5) coordinate(B) to[R=$R$] (B -| A1.out) to[short, -*] (A1.out);
+	\draw (A1.-) to[short,-*] ++(-.5,0) coordinate(AA) to[C=$C$] ++(-2.5,0) coordinate(BB) to[short,-o] ++(-.5,0) coordinate(CC);
+	\draw (A1.+) to[short] ++(0,-0.5) node[ground]{};
+	\draw (A1.out) to[short,-o] ++(1,0) coordinate(D);
+	\draw (-4.6,-1) edge[->,color={green!40!black}] (-4.6,0.3);
+	\node[text={green!40!black}] (Ve) at (-5.1,-0.35){$V_e$}; 
+	\draw (-4.6,-1.3)  to[open,-o] ++(0,0) node[ground](GND){};
+	\draw (2.2,-1) edge[->, color={red}] (2.2,-0.3);
+	\node[text={red}] (Vs) at (1.7,-0.6){$V_s$}; 
+	\draw (2.2,-1.3)  to[open,-o] ++(0,0) node[ground](GND){};
+	
+\end{circuitikz}
+\end{center}
 
 
+\begin{enumerate}
+	\item Donnez la relation entre la tension de sortie $V_S$ et la tension d'entrée $V_e$.
+	\item La fonction trouvée correspond-elle bien au titre de l'exercice ?
+\end{enumerate}
+
+
+\subsection*{Réponse}
+
+\textbf{Question 1}
+
+Il s'agit d'un montage amplificateur inverseur. Ainsi, 
+
+$$\boxed{ \frac{V_S}{V_e} = - j \cdot R \cdot C \cdot \omega}$$
+
+\medskip
+
+\textbf{Question 2}
+
+Dans le domaine temporel, on peut calculer le courant dans la capacité : $i_C = C \cdot \frac{d V_e}{dt}$.
+
+Ainsi $$\boxed{V_s = - R * i_C = R \cdot C \cdot \frac{d V_e}{dt}}$$
+
+La tension de sortie est proportionnelle à la dérivée temporelle de la tension d'entrée.
+
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Exercice 3 - Dérivateur}
+\subsection{Exercice 3 - Intégrateur}
+
+Soit le circuit suivant : 
+
+\begin{center}
+\begin{circuitikz} 
+	\node [op amp, fill=blue!10!white](A1) at (0,0){\texttt{AOP1}};
+	\draw (A1.-) to[short] ++(-.5,0) coordinate(A) to[short] ++(0,1.5) coordinate(B) to[C=$C$] (B -| A1.out) to[short, -*] (A1.out);
+	\draw (A1.-) to[short,-*] ++(-.5,0) coordinate(AA) to[R=$R_1$] ++(-2.5,0) coordinate(BB) to[short,-o] ++(-.5,0) coordinate(CC);
+	\draw (A1.+) to[short] ++(0,-0.5) node[ground]{};
+	\draw (A1.out) to[short,-o] ++(1,0) coordinate(D);
+	\draw (-4.6,-1) edge[->,color={green!40!black}] (-4.6,0.3);
+	\node[text={green!40!black}] (Ve) at (-5.1,-0.35){$V_e$}; 
+	\draw (-4.6,-1.3)  to[open,-o] ++(0,0) node[ground](GND){};
+	\draw (2.2,-1) edge[->, color={red}] (2.2,-0.3);
+	\node[text={red}] (Vs) at (1.7,-0.6){$V_s$}; 
+	\draw (2.2,-1.3)  to[open,-o] ++(0,0) node[ground](GND){};
+	
+	\draw[dashed] (B) -- ++(0,1.5) coordinate(B2) to[R=$R_2$] (B2 -| A1.out) to[short,-*] (B -| A1.out);	
+	
+\end{circuitikz}
+\end{center}
 
 
+\begin{enumerate}
+	\item Donnez la relation entre la tension de sortie $V_S$ et la tension d'entrée $V_e$, dans le cas où $R_2$ n'est pas introduite dans le circuit.
+	\item La fonction trouvée correspond-elle bien au titre de l'exercice ?
+	
+	\bigskip
+	\item Donnez la relation entre la tension de sortie $V_S$ et la tension d'entrée $V_e$, dans le cas où $R_2$ est introduite dans le circuit.
+	\item Dans quelle gamme de fréquence retrouve-t-on la fonction d'intégrateur ?
+\end{enumerate}
+
+
+\subsection*{Réponse}
+
+\textbf{Question 1}
+
+Il s'agit d'un montage amplificateur inverseur. 
+
+
+Si $R_2$ n'est pas présente, on a : 
+
+$$\boxed{ \frac{V_S}{V_e} = - \frac{1}{j \cdot R_1 \cdot C \cdot \omega}}$$
+
+\medskip
+
+\textbf{Question 2}
+
+De la même façon que précédemment, dans le domaine temporel, on peut calculer le courant dans la capacité : $i_C = - C \cdot \frac{d V_S}{dt}$.
+
+On obtient alors : $\frac{d V_S}{dt} = - \frac{V_e}{R \cdot C}$
+
+
+
+\medskip
+
+\textbf{Question 3}
+
+Avec $R_2$, on peut calculer $Z_2$, l'impédance de la mise en parallèle de $C$ et $R_2$.
+
+$$Z_2 = \frac{R_2}{1 + j \cdot R_2 \cdot C \cdot \omega}$$
+
+Ainsi, on obtient : 
+
+$$\boxed{ \frac{V_S}{V_e} = - \frac{R_2}{R_1} \cdot \frac{1}{1 + j \cdot R_2 \cdot C \cdot \omega}}$$
+
+\medskip
+
+\textbf{Question 4}
+
+On obtient un comportement intégrateur pour une pulsation supérieure à la pulsation de coupure de ce montage passe-bas, soit $\omega > \frac{1}{R_2 \cdot C}$
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercice 4 - Différence de potentiels}
+
+Soit le circuit suivant : 
+
+\begin{center}
+\begin{circuitikz} 
+	\node [op amp, fill=blue!10!white](A1) at (0,0){\texttt{AOP1}};
+	\draw (A1.-) to[short] ++(-.5,0) coordinate(A) to[short, -*] ++(0,1.5) coordinate(B) to[R=$R_S$, i=$I_S$] (B -| A1.out) to[short, -*] (A1.out);
+		
+	\draw (A1.+) to[short,-*] ++(-.5,0) coordinate(AA) to[R=$R_1$, i<=$I_1$] ++(-2.5,0) coordinate(BB) to[short,-o] ++(-.5,0) coordinate(CC);
+	\draw (AA) to[R=$R_S$] ++(0,-2.5) coordinate(RR) node[ground]{};
+	
+	\draw (B) to[R=$R_2$, i<=$I_2$] ++(-2.5, 0) to[short, -o] ++(-2.5, 0);
+	
+	%\draw (B) -- ++(0, 1.5) to[R=$Z_N$, i<=$I_N$] ++(-2.5, 0) to[short, -o] ++(-2.5, 0);	
+	
+	\draw (A1.out) to[short,-o] ++(1,0) coordinate(D);
+	\draw (-4.6,-2.5) edge[->,color={green!40!black}] (-4.6,-0.7);
+	\node[text={green!40!black}] (Ve) at (-5.1,-1.3){$V_{e1}$};			\draw (-4.6,-2.8)  to[open,-o] ++(0,0) node[ground](GND){};	 
+
+	\draw (-6.6,-2.5) edge[->,color={green!40!black}] (-6.6,1.7);
+	\node[text={green!40!black}] (Ve) at (-6.1,0){$V_{e2}$};			\draw (-6.6,-2.8)  to[open,-o] ++(0,0) node[ground](GND){};
+	
+	\draw (2.2,-1) edge[->, color={red}] (2.2,-0.3);
+	\node[text={red}] (Vs) at (1.7,-0.6){$V_s$}; 
+	\draw (2.2,-1.3)  to[open,-o] ++(0,0) node[ground](GND){};
+	
+\end{circuitikz}
+\end{center}
+
+\begin{enumerate}
+	\item Calculez la tension $V^+$ et la tension $V^-$.
+	\item Donnez alors la relation entre la tension de sortie $V_S$ et les tensions d'entrée $V_{e1}$ et $V_{e2}$.
+\end{enumerate}
+
+
+\subsection*{Réponse}
+
+\textbf{Question 1}
+
+On supposera les courants d'entrée $i^+$ et $i^-$ négligeables face aux autres courants mis en jeu.
+
+Ainsi : $$V^+ = \frac{R_S}{R_S + R_1} \cdot V_{e1}$$
+
+$I_2 = \frac{V_{e2} - V^-}{R_2} = I_S = \frac{V^- - V_S}{R_S}$
+
+\medskip
+
+On obtient alors $$V^- = \frac{1}{R_S + R_2} \cdot (R_S \cdot V_{e2} + R_2 \cdot V_S)$$
+
+\medskip
+
+\textbf{Question 2}
+
+Le montage autour de l'ALI possède une boucle de contre-réaction (via l'impédance $R_S$). On peut donc faire l'hypothèse que le montage fonctionne en régime "linéaire", ainsi $V^+ = V^-$.
+
+Ainsi : $$\boxed{V_S = \frac{R_S + R_2}{R_S + R_1} \cdot \frac{R_S}{R_2} \cdot (V_{e1} - V_{e2})}$$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

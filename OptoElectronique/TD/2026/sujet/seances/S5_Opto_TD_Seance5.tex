@@ -39,7 +39,7 @@ Soit la structure suivante, basée sur les montages vus précédemment :
 	\bigskip
 
 
-On souhaite s'intéresser au composant \textbf{UAF42}, dont quelques pages de documentation technique sont données en annexe.
+On s'intéresse au composant \textbf{UAF42}, dont quelques pages de documentation technique sont données en annexe.
 
 	\item Retrouve-t-on la structure étudiée précédemment dans le schéma de la page 1 de la documentation technique ?
 	\item Le câblage de la figure 1 de la page 6 de la documentation technique est-il conforme à la structure universelle proposée précédemment ?
@@ -48,38 +48,42 @@ On souhaite s'intéresser au composant \textbf{UAF42}, dont quelques pages de do
 \end{enumerate}
 }
 
-\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Exercice 2 - Asservissement d'intensité lumineuse}
 
 \textit{Ce TD est en lien avec la dernière partie des TP sur la photodétection.}
 
-On s'intéresse au schéma bloc suivant :
+\begin{enumerate}
+	\item Proposez une architecture pour un \textbf{correcteur PID} (proportionnel, intégral, dérivé).
+	\item Proposez une architecture permettant d'\textbf{asservir l'intensité lumineuse} d'un éclairage à LED sur une surface (plan de travail par exemple).
+\end{enumerate}
 
-\begin{center}
-{\Large
-\begin{tikzpicture}
-\sbEntree{E}
-\sbComp{comp}{E}
-\sbRelier[$E_C$]{E}{comp}
-\sbStyleBloc{fill=schema_PID}
-\sbBloc{reg}{PID}{comp}
-\sbRelier[$\varepsilon$]{comp}{reg}
-\sbStyleBloc{fill=schema_action}
-\sbBloc{sys}{LED $D_1$}{reg}
-\sbStyleBlocDefaut
-\sbRelier[u]{reg}{sys}
-\sbSortie{S}{sys}
-\sbRelier[$E_S$]{sys}{S}
-\sbDecaleNoeudy[4]{S}{U}
-\sbStyleBloc{fill=schema_feed}
-\sbBlocr{cap}{Photodétection}{U}
-\sbStyleBlocDefaut
-\sbRelieryx{sys-S}{cap}
-\sbRelierxy[m]{cap}{comp}
-\end{tikzpicture}
-}
-\end{center}
+
+
+%\begin{center}
+%{\Large
+%\begin{tikzpicture}
+%\sbEntree{E}
+%\sbComp{comp}{E}
+%\sbRelier[$E_C$]{E}{comp}
+%\sbStyleBloc{fill=schema_PID}
+%\sbBloc{reg}{PID}{comp}
+%\sbRelier[$\varepsilon$]{comp}{reg}
+%\sbStyleBloc{fill=schema_action}
+%\sbBloc{sys}{LED $D_1$}{reg}
+%\sbStyleBlocDefaut
+%\sbRelier[u]{reg}{sys}
+%\sbSortie{S}{sys}
+%\sbRelier[$E_S$]{sys}{S}
+%\sbDecaleNoeudy[4]{S}{U}
+%\sbStyleBloc{fill=schema_feed}
+%\sbBlocr{cap}{Photodétection}{U}
+%\sbStyleBlocDefaut
+%\sbRelieryx{sys-S}{cap}
+%\sbRelierxy[m]{cap}{comp}
+%\end{tikzpicture}
+%}
+%\end{center}
 
 
 
