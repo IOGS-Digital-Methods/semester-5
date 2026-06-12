@@ -1,0 +1,192 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Engineering problems / LaTeX Template
+%		Semester 5
+%		Institut d'Optique Graduate School
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	5N-OptoElec-Sujet	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Created by:
+%	Julien VILLEMEJANE - 05/may/2025
+%	
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Professional Newsletter Template
+% LaTeX Template
+% Version 1.0 (09/03/14)
+%
+% Created by:
+% Bob Kerstetter (https://www.tug.org/texshowcase/) and extensively modified by:
+% Vel (vel@latextemplates.com)
+% 
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/li censes/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper,11pt,twoside]{book} % The default font size is 10pt; 11pt and 12pt are alternatives
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{opto_elec_villemejane}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\pagestyle{plain}
+
+% Séances
+\cleardoublepage
+\ifodd\value{page}\else
+  \hbox{}\newpage
+\fi
+
+\newpage
+%\pagestyle{empty}
+
+\begin{minipage}[c]{.25\linewidth}
+	\includegraphics[width=4cm]{images/LEnsE_IOGS.jpg}
+\end{minipage} \hfill
+\begin{minipage}[c]{.4\linewidth}
+
+\begin{center}
+\vspace{0.3cm}
+{\Large \textsc{Opto-Électronique}}
+
+\medskip
+
+5N-027-SCI \qquad \textbf{\Large TD Asservissement}
+
+\end{center}
+\end{minipage}\hfill
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{TD Asservissement - Systèmes en boucle fermée}
+
+Pour les exercices 1 et 2, on considérera le schéma bloc suivant :
+
+\begin{center}
+{\Large
+\begin{tikzpicture}
+\sbEntree{E}
+\sbComp{comp}{E}
+\sbRelier[$G_E$]{E}{comp}
+
+\sbStyleBloc{fill=schema_action}
+\sbBloc{sys}{$A(j \omega)$}{comp}
+\sbRelier[$\varepsilon$]{comp}{sys}
+
+\sbStyleBlocDefaut
+\sbSortie{S}{sys}
+\sbRelier[$G_S$]{sys}{S}
+\sbDecaleNoeudy[4]{S}{U} 
+\sbStyleBloc{fill=schema_feed}
+\sbBlocr{cap}{$B(j \omega)$}{U}
+\sbStyleBlocDefaut
+\sbRelieryx{sys-S}{cap}
+\sbRelierxy[$G_M$]{cap}{comp}
+\end{tikzpicture}
+}
+\end{center}
+
+On rappelle que l'\textbf{erreur statique} correspond à $\boxed{\varepsilon_S = \varepsilon(t \to \infty)}$. Il s'agit de l'erreur commise entre la consigne d'entrée et la valeur réellement obtenue en sortie du système.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercice 1 - Boucle ouverte et boucle fermée - Ordre 0}
+
+Pour cet exercice, on considérera les fonctions de transfert suivantes : 
+
+$A(j \omega) = K_A$ et $B(j \omega) = K_B$
+
+
+\begin{enumerate}
+	\item Donnez l'expression de $G_S$ en fonction de $G_E$, en \textbf{boucle ouverte}.
+	\item Donnez l'expression de $G_M$ en fonction de $G_E$, en \textbf{boucle ouverte}.
+		
+	\item Donnez l'expression de la \textbf{fonction de transfert} $H(j \omega) = G_S / G_E$, en \textbf{boucle fermée}.
+	\item Calculez la \textbf{fonction de transfert} et l'\textbf{erreur statique} (dans le cas d'un échelon de tension en entrée) pour les valeurs suivantes de $K_A$ et $K_B$ :
+	\begin{itemize}
+		\item $K_A = 1$ et $K_B = 1$
+		\item $K_A = 10$ et $K_B = 1$
+		\item $K_A = 100$ et $K_B = 1$
+		\item $K_A = 1$ et $K_B = 10^{-2}$
+		\item $K_A = 10^7$ et $K_B = 10^{-4}$ (cas amplificateur inverseur par exemple)
+	\end{itemize}
+	\item Pour $K_A = 1$, quelles sont les limites de $H$ lorsque $K_B >> 1$ ? Lorsque $K_B << 1$ ?
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercice 2 - Boucle ouverte et boucle fermée - Ordre 1}
+
+Pour cet exercice, on considérera les fonctions de transfert suivantes : 
+
+$A(j \omega) = \frac{K_A}{1 + T_A j \omega}$ et $B(j \omega) = K_B$
+
+\begin{enumerate}
+	\item Donnez l'expression de la \textbf{fonction de transfert} $H(j \omega) = G_S / G_E$, en \textbf{boucle fermée}. 
+	\item Mettez cette expression sous forme canonique et donnez les principales caractéristiques du système obtenu.
+	\item Calculez ces valeurs caractéristiques pour les valeurs suivantes de $K_A$, $K_B$ et $T_A$ :
+	\begin{itemize}
+		\item $K_A = 1$, $K_B = 1$ et $T_A = 100\operatorname{ms}$
+		\item $K_A = 10$, $K_B = 1$ et $T_A = 100\operatorname{ms}$
+		\item $K_A = 10^7$, $K_B = 10^{-4}$ et $T_A = 100\operatorname{ms}$ (cas amplificateur inverseur par exemple)
+	\end{itemize}
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+
+Pour les exercices 3 et 4, on considérera le schéma bloc suivant :
+
+
+\begin{center}
+{\Large
+\begin{tikzpicture}
+\sbEntree{E}
+\sbComp{comp}{E}
+\sbRelier[$G_E$]{E}{comp}
+\sbStyleBloc{fill=schema_PID}
+\sbBloc{reg}{$C(j \omega)$}{comp}
+\sbRelier[$\varepsilon$]{comp}{reg}
+\sbStyleBloc{fill=schema_action}
+\sbBloc{sys}{$A(j \omega)$}{reg}
+\sbStyleBlocDefaut
+\sbRelier[u]{reg}{sys}
+\sbSortie{S}{sys}
+\sbRelier[$G_S$]{sys}{S}
+\sbDecaleNoeudy[4]{S}{U}
+\sbStyleBloc{fill=schema_feed}
+\sbBlocr{cap}{$B(j \omega)$}{U}
+\sbStyleBlocDefaut
+\sbRelieryx{sys-S}{cap}
+\sbRelierxy[m]{cap}{comp}
+\end{tikzpicture}
+}
+\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercice 3 - Correcteur PID}
+
+Pour cet exercice, on considérera les fonctions de transfert, d'ordre 0, suivantes : 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercice 4 - Correcteur PID}
+
+Pour cet exercice, on considérera les fonctions de transfert, d'ordre 0, suivantes : 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}
+
+
