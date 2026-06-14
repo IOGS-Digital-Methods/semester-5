@@ -73,9 +73,9 @@
 
 VOIR EXEMPLE SEB - SC19
 
-On cherche à détecter un \textbf{QR code} imprimé sur une affiche avec une taille de \textbf{5~cm de côté}. On souhaite pouvoir détecter ce QR code à une distance de \textbf{1~m}.
+On cherche à détecter un \textbf{QR code} imprimé sur une affiche avec une taille de \textbf{5~cm de côté} ($T_{QR}$). On souhaite pouvoir détecter ce QR code à une distance de \textbf{1~m} ($D$).
 
-Le QR code est dans une version 40, soit 177 x 177 motifs. On souhaite un facteur de sécurité de 3.
+Le QR code est dans une version 40, soit 177 x 177 motifs ($N_{QR}$). On souhaite un facteur de sécurité de 3 ($S$).
 
 On prendra une caméra dans les pixels font $3.45\operatorname{\mu{}m}$ de côté.
 
@@ -84,8 +84,29 @@ On prendra une caméra dans les pixels font $3.45\operatorname{\mu{}m}$ de côt�
 	\item Quel est le nombre de pixels minimal pour détecter correctement ce QR code ?
 \end{enumerate}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Réponse}
+
+%%%%%%%%%%%
+\textbf{Question 1}
+
+La taille d'un élément est de $T_p = T_{QR} / N_{QR} = 282 \operatorname{\mu{}m}$
+
+
+%%%%%%%%%%%
+\medskip
+\textbf{Question 2}
+
+Le code faisant 177 motifs différents dans une direction, avec un facteur 3 de sécurité, il faut au minimum $N_X = S * N_{QR} = 531\operatorname{pixels}$ 
+
+
+%%%%%%%%%%%
+\medskip
+\textbf{Question 3}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Exercice 2 - Choix d'un objectif de caméra}
+\subsection{Exercice 2 - ??}
 
 
 
