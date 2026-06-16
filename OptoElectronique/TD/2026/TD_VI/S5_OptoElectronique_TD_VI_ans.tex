@@ -69,7 +69,103 @@
 \section{TD Vision Industrielle - Chaine d'acquisition et convolution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Exercice 1 - Choix d'une caméra et d'un objectif}
+\subsection{Exercice 1 - Chaîne de vision articielle}
+
+\begin{center}
+	\includegraphics[width=0.4\textwidth]{images/vi_model_chaine.png}
+\end{center}
+
+\begin{enumerate}
+	\item Quel est l'objectif principal d'une chaîne de traitement de vision industrielle ?
+	\item Rappelez les caractéristiques principales des différents éléments de cette chaîne et leur impact.
+	\item Comment sont mesurées ces différentes caractéristiques ?
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Réponse}
+
+%%%%%%%%%%%
+\textbf{Question 1}
+
+La \textbf{vision industrielle} est une technologie qui permet à des machines d'\textbf{analyser automatiquement des scènes} pour \textbf{contrôler}, \textbf{guider} ou \textbf{inspecter des objets} sur des processus de production. 
+
+Elle a pour but de \textbf{prendre des décisions automatiques} (ou aider l'être humain dans sa prise de décision) vis-à-vis d'un (ou plusieurs) objet(s) dans une scène spécifique : détecter des défauts ou des irrégularités, compter ou trier..., en rejetant ou validant automatiquement des produits, tout en assurant une
+constance de la qualité et de la répétabilité des opérations.
+
+
+%%%%%%%%%%%
+\medskip
+\textbf{Question 2}
+
+\begin{description}
+	\item[Source] caractérisée par son \textbf{intensité}, sa \textbf{couleur} (ou spectre en longueur d'ondes), sa directivité (frontal, rasant, rétroéclairage, diffus) et son \textbf{uniformité}. 
+	\begin{itemize}
+		\item Elle détermine le \textbf{contraste} entre l'objet et son environnement.
+		\item Elle influence la \textbf{visibilité des défauts}, contours et textures.
+		\item Un éclairage mal choisi peut créer des ombres parasites et/ou des reflets spéculaires.
+	\end{itemize}		
+
+	\item[Objet(s) / Scène] caractérisés par leur réflectance (diffuse ou spéculaire), leur texture, leur brillance, leur couleur, leur orientation et leur position.
+	\begin{itemize}
+		\item Ils déterminent \textbf{la quantité et la nature de la lumière renvoyée} vers la caméra.
+		\item Leur texture influence la détection des défauts.
+		\item Une différence importante de texture ou des réflectances dans des zones spectrales différentes \textbf{facilite la discrimination} entre objet(s) et scène.
+	\end{itemize}
+
+	\item[Objectif] caractérisé par sa \textbf{distance focale}, son \textbf{ouverture} (f/N), son champ de vision, sa profondeur de champ, sa distance de travail, ses distorsions optiques (modification de la géométrie de l'image) et ses aberrations (dégradation de la netteté de l'image).
+
+	\begin{itemize}
+		\item Il détermine la \textbf{zone observée} et le \textbf{grossissement}/\textbf{grandissement}.
+		\item Il influence la netteté de l'image. Une faible profondeur de champ peut rendre certaines zones floues.
+		\item Les distorsions dégradent la précision des mesures géométriques.
+	\end{itemize}
+
+	\item[Caméra] caractérisé par sa \textbf{résolution spatiale} (nombre de pixels), sa \textbf{taille de capteur}, sa \textbf{sensibilité spectrale} (dépendant de la longueur d'ondes), sa profondeur binaire (nombre de bits pour codé chaque pixel), sa cadence d'acquisition, son \textbf{temps d'exposition}.
+
+	\begin{itemize}
+		\item Elle conditionne la \textbf{précision de mesure}. Une résolution insuffisante limite la détection des petits défauts.
+		\item Un faible temps d'exposition nécessite davantage d'éclairage, mais augmente potentiellement la cadence d'acquisition.
+	\end{itemize}
+
+\end{description}
+
+
+%%%%%%%%%%%
+\medskip
+\textbf{Question 3}
+
+\textit{voir document \textbf{Ressources des TP de Vision Industrielle} en Opto-Electronique}
+
+Liste non exhaustive des méthodes.
+
+\begin{description}
+	\item[Source] .
+	\begin{description}
+		\item[Intensité] Système de photodétection (photodiode par exemple) ou Luxmètre
+		\item[Spectre] Spectromètre
+		\item[Directivité] Système de photodétection monté sur un système permettant de contrôler l'angle
+		\item[Uniformité] Image d'un plan éclairé par la source (caméra par exemple et objectif)
+	\end{description}		
+
+	\item[Objet(s) / Source] .
+	\begin{description}
+		\item[Réflectance] Réflectomètre (mesure le coefficient de réflexion d'une surface) ou Spectrophotomètre (mesure la réflectance selon la longueur d'onde).
+		\item[Spectre] Spectrocolorimètre
+		\item[Etat de surface / Texture] Rugosimètre ou Profilomètre optique
+	\end{description}
+	
+	\item[Objectif] .
+	\begin{description}
+		\item[Focale / Champ de vision] Banc optique de mesure (collimateur et rails de déplacement) - \textit{voir TP S5/S6}.
+		\item[Spectre] Spectrocolorimètre
+		\item[Résolution optique / Distorsions] Mires et système d'image.
+		\item[Aberrations / Front d'onde] Interféromètre (Fizeau par exemple).
+	\end{description}
+\end{description}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercice 2 - Choix d'une caméra et d'un objectif}
 
 VOIR EXEMPLE SEB - SC19
 
@@ -80,6 +176,7 @@ Le QR code est dans une version 40, soit 177 x 177 motifs ($N_{QR}$). On souhait
 On prendra une caméra dans les pixels font $3.45\operatorname{\mu{}m}$ de côté.
 
 \begin{enumerate}
+	\item Faites un schéma de principe du système étudié.
 	\item Quelle est la taille d'un élément du QR code ?
 	\item Quel est le nombre de pixels minimal pour détecter correctement ce QR code ?
 \end{enumerate}
@@ -91,22 +188,32 @@ On prendra une caméra dans les pixels font $3.45\operatorname{\mu{}m}$ de côt�
 %%%%%%%%%%%
 \textbf{Question 1}
 
-La taille d'un élément est de $T_p = T_{QR} / N_{QR} = 282 \operatorname{\mu{}m}$
+\begin{figure}[!h]
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{images/optique_champ_derossi.png}
+	\caption{Système optique et champ de vision d'une caméra numérique - \textit{illustration provenant du cours d'optique instrumentale de Sébastien de Rossi}.}
+	\label{fig:fov}
+\end{center}
+\end{figure}
 
 
 %%%%%%%%%%%
 \medskip
 \textbf{Question 2}
 
-Le code faisant 177 motifs différents dans une direction, avec un facteur 3 de sécurité, il faut au minimum $N_X = S * N_{QR} = 531\operatorname{pixels}$ 
+La taille d'un élément est de $T_p = T_{QR} / N_{QR} = 282 \operatorname{\mu{}m}$
 
 
 %%%%%%%%%%%
 \medskip
 \textbf{Question 3}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Exercice 2 - ??}
+Le code faisant 177 motifs différents dans une direction, avec un facteur 3 de sécurité, il faut au minimum $N_X = S * N_{QR} = 531\operatorname{pixels}$ 
+
+
+%%%%%%%%%%%
+\medskip
+\textbf{Question 4}
 
 
 
