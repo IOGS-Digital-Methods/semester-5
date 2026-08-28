@@ -167,18 +167,18 @@ Liste non exhaustive des méthodes.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Exercice 2 - Choix d'une caméra et d'un objectif}
 
-VOIR EXEMPLE SEB - SC19
-
 On cherche à détecter un \textbf{QR code} imprimé sur une affiche avec une taille de \textbf{5~cm de côté} ($T_{QR}$). On souhaite pouvoir détecter ce QR code à une distance de \textbf{1~m} ($D$).
 
-Le QR code est dans une version 40, soit 177 x 177 motifs ($N_{QR}$). On souhaite un facteur de sécurité de 3 ($S$).
+Le QR code est dans une version 40, soit 177 x 177 motifs ($N_{QR}$). On souhaite un facteur de sécurité de 5 ($S$).
 
-On prendra une caméra dans les pixels font $3.45\operatorname{\mu{}m}$ de côté.
+On prendra une caméra dans les pixels font $T_p = 3.45\operatorname{\mu{}m}$ de côté.
 
 \begin{enumerate}
 	\item Faites un schéma de principe du système étudié.
 	\item Quelle est la taille d'un élément du QR code ?
 	\item Quel est le nombre de pixels minimal pour détecter correctement ce QR code ?
+	\item Calculez le grandissement nécessaire pour cette application.
+	\item Déterminez la focale que devra avoir cet objectif.
 \end{enumerate}
 
 
@@ -208,13 +208,31 @@ La taille d'un élément est de $T_p = T_{QR} / N_{QR} = 282 \operatorname{\mu{}
 \medskip
 \textbf{Question 3}
 
-Le code faisant 177 motifs différents dans une direction, avec un facteur 3 de sécurité, il faut au minimum $N_X = S * N_{QR} = 531\operatorname{pixels}$ 
+Le code faisant 177 motifs différents dans une direction, avec un facteur 5 de sécurité, il faut au minimum $N_X = N_Y = S * N_{QR} = 885\operatorname{pixels}$ 
 
 
 %%%%%%%%%%%
 \medskip
 \textbf{Question 4}
 
+Le grandissement est le rapport entre la taille de l'image et la taille de l'objet : 
+
+$$g_X = g_Y = \frac{N_X * T_p}{T_{QR}} = \frac{885 * 3.45\operatorname{\mu{}m}}{5\operatorname{cm}} = 0.061$$
+
+
+%%%%%%%%%%%
+\medskip
+\textbf{Question 5}
+
+A partir du grandissement, on peut calculer la position de l'image par rapport à l'objectif à l'aide de la position de l'objet par rapport à l'objectif :  $OA' = g_X * OA = 61\operatorname{mm}$
+
+\medskip
+
+A partir de la formule de conjugaison suivante, on peut alors calculer la focale de l'objectif.
+
+$\frac{1}{OA'} - \frac{1}{OA} = \frac{1}{f'}$
+
+On trouve alors que $$f' = 65\operatorname{mm}$$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

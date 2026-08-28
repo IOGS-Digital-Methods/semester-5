@@ -71,6 +71,11 @@ Soit le circuit suivant :
 
 \draw (4,3) to[short, -*] (6,3) to[R, R=$R_{e}$, -*] (6, 0)
 	-- (4,0);
+	
+	% fleche
+	\draw (9.5,0) edge[->] (9.5,3);
+	\node (Ein) at (10,1.5){$V_S$};	
+	
 
 \draw (6,3) -- (8,3) to[R, R=$Z_{e}$] (8,0) -- (6,0);
 \end{circuitikz}
