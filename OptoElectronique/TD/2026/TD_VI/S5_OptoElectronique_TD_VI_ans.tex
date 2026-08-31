@@ -179,6 +179,7 @@ On prendra une caméra dans les pixels font $T_p = 3.45\operatorname{\mu{}m}$ de
 	\item Quel est le nombre de pixels minimal pour détecter correctement ce QR code ?
 	\item Calculez le grandissement nécessaire pour cette application.
 	\item Déterminez la focale que devra avoir cet objectif.
+	\item Si on diminue la focale d'un facteur 2, à distance de travail égale, que devient le champ de vision ?
 \end{enumerate}
 
 
@@ -195,6 +196,102 @@ On prendra une caméra dans les pixels font $T_p = 3.45\operatorname{\mu{}m}$ de
 	\label{fig:fov}
 \end{center}
 \end{figure}
+
+\begin{center}
+\begin{tikzpicture}[
+    >=stealth,
+    scale=1.0,
+    every node/.style={font=\small}
+]
+
+% ============================================================
+% AXE OPTIQUE
+% ============================================================
+\draw[->] (-8,0) -- (6,0) node[right] {axe optique};
+
+% ============================================================
+% OBJET
+% ============================================================
+\draw[dashed] (-7,-2.5) -- (-7,2.2);
+\node[above] at (-7,2.2) {Plan objet};
+\draw[<->,very thick] (-7,-2.2) -- (-7,2.2)
+    node[below left] {$B$};
+
+% Point objet
+\node[below left] at (-7,0) {$A$};
+
+% ============================================================
+% LENTILLE
+% ============================================================
+\draw[thick] (0,-2.2) .. controls (-0.35,-1.0) and (-0.35,1.0) ..
+             (0,2.2);
+\draw[thick] (0,-2.2) .. controls (0.35,-1.0) and (0.35,1.0) ..
+             (0,2.2);
+
+\node[above] at (0,2.2) {Objectif};
+\node[below] at (0,0) {$O$};
+
+% ============================================================
+% PLAN IMAGE / CAPTEUR
+% ============================================================
+\draw[dashed] (4,-2.2) -- (4,2.2);
+\node[above] at (4,2.2) {Plan image / capteur};
+
+% ============================================================
+% IMAGE
+% ============================================================
+\draw[<->,very thick] (4,1.25) -- (4,-1.25);
+\draw[->,very thick] (4,0) -- (4,-1.25)
+    node[above right] {$B'$};
+
+\node[above right] at (4,0) {$A'$};
+
+% ============================================================
+% RAYONS PRINCIPAUX
+% ============================================================
+
+% Rayon passant par le centre optique
+\draw[->] (-7,2.2) -- (0,0) -- (4,-1.25);
+
+% Rayon parallèle à l'axe puis réfracté
+\draw[->] (-7,2.2) -- (0,2.2);
+\draw[->] (0,2.2) -- (4,-1.25);
+
+% ============================================================
+% DISTANCE OBJET p
+% ============================================================
+\draw[<->] (-7,-0.65) -- (0,-0.65);
+\node[fill=white] at (-3.5,-0.65) {$D$};
+
+% ============================================================
+% DISTANCE IMAGE p'
+% ============================================================
+\draw[<->] (0,-1.75) -- (4,-1.75);
+\node[fill=white] at (2,-1.75) {$d'$};
+
+% ============================================================
+% FOCAL
+% ============================================================
+\draw[dashed] (1.25,0.15) -- (1.25,-0.15);
+\node[below] at (1.25,-0.15) {$F'$};
+
+\draw[<->] (0,0.45) -- (1.25,0.45);
+\node[fill=white] at (0.625,0.45) {$f$};
+
+% ============================================================
+% CHAMP OBJET
+% ============================================================
+%\draw[<->] (-7,2.65) -- (-7,-2.65);
+\node[left] at (-7,1) {$T_{QR}$};
+
+% ============================================================
+% CHAMP IMAGE / CAPTEUR
+% ============================================================
+%\draw[<->] (4,1.45) -- (4,-1.45);
+\node[right] at (4,-0.55) {$T_{QR}' = N_P$};
+
+\end{tikzpicture}
+\end{center}
 
 
 %%%%%%%%%%%
@@ -233,6 +330,22 @@ A partir de la formule de conjugaison suivante, on peut alors calculer la focale
 $\frac{1}{OA'} - \frac{1}{OA} = \frac{1}{f'}$
 
 On trouve alors que $$f' = 65\operatorname{mm}$$.
+
+
+%%%%%%%%%%%
+\medskip
+\textbf{Question 6}
+
+
+
+
+
+On rappelle les formules de conjugaison et de grandissement suivantes :
+
+
+
+Si la focale $f_2 = f' / 2$
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
