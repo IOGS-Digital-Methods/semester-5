@@ -32,6 +32,37 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{opto_elec_villemejane}
 
+% Affichage d'un signal sous forme de cases
+\newcommand{\signal}[1]{ 
+	\begin{tikzpicture}[baseline=(current bounding box.center)] \foreach \val [count=\i] in {#1} { \draw (\i-1,0) rectangle (\i,0.6); \node at (\i-.5,.3) {\val}; } \end{tikzpicture} } 
+% Affichage d'un kernel 
+\newcommand{\kernel}[1]{ 
+	\begin{tikzpicture}[baseline=(current bounding box.center)] \foreach \val [count=\i] in {#1} { \draw (\i-1,0) rectangle (\i,0.6); \node at (\i-.5,.3) {\val}; } \end{tikzpicture} 
+	}
+
+\definecolor{bleu}{RGB}{40,90,150} 
+\definecolor{gris}{RGB}{240,240,240}
+
+\newcommand{\dessinsignal}[2]{ 
+\begin{tikzpicture}[x=1.1cm,y=0.035cm] 
+% Axe 
+\draw[->] (-0.5,0) -- (#1+0.5,0); 
+% Valeurs 
+\foreach \y [count=\x from 0] in {#2} { \draw[thick] (\x,0) -- (\x,\y); \fill (\x,\y) circle (2pt); \node[above] at (\x,\y) {\small \y}; } 
+% Indices 
+\foreach \x in {0,...,#1} { \node[below] at (\x,-8) {\small $x_{\x}$}; } 
+\end{tikzpicture} }
+
+\newcommand{\fenetresignal}[3]{ 
+\begin{tikzpicture}[x=1.2cm,y=0.035cm] 
+% Signal 
+\draw[->] (-0.5,0) -- (#1+0.5,0); 
+\foreach \y [count=\x from 0] in {#2} { \draw[thick] (\x,0) -- (\x,\y); \fill (\x,\y) circle (2pt); \node[above] at (\x,\y) {\small \y}; } 
+% Fenêtre 
+\draw[very thick,bleu] (#3-1.45,-12) rectangle (#3+1.45,125); \node[bleu,below] at (#3,-15) {\small Noyau}; 
+\end{tikzpicture} 
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -69,28 +100,90 @@
 \section{TD Vision Industrielle - Chaine d'acquisition et convolution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Exercice 1 - Choix d'une caméra et d'un objectif}
+\subsection{Exercice 1 - Chaîne de vision articielle}
 
-VOIR EXEMPLE SEB - SC19
-
-On cherche à détecter un \textbf{QR code} imprimé sur une affiche avec une taille de \textbf{5~cm de côté}. On souhaite pouvoir détecter ce QR code à une distance de \textbf{1~m}.
-
-Le QR code est dans une version 40, soit 177 x 177 motifs. On souhaite un facteur de sécurité de 3.
-
-On prendra une caméra dans les pixels font $3.45\operatorname{\mu{}m}$ de côté.
+\begin{center}
+	\includegraphics[width=0.4\textwidth]{images/vi_model_chaine.png}
+\end{center}
 
 \begin{enumerate}
-	\item Quelle est la taille d'un élément du QR code ?
-	\item Quel est le nombre de pixels minimal pour détecter correctement ce QR code ?
+	\item Quel est l'objectif principal d'une chaîne de traitement de vision industrielle ?
+	\item Rappelez les caractéristiques principales des différents éléments de cette chaîne et leur impact.
+	\item Comment sont mesurées ces différentes caractéristiques ?
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Exercice 2 - Choix d'un objectif de caméra}
+\subsection{Exercice 2 - Choix d'une caméra et d'un objectif}
 
+On cherche à détecter un \textbf{QR code} imprimé sur une affiche avec une taille de \textbf{5~cm de côté} ($T_{QR}$). On souhaite pouvoir détecter ce QR code à une distance de \textbf{1~m} ($D$).
+
+Le QR code est dans une version 40, soit 177 x 177 motifs ($N_{QR}$). On souhaite un facteur de sécurité de 5 ($S$).
+
+On prendra une caméra dans les pixels font $T_p = 3.45\operatorname{\mu{}m}$ de côté.
+
+\begin{enumerate}
+	\item Faites un schéma de principe du système étudié.
+	\item Quelle est la taille d'un élément du QR code ?
+	\item Quel est le nombre de pixels minimal pour détecter correctement ce QR code ?
+	\item Calculez le grandissement nécessaire pour cette application.
+	\item Déterminez la focale que devra avoir cet objectif.
+	\item Si on diminue la focale d'un facteur 2, à distance de travail égale, que devient le champ de vision ?
+\end{enumerate}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Exercice 3 - Convolution : flou gaussien, Sobel...}
+
+On s'intéresse à présent à certains traitements d'image basés sur le \textbf{principe de la convolution}.
+
+\textit{On supposera pour l'ensemble de cet exercice que chaque pixel est codé sur 8~bits.}
+
+On cherche à comparer l'effet des \textbf{5 noyaux suivants} (qu'on pourra normaliser) :
+
+$$ A3 = \kernel{1,1,1} \qquad A5 = \kernel{1,1,1,1,1} $$
+
+$$ B = \kernel{1,4,1} \qquad C1 = \kernel{-1,0,1} \qquad C2 = \kernel{1,0,-1} $$
+
+\bigskip
+
+On s'intéresse au \textbf{signal suivant} :
+
+$$ S1 = \signal{0, 0, 0, 0, 0, 100, 100, 100, 100, 100} $$
+
+$$ A3 > \signal{ , , , , , , , , , } $$
+$$ A3 > \signal{ , , , , , , , , , } $$
+$$ A5 > \signal{ , , , , , , , , , } $$
+$$ B > \signal{ , , , , , , , , , } $$
+$$ C1 > \signal{ , , , , , , , , , } $$
+$$ C2 > \signal{ , , , , , , , , , } $$
+
+Conclure sur l'effet de ces noyaux.
+
+\medskip
+
+On fera de même uniquement avec les noyaux A3, B et C1 avec les signaux suivants :
+
+$$ S2 = \signal{0, 0, 0, 0, 33, 66, 100, 100, 100, 100} $$
+
+$$ A3 > \signal{ , , , , , , , , , } $$
+$$ B > \signal{ , , , , , , , , , } $$
+$$ C1 > \signal{ , , , , , , , , , } $$
+
+\medskip
+
+$$ S3 = \signal{50, 40, 60, 50, 60, 0, 10, 20, 0, 10} $$
+
+$$ A3 > \signal{ , , , , , , , , , } $$
+$$ B > \signal{ , , , , , , , , , } $$
+$$ C1 > \signal{ , , , , , , , , , } $$
+
+\medskip
+
+$$ S4 = \signal{10, 10, 10, 10, 50, 10, 10, 10, 10, 10} $$
+
+$$ A3 > \signal{ , , , , , , , , , } $$
+$$ B > \signal{ , , , , , , , , , } $$
+$$ C1 > \signal{ , , , , , , , , , } $$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

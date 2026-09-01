@@ -32,6 +32,38 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{opto_elec_villemejane}
 
+
+% Affichage d'un signal sous forme de cases
+\newcommand{\signal}[1]{ 
+	\begin{tikzpicture}[baseline=(current bounding box.center)] \foreach \val [count=\i] in {#1} { \draw (\i-1,0) rectangle (\i,0.6); \node at (\i-.5,.3) {\val}; } \end{tikzpicture} } 
+% Affichage d'un kernel 
+\newcommand{\kernel}[1]{ 
+	\begin{tikzpicture}[baseline=(current bounding box.center)] \foreach \val [count=\i] in {#1} { \draw (\i-1,0) rectangle (\i,0.6); \node at (\i-.5,.3) {\val}; } \end{tikzpicture} 
+	}
+
+\definecolor{bleu}{RGB}{40,90,150} 
+\definecolor{gris}{RGB}{240,240,240}
+
+\newcommand{\dessinsignal}[2]{ 
+\begin{tikzpicture}[x=1.1cm,y=0.035cm] 
+% Axe 
+\draw[->] (-0.5,0) -- (#1+0.5,0); 
+% Valeurs 
+\foreach \y [count=\x from 0] in {#2} { \draw[thick] (\x,0) -- (\x,\y); \fill (\x,\y) circle (2pt); \node[above] at (\x,\y) {\small \y}; } 
+% Indices 
+\foreach \x in {0,...,#1} { \node[below] at (\x,-8) {\small $x_{\x}$}; } 
+\end{tikzpicture} }
+
+\newcommand{\fenetresignal}[3]{ 
+\begin{tikzpicture}[x=1.2cm,y=0.035cm] 
+% Signal 
+\draw[->] (-0.5,0) -- (#1+0.5,0); 
+\foreach \y [count=\x from 0] in {#2} { \draw[thick] (\x,0) -- (\x,\y); \fill (\x,\y) circle (2pt); \node[above] at (\x,\y) {\small \y}; } 
+% Fenêtre 
+\draw[very thick,bleu] (#3-1.45,-12) rectangle (#3+1.45,125); \node[bleu,below] at (#3,-15) {\small Noyau}; 
+\end{tikzpicture} 
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -298,14 +330,14 @@ On prendra une caméra dans les pixels font $T_p = 3.45\operatorname{\mu{}m}$ de
 \medskip
 \textbf{Question 2}
 
-La taille d'un élément est de $T_p = T_{QR} / N_{QR} = 282 \operatorname{\mu{}m}$
+La taille d'un élément est de $T_E = T_{QR} / N_{QR} = 282 \operatorname{\mu{}m}$
 
 
 %%%%%%%%%%%
 \medskip
 \textbf{Question 3}
 
-Le code faisant 177 motifs différents dans une direction, avec un facteur 5 de sécurité, il faut au minimum $N_X = N_Y = S * N_{QR} = 885\operatorname{pixels}$ 
+Le code faisant 177 motifs différents dans une direction, avec un facteur 5 de sécurité, il faut au minimum $N_P = S * N_{QR} = 885\operatorname{pixels}$ 
 
 
 %%%%%%%%%%%
@@ -314,14 +346,14 @@ Le code faisant 177 motifs différents dans une direction, avec un facteur 5 de 
 
 Le grandissement est le rapport entre la taille de l'image et la taille de l'objet : 
 
-$$g_X = g_Y = \frac{N_X * T_p}{T_{QR}} = \frac{885 * 3.45\operatorname{\mu{}m}}{5\operatorname{cm}} = 0.061$$
+$$g = \frac{N_P * T_p}{T_{QR}} = \frac{885 * 3.45\operatorname{\mu{}m}}{5\operatorname{cm}} = 0.061$$
 
 
 %%%%%%%%%%%
 \medskip
 \textbf{Question 5}
 
-A partir du grandissement, on peut calculer la position de l'image par rapport à l'objectif à l'aide de la position de l'objet par rapport à l'objectif :  $OA' = g_X * OA = 61\operatorname{mm}$
+A partir du grandissement, on peut calculer la position de l'image par rapport à l'objectif à l'aide de la position de l'objet par rapport à l'objectif :  $OA' = g * OA = 61\operatorname{mm}$
 
 \medskip
 
@@ -336,23 +368,186 @@ On trouve alors que $$f' = 65\operatorname{mm}$$.
 \medskip
 \textbf{Question 6}
 
+A partir des formules de conjugaison et de grandissement : 
 
+$$\frac{1}{f'} = \frac{1}{OA'} - \frac{1}{OA} \qquad g = \frac{OA'}{OA}$$
 
+on peut obtenir : $$g = \frac{f'}{OA -f'}$$
 
+Si on appelle $X = T_{QR}$ la taille de l'objet et $L$ la largeur du capteur, on a $L = g \cdot X$.
 
-On rappelle les formules de conjugaison et de grandissement suivantes :
+Ainsi, on obtient : 
 
+$$X = L \cdot (\frac{OA}{f'} - 1)$$
 
+Si on note $X_1$ et $X_2$ la taille de l'objet pour des focales $f_1$ et $f_2 = f_1 / 2$, on a alors :
 
-Si la focale $f_2 = f' / 2$
+$$X_1 = L \cdot (\frac{OA}{f_1} - 1)$$ 
 
+$$X_2 = L \cdot (\frac{OA}{f_2} - 1) = L \cdot (\frac{2 \cdot OA}{f_1} - 1)$$
 
+En faisant le rapport des deux, on obtient : 
 
+$$ \frac{X_2}{X_1} = \frac{\frac{2 \cdot OA}{f_1} - 1}{\frac{OA}{f_1} - 1}$$
+
+En supposant que la distance $D$ est grande devant la focale $f'$, alors on trouve que $X_2 \approx 2 \cdot X_1$.
+
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Exercice 3 - Convolution : flou gaussien, Sobel...}
 
+On s'intéresse à présent à certains traitements d'image basés sur le \textbf{principe de la convolution}.
+
+\textit{On supposera pour l'ensemble de cet exercice que chaque pixel est codé sur 8~bits.}
+
+On cherche à comparer l'effet des \textbf{5 noyaux suivants} (qu'on pourra normaliser) :
+
+$$ A3 = \kernel{1,1,1} \qquad A5 = \kernel{1,1,1,1,1} $$
+
+$$ B = \kernel{1,4,1}$$
+
+$$ C1 = \kernel{-1,0,1} \qquad C2 = \kernel{1,0,-1} $$
+
+\bigskip
+
+On s'intéresse au \textbf{signal suivant} :
+
+$$ S1 = \signal{0, 0, 0, 0, 0, 100, 100, 100, 100, 100} $$
+
+
+$$ A3 > \signal{ , , , , , , , , , } $$
+$$ A5 > \signal{ , , , , , , , , , } $$
+$$ B > \signal{ , , , , , , , , , } $$
+$$ C1 > \signal{ , , , , , , , , , } $$
+$$ C2 > \signal{ , , , , , , , , , } $$
+
+Conclure sur l'effet de ces noyaux.
+
+\medskip
+
+On fera de même uniquement avec les noyaux A3, B et C1 avec les signaux suivants :
+
+$$ S2 = \signal{0, 0, 0, 0, 33, 66, 100, 100, 100, 100} $$
+
+$$ A3 > \signal{ , , , , , , , , , } $$
+$$ B > \signal{ , , , , , , , , , } $$
+$$ C1 > \signal{ , , , , , , , , , } $$
+
+\medskip
+
+$$ S3 = \signal{50, 40, 60, 50, 60, 0, 10, 20, 0, 10} $$
+
+$$ A3 > \signal{ , , , , , , , , , } $$
+$$ B > \signal{ , , , , , , , , , } $$
+$$ C1 > \signal{ , , , , , , , , , } $$
+
+\medskip
+
+$$ S4 = \signal{10, 10, 10, 10, 50, 10, 10, 10, 10, 10} $$
+
+$$ A3 > \signal{ , , , , , , , , , } $$
+$$ B > \signal{ , , , , , , , , , } $$
+$$ C1 > \signal{ , , , , , , , , , } $$
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Réponse}
+
+\textbf{Principe}
+
+\begin{center} 
+\fenetresignal{6}{10,10,10,50,10,10,10}{1} 
+
+$$ \signal{x, \textbf{?},  ,  ,  ,  , x} $$
+
+$$ \signal{x, \textbf{30},  ,  ,  ,  , x} $$
+
+\dessinsignal{6}{10,10,10,50,10,10,10} 
+\end{center}
+
+\begin{center} 
+\fenetresignal{6}{10,10,10,50,10,10,10}{2} 
+
+$$ \signal{x, 30, \textbf{?},  ,  ,  , x} $$
+
+$$ \signal{x, 30, \textbf{70},  ,  ,  , x} $$
+
+\dessinsignal{6}{10,10,10,50,10,10,10} 
+\end{center}
+
+
+\textbf{S1 avec A3}
+
+$$ S1(A3) = \signal{x, 0, 0, 0, 100, 200, 300, 300, 300, x} $$
+
+$$ S1(A3) norm = \signal{x, 0, 0, 0, 33, 66, 100, 100, 100, x} $$
+
+\begin{center} 
+\dessinsignal{9}{0, 0, 0, 0, 33, 66, 100, 100, 100, 100} 
+\end{center}
+
+\textbf{S1 avec A5}
+
+$$ S1(A5) norm = \signal{x, x, 0, 20, 40, 60, 80, 100, x, x} $$
+
+\begin{center} 
+\dessinsignal{9}{0, 0, 0, 20, 40, 60, 80, 100, 100, 100} 
+\end{center}
+
+
+\textbf{S1 avec B}
+
+$$ S1(B) norm = \signal{x, 0, 0, 0, 15, 83, 100, 100, 100, x} $$
+
+\begin{center} 
+\dessinsignal{9}{0, 0, 0, 0, 15, 83, 100, 100, 100, 100} 
+\end{center}
+
+
+\textbf{S1 avec C1}
+
+$$ S1(B) norm = \signal{x, 0, 0, 0, 100, 100, 0, 0, 0, x} $$
+
+\begin{center} 
+\dessinsignal{9}{0, 0, 0, 0, 100, 100, 0, 0, 0, 100} 
+\end{center}
+
+
+\textbf{S1 avec C2}
+
+$$ S1(B) norm = \signal{x, 0, 0, 0, -100, -100, 0, 0, 0, x} $$
+
+\begin{center} 
+\dessinsignal{9}{0, 0, 0, 0, -100, -100, 0, 0, 0, 100} 
+\end{center}
+
+\textbf{Attention} si l'image est stockée dans des entiers non signés, on perd l'information de signe... et le résultat est alors nul dans ce cas.
+
+
+\textbf{S2 avec A3}
+
+$$ S2(A3) norm = \signal{x, 0, 0, 11, 33, 66, 88, 100, 100, x} $$
+
+\begin{center} 
+\dessinsignal{9}{0, 0, 0, 11, 33, 66, 88, 100, 100, 100} 
+\end{center}
+
+\textbf{S2 avec B}
+
+$$ S2(A3) norm = \signal{x, 0, 0, 5, 33, 66, 94, 100, 100, x} $$
+
+\begin{center} 
+\dessinsignal{9}{0, 0, 0, 5, 33, 66, 94, 100, 100, 100} 
+\end{center}
+
+\textbf{S2 avec C1}
+
+$$ S2(A3) norm = \signal{x, 0, 0, 5, 33, 66, 94, 100, 100, x} $$
+
+\begin{center} 
+\dessinsignal{9}{0, 0, 0, 5, 33, 66, 94, 100, 100, 100} 
+\end{center}
 
 \end{document}
 
