@@ -19,6 +19,7 @@ import control as ct
 KaKbTb = [
     (1, 1, 1e-1),
     (1, 1e-2, 1e-1),
+    (1, 10, 1e-1),
     (1, 100, 1e-1)
 ]
 
@@ -43,8 +44,10 @@ for KA, KB, TB in KaKbTb:
     print(sys_C)
 
 # Bode diagram
-w = np.logspace(1e-3, 5, 101)
+w = np.logspace(-1, 5, 101)
+print(w)
 
+'''
 for k in range(len(KaKbTb)):
     freq_resp_A = ct.frequency_response(systems_A[k], w)
     mag_A = 20*np.log10(freq_resp_A.magnitude)
@@ -58,5 +61,17 @@ for k in range(len(KaKbTb)):
     plt.legend()
     plt.xlabel('Pulsation in rd/s')
     plt.ylabel('Gain in dB')
+'''
+
+plt.figure()
+plt.title(f'Comparison')
+plt.grid()
+plt.xlabel('Pulsation in rd/s')
+plt.ylabel('Gain in dB')
+for k in range(len(KaKbTb)):
+    freq_resp_L = ct.frequency_response(systems_loop[k], w)
+    mag_L = 20*np.log10(freq_resp_L.magnitude)    
+    plt.semilogx(w, mag_L, label=f'System - Ka Kb={KaKbTb[k][0] * KaKbTb[k][1]}')
+plt.legend()
     
 plt.show()

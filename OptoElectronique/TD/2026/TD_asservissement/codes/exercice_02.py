@@ -41,7 +41,7 @@ for KA, KB, TA in KaKbTa:
     systems_loop.append(sys_C)
 
 # Bode diagram
-w = np.logspace(1e-3, 5, 101)
+w = np.logspace(-1, 5, 101)
 
 for k in range(len(KaKbTa)):
     freq_resp_A = ct.frequency_response(systems_A[k], w)
