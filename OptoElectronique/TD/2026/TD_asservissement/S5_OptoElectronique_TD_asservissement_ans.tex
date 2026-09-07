@@ -94,7 +94,6 @@ Pour les exercices 1 et 2, on considérera le schéma bloc suivant :
 }
 \end{center}
 
-On rappelle que l'\textbf{erreur statique} correspond à $\boxed{\varepsilon_S = \varepsilon(t \to \infty)}$. Il s'agit de l'erreur commise entre la consigne d'entrée et la valeur réellement obtenue en sortie du système.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Exercice 1 - Boucle ouverte et boucle fermée - Ordre 0}
@@ -109,7 +108,7 @@ $A(j \omega) = K_A$ et $B(j \omega) = K_B$
 	\item Donnez l'expression de $G_M$ en fonction de $G_E$, en \textbf{boucle ouverte}.
 		
 	\item Donnez l'expression de la \textbf{fonction de transfert} $H(j \omega) = G_S / G_E$, en \textbf{boucle fermée}.
-	\item Calculez la \textbf{fonction de transfert} et l'\textbf{erreur statique} (dans le cas d'un échelon de tension en entrée) pour les valeurs suivantes de $K_A$ et $K_B$ :
+	\item Calculez la \textbf{fonction de transfert} pour les valeurs suivantes de $K_A$ et $K_B$ :
 	\begin{itemize}
 		\item $K_A = 1$ et $K_B = 1$
 		\item $K_A = 10$ et $K_B = 1$
@@ -163,20 +162,11 @@ Ainsi : $$\boxed{H(j \omega) = \frac{A(j \omega)}{1 + A(j \omega) B(j \omega)}}$
 
 $$H(j \omega) = \frac{1}{1 + 1 \times 1} = \frac{1}{2}$$
 
-Pour un échelon, la valeur finale vaut 1. On chercher l'erreur commise par le système en sortie, c'est à dire l'écart entre la valeur finale théorique (ici 1 car échelon) et la véritable valeur de la sortie.
-
-La sortie vaut ici : $G_S = H(j \omega) \times 1$
-
-On obtient donc $\varepsilon_S = 1 - \frac{1}{2} = \frac{1}{2}$
-
 \medskip
 
 \underline{Pour $K_A = 10$ et $K_B = 1$} :
 
 $$H(j \omega) = \frac{10}{1 + 10 \times 1} = \frac{10}{11}$$
-
-Et $\varepsilon_S = 1 - \frac{10}{11} = \frac{1}{11}$
-
 
 \medskip
 
@@ -184,16 +174,11 @@ Et $\varepsilon_S = 1 - \frac{10}{11} = \frac{1}{11}$
 
 $$H(j \omega) = \frac{100}{1 + 100 \times 1} = \frac{100}{101} \approx 1$$
 
-Et $\varepsilon_S = 1 - \frac{100}{101} = \frac{1}{101}$
-
-
 \medskip
 
 \underline{Pour $K_A = 1$ et $K_B = 10^{-2}$} :
 
 $$H(j \omega) = \frac{1}{1 + 1 \times 10^{-2}} = \frac{100}{101} \approx 1$$
-
-Et $\varepsilon_S = 1 - \frac{100}{101} = \frac{1}{101}$
 
 \medskip
 
@@ -201,7 +186,6 @@ Et $\varepsilon_S = 1 - \frac{100}{101} = \frac{1}{101}$
 
 $$H(j \omega) = \frac{10^7}{1 + 10^7 \times 10^{-4}} = \frac{10^7}{1001} \approx 10^4$$
 
-Et $\varepsilon_S = 1 - 10^4 \approx - 10^4$
 
 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -289,12 +273,51 @@ $H_0 = \frac{10^7}{1 + 10^7 \times 10^{-4}} \approx 10^4$
 
 
 
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercice 3 - Boucle ouverte et boucle fermée - Ordre 1}
+
+Pour cet exercice, on considérera les fonctions de transfert suivantes : 
+
+$A(j \omega) = K_A$ et $B(j \omega) = \frac{K_B}{1 + T_B j \omega}$
+
+On donne l'expression suivante pour $H(j \omega) = G_S / G_E$ :
+
+$$H(j \omega) = \frac{K_A}{1 + K_A K_B} \cdot \frac{1 + T_B j \omega}{1 + \frac{T_M}{1 + K_A K_B} j \omega}$$
+
+
+
+
+\begin{enumerate}
+	\item Tracez le gain de cette fonction de transfert dans les deux conditions suivantes :
+	\begin{itemize}
+		\item $K_A K_B > 1$
+		\item $K_A K_B < 1$		
+	\end{itemize}
+	\item Donnez également l'expression du gain statique et de la constante de temps de ce système dans les deux conditions précédentes.
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\medskip
+\textbf{Question 1}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\medskip
+\textbf{Question 2}
+
+On trouve : $$H_0 = \frac{K_A}{1 + K_A K_B}$$
+
+Si $K_A K_B >> 1$ alors $H_0 \to 1/K_B$
+
+Si $K_A K_B << 1$ alors $H_0 \to K_A$
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%
 \newpage
 
-Pour les exercices 3 et 4, on considérera le schéma bloc suivant :
+Pour les exercices 4 et 5, on considérera le schéma bloc suivant :
 
 
 \begin{center}
@@ -324,7 +347,7 @@ Pour les exercices 3 et 4, on considérera le schéma bloc suivant :
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Exercice 3 - Correcteur PID}
+\subsection{Exercice 4 - Correcteur P}
 
 Pour cet exercice, on considérera les fonctions de transfert suivantes : 
 
@@ -433,9 +456,11 @@ L'ajout d'un \textbf{correcteur} (gain pour l'instant) permet de réduire l'erre
 
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Exercice 4 - Correcteur PID}
+\subsection{Exercice 5 - Correcteur PID}
 
-Pour cet exercice, on considérera les fonctions de transfert, d'ordre 0, suivantes : 
+Pour cet exercice, on considérera les fonctions de transfert suivantes : 
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
