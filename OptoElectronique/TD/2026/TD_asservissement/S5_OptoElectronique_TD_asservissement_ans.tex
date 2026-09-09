@@ -116,7 +116,7 @@ $A(j \omega) = K_A$ et $B(j \omega) = K_B$
 		\item $K_A = 1$ et $K_B = 10^{-2}$
 		\item $K_A = 10^7$ et $K_B = 10^{-4}$ (cas amplificateur inverseur par exemple)
 	\end{itemize}
-	\item Pour $K_A = 1$, quelles sont les limites de $H$ lorsque $K_B >> 1$ ? Lorsque $K_B << 1$ ?
+	\item Quelles sont les limites de $H$ lorsque $K_A K_B >> 1$ ? Lorsque $K_A K_B << 1$ ?
 \end{enumerate}
 
 
@@ -194,9 +194,9 @@ $$H(j \omega) = \frac{10^7}{1 + 10^7 \times 10^{-4}} = \frac{10^7}{1001} \approx
 
 $$H = \frac{1}{1 + K_B}$$
 
-Lorsque $K_B >> 1$ (i.e. $K_B \to \infty$) , $H \to 0$
+Lorsque $K_A K_B >> 1$ (i.e. $K_B \to \infty$) , $H \to \frac{1}{K_B}$
 
-Lorsque $K_B << 1$ (i.e. $K_B \to 0$), $H \to \frac{1}{K_B}$
+Lorsque $K_A K_B << 1$ (i.e. $K_B \to 0$), $H \to K_A$
 
 
 \newpage
@@ -271,6 +271,40 @@ $T_H = \frac{100\operatorname{ms}}{1 + 10^7 \times 10^{-4}} \approx 100\operator
 
 $H_0 = \frac{10^7}{1 + 10^7 \times 10^{-4}} \approx 10^4$
 
+\newpage
+On peut regarder le \textbf{diagramme de Bode en gain} pour ces trois systèmes, en comparant le système initial (A) et le système rebouclé (A-B) :
+
+\begin{center}
+	\includegraphics[width=0.5\textwidth]{images/A_1_B_0_bode_ex2.png}
+	
+	Exemple du système 2 : $K_A = 10$, $K_B = 1$ et $T_A = 100\operatorname{ms}$
+\end{center}
+
+\begin{center}
+	\includegraphics[width=0.5\textwidth]{images/A_1_B_0_bode_ALI.png}
+	
+	Exemple du système 3 : $K_A = 10^7$, $K_B = 10^{-4}$ et $T_A = 100\operatorname{ms}$
+\end{center}
+
+\newpage
+\textbf{Et si A est d'ordre 2 ?}
+
+De type : 
+
+$$\boxed{H(j \omega) = \frac{K_A}{1 + 2 m j \frac{\omega}{\omega_0} + \frac{\omega^2}{\omega_0^2}}}$$
+
+\begin{center}
+	\includegraphics[width=0.5\textwidth]{images/A_2_B_0_bode_ex2.png}
+	
+	Exemple du système 2 : $K_A = 10$, $m = 0.5$, $K_B = 1$ et $T_A = 100\operatorname{ms}$
+\end{center}
+
+
+\begin{center}
+	\includegraphics[width=0.5\textwidth]{images/A_2_B_0_bode_ALI.png}
+	
+	Exemple du système 3 (ALI) : $K_A = 10^7$, $m=0.5$, $K_B = 10^{-4}$ et $T_A = 100\operatorname{ms}$
+\end{center}
 
 
 \newpage
@@ -294,14 +328,22 @@ $$H(j \omega) = \frac{K_A}{1 + K_A K_B} \cdot \frac{1 + T_B j \omega}{1 + \frac{
 		\item $K_A K_B > 1$
 		\item $K_A K_B < 1$		
 	\end{itemize}
-	\item Donnez également l'expression du gain statique et de la constante de temps de ce système dans les deux conditions précédentes.
+	\item Donnez également l'expression du gain statique de ce système dans les deux conditions précédentes.
+	\item Donnez également l'expression du rapport de la constante de temps du système bouclé sur celle du système A dans les deux conditions précédentes.
 \end{enumerate}
 
-
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Réponse}
 %%%%%%%%%%%%%%%%%%%%%%
 \medskip
 \textbf{Question 1}
 
+\begin{center}
+	\includegraphics[width=0.5\textwidth]{images/A_0_B_1_bode_comp.png}
+	
+	Comparaison du diagramme de Bode en gain en fonction du produit des paramètres $K_A$ et $K_B$
+\end{center}
 
 %%%%%%%%%%%%%%%%%%%%%%
 \medskip
@@ -312,6 +354,17 @@ On trouve : $$H_0 = \frac{K_A}{1 + K_A K_B}$$
 Si $K_A K_B >> 1$ alors $H_0 \to 1/K_B$
 
 Si $K_A K_B << 1$ alors $H_0 \to K_A$
+
+%%%%%%%%%%%%%%%%%%%%%%
+\medskip
+\textbf{Question 3}
+
+
+On trouve : $$R = \frac{\frac{T_B}{1 + K_A K_B}}{T_B} = \frac{1}{1 + K_A K_B}$$
+
+Si $K_A K_B >> 1$ alors $R \to \frac{1}{K_A K_B} \to 0$
+
+Si $K_A K_B << 1$ alors $R \to 1$
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%
@@ -435,6 +488,14 @@ $T_H = \frac{100\operatorname{ms}}{1 + 10^{-1}} = \frac{10}{11} \times 100\opera
 
 $H_0 = \frac{100}{11}$
 
+%%%%%%%%%%%%%%%%%%%%%%
+\textbf{Diagramme de Bode}
+
+\begin{center}
+	\includegraphics[width=0.5\textwidth]{images/A_1_B_0_C_0_bode_comp1.png}
+	
+	Comparaison du diagramme de Bode en gain en fonction de la valeur du gain du correcteur proportionnel ($K_C$)
+\end{center}
 
 
 %%%%%%%%%%%%%%%%%%%%%%

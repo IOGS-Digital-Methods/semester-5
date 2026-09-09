@@ -15,7 +15,7 @@ import control as ct
 
 
 # Parameters of the system
-
+m = 0.5
 KaKbTa = [
     (1, 1, 1e-1),
     (10, 1, 1e-1),
@@ -28,7 +28,7 @@ systems_loop = []
 
 for KA, KB, TA in KaKbTa:
     num_A = [KA]
-    den_A = [TA, 1]
+    den_A = [TA*TA, 2*m*TA, 1]
     sys_A = ct.tf(num_A, den_A)
     systems_A.append(sys_A)
     
@@ -57,6 +57,7 @@ for k in range(len(KaKbTa)):
     plt.xlabel('Pulsation in rd/s')
     plt.ylabel('Gain in dB')
     
+
 ## Step Response
 time = np.arange(0, 1, 0.0001)
 N_sys = 2
@@ -80,19 +81,23 @@ plt.ylabel("Step Response")
 plt.legend()
 plt.grid()
 
+'''
+time = np.arange(0, 0.1, 0.0001)
 
-time = np.arange(0, 0.002, 0.00001)
-N_sys = 2
-T, youtA = ct.step_response(systems_A[N_sys], time)
-T, youtL = ct.step_response(systems_loop[N_sys], time)
-
+T, yout = ct.step_response(sys_A, time)
 plt.figure()
-plt.title(f'Parameters : KA={KaKbTa[N_sys][0]} / KB={KaKbTa[N_sys][1]}')
-plt.plot(T, youtA, label=f'Initial system')
-plt.plot(T, KaKbTa[N_sys][0]*KaKbTa[N_sys][1]*youtL, label=f'Control system (x KA.KB)')
+plt.plot(T, yout)
 plt.xlabel("time (s)")
 plt.ylabel("Step Response")
-plt.legend()
 plt.grid()
+
+
+T, yout = ct.impulse_response(sys_A, time)
+plt.figure()
+plt.plot(T, yout)
+plt.xlabel("time (s)")
+plt.ylabel("Step Response")
+plt.grid()
+'''
 
 plt.show()
