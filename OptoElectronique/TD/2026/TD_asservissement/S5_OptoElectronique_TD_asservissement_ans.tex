@@ -130,6 +130,8 @@ En boucle ouverte, $\varepsilon = G_E$ (le lien entre $G_M$ et le comparateur es
 
 On a alors : $\boxed{G_S = A(j \omega) G_E}$
 
+\noindent\hrulefill
+
 %%%%%%%%%%%%%%%%%%%%%%
 \medskip
 \textbf{Question 2}
@@ -153,6 +155,9 @@ En boucle fermée :
 On a alors : $G_S = A(j \omega) (G_E - G_M) = A(j \omega) (G_E - B(j \omega) G_S)$
 
 Ainsi : $$\boxed{H(j \omega) = \frac{A(j \omega)}{1 + A(j \omega) B(j \omega)}}$$
+
+
+\noindent\hrulefill
 
 %%%%%%%%%%%%%%%%%%%%%%
 \medskip
@@ -187,6 +192,8 @@ $$H(j \omega) = \frac{1}{1 + 1 \times 10^{-2}} = \frac{100}{101} \approx 1$$
 $$H(j \omega) = \frac{10^7}{1 + 10^7 \times 10^{-4}} = \frac{10^7}{1001} \approx 10^4$$
 
 
+
+\noindent\hrulefill
 
 %%%%%%%%%%%%%%%%%%%%%%
 \medskip
@@ -231,6 +238,9 @@ En boucle fermée, on repart de l'expression obtenue dans l'exercice 1 : $$H(j \
 
 En remplaçant $A(j \omega)$ et $B(j \omega)$ par leurs expressions, on trouve : $$\boxed{H(j \omega) = \frac{K_A}{1 + K_A K_B + T_A j \omega}} $$
 
+
+\noindent\hrulefill
+
 %%%%%%%%%%%%%%%%%%%%%%
 \medskip
 \textbf{Question 2}
@@ -245,6 +255,8 @@ $$\boxed{T_H = \frac{T_A}{1 + K_A K_B}}$$
 
 $$\boxed{H_0 = \frac{K_A}{1 + K_A K_B}}$$
 
+
+\noindent\hrulefill
 
 %%%%%%%%%%%%%%%%%%%%%%
 \medskip
@@ -345,6 +357,8 @@ $$H(j \omega) = \frac{K_A}{1 + K_A K_B} \cdot \frac{1 + T_B j \omega}{1 + \frac{
 	Comparaison du diagramme de Bode en gain en fonction du produit des paramètres $K_A$ et $K_B$
 \end{center}
 
+\noindent\hrulefill
+
 %%%%%%%%%%%%%%%%%%%%%%
 \medskip
 \textbf{Question 2}
@@ -354,6 +368,9 @@ On trouve : $$H_0 = \frac{K_A}{1 + K_A K_B}$$
 Si $K_A K_B >> 1$ alors $H_0 \to 1/K_B$
 
 Si $K_A K_B << 1$ alors $H_0 \to K_A$
+
+
+\noindent\hrulefill
 
 %%%%%%%%%%%%%%%%%%%%%%
 \medskip
@@ -436,6 +453,8 @@ On a alors : $\boxed{G_S = A(j \omega) C(j \omega) G_E}$
 Et $\boxed{G_M = A(j \omega) B(j \omega) C(j \omega) G_E}$
 
 
+\noindent\hrulefill
+
 %%%%%%%%%%%%%%%%%%%%%%
 \medskip
 \textbf{Question 2}
@@ -469,6 +488,8 @@ $$\boxed{T_H = \frac{T_A}{1 + K_A K_B K_C}}$$
 
 $$\boxed{H_0 = \frac{K_A K_C}{1 + K_A K_B K_C}}$$
 
+
+\noindent\hrulefill
 
 %%%%%%%%%%%%%%%%%%%%%%
 \medskip
@@ -516,12 +537,47 @@ L'ajout d'un \textbf{correcteur} (gain pour l'instant) permet de réduire l'erre
 
 
 \newpage
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Exercice 5 - Correcteur PID}
+\subsection{Exercice 5 - Correcteur PI}
 
 Pour cet exercice, on considérera les fonctions de transfert suivantes : 
 
+$A(j \omega) = \frac{K_A}{1 + T_A j \omega}$, $B(j \omega) = K_B$ et $C(j \omega) = K_C + \frac{1}{T_I j \omega}$ 
 
+\bigskip
+
+\begin{enumerate}
+	\item Comparez les diagrammes de Bode en gain et les réponses indicielles suivants.
+	\item Concluez sur le rôle des correcteurs proportionnel et intégral.
+\end{enumerate}
+
+\newpage
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{images/A_0_B_0_CI_1_bode_comp1.png}
+	
+	Comparaison du diagramme de Bode en gain en fonction de la constante de temps de l'intégrateur - $K_C = 1$.
+\end{center}
+
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{images/A_0_B_0_CI_1_step_comp1.png}
+	
+	Comparaison de la réponses indicielle en fonction de la constante de temps de l'intégrateur - $K_C = 1$.
+\end{center}
+
+
+\newpage
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{images/A_0_B_0_CI_1_bode_comp2.png}
+	
+	Comparaison du diagramme de Bode en gain en fonction de la constante de temps de l'intégrateur - $K_C = 10$.
+\end{center}
+
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{images/A_0_B_0_CI_1_step_comp2.png}
+	
+	 Comparaison de la réponses indicielle en fonction de la constante de temps de l'intégrateur - $K_C = 10$.
+\end{center}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

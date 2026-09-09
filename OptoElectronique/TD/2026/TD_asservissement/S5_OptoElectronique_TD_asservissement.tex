@@ -68,7 +68,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{TD Asservissement - Systèmes en boucle fermée}
 
-Pour les exercices 1 et 2, on considérera le schéma bloc suivant :
+Pour les exercices 1, 2 et 3, on considérera le schéma bloc suivant :
 
 \begin{center}
 {\Large
@@ -94,7 +94,6 @@ Pour les exercices 1 et 2, on considérera le schéma bloc suivant :
 }
 \end{center}
 
-On rappelle que l'\textbf{erreur statique} correspond à $\boxed{\varepsilon_S = \varepsilon(t \to \infty)}$. Il s'agit de l'erreur commise entre la consigne d'entrée et la valeur réellement obtenue en sortie du système.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Exercice 1 - Boucle ouverte et boucle fermée - Ordre 0}
@@ -109,7 +108,7 @@ $A(j \omega) = K_A$ et $B(j \omega) = K_B$
 	\item Donnez l'expression de $G_M$ en fonction de $G_E$, en \textbf{boucle ouverte}.
 		
 	\item Donnez l'expression de la \textbf{fonction de transfert} $H(j \omega) = G_S / G_E$, en \textbf{boucle fermée}.
-	\item Calculez la \textbf{fonction de transfert} et l'\textbf{erreur statique} (dans le cas d'un échelon de tension en entrée) pour les valeurs suivantes de $K_A$ et $K_B$ :
+	\item Calculez la \textbf{fonction de transfert} pour les valeurs suivantes de $K_A$ et $K_B$ :
 	\begin{itemize}
 		\item $K_A = 1$ et $K_B = 1$
 		\item $K_A = 10$ et $K_B = 1$
@@ -117,9 +116,8 @@ $A(j \omega) = K_A$ et $B(j \omega) = K_B$
 		\item $K_A = 1$ et $K_B = 10^{-2}$
 		\item $K_A = 10^7$ et $K_B = 10^{-4}$ (cas amplificateur inverseur par exemple)
 	\end{itemize}
-	\item Pour $K_A = 1$, quelles sont les limites de $H$ lorsque $K_B >> 1$ ? Lorsque $K_B << 1$ ?
+	\item Quelles sont les limites de $H$ lorsque $K_A K_B >> 1$ ? Lorsque $K_A K_B << 1$ ?
 \end{enumerate}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Exercice 2 - Boucle ouverte et boucle fermée - Ordre 1}
@@ -130,7 +128,7 @@ $A(j \omega) = \frac{K_A}{1 + T_A j \omega}$ et $B(j \omega) = K_B$
 
 \begin{enumerate}
 	\item Donnez l'expression de la \textbf{fonction de transfert} $H(j \omega) = G_S / G_E$, en \textbf{boucle fermée}. 
-	\item Mettez cette expression sous forme canonique et donnez les principales caractéristiques du système obtenu.
+	\item Mettez cette expression sous \textbf{forme canonique} et donnez les \textbf{principales caractéristiques} du système obtenu.
 	\item Calculez ces valeurs caractéristiques pour les valeurs suivantes de $K_A$, $K_B$ et $T_A$ :
 	\begin{itemize}
 		\item $K_A = 1$, $K_B = 1$ et $T_A = 100\operatorname{ms}$
@@ -140,11 +138,35 @@ $A(j \omega) = \frac{K_A}{1 + T_A j \omega}$ et $B(j \omega) = K_B$
 \end{enumerate}
 
 
-%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%
 \newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercice 3 - Boucle ouverte et boucle fermée - Ordre 1}
 
-Pour les exercices 3 et 4, on considérera le schéma bloc suivant :
+Pour cet exercice, on considérera les fonctions de transfert suivantes : 
+
+$A(j \omega) = K_A$ et $B(j \omega) = \frac{K_B}{1 + T_B j \omega}$
+
+On donne l'expression suivante pour $H(j \omega) = G_S / G_E$ :
+
+$$H(j \omega) = \frac{K_A}{1 + K_A K_B} \cdot \frac{1 + T_B j \omega}{1 + \frac{T_B}{1 + K_A K_B} j \omega}$$
+
+
+\begin{enumerate}
+	\item Tracez le gain de cette fonction de transfert dans les deux conditions suivantes :
+	\begin{itemize}
+		\item $K_A K_B > 1$
+		\item $K_A K_B < 1$		
+	\end{itemize}
+	\item Donnez également l'expression du gain statique de ce système dans les deux conditions précédentes.
+	\item Donnez également l'expression du rapport de la constante de temps du système bouclé sur celle du système A dans les deux conditions précédentes.
+\end{enumerate}
+
+
+\noindent\hrulefill
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+Pour les exercices 4 et 5, on considérera le schéma bloc suivant :
 
 
 \begin{center}
@@ -159,7 +181,7 @@ Pour les exercices 3 et 4, on considérera le schéma bloc suivant :
 \sbStyleBloc{fill=schema_action}
 \sbBloc{sys}{$A(j \omega)$}{reg}
 \sbStyleBlocDefaut
-\sbRelier[u]{reg}{sys}
+\sbRelier[$G_u$]{reg}{sys}
 \sbSortie{S}{sys}
 \sbRelier[$G_S$]{sys}{S}
 \sbDecaleNoeudy[4]{S}{U}
@@ -167,22 +189,73 @@ Pour les exercices 3 et 4, on considérera le schéma bloc suivant :
 \sbBlocr{cap}{$B(j \omega)$}{U}
 \sbStyleBlocDefaut
 \sbRelieryx{sys-S}{cap}
-\sbRelierxy[m]{cap}{comp}
+\sbRelierxy[$G_M$]{cap}{comp}
 \end{tikzpicture}
 }
 \end{center}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Exercice 3 - Correcteur PID}
+\subsection{Exercice 4 - Correcteur P}
 
-Pour cet exercice, on considérera les fonctions de transfert, d'ordre 0, suivantes : 
+Pour cet exercice, on considérera les fonctions de transfert suivantes : 
+
+$A(j \omega) = \frac{K_A}{1 + T_A j \omega}$, $B(j \omega) = K_B$ et $C(j \omega) = K_C$ 
+
+\begin{enumerate}
+	\item Donnez l'expression de $G_M$ en fonction de $G_E$, en \textbf{boucle ouverte}.
+		
+	\item Donnez l'expression de la \textbf{fonction de transfert} $H(j \omega) = G_S / G_E$, en \textbf{boucle fermée}.
+	\item Mettez cette expression sous \textbf{forme canonique} et donnez les \textbf{principales caractéristiques} du système obtenu.
+	\item Calculez ces valeurs caractéristiques pour les valeurs suivantes de $K_A$, $K_B$ et $T_A$ :
+	\begin{itemize}
+		\item $K_A = 1$, $K_B = 1$, $K_C = 10$ et $T_A = 100\operatorname{ms}$
+		\item $K_A = 1$, $K_B = 10^{-2}$, $K_C = 10$ et $T_A = 100\operatorname{ms}$
+	\end{itemize}
+\end{enumerate}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Exercice 4 - Correcteur PID}
+\subsection{Exercice 5 - Correcteur PI}
 
-Pour cet exercice, on considérera les fonctions de transfert, d'ordre 0, suivantes : 
+Pour cet exercice, on considérera les fonctions de transfert suivantes : 
+
+$A(j \omega) = \frac{K_A}{1 + T_A j \omega}$, $B(j \omega) = K_B$ et $C(j \omega) = K_C + \frac{1}{T_I j \omega}$ 
+
+\bigskip
+
+\begin{enumerate}
+	\item Comparez les diagrammes de Bode en gain et les réponses indicielles suivants.
+	\item Concluez sur le rôle des correcteurs proportionnel et intégral.
+\end{enumerate}
+
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{images/A_0_B_0_CI_1_bode_comp1.png}
+	
+	Comparaison du diagramme de Bode en gain en fonction de la constante de temps de l'intégrateur - $K_C = 1$.
+\end{center}
+
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{images/A_0_B_0_CI_1_step_comp1.png}
+	
+	Comparaison de la réponses indicielle en fonction de la constante de temps de l'intégrateur - $K_C = 1$.
+\end{center}
+
+
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{images/A_0_B_0_CI_1_bode_comp2.png}
+	
+	Comparaison du diagramme de Bode en gain en fonction de la constante de temps de l'intégrateur - $K_C = 10$.
+\end{center}
+
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{images/A_0_B_0_CI_1_step_comp2.png}
+	
+	 Comparaison de la réponses indicielle en fonction de la constante de temps de l'intégrateur - $K_C = 10$.
+\end{center}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
