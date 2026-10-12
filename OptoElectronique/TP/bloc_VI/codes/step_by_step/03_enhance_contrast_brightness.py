@@ -35,3 +35,4 @@ ax[1,1].set_xlim([0, 256])  # Limits for the x-axis
 ax[1,1].set_title('Histogram of modified image')
 
 
+plt.show()

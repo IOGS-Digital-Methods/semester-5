@@ -19,10 +19,10 @@ plt.figure()
 plt.imshow(image_rgb)
 plt.figure()
 plt.imshow(image_gray) #, cmap='gray')
-plt.show()
 
 # Information on the images
 print(f'Type RGB image: {type(image_rgb)} / Dtype: {image_rgb.dtype}')
 print(f'RGB shape: {image_rgb.shape}')
 print(f'Gray shape: {image_gray.shape}')
 
+plt.show()

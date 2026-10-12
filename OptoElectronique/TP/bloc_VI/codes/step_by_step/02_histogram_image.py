@@ -35,6 +35,7 @@ x = np.arange(256)
 # Plot the histogram as bars
 plt.bar(x, histogram[:,0], width=1, color='black')
 plt.xlim([0, 256])  # Limits for the x-axis
+
 plt.show()
 
 
