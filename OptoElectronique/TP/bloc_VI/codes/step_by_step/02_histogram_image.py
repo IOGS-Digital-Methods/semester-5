@@ -4,7 +4,6 @@ Image histogram processing with OpenCV
 
 @see: https://iogs-lense-training.github.io/image-processing/contents/opencv.html#histogram-of-an-image
 """
-
 import cv2
 from matplotlib import pyplot as plt
 import numpy as np
